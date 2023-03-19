@@ -33,14 +33,22 @@ const Header: FC = () => {
 			<div className={styles.header}>
 				<div className={styles.header_nav_first}>
 					<Link href="/" className={styles.logo}>
-						<Image src="/icon.svg" width={32} height={32} alt="img" />
+						<Image
+							src="/icon.svg"
+							width={32}
+							height={32}
+							alt="img"
+							draggable={false}
+						/>
 					</Link>
 				</div>
 
 				<div className={styles.header_nav_second}>
 					<div className={styles.navigation_menu}>
-						<Link href="/docs">Showcase</Link>
+						<Link href="/showcase">Showcase</Link>
 						<Link href="/docs">Docs</Link>
+						<Link href="/feedback">Feedback</Link>
+						<Link href="/help">Help</Link>
 					</div>
 				</div>
 
