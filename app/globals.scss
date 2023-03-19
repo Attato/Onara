@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 :root {
 	--background: black;
 	--color: black;
@@ -8,7 +10,7 @@
 	--github-color: #24292e;
 	--gitlab-color: #6b4fbb;
 	--logo-filter: invert(1);
-	--font-family: 'San Francisco', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+	--font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
 		'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji';
 }
