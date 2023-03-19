@@ -31,7 +31,9 @@ const Header: FC = () => {
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
-				<Image src="/icon.svg" width={32} height={32} alt="img" />
+				<Link href="/" className={styles.logo}>
+					<Image src="/icon.svg" width={32} height={32} alt="img" />
+				</Link>
 
 				<Link href="/">Документация</Link>
 			</div>
