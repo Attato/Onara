@@ -31,11 +31,20 @@ const Header: FC = () => {
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
-				<Link href="/" className={styles.logo}>
-					<Image src="/icon.svg" width={32} height={32} alt="img" />
-				</Link>
+				<div className={styles.header_nav_first}>
+					<Link href="/" className={styles.logo}>
+						<Image src="/icon.svg" width={32} height={32} alt="img" />
+					</Link>
+				</div>
 
-				<Link href="/">Документация</Link>
+				<div className={styles.header_nav_second}>
+					<div className={styles.navigation_menu}>
+						<Link href="/docs">Showcase</Link>
+						<Link href="/docs">Docs</Link>
+					</div>
+				</div>
+
+				<div className={styles.header_nav_third}>*user logo*</div>
 			</div>
 		</header>
 	);
