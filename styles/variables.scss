@@ -1,0 +1,21 @@
+:root {
+	--background: black;
+	--color: white;
+	--header-background: #222;
+	--header-color: black;
+	--header-height: 72px;
+	--border-radius: 6px;
+	--github-color: #24292e;
+	--gitlab-color: #6b4fbb;
+	--logo-filter: invert(1);
+	--font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji';
+}
+
+[data-theme='dark'] {
+	--background: #121212;
+	--color: white;
+	--header-color: white;
+	--logo-filter: invert(0);
+}

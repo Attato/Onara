@@ -1,9 +1,8 @@
-import './globals.scss';
+import Header from '@/components/header/header';
 
-export const metadata = {
-	title: 'Onara',
-	description: 'Веб-приложение для администрирования репозиториев',
-};
+import '@/styles/globals.scss';
+import '@/styles/nullstyle.scss';
+import '@/styles/variables.scss';
 
 export default function RootLayout({
 	children,
@@ -12,7 +11,12 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="ru">
-			<body>{children}</body>
+			<body>
+				<div className="page_container">
+					<Header />
+					{children}
+				</div>
+			</body>
 		</html>
 	);
 }
