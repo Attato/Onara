@@ -28,11 +28,15 @@ const Header: FC = () => {
 		};
 	}, []);
 
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
 				<div className={styles.header_nav_first}>
-					<Link href="/" className={styles.logo}>
+					<Link href="/" onClick={scrollToTop} className={styles.logo}>
 						<Image
 							src="/icon.svg"
 							width={32}
