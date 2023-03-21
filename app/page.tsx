@@ -8,6 +8,8 @@ export default function Home() {
 			<div className={styles.masthead}>
 				<Image src="/logo.svg" width={264} height={54} alt="img"></Image>
 			</div>
+
+			<div className={styles.empty} />
 		</main>
 	);
 }
