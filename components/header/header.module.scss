@@ -24,7 +24,7 @@
 		gap: 20px;
 
 		.logo {
-			height: 32px;
+			display: flex;
 		}
 
 		.header_nav_first {
@@ -64,6 +64,24 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
+			a {
+				display: flex;
+				align-items: center;
+				gap: 5px;
+				background-color: #ededed;
+				border: 1px solid #ededed;
+				border-radius: 5px;
+				color: #000;
+				padding: 0.3rem 1rem;
+				margin: 0;
+				font-weight: 500;
+				transition: all ease-in-out 0.2s;
+
+				&:hover {
+					background-color: #fff;
+				}
+			}
 		}
 	}
 }
