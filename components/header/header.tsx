@@ -36,12 +36,12 @@ const Header: FC = () => {
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
 				<div className={styles.header_nav_first}>
-					<Link href='/' onClick={scrollToTop} className={styles.logo}>
+					<Link href="/" onClick={scrollToTop} className={styles.logo}>
 						<Image
-							src='/icon.svg'
+							src="/icon.svg"
 							width={90}
-							height={16}
-							alt='img'
+							height={15}
+							alt="img"
 							draggable={false}
 						/>
 					</Link>
@@ -49,17 +49,19 @@ const Header: FC = () => {
 
 				<div className={styles.header_nav_second}>
 					<div className={styles.navigation_menu}>
-						<Link href='/showcase'>Showcase</Link>
-						<Link href='/docs'>Docs</Link>
-						<Link href='/feedback'>Feedback</Link>
-						<Link href='/help'>Help</Link>
+						<Link href="/showcase">Showcase</Link>
+						<Link href="/docs">Docs</Link>
+						<Link href="/feedback">Feedback</Link>
+						<Link href="/help">Help</Link>
 					</div>
 				</div>
 
 				<div className={styles.header_nav_third}>
-					<Link href='/'>
-						Get started
-						<Image src='/signin.svg' width={15} height={15} alt='sign in' />
+					<Link href="/">Sign in</Link>
+
+					<Link href="/">
+						Sign up
+						<Image src="/signin.svg" width={14} height={14} alt="sign in" />
 					</Link>
 				</div>
 			</div>
