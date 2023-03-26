@@ -6,6 +6,8 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import BurgerMenu from '../burgerMenu/burgerMenu';
+
 import styles from './header.module.scss';
 
 const Header: FC = () => {
@@ -32,6 +34,8 @@ const Header: FC = () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	};
 
+	console.info('Have a great day! 🌳🐇🌻');
+
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
@@ -39,7 +43,7 @@ const Header: FC = () => {
 					<Link href="/" onClick={scrollToTop} className={styles.logo}>
 						<Image
 							src="/icon.svg"
-							width={90}
+							width={75}
 							height={15}
 							alt="img"
 							draggable={false}
@@ -57,12 +61,23 @@ const Header: FC = () => {
 				</div>
 
 				<div className={styles.header_nav_third}>
-					<Link href="/">Sign in</Link>
+					<Link href="/" className={styles.signin}>
+						Sign in
+					</Link>
 
-					<Link href="/">
+					<Link href="/" className={styles.signup}>
 						Sign up
 						<Image src="/signin.svg" width={14} height={14} alt="sign in" />
 					</Link>
+
+					<BurgerMenu
+						menuItems={[
+							{ href: '/showcase', label: 'Showcase' },
+							{ href: '/docs', label: 'Docs' },
+							{ href: '/feedback', label: 'Feedback' },
+							{ href: '/help', label: 'Help' },
+						]}
+					/>
 				</div>
 			</div>
 		</header>
