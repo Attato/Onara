@@ -1,8 +1,9 @@
+import type { NextPage } from 'next';
 import Image from 'next/image';
 
 import styles from './page.module.scss';
 
-export default function Home() {
+const Home: NextPage = () => {
 	return (
 		<main className="main">
 			<div className={styles.masthead}>
@@ -12,4 +13,6 @@ export default function Home() {
 			<div className={styles.empty} />
 		</main>
 	);
-}
+};
+
+export default Home;
