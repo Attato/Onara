@@ -1,5 +1,6 @@
 import Header from '@/components/header/header';
 
+import '@/styles/elements.scss';
 import '@/styles/globals.scss';
 import '@/styles/nullstyle.scss';
 import '@/styles/variables.scss';
