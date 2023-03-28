@@ -43,8 +43,8 @@ const Header: FC = () => {
 					<Link href="/" onClick={scrollToTop} className={styles.logo}>
 						<Image
 							src="/icon.svg"
-							width={75}
-							height={15}
+							width={40}
+							height={40}
 							alt="img"
 							draggable={false}
 						/>
@@ -61,11 +61,11 @@ const Header: FC = () => {
 				</div>
 
 				<div className={styles.header_nav_third}>
-					<Link href="/" className={styles.signin}>
+					<Link href="/login" className={styles.signin}>
 						Sign in
 					</Link>
 
-					<Link href="/" className={styles.signup}>
+					<Link href="/signup" className={styles.signup}>
 						Sign up
 						<Image src="/signin.svg" width={14} height={14} alt="sign in" />
 					</Link>
