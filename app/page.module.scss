@@ -1,11 +1,35 @@
 .masthead {
 	display: flex;
-	align-items: center;
-	justify-content: center;
 	flex-direction: column;
+	align-items: center;
 	height: calc(100vh - var(--header-height));
+	max-width: 650px;
+	margin: auto;
+	padding: 120px 40px;
+
+	h1 {
+		font-size: 56px;
+		margin-bottom: 20px;
+	}
+
+	p {
+		font-size: 20px;
+	}
 }
 
 .empty {
+	position: relative;
 	height: 100vh;
+
+	.cosmonaut {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		width: 100%;
+		height: auto;
+		max-width: 512px;
+		max-height: 512px;
+	}
 }
