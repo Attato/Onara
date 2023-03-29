@@ -46,6 +46,7 @@ const Login: NextPage = () => {
 					/>
 				</label>
 				<button type="submit">Continue with Email</button>
+				<Link href="/signup">Create Your Onara Account -&gt;</Link>
 			</form>
 		</main>
 	);
