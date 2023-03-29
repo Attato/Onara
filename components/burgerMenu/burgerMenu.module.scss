@@ -5,6 +5,8 @@
 	align-items: center;
 	background-color: transparent;
 	border: none;
+	height: 20px;
+	margin: 0;
 	cursor: pointer;
 	display: none;
 }
@@ -52,7 +54,7 @@
 
 @media screen and (max-width: 768px) {
 	.burger_menu__button {
-		display: block;
+		display: flex;
 
 		.open_links {
 			display: flex !important;
