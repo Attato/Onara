@@ -1,4 +1,5 @@
-import Header from '@/components/header/header';
+import Header from '@/components/common/header/header';
+import Footer from '@/components/common/footer/footer';
 
 import '@/styles/elements.scss';
 import '@/styles/globals.scss';
@@ -16,6 +17,7 @@ export default function RootLayout({
 				<div className="page_container">
 					<Header />
 					{children}
+					<Footer />
 				</div>
 			</body>
 		</html>
