@@ -53,15 +53,21 @@ const Footer: FC = () => {
 				{footerLinks.map((group) => (
 					<div className={styles.footer_group} key={group.title}>
 						<h2>{group.title}</h2>
-						{group.links.map(({ href, label }) => (
-							<Link key={label} href={href}>
-								{label}
-							</Link>
-						))}
+						<div className={styles.footer_list}>
+							{group.links.map(({ href, label }) => (
+								<Link href={href} key={label}>
+									{label}
+								</Link>
+							))}
+						</div>
 					</div>
 				))}
 			</nav>
 			<div className={styles.footer_wrapper}>
+				<div id={styles.mobile_logo}>
+					<h1>ONARA</h1>
+				</div>
+
 				<span>
 					Copyright © {new Date().getFullYear()} ONARA Inc. All rights reserved.
 				</span>
