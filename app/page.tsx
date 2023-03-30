@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import styles from './page.module.scss';
 
@@ -8,11 +9,14 @@ const Home: NextPage = () => {
 		<main className="main">
 			<div className={styles.masthead}>
 				<h1>IMAGINE A PLACE...</h1>
-				<p>... *text*</p>
-				{/* <Image src="/logo.svg" width={264} height={54} alt="img" /> */}
+				<p>
+					... where you and your friends can manage your project. A place where
+					you can communicate, plan, vote and decide what your project will be
+					like in the near future.
+				</p>
 			</div>
 
-			<div className={styles.empty}>
+			<div className={styles.footer}>
 				<Image
 					src="/bg1.png"
 					width={512}
