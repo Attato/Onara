@@ -6,7 +6,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import BurgerMenu from '../burgerMenu/burgerMenu';
+import BurgerMenu from '@/components/burgerMenu/burgerMenu';
 
 import styles from './header.module.scss';
 
