@@ -5,6 +5,8 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+import useScrollToTop from '@/components/common/scrollToTop';
+
 import styles from './footer.module.scss';
 
 const Footer: FC = () => {
@@ -47,7 +49,9 @@ const Footer: FC = () => {
 		<footer className={styles.footer}>
 			<nav>
 				<div className={styles.footer_group}>
-					<h1>ONARA</h1>
+					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
+						ONARA
+					</Link>
 				</div>
 
 				{footerLinks.map((group) => (
@@ -65,7 +69,9 @@ const Footer: FC = () => {
 			</nav>
 			<div className={styles.footer_wrapper}>
 				<div id={styles.mobile_logo}>
-					<h1>ONARA</h1>
+					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
+						ONARA
+					</Link>
 				</div>
 
 				<span>
