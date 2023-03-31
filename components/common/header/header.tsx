@@ -8,6 +8,8 @@ import Image from 'next/image';
 
 import BurgerMenu from '@/components/burgerMenu/burgerMenu';
 
+import useScrollToTop from '@/components/common/scrollToTop';
+
 import styles from './header.module.scss';
 
 const Header: FC = () => {
@@ -30,17 +32,13 @@ const Header: FC = () => {
 		};
 	}, []);
 
-	const scrollToTop = () => {
-		window.scrollTo({ top: 0, behavior: 'smooth' });
-	};
-
 	console.info('Have a great day! 🌳🐇🌻');
 
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
 				<div className={styles.header_nav_first}>
-					<Link href="/" onClick={scrollToTop} className={styles.logo}>
+					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
 						<Image
 							src="/icon.svg"
 							width={40}
