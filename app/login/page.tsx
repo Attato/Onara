@@ -27,6 +27,7 @@ const Login: NextPage = () => {
 						type="text"
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
+						placeholder="John Doe"
 					/>
 				</label>
 				<label>
@@ -35,6 +36,7 @@ const Login: NextPage = () => {
 						type="email"
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						placeholder="example@gmail.com"
 					/>
 				</label>
 				<label>
@@ -43,6 +45,7 @@ const Login: NextPage = () => {
 						type="password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						placeholder="********"
 					/>
 				</label>
 				<button type="submit">Continue with Email</button>

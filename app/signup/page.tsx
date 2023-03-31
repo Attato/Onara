@@ -9,17 +9,27 @@ const SignUp: NextPage = () => {
 				<h1>Create Your Onara Account</h1>
 				<label htmlFor="name">
 					Name:
-					<input type="text" id="name" name="name" />
+					<input type="text" id="name" name="name" placeholder="John Doe" />
 				</label>
 
 				<label htmlFor="email">
 					Email:
-					<input type="email" id="email" name="email" />
+					<input
+						type="email"
+						id="email"
+						name="email"
+						placeholder="example@gmail.com"
+					/>
 				</label>
 
 				<label htmlFor="password">
 					Password:
-					<input type="password" id="password" name="password" />
+					<input
+						type="password"
+						id="password"
+						name="password"
+						placeholder="********"
+					/>
 				</label>
 
 				<label htmlFor="confirm-password">
@@ -28,11 +38,11 @@ const SignUp: NextPage = () => {
 						type="password"
 						id="confirm-password"
 						name="confirm-password"
+						placeholder="********"
 					/>
 				</label>
 
-				{/* 
-				<label htmlFor="gender">
+				{/* <label htmlFor="gender">
 					Gender:
 					<select id="gender" name="gender">
 						<option value="male">Male</option>
