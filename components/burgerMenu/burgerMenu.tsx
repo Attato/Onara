@@ -19,13 +19,15 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 	const [open, setOpen] = useState(false);
 
 	const handleClick = () => {
-		setOpen(!open);
+		setTimeout(() => {
+			setOpen(!open);
 
-		if (!open) {
-			document.body.classList.add(styles.disabled_scrolling);
-		} else {
-			document.body.classList.remove(styles.disabled_scrolling);
-		}
+			if (!open) {
+				document.body.classList.add(styles.disabled_scrolling);
+			} else {
+				document.body.classList.remove(styles.disabled_scrolling);
+			}
+		}, 100);
 	};
 
 	return (
