@@ -7,6 +7,7 @@ export default function Head() {
 				content="Веб-приложение для администрирования репозиториев"
 			/>
 			<link rel="icon" href="/icon.svg" />
+			<link rel="manifest" href="/manifest.json" />
 		</>
 	);
 }
