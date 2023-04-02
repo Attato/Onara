@@ -32,7 +32,7 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 		<div className={styles.burger_menu}>
 			<button className={styles.burger_menu__button} onClick={handleClick}>
 				<Image
-					src="./burderMenu.svg"
+					src="/components/burgerMenu/burgerMenu.svg"
 					width={20}
 					height={20}
 					alt="burger menu"

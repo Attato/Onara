@@ -65,7 +65,12 @@ const Header: FC = () => {
 
 					<Link href="/signup" className={styles.signup}>
 						Sign up
-						<Image src="/signin.svg" width={14} height={14} alt="sign in" />
+						<Image
+							src="/components/common/header/signin.svg"
+							width={14}
+							height={14}
+							alt="sign in"
+						/>
 					</Link>
 
 					<BurgerMenu

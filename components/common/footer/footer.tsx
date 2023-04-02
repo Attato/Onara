@@ -80,11 +80,21 @@ const Footer: FC = () => {
 
 				<div className={styles.social}>
 					<Link href="https://github.com/Attato/ONARA">
-						<Image src="/github.svg" width={19} height={19} alt="github" />
+						<Image
+							src="/components/common/footer/github.svg"
+							width={19}
+							height={19}
+							alt="github"
+						/>
 					</Link>
 					<hr />
 					<Link href="https://t.me/qwaqwakwa">
-						<Image src="/telegram.svg" width={19} height={19} alt="github" />
+						<Image
+							src="/components/common/footer/telegram.svg"
+							width={19}
+							height={19}
+							alt="github"
+						/>
 					</Link>
 				</div>
 			</div>
