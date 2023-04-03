@@ -10,9 +10,10 @@ const Home: NextPage = () => {
 			<div className={styles.masthead}>
 				<h1>IMAGINE A PLACE...</h1>
 				<p>
-					... where you and your friends can manage your project. A place where
+					...where you and your friends can manage your project. A place where
 					you can communicate, plan, vote and decide what your project will be
-					like in the near future.
+					like <br />
+					in the near future.
 				</p>
 			</div>
 
