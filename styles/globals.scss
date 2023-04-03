@@ -9,3 +9,14 @@
 		min-height: calc(100vh - var(--header-height));
 	}
 }
+
+.page_content {
+	max-width: 840px;
+	width: 100%;
+	padding: 20px;
+
+	h1 {
+		font-size: 40px;
+		margin-bottom: 30px;
+	}
+}
