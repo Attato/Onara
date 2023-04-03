@@ -1,0 +1,59 @@
+.gluing {
+	display: flex;
+	padding-top: 20px;
+	position: relative;
+
+	.sidebar {
+		max-width: 282px;
+		width: 100%;
+		overflow-y: scroll;
+		padding: 0px 20px 20px 0;
+		position: sticky;
+		top: var(--header-height);
+		display: flex;
+		gap: 16px;
+		flex-direction: column;
+		-webkit-box-orient: vertical;
+		-webkit-box-direction: normal;
+		a {
+			font-size: 14px;
+			font-weight: 500;
+			color: #fff;
+			opacity: 0.6;
+			transition: opacity 0.2s ease;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		.links {
+			display: flex;
+			flex-direction: column;
+			margin: 10px 0 0px 4px;
+			padding: 10px 0 0 15px;
+			border-left: 1px solid #333;
+
+			a {
+				font-size: 14px;
+				margin: 11px 0;
+				color: #fff;
+				opacity: 0.6;
+				transition: opacity 0.2s ease;
+				width: fit-content;
+
+				&:hover {
+					opacity: 1;
+				}
+
+				&:first-child {
+					margin-top: 0;
+				}
+
+				&:last-child {
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+}
