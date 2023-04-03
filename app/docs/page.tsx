@@ -13,7 +13,7 @@ const Docs: NextPage = () => {
 				Welcome to ONARA, a powerful platform for managing your repositories.
 				Our platform is designed to provide developers, organizations and
 				individuals with an easy-to-use end-to-end solution for *there should be
-				some text*. <br /> <br /> Whether you're a developer working on a
+				some text*. <br /> <br /> Whether you&apos;re a developer working on a
 				large-scale project or an organization looking to streamline your
 				development workflow, ONARA gives you the tools you need to easily
 				manage your repositories. Our platform supports a wide range of
