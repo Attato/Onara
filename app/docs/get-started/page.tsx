@@ -1,12 +1,11 @@
-'use client';
-
+import PageContent from '@/components/docs/pageContent/pageContent';
 import type { NextPage } from 'next';
 
 import styles from './page.module.scss';
 
 const Docs: NextPage = () => {
 	return (
-		<div className="page_content">
+		<PageContent>
 			<h1>Getting Started</h1>
 
 			<div className={styles.column}>
@@ -16,7 +15,7 @@ const Docs: NextPage = () => {
 				<h2 id="step-4">Step 4</h2>
 				<h2 id="step-5">Step 5</h2>
 			</div>
-		</div>
+		</PageContent>
 	);
 };
 
