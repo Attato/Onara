@@ -1,20 +1,17 @@
-.gluing {
+.slug {
 	display: flex;
-	padding-top: 20px;
-	position: relative;
+	margin-top: 20px;
 
 	.sidebar {
-		max-width: 282px;
-		width: 100%;
-		overflow-y: scroll;
-		padding: 0px 20px 20px 0;
 		position: sticky;
 		top: var(--header-height);
+		width: 200px;
+		height: calc(100vh - var(--header-height));
+		padding: 0 20px 20px 0;
 		display: flex;
-		gap: 16px;
 		flex-direction: column;
-		-webkit-box-orient: vertical;
-		-webkit-box-direction: normal;
+		gap: 20px;
+
 		a {
 			font-size: 14px;
 			font-weight: 500;
