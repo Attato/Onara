@@ -1,16 +1,35 @@
 .slug {
 	display: flex;
-	margin-top: 20px;
 
 	.sidebar {
 		position: sticky;
 		top: var(--header-height);
-		width: 200px;
+		width: 280px;
 		height: calc(100vh - var(--header-height));
-		padding: 0 20px 20px 0;
+		overflow-y: auto;
+		padding: 16px 8px 16px 0;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+
+		&::-webkit-scrollbar {
+			width: 16px;
+			height: 4px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #1a1a1a;
+			border: 4px solid #000;
+			border-radius: 16px;
+
+			&:hover {
+				background: #333;
+			}
+
+			&:active {
+				background: #4d4d4d;
+			}
+		}
 
 		a {
 			font-size: 14px;
@@ -18,9 +37,29 @@
 			color: #fff;
 			opacity: 0.6;
 			transition: opacity 0.2s ease;
+			display: flex;
+			align-items: center;
 
 			&:hover {
 				opacity: 1;
+			}
+
+			&::before {
+				content: '';
+				-webkit-flex-basis: 4px;
+				-ms-flex-preferred-size: 4px;
+				flex-basis: 4px;
+				-webkit-flex-shrink: 0;
+				-ms-flex-negative: 0;
+				flex-shrink: 0;
+				display: block;
+				width: 4px;
+				height: 4px;
+				-webkit-border-radius: 50%;
+				-moz-border-radius: 50%;
+				border-radius: 50%;
+				background: #fff;
+				margin-right: 16px;
 			}
 		}
 
