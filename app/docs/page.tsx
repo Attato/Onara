@@ -1,14 +1,17 @@
 import type { NextPage } from 'next';
 
-import PageContent from '@/components/docs/pageContent/pageContent';
-
 import Link from 'next/link';
 
-import styles from './page.module.scss';
+import PageContent from '@/components/docs/pageContent/pageContent';
+import styles from '@/components/docs/pageContent/pageContent.module.scss';
 
 const Docs: NextPage = () => {
 	return (
 		<PageContent>
+			<div className={styles.time_info}>
+				<span>Last updated on April 4, 2023</span>
+				<span> 1 min read</span>
+			</div>
 			<h1>Introduction to ONARA</h1>
 
 			<p>
