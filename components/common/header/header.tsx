@@ -6,7 +6,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import BurgerMenu from '@/components/burgerMenu/burgerMenu';
+import BurgerMenu from '@/components/common/header/burgerMenu/burgerMenu';
 
 import useScrollToTop from '@/components/common/scrollToTop';
 
