@@ -4,10 +4,10 @@
 	.sidebar {
 		position: sticky;
 		top: var(--header-height);
-		width: 280px;
+		width: 300px;
 		height: calc(100vh - var(--header-height));
 		overflow-y: auto;
-		padding: 16px 8px 16px 0;
+		padding: 16px 16px 16px 0;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
@@ -32,7 +32,8 @@
 		}
 
 		.activeLink {
-			color: #3291ff !important;
+			color: #fff !important;
+			opacity: 1 !important;
 
 			&::before {
 				background-color: #3291ff !important;
@@ -42,14 +43,14 @@
 		a {
 			font-size: 14px;
 			font-weight: 500;
-			color: #acacac;
+			color: #999;
 			opacity: 1;
-			transition: opacity 0.2s ease;
+			transition: color 0.2s ease;
 			display: flex;
 			align-items: center;
 
 			&:hover {
-				opacity: 1;
+				color: #fff;
 			}
 
 			&::before {
@@ -62,18 +63,15 @@
 				flex-shrink: 0;
 				display: block;
 				width: 4px;
-				height: 4px;
+				height: 1px;
 				-webkit-border-radius: 50%;
 				-moz-border-radius: 50%;
 				border-radius: 50%;
-				background: #acacac;
+				background: #999;
 				margin-right: 16px;
 			}
 
 			&:visited {
-				color: #fff;
-				opacity: 1;
-
 				&::before {
 					background-color: #fff;
 				}

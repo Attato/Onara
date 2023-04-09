@@ -54,17 +54,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 			<div className={styles.slug}>
 				<div className={styles.sidebar}>
 					{links.map((link, index) => {
-						const isActive = pathname === link.href; // Сравниваем текущий путь с href ссылки
-
-						console.log(isActive);
-
+						const isActive = pathname === link.href;
 						return (
 							<Link
 								href={link.href}
 								key={index}
 								className={isActive ? styles.activeLink : ''}
 							>
-								{/* Добавляем класс активной ссылки */}
 								{link.label}
 							</Link>
 						);
