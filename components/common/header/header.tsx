@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 import BurgerMenu from '@/components/common/header/burgerMenu/burgerMenu';
 
-import useScrollToTop from '@/components/common/scrollToTop';
+import useScrollToTop from '@/hooks/scrollToTop';
 
 import styles from './header.module.scss';
 

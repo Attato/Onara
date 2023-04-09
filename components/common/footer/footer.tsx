@@ -5,7 +5,7 @@ import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import useScrollToTop from '@/components/common/scrollToTop';
+import useScrollToTop from '@/hooks/scrollToTop';
 
 import styles from './footer.module.scss';
 
