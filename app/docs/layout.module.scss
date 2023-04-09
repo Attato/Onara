@@ -31,11 +31,19 @@
 			}
 		}
 
+		.activeLink {
+			color: #3291ff !important;
+
+			&::before {
+				background-color: #3291ff !important;
+			}
+		}
+
 		a {
 			font-size: 14px;
 			font-weight: 500;
-			color: #fff;
-			opacity: 0.6;
+			color: #acacac;
+			opacity: 1;
 			transition: opacity 0.2s ease;
 			display: flex;
 			align-items: center;
@@ -58,8 +66,17 @@
 				-webkit-border-radius: 50%;
 				-moz-border-radius: 50%;
 				border-radius: 50%;
-				background: #fff;
+				background: #acacac;
 				margin-right: 16px;
+			}
+
+			&:visited {
+				color: #fff;
+				opacity: 1;
+
+				&::before {
+					background-color: #fff;
+				}
 			}
 		}
 
