@@ -1,45 +1,79 @@
+'use client';
+
 import Link from 'next/link';
+
+import { usePathname } from 'next/navigation';
+
 import styles from './layout.module.scss';
 
-const Layout = ({ children }: { children: React.ReactNode }) => (
-	<main className="main">
-		<div className={styles.slug}>
-			<div className={styles.sidebar}>
-				<Link href="/docs">Introduction</Link>
+const Layout = ({ children }: { children: React.ReactNode }) => {
+	const pathname = usePathname();
 
-				<section>
-					<Link href="/docs/get-started">Get started</Link>
-					<div className={styles.links}>
-						<Link href="#step-1">Step 1 - *text*</Link>
-						<Link href="#step-2">Step 2 - *text*</Link>
-						<Link href="#step-3">Step 3 - *text*</Link>
-						<Link href="#step-4">Step 4 - *text*</Link>
-						<Link href="#step-5">Step 5 - *text*</Link>
-					</div>
-				</section>
+	const links = [
+		{ href: '/docs', label: 'Introduction' },
+		{ href: '/docs/installation-and-setup', label: 'Installation and Setup' },
+		{ href: '/docs/user-guide', label: 'User Guide' },
+		{ href: '/docs/api', label: 'API Documentation' },
+		{ href: '/docs/configuration', label: 'Configuration' },
+		{ href: '/docs/troubleshooting-faqs', label: 'Troubleshooting and FAQs' },
+		{ href: '/docs/security', label: 'Security' },
+		{
+			href: '/docs/performance-scalability',
+			label: 'Performance and Scalability',
+		},
+		{ href: '/docs/error-handling', label: 'Error Handling' },
+		{
+			href: '/docs/customization-extensibility',
+			label: 'Customization and Extensibility',
+		},
+		{ href: '/docs/release-notes', label: 'Release Notes' },
+		{ href: '/docs/code-samples-examples', label: 'Code Samples and Examples' },
+		{
+			href: '/docs/dependencies-libraries',
+			label: 'Dependencies and Third-party Libraries',
+		},
+		{ href: '/docs/contact-support', label: 'Contact Information and Support' },
+		{ href: '/docs/glossary', label: 'Glossary' },
+		{ href: '/docs/legal-licensing', label: 'Legal and Licensing Information' },
+		{
+			href: '/docs/version-control-collaboration',
+			label: 'Version Control and Collaboration',
+		},
+		{
+			href: '/docs/backups-disaster-recovery',
+			label: 'Backups and Disaster Recovery',
+		},
+		{
+			href: '/docs/testing-quality-assurance',
+			label: 'Testing and Quality Assurance',
+		},
+	];
 
-				<Link href="/docs/guide">Guide</Link>
+	return (
+		<main className="main">
+			<div className={styles.slug}>
+				<div className={styles.sidebar}>
+					{links.map((link, index) => {
+						const isActive = pathname === link.href; // Сравниваем текущий путь с href ссылки
 
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
-				<Link href="/docs">There will be something here soon</Link>
+						console.log(isActive);
+
+						return (
+							<Link
+								href={link.href}
+								key={index}
+								className={isActive ? styles.activeLink : ''}
+							>
+								{/* Добавляем класс активной ссылки */}
+								{link.label}
+							</Link>
+						);
+					})}
+				</div>
+				{children}
 			</div>
-			{children}
-		</div>
-	</main>
-);
+		</main>
+	);
+};
 
 export default Layout;
