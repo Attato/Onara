@@ -4,13 +4,14 @@
 	.sidebar {
 		position: sticky;
 		top: var(--header-height);
-		width: 300px;
-		height: calc(100vh - var(--header-height));
-		overflow-y: auto;
-		padding: 16px 16px 16px 0;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		width: 300px;
+		padding: 16px 16px 16px 0;
+		height: calc(100vh - var(--header-height));
+		overflow-y: auto;
+		border-right: 1px solid #1a1a1a;
 
 		&::-webkit-scrollbar {
 			width: 16px;
