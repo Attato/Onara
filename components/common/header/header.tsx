@@ -32,7 +32,7 @@ const Header: FC = () => {
 		};
 	}, []);
 
-	console.info('Have a great day! 🌳🐇🌻');
+	// console.info('Have a great day! 🌳🐇🌻');
 
 	return (
 		<header className={styles.header_wrapper}>
@@ -52,7 +52,7 @@ const Header: FC = () => {
 				<div className={styles.header_nav_second}>
 					<div className={styles.navigation_menu}>
 						<Link href="/showcase">Showcase</Link>
-						<Link href="/docs">Docs</Link>
+						<Link href="/docs/introduction">Docs</Link>
 						<Link href="/feedback">Feedback</Link>
 						<Link href="/help">Help</Link>
 					</div>
