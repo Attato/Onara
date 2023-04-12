@@ -76,7 +76,7 @@ const Header: FC = () => {
 					<BurgerMenu
 						menuItems={[
 							{ href: '/showcase', label: 'Showcase' },
-							{ href: '/docs', label: 'Docs' },
+							{ href: '/docs/introduction', label: 'Docs' },
 							{ href: '/feedback', label: 'Feedback' },
 							{ href: '/help', label: 'Help' },
 						]}
