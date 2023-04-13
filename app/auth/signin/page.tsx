@@ -5,9 +5,9 @@ import { useState } from 'react';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 
-import styles from './page.module.scss';
+import styles from '../auth.module.scss';
 
-const Login: NextPage = () => {
+const SignIn: NextPage = () => {
 	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -49,10 +49,10 @@ const Login: NextPage = () => {
 					/>
 				</label>
 				<button type="submit">Continue with Email</button>
-				<Link href="/signup">Create Your Onara Account -&gt;</Link>
+				<Link href="/auth/signup">Create Your Onara Account -&gt;</Link>
 			</form>
 		</main>
 	);
 };
 
-export default Login;
+export default SignIn;

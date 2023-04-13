@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import styles from './page.module.scss';
+import styles from '../auth.module.scss';
 
 const SignUp: NextPage = () => {
 	return (

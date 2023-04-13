@@ -59,11 +59,11 @@ const Header: FC = () => {
 				</div>
 
 				<div className={styles.header_nav_third}>
-					<Link href="/login" className={styles.signin}>
+					<Link href="/auth/signin" className={styles.signin}>
 						Sign in
 					</Link>
 
-					<Link href="/signup" className={styles.signup}>
+					<Link href="/auth/signup" className={styles.signup}>
 						Sign up
 						<Image
 							src="/components/common/header/signin.svg"
