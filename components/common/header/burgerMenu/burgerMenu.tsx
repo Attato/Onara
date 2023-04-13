@@ -52,7 +52,11 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 					</Link>
 				))}
 
-				<Link href="/login" className={styles.signin} onClick={handleClick}>
+				<Link
+					href="/auth/signin"
+					className={styles.signin}
+					onClick={handleClick}
+				>
 					Sign In
 				</Link>
 			</div>
