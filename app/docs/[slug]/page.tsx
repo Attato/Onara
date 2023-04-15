@@ -6,7 +6,9 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import slug from '@/pages/api/slug.json';
+import Content from '../content/about.mdx';
+
+import slug from '@/api/slug.json';
 
 import styles from './page.module.scss';
 
@@ -19,13 +21,14 @@ const DocsPage = () => {
 				<span>Last updated on April 10, 2023</span>
 				<span> 1 min read</span>
 			</div>
-			<h1>
-				{slug
+
+			{/* {slug
 					.filter((title) => title.url === router)
 					.map((title) => {
 						return title.title;
-					})}
-			</h1>
+					})} */}
+
+			<Content />
 
 			<p>*there should be some text*.</p>
 
@@ -33,7 +36,6 @@ const DocsPage = () => {
 				{slug
 					.filter((title) => title.url === router)
 					.map((item, id) => {
-						console.log(slug[item.id]);
 						return (
 							<div
 								className={styles.links}

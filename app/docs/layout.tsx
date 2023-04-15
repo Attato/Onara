@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import slug from '@/pages/api/slug.json';
+import slug from '@/api/slug.json';
 import styles from './layout.module.scss';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	const pathname = usePathname();
+	const router = useRouter();
 
 	return (
 		<main className="main">
@@ -22,6 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 								href={link.url}
 								key={index}
 								className={isActive ? styles.activeLink : ''}
+								draggable={false}
 							>
 								{link.title}
 							</Link>

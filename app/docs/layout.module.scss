@@ -12,6 +12,7 @@
 		height: calc(100vh - var(--header-height));
 		overflow-y: auto;
 		border-right: 1px solid #1a1a1a;
+		user-select: none;
 
 		&::-webkit-scrollbar {
 			width: 16px;
