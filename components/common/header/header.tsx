@@ -32,8 +32,6 @@ const Header: FC = () => {
 		};
 	}, []);
 
-	// console.info('Have a great day! 🌳🐇🌻');
-
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
