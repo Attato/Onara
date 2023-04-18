@@ -1,0 +1,45 @@
+.slug {
+	display: flex;
+
+	.page_content {
+		max-width: 840px;
+		padding: 32px 0 32px 32px;
+		width: 100%;
+
+		h1 {
+			font-size: 40px;
+			margin: 32px 0;
+		}
+
+		p {
+			line-height: 1.6;
+			margin: 16px 0;
+		}
+
+		pre {
+			background: #111;
+			padding: 20px;
+			border-radius: 6px;
+			color: #f8f8f2;
+			white-space: pre;
+			overflow: auto;
+		}
+
+		.time_info {
+			display: flex;
+			justify-content: space-between;
+
+			span {
+				color: #888;
+				font-size: 14px;
+				margin-top: -16px;
+			}
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		.page_content {
+			padding: 32px 0;
+		}
+	}
+}
