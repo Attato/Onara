@@ -20,7 +20,7 @@ const SignIn: NextPage = () => {
 	return (
 		<main className="main">
 			<form className={styles.form} onSubmit={handleSubmit}>
-				<h1>Log in to Onara</h1>
+				<h1>Sign in to Onara</h1>
 				<label>
 					Username:
 					<input
@@ -48,7 +48,7 @@ const SignIn: NextPage = () => {
 						placeholder="********"
 					/>
 				</label>
-				<button type="submit">Continue with Email</button>
+				<button type="submit">Continue </button>
 				<Link href="/auth/signup">Create Your Onara Account -&gt;</Link>
 			</form>
 		</main>
