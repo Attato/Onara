@@ -1,5 +1,5 @@
 input {
-	border: 1px solid rgb(255 255 255 / 60%);
+	border: 1px solid #222;
 	border-radius: 3px;
 	background: #000;
 	outline: none;
@@ -8,14 +8,12 @@ input {
 	font-size: 100%;
 
 	&:focus-visible {
-		border: 1px solid #ededed;
+		border: 1px solid #444;
 	}
 }
 
 button {
-	background: #fff;
-	border: 1px solid #fff;
-	color: #000;
+	border: 0;
 	border-radius: 6px;
 	height: 40px;
 	margin-top: 20px;

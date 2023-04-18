@@ -1,10 +1,13 @@
 .slug {
 	display: flex;
+	margin-top: 20px;
 
 	.page_content {
+		border-radius: 0 10px 0 0;
 		max-width: 840px;
-		padding: 32px 0 32px 32px;
 		width: 100%;
+		padding: 32px 40px;
+		background: #0a0a0a;
 
 		h1 {
 			font-size: 40px;
@@ -16,8 +19,12 @@
 			margin: 16px 0;
 		}
 
+		a {
+			color: #3291ff;
+		}
+
 		pre {
-			background: #111;
+			background: #0a0a0a;
 			padding: 20px;
 			border-radius: 6px;
 			color: #f8f8f2;
@@ -32,7 +39,6 @@
 			span {
 				color: #888;
 				font-size: 14px;
-				margin-top: -16px;
 			}
 		}
 	}
