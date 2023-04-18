@@ -11,23 +11,23 @@ import styles from './footer.module.scss';
 
 const Footer: FC = () => {
 	const productLinks = [
-		{ href: '/', label: 'Features' },
-		{ href: '/', label: 'Security' },
+		{ href: '/docs/release-notes', label: 'Release Notes' },
+		{ href: '/docs/security', label: 'Security' },
 		{ href: '/', label: 'Sitemap' },
 		{ href: '/', label: 'What is ONARA?' },
 	];
 
 	const resourcesLinks = [
-		{ href: '/', label: 'Documentation' },
-		{ href: '/', label: 'Guides' },
-		{ href: '/', label: 'Help' },
+		{ href: '/docs/introduction', label: 'Documentation' },
+		{ href: '/docs/user-guide', label: 'Guides' },
+		{ href: '/help', label: 'Help' },
 		{ href: '/', label: 'Open Source Software' },
 	];
 
 	const companyLinks = [
 		{ href: '/', label: 'Home' },
-		{ href: '/', label: 'Showcase' },
-		{ href: '/', label: 'Feedback' },
+		{ href: '/showcase', label: 'Showcase' },
+		{ href: '/feedback', label: 'Feedback' },
 		{ href: '/', label: 'Contact Us' },
 	];
 
@@ -35,7 +35,7 @@ const Footer: FC = () => {
 		{ href: '/', label: 'Privacy Policy' },
 		{ href: '/', label: 'Terms of Service' },
 		{ href: '/', label: 'Cookie Preferences' },
-		{ href: '/', label: 'License' },
+		{ href: '/docs/legal-licensing', label: 'License' },
 	];
 
 	const footerLinks = [
@@ -79,7 +79,7 @@ const Footer: FC = () => {
 				</span>
 
 				<div className={styles.social}>
-					<Link href="https://github.com/Attato/ONARA">
+					<Link href="https://github.com/Attato/Onara">
 						<Image
 							src="/components/common/footer/github.svg"
 							width={19}
