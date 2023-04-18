@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import type { FC } from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,7 +11,7 @@ import useScrollToTop from '@/hooks/scrollToTop';
 
 import styles from './header.module.scss';
 
-const Header: FC = () => {
+const Header: React.FC = () => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const header = document.querySelector('header');
@@ -32,6 +31,13 @@ const Header: FC = () => {
 		};
 	}, []);
 
+	const links = [
+		{ href: '/showcase', label: 'Showcase' },
+		{ href: '/docs/introduction', label: 'Docs' },
+		{ href: '/feedback', label: 'Feedback' },
+		{ href: '/help', label: 'Help' },
+	];
+
 	return (
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
@@ -49,10 +55,13 @@ const Header: FC = () => {
 
 				<div className={styles.header_nav_second}>
 					<div className={styles.navigation_menu}>
-						<Link href="/showcase">Showcase</Link>
-						<Link href="/docs/introduction">Docs</Link>
-						<Link href="/feedback">Feedback</Link>
-						<Link href="/help">Help</Link>
+						{links.map((link) => {
+							return (
+								<Link key={link.href} href={link.href}>
+									{link.label}
+								</Link>
+							);
+						})}
 					</div>
 				</div>
 
@@ -71,14 +80,7 @@ const Header: FC = () => {
 						/>
 					</Link>
 
-					<BurgerMenu
-						menuItems={[
-							{ href: '/showcase', label: 'Showcase' },
-							{ href: '/docs/introduction', label: 'Docs' },
-							{ href: '/feedback', label: 'Feedback' },
-							{ href: '/help', label: 'Help' },
-						]}
-					/>
+					<BurgerMenu menuItems={links} />
 				</div>
 			</div>
 		</header>
