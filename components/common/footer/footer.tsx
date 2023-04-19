@@ -14,19 +14,19 @@ const Footer: FC = () => {
 		{ href: '/docs/release-notes', label: 'Release Notes' },
 		{ href: '/docs/security', label: 'Security' },
 		{ href: '/', label: 'Sitemap' },
-		{ href: '/', label: 'What is ONARA?' },
+		{ href: '/', label: 'What is Onara?' },
 	];
 
 	const resourcesLinks = [
 		{ href: '/docs/introduction', label: 'Documentation' },
-		{ href: '/docs/user-guide', label: 'Guides' },
+		{ href: '/docs/user-guide', label: 'User Guide' },
 		{ href: '/help', label: 'Help' },
 		{ href: '/', label: 'Open Source Software' },
 	];
 
 	const companyLinks = [
 		{ href: '/', label: 'Home' },
-		{ href: '/showcase', label: 'Showcase' },
+		{ href: '/about', label: 'About' },
 		{ href: '/feedback', label: 'Feedback' },
 		{ href: '/', label: 'Contact Us' },
 	];
