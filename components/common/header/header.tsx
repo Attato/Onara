@@ -32,7 +32,7 @@ const Header: React.FC = () => {
 	}, []);
 
 	const links = [
-		{ href: '/showcase', label: 'Showcase' },
+		{ href: '/about', label: 'About' },
 		{ href: '/docs/introduction', label: 'Docs' },
 		{ href: '/feedback', label: 'Feedback' },
 		{ href: '/help', label: 'Help' },
