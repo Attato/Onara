@@ -33,6 +33,7 @@ const Home: NextPage = () => {
 						height={512}
 						alt="img"
 						className={styles.cosmonaut}
+						priority={true}
 					/>
 				</div>
 			</main>
