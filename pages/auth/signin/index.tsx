@@ -5,6 +5,11 @@ import { useState } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
+
+import { useSession, getProviders, signOut } from 'next-auth/react';
+
+import Loading from '@/components/loading/loading';
 
 import styles from '../auth.module.scss';
 
@@ -13,9 +18,38 @@ const SignIn: NextPage = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
+	const { data: session, status } = useSession();
+	console.log(session, status);
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 		// handle form submission
+	};
+
+	const [loading, setLoading] = useState(false);
+
+	const handleGithubLogin = async () => {
+		setLoading(true);
+
+		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${
+			process.env.GITHUB_CLIENT_ID
+		}&redirect_uri=${encodeURIComponent(
+			process.env.NEXTAUTH_URL + '/api/auth/callback/github'
+		)}&scope=user`;
+
+		const popup = window.open(githubAuthUrl, '_blank', 'height=800,width=600');
+
+		if (popup) {
+			popup.focus();
+			const pollTimer = setInterval(() => {
+				if (popup.closed) {
+					clearInterval(pollTimer);
+					setLoading(false);
+				}
+			}, 500);
+		} else {
+			setLoading(false);
+			alert('Failed to open Github login popup. Please try again.');
+		}
 	};
 
 	return (
@@ -28,36 +62,62 @@ const SignIn: NextPage = () => {
 
 			<main className="main">
 				<form className={styles.form} onSubmit={handleSubmit}>
-					<h1>Sign in to Onara</h1>
-					<label>
-						Username:
-						<input
-							type="text"
-							value={username}
-							onChange={(e) => setUsername(e.target.value)}
-							placeholder="John Doe"
-						/>
-					</label>
-					<label>
-						Email:
-						<input
-							type="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							placeholder="example@gmail.com"
-						/>
-					</label>
-					<label>
-						Password:
-						<input
-							type="password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							placeholder="********"
-						/>
-					</label>
-					<button type="submit">Continue </button>
-					<Link href="/auth/signup">Create Your Onara Account -&gt;</Link>
+					<div className={styles.with_email}>
+						<h1>Sign in to Onara</h1>
+						<label>
+							Email
+							<input
+								type="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								placeholder="example@gmail.com"
+							/>
+						</label>
+						<label>
+							Password
+							<input
+								type="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								placeholder="********"
+							/>
+							<Link href="/auth/signin">Forgot your password?</Link>
+						</label>
+						<button type="submit">Continue</button>
+
+						<span>
+							Need an account? <Link href="/auth/signup">Register</Link>
+						</span>
+					</div>
+
+					<div className={styles.with_options}>
+						<button
+							className={styles.github_btn}
+							onClick={handleGithubLogin}
+							disabled={loading}
+						>
+							{loading ? (
+								<Loading width={18} height={18} />
+							) : (
+								<Image
+									src="/icons/github.svg"
+									width={18}
+									height={18}
+									alt="github"
+								/>
+							)}
+							Continue with Github
+						</button>
+						<button className={styles.gitlab_btn}>
+							<Image
+								src="/icons/gitlab.svg"
+								width={18}
+								height={18}
+								alt="gitlab"
+							/>
+							Continue with Gitlab
+						</button>
+					</div>
 				</form>
 			</main>
 		</>

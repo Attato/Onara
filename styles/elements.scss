@@ -1,5 +1,5 @@
 input {
-	border: 1px solid #222;
+	border: 1px solid #1a1a1a;
 	border-radius: 3px;
 	background: #000;
 	outline: none;
@@ -9,6 +9,10 @@ input {
 
 	&:focus-visible {
 		border: 1px solid #444;
+	}
+
+	&::placeholder {
+		color: #888;
 	}
 }
 
