@@ -73,7 +73,7 @@ const Header: React.FC = () => {
 					<Link href="/auth/signup" className={styles.signup}>
 						Sign up
 						<Image
-							src="/components/common/header/signin.svg"
+							src="/icons/signin.svg"
 							width={14}
 							height={14}
 							alt="sign in"

@@ -31,7 +31,7 @@ const Links = ({ posts }: any) => {
 									className={styles.left}
 								>
 									<Image
-										src="/docs/arrow_left.svg"
+										src="/icons/arrow_left.svg"
 										width={24}
 										height={24}
 										alt="arrow_left"
@@ -46,7 +46,7 @@ const Links = ({ posts }: any) => {
 								>
 									{posts[item.frontMatter.id + 1].frontMatter.title}
 									<Image
-										src="/docs/arrow_right.svg"
+										src="/icons/arrow_right.svg"
 										width={24}
 										height={24}
 										alt="arrow_right"

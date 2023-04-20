@@ -5,7 +5,7 @@ const Stub = () => {
 	return (
 		<div className={styles.stub}>
 			<Image
-				src="/components/stub/attention.svg"
+				src="/icons/attention.svg"
 				width={16}
 				height={16}
 				alt="attention"
