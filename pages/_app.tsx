@@ -1,13 +1,12 @@
 import React from 'react';
+
+import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
+
 import Header from '@/components/common/header/header';
 import Footer from '@/components/common/footer/footer';
 
-import '@/styles/elements.scss';
-import '@/styles/globals.scss';
-import '@/styles/nullstyle.scss';
-import '@/styles/variables.scss';
-
-import type { AppProps } from 'next/app';
+import '@/styles/import.scss';
 
 console.info('Have a great day! 🌳🐇🌻');
 
@@ -16,6 +15,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 		<div className="page_container">
 			<Header />
 			<Component {...pageProps} />
+			<Analytics />
 			<Footer />
 		</div>
 	);
