@@ -7,33 +7,31 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useSession, getProviders, signOut } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 
 import Loading from '@/components/loading/loading';
+import Attention from '@/components/attention/attention';
 
 import styles from '../auth.module.scss';
 
 const SignIn: NextPage = () => {
-	const [username, setUsername] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
-	const { data: session, status } = useSession();
-	console.log(session, status);
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 		// handle form submission
 	};
 
+	const { data } = useSession();
+	console.log(data);
 	const [loading, setLoading] = useState(false);
 
 	const handleGithubLogin = async () => {
 		setLoading(true);
 
-		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${
-			process.env.GITHUB_CLIENT_ID
-		}&redirect_uri=${encodeURIComponent(
-			process.env.NEXTAUTH_URL + '/api/auth/callback/github'
+		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=8748f2b3a51ce1010736&redirect_uri=${encodeURIComponent(
+			process.env.NEXT_PUBLIC_GITHUB_NEXTAUTH_URL + '/api/auth/callback/github'
 		)}&scope=user`;
 
 		const popup = window.open(githubAuthUrl, '_blank', 'height=800,width=600');
@@ -51,7 +49,6 @@ const SignIn: NextPage = () => {
 			alert('Failed to open Github login popup. Please try again.');
 		}
 	};
-
 	return (
 		<>
 			<Head>
@@ -80,6 +77,7 @@ const SignIn: NextPage = () => {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								placeholder="********"
+								autoComplete={password}
 							/>
 							<Link href="/auth/signin">Forgot your password?</Link>
 						</label>
@@ -91,6 +89,19 @@ const SignIn: NextPage = () => {
 					</div>
 
 					<div className={styles.with_options}>
+						<div className={styles.qr_code}>
+							<Image
+								src="/icons/qr_code.svg"
+								width={200}
+								height={200}
+								alt="qr-code"
+							/>
+							<p>
+								Scan this with the <span>Onara mobile app</span> to log in
+								instantly
+							</p>
+							<Attention text="This is a stub. Help us expand it by contributing!" />
+						</div>
 						<button
 							className={styles.github_btn}
 							onClick={handleGithubLogin}
@@ -108,7 +119,7 @@ const SignIn: NextPage = () => {
 							)}
 							Continue with Github
 						</button>
-						<button className={styles.gitlab_btn}>
+						<button className={styles.gitlab_btn} onClick={() => signIn()}>
 							<Image
 								src="/icons/gitlab.svg"
 								width={18}
