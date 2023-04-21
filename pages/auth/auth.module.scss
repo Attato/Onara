@@ -1,8 +1,8 @@
 .form {
 	display: flex;
 	height: calc(100vh - var(--header-height));
-
 	align-items: center;
+
 	.with_email {
 		display: flex;
 		flex-direction: column;
@@ -44,6 +44,7 @@
 
 		button {
 			color: white;
+			background-color: #3f51b5;
 		}
 	}
 
@@ -63,6 +64,7 @@
 			align-items: center;
 			justify-content: center;
 			gap: 10px;
+			color: white;
 		}
 
 		.github_btn {
@@ -71,6 +73,31 @@
 
 		.gitlab_btn {
 			background-color: var(--gitlab-color);
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.form {
+		flex-direction: column;
+		justify-content: center;
+		margin-top: 20px;
+
+		.with_email {
+			border-radius: 10px 10px 0 0;
+			padding: 32px 24px;
+			height: auto;
+		}
+
+		.with_options {
+			border-radius: 0 0 10px 10px;
+			border-left: 0;
+			height: fit-content;
+			padding: 32px 24px;
+
+			.github_btn {
+				margin-top: 0;
+			}
 		}
 	}
 }
