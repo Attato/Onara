@@ -30,7 +30,9 @@ const SignIn: NextPage = () => {
 	const handleGithubLogin = async () => {
 		setLoading(true);
 
-		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=8748f2b3a51ce1010736&redirect_uri=${encodeURIComponent(
+		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${
+			process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
+		}&redirect_uri=${encodeURIComponent(
 			process.env.NEXT_PUBLIC_GITHUB_NEXTAUTH_URL + '/api/auth/callback/github'
 		)}&scope=user`;
 
