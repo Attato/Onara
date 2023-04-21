@@ -65,6 +65,10 @@
 			justify-content: center;
 			gap: 10px;
 			color: white;
+
+			&:disabled {
+				color: rgb(255 255 255 / 30%);
+			}
 		}
 
 		.github_btn {
