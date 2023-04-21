@@ -1,7 +1,11 @@
 import Image from 'next/image';
-import styles from './stub.module.scss';
+import styles from './attention.module.scss';
 
-const Stub = () => {
+interface AttentionProps {
+	text: string;
+}
+
+const Attention = ({ text }: AttentionProps) => {
 	return (
 		<div className={styles.stub}>
 			<Image
@@ -10,9 +14,9 @@ const Stub = () => {
 				height={16}
 				alt="attention"
 			/>
-			<p>This page is a stub. Help us expand it by contributing! </p>
+			<p>{text}</p>
 		</div>
 	);
 };
 
-export default Stub;
+export default Attention;
