@@ -28,7 +28,7 @@ const Home: NextPage = () => {
 
 				<div className={styles.footer}>
 					<Image
-						src="/homePage_1.png"
+						src="/illustrations/homePage_1.png"
 						width={512}
 						height={512}
 						alt="img"
