@@ -15,8 +15,10 @@ const Feedback: NextPage = () => {
 			</Head>
 
 			<main className="main">
-				<h1>Feedback</h1>
-				<Attention text="This page is a stub. Help us expand it by contributing!" />
+				<div className={styles.page_content}>
+					<h1>Feedback</h1>
+					<Attention text="This page is a stub. Help us expand it by contributing!" />
+				</div>
 			</main>
 		</>
 	);
