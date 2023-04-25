@@ -33,7 +33,7 @@ const Home: NextPage = () => {
 
 				<div className={styles.title}>
 					<span>Main features</span>
-					<h1>What's in Onara?</h1>
+					<h1>What&apos;s in Onara?</h1>
 				</div>
 
 				<div className={styles.features_grid}>
