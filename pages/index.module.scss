@@ -25,7 +25,6 @@
 	span {
 		font-size: 18px;
 		opacity: 0.5;
-		font-weight: 300;
 	}
 
 	h1 {
@@ -64,7 +63,6 @@
 				margin-top: 10px;
 				line-height: 1.4;
 				opacity: 0.6;
-				font-weight: 300;
 			}
 		}
 	}
@@ -82,6 +80,8 @@
 	}
 
 	a {
+		display: flex;
+		align-items: center;
 		padding: 8px 24px;
 		color: #ededed;
 		background-color: #0a0a0a;
@@ -95,6 +95,12 @@
 		&:hover {
 			background-color: #0c0c0c;
 			border-color: #323232;
+		}
+
+		img {
+			transform: rotate(180deg);
+			margin-left: 4px;
+			margin-top: 1px;
 		}
 	}
 

@@ -118,7 +118,15 @@ const Home: NextPage = () => {
 				/>
 				<div className={styles.footer}>
 					<h1>Commence your journey today</h1>
-					<Link href="/auth/signup">Sign up</Link>
+					<Link href="/auth/signup">
+						Sign up{' '}
+						<Image
+							src="/icons/enter-exit.svg"
+							width={14}
+							height={14}
+							alt="sign up"
+						/>
+					</Link>
 					<Image
 						src="/illustrations/homePage_1.png"
 						width={512}
