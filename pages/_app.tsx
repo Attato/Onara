@@ -4,8 +4,8 @@ import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react';
 
-import Header from '@/components/common/header/header';
-import Footer from '@/components/common/footer/footer';
+import Header from '@/components/header/header';
+import Footer from '@/components/footer/footer';
 
 import '@/styles/import.scss';
 
@@ -17,12 +17,12 @@ export default function MyApp({
 }: AppProps) {
 	return (
 		<div className="page_container">
-			<Header />
 			<SessionProvider session={session}>
+				<Header />
 				<Component {...pageProps} />
+				<Footer />
 			</SessionProvider>
 			<Analytics />
-			<Footer />
 		</div>
 	);
 }
