@@ -12,7 +12,7 @@ import { signIn, useSession } from 'next-auth/react';
 import Loading from '@/components/loading/loading';
 import Attention from '@/components/attention/attention';
 
-import styles from '../auth.module.scss';
+import styles from './signin.module.scss';
 
 const SignIn: NextPage = () => {
 	const [email, setEmail] = useState('');
@@ -20,37 +20,13 @@ const SignIn: NextPage = () => {
 
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
-		// handle form submission
 	};
 
 	const { data } = useSession();
 	console.log(data);
+
 	const [loading, setLoading] = useState(false);
 
-	const handleGithubLogin = async () => {
-		setLoading(true);
-
-		const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${
-			process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID
-		}&redirect_uri=${encodeURIComponent(
-			process.env.NEXT_PUBLIC_GITHUB_NEXTAUTH_URL + '/api/auth/callback/github'
-		)}&scope=user`;
-
-		const popup = window.open(githubAuthUrl, '_blank', 'height=800,width=600');
-
-		if (popup) {
-			popup.focus();
-			const pollTimer = setInterval(() => {
-				if (popup.closed) {
-					clearInterval(pollTimer);
-					setLoading(false);
-				}
-			}, 500);
-		} else {
-			setLoading(false);
-			alert('Failed to open Github login popup. Please try again.');
-		}
-	};
 	return (
 		<>
 			<Head>
@@ -106,7 +82,7 @@ const SignIn: NextPage = () => {
 						</div>
 						<button
 							className={styles.github_btn}
-							onClick={handleGithubLogin}
+							onClick={() => signIn('github')}
 							disabled={loading}
 						>
 							{loading ? (
@@ -121,7 +97,7 @@ const SignIn: NextPage = () => {
 							)}
 							Continue with Github
 						</button>
-						<button className={styles.gitlab_btn} onClick={() => signIn()}>
+						<button className={styles.gitlab_btn}>
 							<Image
 								src="/icons/gitlab.svg"
 								width={18}
