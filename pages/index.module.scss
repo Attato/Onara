@@ -23,8 +23,9 @@
 	margin-bottom: 48px;
 
 	span {
-		color: #888;
 		font-size: 18px;
+		opacity: 0.5;
+		font-weight: 300;
 	}
 
 	h1 {
@@ -62,7 +63,8 @@
 				font-size: 14px;
 				margin-top: 10px;
 				line-height: 1.4;
-				color: #ededed;
+				opacity: 0.6;
+				font-weight: 300;
 			}
 		}
 	}

@@ -38,7 +38,13 @@ const FAQ = ({ questions }: Props) => {
 								activeQuestion === index ? styles.arrow_rotate : styles.arrow
 							}
 						/>
-						<h3>{item.question}</h3>
+						<h3
+							style={
+								activeQuestion === index ? { opacity: 1 } : { opacity: 0.6 }
+							}
+						>
+							{item.question}
+						</h3>
 					</button>
 					{activeQuestion === index && (
 						<div className={styles.faq_content}>
