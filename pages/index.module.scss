@@ -18,8 +18,83 @@
 	}
 }
 
+.title {
+	margin-top: 120px;
+	margin-bottom: 48px;
+
+	span {
+		color: #888;
+		font-size: 18px;
+	}
+
+	h1 {
+		font-size: 52px;
+	}
+}
+
+.features_grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-gap: 16px;
+
+	.columns {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		width: 100%;
+
+		a {
+			padding: 24px;
+			background-color: #0a0a0a;
+			border: 1px solid #232323;
+			border-radius: 10px;
+
+			&:hover {
+				border-color: #343434;
+			}
+
+			span {
+				font-size: 20px;
+				font-weight: 500;
+			}
+
+			p {
+				font-size: 14px;
+				margin-top: 10px;
+				line-height: 1.4;
+				color: #ededed;
+			}
+		}
+	}
+}
+
 .footer {
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 120px;
+
+	h1 {
+		text-align: center;
+		font-size: 32px;
+	}
+
+	a {
+		padding: 8px 24px;
+		color: #ededed;
+		background-color: #0a0a0a;
+		border: 1px solid #232323;
+		border-radius: 26px;
+		font-weight: 500;
+		text-align: center;
+		margin-top: 40px;
+		transition: all 0.2s ease;
+
+		&:hover {
+			background-color: #0c0c0c;
+			border-color: #323232;
+		}
+	}
 
 	.cosmonaut {
 		margin: auto;
@@ -46,5 +121,27 @@
 			font-size: 16px;
 			text-align: left;
 		}
+	}
+
+	.title {
+		margin-bottom: 32px;
+
+		span {
+			font-size: 16px;
+		}
+
+		h1 {
+			font-size: 32px;
+		}
+	}
+
+	.features_grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.features_grid {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
 }
