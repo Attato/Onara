@@ -10,15 +10,20 @@
 		font-size: 20px;
 
 		h3 {
-			font-size: 20px;
+			font-size: 18px;
 			font-weight: 400;
 			text-align: left;
 		}
 
-		.simbol {
-			display: block;
-			width: 12px;
+		.arrow,
+		.arrow_rotate {
 			margin-right: 8px;
+			transition: all 0.3s ease;
+		}
+
+		.arrow_rotate {
+			transform: rotate(-90deg);
+			filter: brightness(2.5);
 		}
 	}
 
@@ -32,5 +37,11 @@
 			line-height: 1.4;
 			color: #ededed;
 		}
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.simbol {
+		display: none !important;
 	}
 }

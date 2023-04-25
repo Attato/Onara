@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import Image from 'next/image';
+
 import styles from './faq.module.scss';
 
 interface Question {
@@ -27,9 +29,15 @@ const FAQ = ({ questions }: Props) => {
 			{questions.map((item, index) => (
 				<div className={styles.faq} key={index}>
 					<button onClick={() => handleClick(index)}>
-						<span className={styles.simbol}>
-							{activeQuestion === index ? '-' : '+'}
-						</span>
+						<Image
+							src="/icons/arrow_down.svg"
+							width={12}
+							height={8}
+							alt="arrow_down"
+							className={
+								activeQuestion === index ? styles.arrow_rotate : styles.arrow
+							}
+						/>
 						<h3>{item.question}</h3>
 					</button>
 					{activeQuestion === index && (
