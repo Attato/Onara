@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 import { signIn, useSession } from 'next-auth/react';
 
-import Loading from '@/components/loading';
+import Loading from '@/components/Loading';
 import Attention from '@/components/Attention';
 
 import styles from './signin.module.scss';

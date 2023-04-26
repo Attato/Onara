@@ -6,8 +6,8 @@ import Head from 'next/head';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 
-import SideBar from '@/components/sidebar';
-import Links from '@/components/links';
+import SideBar from '@/components/Sidebar';
+import Links from '@/components/Links';
 
 import styles from './index.module.scss';
 
