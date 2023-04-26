@@ -4,6 +4,8 @@ import type { FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useSession } from 'next-auth/react';
+
 import styles from './burgerMenu.module.scss';
 
 interface MenuItem {
@@ -30,8 +32,10 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 		}, 100);
 	};
 
+	const { data, status } = useSession();
+
 	return (
-		<div className={styles.burger_menu}>
+		<>
 			<button className={styles.burger_menu__button} onClick={handleClick}>
 				<Image
 					src="/icons/burger_menu.svg"
@@ -40,27 +44,39 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 					alt="burger menu"
 				></Image>
 			</button>
-			<div className={open ? styles.open_links : styles.close_links}>
+
+			<div className={open ? styles.content : styles.close_content}>
+				{status === 'authenticated' ? (
+					<>
+						<Link href="/" className={styles.user} onClick={handleClick}>
+							<Image
+								src={`${data.user?.image}`}
+								width={32}
+								height={32}
+								alt={data.user?.name + ' logo'}
+							/>
+							<p>{data.user?.name}</p>
+						</Link>
+					</>
+				) : null}
+
 				{menuItems.map((menuItem) => (
-					<Link
-						href={menuItem.href}
-						key={menuItem.label}
-						onClick={handleClick}
-						className={styles.open_link}
-					>
+					<Link href={menuItem.href} key={menuItem.label} onClick={handleClick}>
 						{menuItem.label}
 					</Link>
 				))}
 
-				<Link
-					href="/auth/signin"
-					className={styles.signin}
-					onClick={handleClick}
-				>
-					Sign In
-				</Link>
+				{status === 'authenticated' ? null : (
+					<Link
+						href="/auth/signin"
+						className={styles.signin}
+						onClick={handleClick}
+					>
+						Sign In
+					</Link>
+				)}
 			</div>
-		</div>
+		</>
 	);
 };
 

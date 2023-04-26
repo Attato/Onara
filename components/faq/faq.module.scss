@@ -1,6 +1,11 @@
 .faq {
 	padding: 20px 0;
-	border-bottom: 1px solid #232323;
+	border-bottom: 1px solid var(--border-color);
+	transition: border-color 0.3s ease;
+
+	&:hover {
+		border-color: var(--border-color-hover);
+	}
 
 	button {
 		display: flex;
@@ -35,7 +40,7 @@
 			font-size: 14px;
 			margin-top: 10px;
 			line-height: 1.4;
-			opacity: 0.8;
+			color: var(--color-secondary);
 		}
 	}
 }

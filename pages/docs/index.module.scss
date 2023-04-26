@@ -7,29 +7,32 @@
 		max-width: 840px;
 		width: 100%;
 		padding: 32px 40px;
-		background: #0a0a0a;
+		background-color: var(--background-primary);
 
 		h1 {
 			font-size: 40px;
 			margin: 32px 0;
+			color: var(--color-primary);
 		}
 
 		p {
 			line-height: 1.6;
 			margin: 16px 0;
+			color: var(--color-primary);
 		}
 
 		a {
-			color: #3291ff;
+			color: var(--primary-link);
 
 			&:focus-visible {
-				outline: 2px solid #3291ff;
+				outline: 2px solid var(--primary-link);
 			}
 		}
 
 		pre {
-			background: #0a0a0a;
+			background-color: #1e1e1e;
 			padding: 20px;
+			margin-bottom: 16px;
 			border-radius: 6px;
 			color: #f8f8f2;
 			white-space: pre;
@@ -39,10 +42,9 @@
 		.time_info {
 			display: flex;
 			justify-content: space-between;
+			color: var(--color-secondary);
 
 			span {
-				color: #fff;
-				opacity: 0.6;
 				font-size: 14px;
 			}
 		}

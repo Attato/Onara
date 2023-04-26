@@ -4,8 +4,8 @@
 	align-items: center;
 
 	.spinner {
-		border: 3px solid rgba(0, 0, 0, 0.1);
-		border-top-color: rgb(255 255 255 / 60%);
+		border: 3px solid var(--background-secondary);
+		border-top-color: var(--primary-link);
 		border-radius: 50%;
 		animation: spin 1s ease-in-out infinite;
 	}

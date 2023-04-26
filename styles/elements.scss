@@ -1,18 +1,19 @@
 input {
-	border: 1px solid #1a1a1a;
+	border: 1px solid var(--border-color);
 	border-radius: 3px;
-	background: #000;
+	background: var(--background);
 	outline: none;
 	height: 40px;
 	padding: 0 12px;
 	font-size: 100%;
+	color: var(--color-primary);
 
 	&:focus-visible {
-		border: 1px solid #444;
+		border-color: var(--border-color-hover);
 	}
 
 	&::placeholder {
-		color: #888;
+		color: var(--color-secondary);
 	}
 }
 
@@ -26,9 +27,9 @@ button {
 }
 
 select {
-	border: 1px solid rgba(255, 255, 255, 0.6);
+	border: 1px solid var(--border-color);
 	border-radius: 3px;
-	background: #000;
+	background: var(--background);
 	outline: none;
 	height: 40px;
 	padding: 0 12px;

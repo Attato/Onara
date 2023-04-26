@@ -40,7 +40,9 @@ const FAQ = ({ questions }: Props) => {
 						/>
 						<h3
 							style={
-								activeQuestion === index ? { opacity: 1 } : { opacity: 0.6 }
+								activeQuestion === index
+									? { color: `var(--color-primary)` }
+									: { color: `var(--color-secondary)` }
 							}
 						>
 							{item.question}

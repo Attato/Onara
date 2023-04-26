@@ -14,21 +14,23 @@
 		margin: auto;
 		padding: 32px 40px;
 		border-radius: 10px;
-		background-color: #0a0a0a;
+		background-color: var(--background-primary);
 
 		h1 {
 			text-align: center;
+			color: var(--color-primary);
 		}
 
 		label {
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
+			color: var(--color-primary);
 		}
 
 		button {
-			color: white;
-			background-color: #3f51b5;
+			color: var(--color-primary);
+			background-color: var(--secondary-link);
 			margin: 0;
 		}
 	}

@@ -8,9 +8,9 @@
 	padding: 20px;
 	height: calc(100vh - var(--header-height));
 	overflow-y: auto;
-	background-color: #0c0c0c;
+	background-color: var(--background-secondary);
 	border-radius: 10px 0 0 0;
-	border-right: 1px solid #1a1a1a;
+	border-right: 1px solid var(--border-color);
 	user-select: none;
 
 	&::-webkit-scrollbar {
@@ -19,85 +19,47 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: #1a1a1a;
-		border: 4px solid #0c0c0c;
+		background: var(--border-color);
+		border: 4px solid var(--background-secondary);
 		border-radius: 16px;
 
 		&:hover {
-			background: #333;
+			background: var(--border-color-hover);
 		}
 
 		&:active {
-			background: #4d4d4d;
+			background: var(--border-color-active);
 		}
 	}
 
 	.activeLink {
-		color: #fff !important;
-		opacity: 1 !important;
+		color: var(--color-primary);
 
 		&::before {
-			background-color: #3291ff !important;
+			background-color: var(--primary-link);
 		}
 	}
 
 	a {
-		font-size: 14px;
-		color: #fff;
-		opacity: 0.6;
-		transition: color 0.2s ease;
 		display: flex;
 		align-items: center;
+		font-size: 14px;
+		color: var(--color-secondary);
+		font-weight: 500;
+		transition: color 0.2s ease;
 
 		&:hover {
-			opacity: 1;
+			color: var(--color-primary);
 		}
 
 		&::before {
 			content: '';
-			-webkit-flex-basis: 4px;
-			-ms-flex-preferred-size: 4px;
-			flex-basis: 4px;
-			-webkit-flex-shrink: 0;
-			-ms-flex-negative: 0;
-			flex-shrink: 0;
 			display: block;
-			width: 4px;
+			min-width: 4px;
 			height: 1px;
-			-webkit-border-radius: 50%;
-			-moz-border-radius: 50%;
 			border-radius: 50%;
-			background: #999;
+			background: var(--color-secondary);
 			margin-right: 16px;
-		}
-	}
-
-	.links {
-		display: flex;
-		flex-direction: column;
-		margin: 10px 0 0px 4px;
-		padding: 10px 0 0 15px;
-		border-left: 1px solid #333;
-
-		a {
-			font-size: 14px;
-			margin: 11px 0;
-			color: #fff;
-			opacity: 0.6;
-			transition: opacity 0.2s ease;
-			width: fit-content;
-
-			&:hover {
-				opacity: 1;
-			}
-
-			&:first-child {
-				margin-top: 0;
-			}
-
-			&:last-child {
-				margin-bottom: 10px;
-			}
 		}
 	}
 }
