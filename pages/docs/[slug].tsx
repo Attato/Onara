@@ -3,11 +3,16 @@ import path from 'path';
 import matter from 'gray-matter';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+import { MDXProvider } from '@mdx-js/react';
 
 import SideBar from '@/components/Sidebar';
 import Links from '@/components/Links';
+
+// Для использования в mdx файлах
+import CodeBlock from '@/components/CodeBlock';
 
 import styles from './index.module.scss';
 
@@ -50,6 +55,10 @@ const getMdxFileContent = async (slug: string) => {
 	return { content, data };
 };
 
+const components = {
+	CodeBlock,
+};
+
 const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 	return (
 		<>
@@ -68,7 +77,10 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 							<span> 1 min read</span>
 						</div>
 
-						<MDXRemote {...mdxSource} />
+						<MDXProvider components={components}>
+							<MDXRemote {...mdxSource} />
+						</MDXProvider>
+
 						<Links posts={allPosts} />
 					</div>
 				</div>

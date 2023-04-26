@@ -30,12 +30,10 @@ const Home: NextPage = () => {
 				</div>
 
 				<Attention text="This page is a stub. Help us expand it by contributing!" />
-
 				<div className={styles.title}>
 					<span>Main features</span>
 					<h1>What&apos;s in Onara?</h1>
 				</div>
-
 				<div className={styles.features_grid}>
 					<div className={styles.columns}>
 						<Link href="/not-found">

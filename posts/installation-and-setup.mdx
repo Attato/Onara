@@ -2,11 +2,35 @@
 id: 1
 title: 'Installation and Setup'
 readingTime: '1 min'
-lastUpdated: 'April 19, 2023'
+lastUpdated: 'April 26, 2023'
 ---
 
 # Installation and Setup
 
-```
-npm run dev
-```
+To install and set up the application, follow these steps:
+
+<CodeBlock language="bash" value="npm i" />
+
+To run the application, follow these steps:
+
+<CodeBlock language="bash" value="npm run dev" />
+
+TSX Example:
+
+<CodeBlock
+	language="typescript"
+	value={`const Attention = ({ text }: AttentionProps) => {
+	return (
+		<div className={styles.stub}>
+			<Image
+				src="/icons/attention.svg"
+				width={16}
+				height={16}
+				alt="attention"
+			/>
+			<p>{text}</p>
+		</div>
+	);
+};
+`}
+/>
