@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import Attention from '@/components/attention/attention';
+import Attention from '@/components/Attention';
 
 import styles from './index.module.scss';
 

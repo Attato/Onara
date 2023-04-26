@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
-import Attention from '@/components/attention/attention';
+import Attention from '@/components/Attention';
 
 import styles from './index.module.scss';
 
@@ -16,7 +16,6 @@ const Feedback: NextPage = () => {
 
 			<main className="main">
 				<div className={styles.page_content}>
-					<h1>Feedback</h1>
 					<Attention text="This page is a stub. Help us expand it by contributing!" />
 				</div>
 			</main>

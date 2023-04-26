@@ -7,12 +7,12 @@ import Image from 'next/image';
 
 import { useSession, signOut } from 'next-auth/react';
 
-import BurgerMenu from '@/components/header/burgerMenu/burgerMenu';
-import Dropdown from '@/components/dropdown/dropdown';
+import BurgerMenu from '@/components/header/BurgerMenu';
+import Dropdown from '@/components/Dropdown';
 
 import useScrollToTop from '@/hooks/scrollToTop';
 
-import styles from './header.module.scss';
+import styles from './index.module.scss';
 
 const Header: React.FC = () => {
 	useEffect(() => {

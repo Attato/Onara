@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
-import styles from './faq.module.scss';
+import styles from './index.module.scss';
 
 interface Question {
 	question: string;

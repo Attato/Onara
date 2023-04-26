@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { useSession } from 'next-auth/react';
 
-import styles from './burgerMenu.module.scss';
+import styles from './index.module.scss';
 
 interface MenuItem {
 	href: string;

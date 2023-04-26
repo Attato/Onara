@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, ReactNode } from 'react';
 
 import Image from 'next/image';
 
-import styles from './dropdown.module.scss';
+import styles from './index.module.scss';
 
 interface DropdownProps {
 	children: ReactNode;

@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import useScrollToTop from '@/hooks/scrollToTop';
 
-import styles from './footer.module.scss';
+import styles from './index.module.scss';
 
 const Footer: FC = () => {
 	const productLinks = [

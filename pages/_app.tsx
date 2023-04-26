@@ -4,8 +4,8 @@ import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
 import { SessionProvider } from 'next-auth/react';
 
-import Header from '@/components/header/header';
-import Footer from '@/components/footer/footer';
+import Header from '@/components/header';
+import Footer from '@/components/Footer';
 
 import '@/styles/import.scss';
 

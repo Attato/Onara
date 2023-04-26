@@ -4,8 +4,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Attention from '@/components/attention/attention';
-import FAQ from '@/components/faq/faq';
+import Attention from '@/components/Attention';
+import FAQ from '@/components/FAQ';
 
 import styles from './index.module.scss';
 

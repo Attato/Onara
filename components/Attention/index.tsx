@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import styles from './attention.module.scss';
+
+import styles from './index.module.scss';
 
 interface AttentionProps {
 	text: string;
