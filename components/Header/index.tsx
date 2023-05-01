@@ -35,10 +35,10 @@ const Header: React.FC = () => {
 	}, []);
 
 	const links = [
-		{ href: '/about', label: 'About' },
+		{ href: '/features', label: 'Features' },
+		{ href: '/changelog', label: 'Changelog' },
 		{ href: '/docs/introduction', label: 'Docs' },
 		{ href: '/feedback', label: 'Feedback' },
-		{ href: '/help', label: 'Help' },
 	];
 
 	const { data, status } = useSession();
