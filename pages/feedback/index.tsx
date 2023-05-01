@@ -1,11 +1,47 @@
+import { useState } from 'react';
+
 import type { NextPage } from 'next';
 import Head from 'next/head';
-
-import Attention from '@/components/Attention';
+import Image from 'next/image';
 
 import styles from './index.module.scss';
 
 const Feedback: NextPage = () => {
+	const [rating, setRating] = useState('');
+	const [email, setEmail] = useState('');
+	const [feedback, setFeedback] = useState('');
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const response = await fetch('/api/feedback', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				rating,
+				email,
+				feedback,
+			}),
+		});
+		if (response.ok) {
+			alert('Thank you for your feedback!');
+			setRating('');
+			setEmail('');
+			setFeedback('');
+		} else {
+			alert('An error occurred, please try again later.');
+		}
+	};
+	console.log(rating, email, feedback);
+
+	const emoji_selector = [
+		{ id: 0, rating: 'bad' },
+		{ id: 1, rating: 'okay' },
+		{ id: 2, rating: 'good' },
+		{ id: 3, rating: 'amazing' },
+	];
+
 	return (
 		<>
 			<Head>
@@ -16,7 +52,58 @@ const Feedback: NextPage = () => {
 
 			<main className="main">
 				<div className={styles.page_content}>
-					<Attention text="This page is a stub. Help us expand it by contributing!" />
+					<form className={styles.geist_feedback} onSubmit={handleSubmit}>
+						<h1>
+							What is your opinion of <br /> this app?
+						</h1>
+						<div className={styles.geist_emoji_selector}>
+							{emoji_selector.map((emoji, id) => {
+								return (
+									<button
+										key={id}
+										type="button"
+										title={
+											emoji.rating.charAt(0).toUpperCase() +
+											emoji.rating.slice(1)
+										}
+										onClick={() => setRating(`${emoji.rating}`)}
+										className={rating === emoji.rating ? styles.selected : ''}
+									>
+										<Image
+											src={`/icons/emoji_rating/${emoji.rating}.svg`}
+											width={28}
+											height={28}
+											alt={emoji.rating}
+										/>
+									</button>
+								);
+							})}
+						</div>
+						<label>
+							Enter your email:
+							<input
+								type="email"
+								placeholder="example@gmail.com"
+								value={email}
+								onChange={(event) => setEmail(event.target.value)}
+							/>
+						</label>
+						<label>
+							Leave your feedback bellow:
+							<div className={styles.text_area} role="textbox">
+								<div
+									contentEditable
+									data-placeholder="Send message."
+									onInput={(event) =>
+										setFeedback(event.currentTarget.textContent || '')
+									}
+								/>
+							</div>
+						</label>
+						<button type="submit" className={styles.submit}>
+							<span className={styles.text}>Send</span>
+						</button>
+					</form>
 				</div>
 			</main>
 		</>
