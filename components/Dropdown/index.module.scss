@@ -41,10 +41,6 @@
 
 	a {
 		border-radius: 6px;
-
-		&:hover {
-			background-color: var(--border-color);
-		}
 	}
 
 	hr {
@@ -64,8 +60,10 @@
 		padding: 8px 12px;
 		font-weight: 400;
 		color: var(--color-primary);
+		transition: all 0.2s ease;
+
 		&:hover {
-			background-color: var(--border-color);
+			filter: brightness(0.8);
 		}
 
 		img {
