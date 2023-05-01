@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Attention from '@/components/Attention';
 import FAQ from '@/components/FAQ';
 
 import styles from './index.module.scss';
@@ -29,7 +28,6 @@ const Home: NextPage = () => {
 					</p>
 				</div>
 
-				<Attention text="This page is a stub. Help us expand it by contributing!" />
 				<div className={styles.title}>
 					<span>Main features</span>
 					<h1>What&apos;s in Onara?</h1>
