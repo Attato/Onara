@@ -33,7 +33,6 @@ const Feedback: NextPage = () => {
 			alert('An error occurred, please try again later.');
 		}
 	};
-	console.log(rating, email, feedback);
 
 	const emoji_selector = [
 		{ id: 0, rating: 'bad' },
