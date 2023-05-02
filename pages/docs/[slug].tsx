@@ -8,8 +8,8 @@ import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXProvider } from '@mdx-js/react';
 
-import SideBar from '@/components/Sidebar';
-import Links from '@/components/Links';
+import SideBar from '@/components/_Sidebar';
+import Links from '@/components/_Links';
 
 // Для использования в mdx файлах
 import CodeBlock from '@/components/CodeBlock';
