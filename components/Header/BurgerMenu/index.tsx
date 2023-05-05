@@ -61,7 +61,12 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 				) : null}
 
 				{menuItems.map((menuItem) => (
-					<Link href={menuItem.href} key={menuItem.label} onClick={handleClick}>
+					<Link
+						href={menuItem.href}
+						key={menuItem.label}
+						className={styles.burger_link}
+						onClick={handleClick}
+					>
 						{menuItem.label}
 					</Link>
 				))}

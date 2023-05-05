@@ -94,13 +94,17 @@ const Header: React.FC = () => {
 								</p>
 								<p className={styles.user_email}>{data.user?.email}</p>
 							</Link>
+
 							<hr />
+
 							{options.map((option) => (
 								<Link href={option.href} key={option.label} role="menuitem">
 									{option.label}
 								</Link>
 							))}
+
 							<hr />
+
 							<button onClick={() => signOut()}>
 								Sign out
 								<Image
@@ -111,6 +115,7 @@ const Header: React.FC = () => {
 								/>
 							</button>
 						</Dropdown>
+
 						<BurgerMenu menuItems={links} />
 					</div>
 				) : null}
