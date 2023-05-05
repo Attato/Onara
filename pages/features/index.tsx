@@ -16,8 +16,16 @@ const Features: NextPage = () => {
 
 			<main className="main">
 				<div className={styles.page_content}>
-					<h1>Features</h1>
-					<Attention text="This page is a stub. Help us expand it by contributing!" />
+					<div className={styles.masthead}>
+						<span>Features</span>
+						<h1>The new standard for modern software development</h1>
+						<p>
+							With its meticulous design, breathtaking speed and opinionated yet
+							flexible workflows, Linear unlocks your team’s full potential. It
+							is the tool of choice for high-performance teams to build products
+							better.
+						</p>
+					</div>
 				</div>
 			</main>
 		</>
