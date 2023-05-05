@@ -1,11 +1,12 @@
 :root {
-	--background: black;
+	--page-width: 1024px;
+	--background: #060606;
 	--header-height: 64px;
 	--color-primary: #f5f5f7;
 	--color-secondary: #86868b;
 	--background-primary: #0a0a0a;
 	--background-secondary: #0c0c0c;
-	--background-disabled: rgb(255 255 255 / 30%);
+	--background-disabled: rgba(255, 255, 255, 0.3);
 	--border-color: #232323;
 	--border-color-hover: #343434;
 	--border-color-active: #454545;
@@ -24,7 +25,3 @@
 		'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
 		'Segoe UI Emoji';
 }
-
-// [data-theme='dark'] {
-// 	--background: #121212;
-// }
