@@ -73,7 +73,7 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 					<SideBar posts={allPosts} />
 					<div className={styles.page_content}>
 						<div className={styles.time_info}>
-							<span>Last updated on {frontMatter.lastUpdated}</span>
+							<span>{frontMatter.lastUpdated}</span>
 							<span> 1 min read</span>
 						</div>
 
