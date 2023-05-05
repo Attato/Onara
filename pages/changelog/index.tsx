@@ -17,23 +17,26 @@ const Changelog: NextPage = () => {
 				<link rel="icon" href="/icon.svg" />
 			</Head>
 
-			<main className="main">
-				<div className={styles.page_content}>
+			<div className={styles.page_content}>
+				<main className="main">
 					<div className={styles.masthead}>
-						<h1 className={styles.title}>Changelog</h1>
-						<div className={styles.content}>
-							New updates and improvements to Onara.
-							<div>
-								<Link href="/">Subscribe to updates</Link>
-								&nbsp;&nbsp;·&nbsp;&nbsp;
-								<Link href="/">Follow us on Telegram</Link>
+						<div className={styles.masthead_content}>
+							<h1 className={styles.title}>Changelog</h1>
+							<div className={styles.content}>
+								New updates and improvements to Onara.
+								<div>
+									<Link href="/">Subscribe to updates</Link>
+									<Link href="/">Follow us on Telegram</Link>
+								</div>
 							</div>
 						</div>
 					</div>
+				</main>
 
-					<div className={styles.changelog}>
+				<div className={styles.changelog}>
+					<div className={styles.changelog_content}>
 						<div className={styles.date}>
-							<p>v.0.0.3. April 19, 2023</p>
+							<p>April 19, 2023</p>
 							<p>(27 days ago)</p>
 						</div>
 
@@ -66,9 +69,12 @@ const Changelog: NextPage = () => {
 							</p>
 						</div>
 					</div>
-					<div className={styles.changelog}>
+				</div>
+
+				<div className={styles.changelog}>
+					<div className={styles.changelog_content}>
 						<div className={styles.date}>
-							<p>v.0.0.2. April 18, 2023</p>
+							<p>April 18, 2023</p>
 							<p>(28 days ago)</p>
 						</div>
 
@@ -102,7 +108,7 @@ const Changelog: NextPage = () => {
 						</div>
 					</div>
 				</div>
-			</main>
+			</div>
 		</>
 	);
 };
