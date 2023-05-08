@@ -1,14 +1,33 @@
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
-
-import Attention from '@/components/Attention';
-
+import fs from 'fs/promises';
+import path from 'path';
+import matter from 'gray-matter';
+import { GetStaticProps } from 'next';
+import { MDXRemote } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 import styles from './index.module.scss';
 
-const Changelog: NextPage = () => {
+const components = {
+	Image,
+};
+
+interface PostData {
+	[key: string]: any;
+}
+
+interface Post {
+	slug: string;
+	frontMatter: PostData;
+}
+
+interface ChangelogPageProps {
+	posts: Post[];
+}
+
+const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 	return (
 		<>
 			<Head>
@@ -33,84 +52,97 @@ const Changelog: NextPage = () => {
 					</div>
 				</main>
 
-				<div className={styles.changelog}>
-					<div className={styles.changelog_content}>
-						<div className={styles.date}>
-							<p>April 19, 2023</p>
-							<p>(27 days ago)</p>
+				{posts.map((post) => {
+					return (
+						<div key={post.slug} className={styles.changelog}>
+							<div className={styles.changelog_content}>
+								<div className={styles.date}>
+									<p>{post.frontMatter.date}</p>
+
+									<p>
+										{post.frontMatter.isToday ? (
+											<span>(Today&apos;s log)</span>
+										) : (
+											<span>{`(${post.frontMatter.diffDays} days ago)`}</span>
+										)}
+									</p>
+								</div>
+
+								<div className={styles.details}>
+									<MDXRemote
+										{...post.frontMatter.content}
+										components={components}
+									/>
+								</div>
+							</div>
 						</div>
-
-						<div className={styles.detalis}>
-							<Image
-								src="/illustrations/post-1.webp"
-								width={1920}
-								height={1080}
-								alt="post-1"
-							/>
-
-							<h2>At vero eos et accusamus</h2>
-
-							<p>
-								At vero eos et accusamus et iusto odio dignissimos ducimus qui
-								blanditiis praesentium voluptatum deleniti atque corrupti quos
-								dolores et quas molestias excepturi sint occaecati cupiditate
-								non provident, similique sunt in culpa qui officia deserunt
-								mollitia animi, id est laborum et dolorum fuga.
-							</p>
-
-							<p>
-								Et harum quidem rerum facilis est et expedita distinctio. Nam
-								libero tempore, cum soluta nobis est eligendi optio cumque nihil
-								impedit quo minus id quod maxime placeat facere possimus, omnis
-								voluptas assumenda est, omnis dolor repellendus. Temporibus
-								autem quibusdam et aut officiis debitis aut rerum necessitatibus
-								saepe eveniet ut et voluptates repudiandae sint et molestiae non
-								recusandae.
-							</p>
-						</div>
-					</div>
-				</div>
-
-				<div className={styles.changelog}>
-					<div className={styles.changelog_content}>
-						<div className={styles.date}>
-							<p>April 18, 2023</p>
-							<p>(28 days ago)</p>
-						</div>
-
-						<div className={styles.detalis}>
-							<Image
-								src="/illustrations/post-2.webp"
-								width={1920}
-								height={1080}
-								alt="post-2"
-							/>
-
-							<h2>At vero eos et accusamus</h2>
-
-							<p>
-								At vero eos et accusamus et iusto odio dignissimos ducimus qui
-								blanditiis praesentium voluptatum deleniti atque corrupti quos
-								dolores et quas molestias excepturi sint occaecati cupiditate
-								non provident, similique sunt in culpa qui officia deserunt
-								mollitia animi, id est laborum et dolorum fuga.
-							</p>
-
-							<p>
-								Et harum quidem rerum facilis est et expedita distinctio. Nam
-								libero tempore, cum soluta nobis est eligendi optio cumque nihil
-								impedit quo minus id quod maxime placeat facere possimus, omnis
-								voluptas assumenda est, omnis dolor repellendus. Temporibus
-								autem quibusdam et aut officiis debitis aut rerum necessitatibus
-								saepe eveniet ut et voluptates repudiandae sint et molestiae non
-								recusandae.
-							</p>
-						</div>
-					</div>
-				</div>
+					);
+				})}
 			</div>
 		</>
 	);
+};
+
+const formatDate = (date: Date) => {
+	const options: Intl.DateTimeFormatOptions = {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	};
+	const formattedDate = date.toLocaleDateString('en-US', options);
+	const isToday =
+		new Date().toLocaleDateString('en-US', options) === formattedDate;
+
+	const diffDays = Math.round(
+		Math.abs((new Date().getTime() - date.getTime()) / (24 * 60 * 60 * 1000))
+	);
+
+	return { formattedDate, isToday, diffDays };
+};
+
+const getPosts = async (): Promise<Post[]> => {
+	// Get the path to the directory containing the MDX files
+	const mdxFilesDirectory = path.join(process.cwd(), 'posts/changelog');
+	const mdxFiles = await fs.readdir(mdxFilesDirectory);
+
+	const posts = await Promise.all(
+		mdxFiles.map(async (file) => {
+			const slug = file.replace(/\.mdx?$/, '');
+			const fullPath = path.join(mdxFilesDirectory, file);
+			const fileStats = await fs.stat(fullPath);
+			const fileContents = await fs.readFile(fullPath, 'utf8');
+			const { data, content } = matter(fileContents);
+
+			const mdxSource = await serialize(content, {
+				scope: data,
+			});
+
+			const { formattedDate, isToday, diffDays } = formatDate(fileStats.mtime);
+
+			return {
+				slug,
+				frontMatter: {
+					...data,
+					content: mdxSource,
+					date: formattedDate,
+					isToday,
+					diffDays,
+				},
+			};
+		})
+	);
+
+	return posts;
+};
+
+export const getStaticProps: GetStaticProps<ChangelogPageProps> = async () => {
+	const posts = await getPosts();
+
+	return {
+		props: {
+			posts,
+		},
+	};
 };
 
 export default Changelog;
