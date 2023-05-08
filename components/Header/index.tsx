@@ -10,7 +10,7 @@ import { useSession, signOut } from 'next-auth/react';
 import BurgerMenu from '@/components/Header/BurgerMenu';
 import Dropdown from '@/components/Dropdown';
 
-import useScrollToTop from '@/hooks/scrollToTop';
+import useScrollToTop from '@/hooks/useScrollToTop';
 
 import styles from './index.module.scss';
 
