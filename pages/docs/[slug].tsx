@@ -33,7 +33,7 @@ interface SlugPageProps {
 
 const getPosts = async (): Promise<Post[]> => {
 	// Get the path to the directory containing the MDX files
-	const mdxFilesDirectory = path.join(process.cwd(), 'posts');
+	const mdxFilesDirectory = path.join(process.cwd(), 'posts/docs');
 	const mdxFiles = await fs.readdir(mdxFilesDirectory);
 
 	const posts = await Promise.all(
@@ -48,11 +48,14 @@ const getPosts = async (): Promise<Post[]> => {
 };
 
 const getMdxFileContent = async (slug: string) => {
-	const mdxFilePath = path.join(process.cwd(), `posts/${slug}.mdx`);
+	const mdxFilePath = path.join(process.cwd(), `posts/docs/${slug}.mdx`);
 	const fileContents = await fs.readFile(mdxFilePath, 'utf-8');
 	const { content, data } = matter(fileContents);
 
-	return { content, data };
+	const fileStats = await fs.stat(mdxFilePath);
+	const lastUpdated = new Date(fileStats.mtime).toLocaleDateString();
+
+	return { content, data: { ...data, lastUpdated } };
 };
 
 const components = {
@@ -60,6 +63,14 @@ const components = {
 };
 
 const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
+	const formattedDate = new Date(frontMatter.lastUpdated).toLocaleDateString(
+		'en-US',
+		{
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		}
+	);
 	return (
 		<>
 			<Head>
@@ -73,7 +84,7 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 					<SideBar posts={allPosts} />
 					<div className={styles.page_content}>
 						<div className={styles.time_info}>
-							<span>{frontMatter.lastUpdated}</span>
+							<span>{formattedDate}</span>
 							<span> 1 min read</span>
 						</div>
 
@@ -90,7 +101,7 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-	const mdxFilesDirectory = path.join(process.cwd(), 'posts');
+	const mdxFilesDirectory = path.join(process.cwd(), 'posts/docs');
 	const mdxFiles = await fs.readdir(mdxFilesDirectory);
 
 	const paths = mdxFiles.map((file) => ({
