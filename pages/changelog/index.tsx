@@ -83,7 +83,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 	);
 };
 
-const formatDate = (date: Date) => {
+const getFormattedDate = (date: Date) => {
 	const options: Intl.DateTimeFormatOptions = {
 		year: 'numeric',
 		month: 'long',
@@ -122,7 +122,9 @@ const getPosts = async (): Promise<Post[]> => {
 				scope: data,
 			});
 
-			const { formattedDate, isToday, diffDays } = formatDate(fileStats.mtime);
+			const { formattedDate, isToday, diffDays } = getFormattedDate(
+				fileStats.mtime
+			);
 
 			return {
 				slug,
