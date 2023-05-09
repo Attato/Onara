@@ -90,14 +90,19 @@ const formatDate = (date: Date) => {
 		day: 'numeric',
 	};
 	const formattedDate = date.toLocaleDateString('en-US', options);
-	const isToday =
-		new Date().toLocaleDateString('en-US', options) === formattedDate;
+	const today = new Date();
+	const isToday = today.toLocaleDateString('en-US', options) === formattedDate;
 
-	const diffDays = Math.round(
-		Math.abs((new Date().getTime() - date.getTime()) / (24 * 60 * 60 * 1000))
-	);
+	const diffTime = Math.abs(today.getTime() - date.getTime());
+	const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-	return { formattedDate, isToday, diffDays };
+	if (diffDays < 1) {
+		if (isToday) {
+			return { formattedDate, isToday: true, diffDays };
+		}
+	}
+
+	return { formattedDate, isToday: false, diffDays };
 };
 
 const getPosts = async (): Promise<Post[]> => {
