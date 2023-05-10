@@ -53,11 +53,13 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 				</main>
 
 				{posts.map((post) => {
+					console.log(post);
+
 					return (
 						<div key={post.slug} className={styles.changelog}>
 							<div className={styles.changelog_content}>
 								<div className={styles.date}>
-									<p>{post.frontMatter.date}</p>
+									<p>{post.frontMatter.releaseDate}</p>
 
 									<p>
 										{post.frontMatter.isToday ? (
@@ -83,18 +85,32 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 	);
 };
 
-const getFormattedDate = (date: Date) => {
+const getFormattedDate = (fileName: string) => {
+	// Extract the date parts from the file name
+	const [day, month, year] = fileName.split('.')[0].split('-');
+
+	// Create a Date object from the extracted parts
+	const date = new Date(`${month}-${day}-${year}`);
+	console.log('date', date);
+
 	const options: Intl.DateTimeFormatOptions = {
-		year: 'numeric',
-		month: 'long',
 		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
 	};
+
 	const formattedDate = date.toLocaleDateString('en-US', options);
 	const today = new Date();
 	const isToday = today.toLocaleDateString('en-US', options) === formattedDate;
 
 	const diffTime = Math.abs(today.getTime() - date.getTime());
-	const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+	let diffDays = Math.ceil(
+		(diffTime - today.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24)
+	);
+
+	if (diffDays > 0) {
+		diffDays -= today.getDate() > date.getDate() ? 1 : 0;
+	}
 
 	if (diffDays < 1) {
 		if (isToday) {
@@ -114,7 +130,6 @@ const getPosts = async (): Promise<Post[]> => {
 		mdxFiles.map(async (file) => {
 			const slug = file.replace(/\.mdx?$/, '');
 			const fullPath = path.join(mdxFilesDirectory, file);
-			const fileStats = await fs.stat(fullPath);
 			const fileContents = await fs.readFile(fullPath, 'utf8');
 			const { data, content } = matter(fileContents);
 
@@ -122,16 +137,14 @@ const getPosts = async (): Promise<Post[]> => {
 				scope: data,
 			});
 
-			const { formattedDate, isToday, diffDays } = getFormattedDate(
-				fileStats.mtime
-			);
+			const { formattedDate, isToday, diffDays } = getFormattedDate(slug);
 
 			return {
 				slug,
 				frontMatter: {
 					...data,
 					content: mdxSource,
-					date: formattedDate,
+					releaseDate: formattedDate,
 					isToday,
 					diffDays,
 				},
@@ -139,7 +152,16 @@ const getPosts = async (): Promise<Post[]> => {
 		})
 	);
 
-	return posts;
+	const sortedPosts = posts.sort((a, b) => {
+		const dateA = new Date(a.frontMatter.releaseDate);
+		const dateB = new Date(b.frontMatter.releaseDate);
+
+		if (dateA > dateB) return -1;
+		if (dateA < dateB) return 1;
+		return 0;
+	});
+
+	return sortedPosts;
 };
 
 export const getStaticProps: GetStaticProps<ChangelogPageProps> = async () => {
