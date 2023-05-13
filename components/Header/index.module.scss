@@ -91,9 +91,10 @@
 				display: flex;
 				flex-direction: column;
 				gap: 4px;
+				margin-top: 8px;
 
 				&:hover {
-					background-color: transparent;
+					background-color: var(--background-secondary);
 				}
 
 				span {
