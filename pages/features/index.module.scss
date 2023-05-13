@@ -12,6 +12,14 @@
 		margin-top: 200px;
 		color: var(--color-primary);
 
+		.logo {
+			padding: 24px;
+			background: black;
+			border: 2px solid var(--border-color);
+			border-radius: 22px;
+			margin-bottom: 12px;
+		}
+
 		span {
 			font-weight: 600;
 			font-size: 14px;
@@ -21,7 +29,7 @@
 			-webkit-text-fill-color: transparent;
 			color: unset;
 			background: linear-gradient(
-				92.88deg,
+				to right,
 				rgb(69, 94, 181) 9.16%,
 				rgb(86, 67, 204) 43.89%,
 				rgb(103, 63, 215) 64.72%
@@ -38,6 +46,52 @@
 			font-size: 18px;
 			line-height: 1.6;
 			color: #d0d6e0;
+		}
+	}
+
+	hr {
+		border: 1px solid var(--border-color);
+		border-bottom: 0;
+		margin: 120px 0;
+	}
+
+	.feature {
+		max-width: 690px;
+		margin: auto;
+
+		&:last-child {
+			margin-bottom: 120px;
+		}
+
+		h1 {
+			font-weight: 600;
+			font-size: 36px;
+			-webkit-text-fill-color: transparent;
+			width: fit-content;
+		}
+
+		.first {
+			background: linear-gradient(to right, #46e3b7, #527cac);
+			background-clip: text;
+		}
+
+		.second {
+			background: linear-gradient(to right, #7f7fd5, #86a8e7, #91eae4);
+			background-clip: text;
+		}
+
+		.third {
+			background: linear-gradient(to right, #ff5f6d, #ffc371);
+
+			background-clip: text;
+		}
+
+		p {
+			font-size: 18px;
+			letter-spacing: -0.014px;
+			line-height: 30px;
+			margin: 22px 0px 0px;
+			color: rgb(208, 214, 224);
 		}
 	}
 }
