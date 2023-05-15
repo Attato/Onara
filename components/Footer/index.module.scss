@@ -23,18 +23,18 @@
 			}
 
 			h2 {
-				font-size: 14px;
+				font-size: 16px;
 				font-weight: 400;
-				margin-bottom: 12px;
 				color: var(--color-primary);
 			}
 
 			.footer_list {
 				display: flex;
 				flex-direction: column;
+				margin-top: 12px;
 
 				a {
-					color: var(--color-secondary);
+					color: var(--color-primary);
 					transition: color 0.3s ease;
 					font-size: 14px;
 					padding: 8px 0;
@@ -111,7 +111,7 @@
 				}
 
 				h2 {
-					margin-top: 12px;
+					margin-top: 24px;
 				}
 
 				.footer_list {
