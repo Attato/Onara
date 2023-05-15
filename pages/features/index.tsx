@@ -17,7 +17,13 @@ const Features: NextPage = () => {
 				<div className={styles.page_content}>
 					<div className={styles.masthead}>
 						<div className={styles.logo}>
-							<Image src="icon.svg" width={64} height={64} alt="logo"></Image>
+							<Image
+								src="icon.svg"
+								width={64}
+								height={64}
+								alt="logo"
+								draggable={false}
+							/>
 						</div>
 						<span>Features</span>
 						<h1>The new standard for modern software development</h1>
