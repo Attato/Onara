@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import FAQ from '@/components/FAQ';
+import IconComponent from '@/components/IconComponent';
 
 import styles from './index.module.scss';
 
@@ -19,120 +19,183 @@ const Home: NextPage = () => {
 
 			<main className="main">
 				<div className={styles.masthead}>
-					<h1>IMAGINE A PLACE...</h1>
-					<p>
-						...where you and your friends can manage your project. A place where
-						you can communicate, plan, vote and decide what your project will be
-						like <br />
-						in the near future.
-					</p>
-				</div>
+					<h1>Onara - is the perfect way to administer your repositories.</h1>
 
-				<div className={styles.title}>
-					<span>Main features</span>
-					<h1>What&apos;s in Onara?</h1>
-				</div>
-				<div className={styles.features_grid}>
-					<div className={styles.columns}>
-						<Link href="/not-found">
-							<span>Architecto beatae vitae dicta</span>
-							<p>
-								Ut enim ad minima veniam, quis nostrum exercitationem ullam
-								corporis suscipit laboriosam.
-							</p>
+					<div className={styles.masthed_buttons}>
+						<Link href="/">
+							Language
+							<IconComponent>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M10.5 21l5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 016-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 01-3.827-5.802"
+								/>
+							</IconComponent>
 						</Link>
-						<Link href="/not-found">
-							<span>Neque porro quisquam est</span>
-							<p>
-								Nam libero tempore, cum soluta nobis est eligendi optio cumque
-								nihil impedit quo minus id quod maxime placeat.
-							</p>
-						</Link>
-					</div>
-					<div className={styles.columns}>
-						<Link href="/not-found">
-							<span>Ut enim ad minima veniam</span>
-							<p>
-								Nihil molestiae consequatur, vel illum qui dolorem eum.
-								Architecto beatae vitae dicta sunt explicabo.
-							</p>
-						</Link>
-						<Link href="/not-found">
-							<span>Sed ut perspiciatis unde</span>
-							<p>
-								Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
-								consectetur, adipisci velit. Architecto beatae vitae dicta sunt
-								explicabo.
-							</p>
-						</Link>
-					</div>
-					<div className={styles.columns}>
-						<Link href="/not-found">
-							<span>Nihil molestiae consequatur</span>
-							<p>
-								Sed ut perspiciatis unde omnis iste natus error sit voluptatem.
-								Integer malesuada nunc vel risus commodo viverra.
-							</p>
-						</Link>
-						<Link href="/not-found">
-							<span>Volutpat blandit aliquam</span>
-							<p>
-								Quisque non tellus orci ac auctor augue mauris augue. Sagittis
-								nisl rhoncus mattis rhoncus urna neque.
-							</p>
+						<Link href="/">
+							Get Started
+							<IconComponent>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+								/>
+							</IconComponent>
 						</Link>
 					</div>
 				</div>
-				<div className={styles.title}>
-					<span>FAQ</span>
-					<h1>Frequently asked questions</h1>
-				</div>
-				<FAQ
-					questions={[
-						{
-							question:
-								'Lorem ipsum dolor sit amet, consectetur adipiscing elit?',
-							answer:
-								'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-						},
-						{
-							question: 'Duis aute irure dolor in reprehenderit in voluptate?',
-							answer:
-								'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-						},
-						{
-							question: 'Vulputate sapien nec sagittis aliquam malesuada?',
-							answer:
-								'Aliquam vestibulum morbi blandit cursus. Dictum varius duis at consectetur lorem donec massa.',
-						},
-						{
-							question: 'Tincidunt arcu non sodales neque sodales ut etiam?',
-							answer:
-								'Enim facilisis gravida neque convallis a cras semper auctor. Vulputate odio ut enim blandit volutpat maecenas.',
-						},
-					]}
-				/>
 				<div className={styles.footer}>
-					<h1>Commence your journey today</h1>
-					<Link href="/auth/signup">
-						Sign up{' '}
-						<Image
-							src="/icons/enter-exit.svg"
-							width={14}
-							height={14}
-							alt="sign up"
-						/>
-					</Link>
 					<Image
-						src="/illustrations/homePage_1.png"
+						src="/illustrations/homePage.png"
 						width={512}
 						height={512}
-						alt="img"
-						className={styles.cosmonaut}
-						priority={true}
-					/>
+						alt="rabbit asrtonaut"
+					></Image>
 				</div>
 			</main>
+
+			<div className={styles.homepage}>
+				<div className={styles.content}>
+					<h1>Built on a foundation of fast, production-grade tooling</h1>
+
+					<div className={styles.foundation}>
+						<Link
+							href="https://react.dev/"
+							className={styles.stack}
+							target={'_blank'}
+						>
+							<Image
+								src="/icons/stack/react.svg"
+								width={50}
+								height={50}
+								alt="React"
+							/>
+							<h2>
+								React
+								<IconComponent>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+									/>
+								</IconComponent>
+							</h2>
+							<p>
+								A free and open-source front-end JavaScript library for building
+								user interfaces based on components.
+							</p>
+						</Link>
+						<Link
+							href="https://nextjs.org/"
+							className={styles.stack}
+							target={'_blank'}
+						>
+							<Image
+								src="/icons/stack/next-js.svg"
+								width={90}
+								height={50}
+								alt="Next.js"
+							/>
+
+							<h2>
+								Next js
+								<IconComponent>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+									/>
+								</IconComponent>
+							</h2>
+							<p>
+								A free and open-source front-end JavaScript library for building
+								user interfaces based on components.
+							</p>
+						</Link>
+
+						<Link
+							href="https://vercel.com/"
+							className={styles.stack}
+							target={'_blank'}
+						>
+							<Image
+								src="/icons/stack/vercel.svg"
+								width={90}
+								height={50}
+								alt="Vercel"
+							/>
+							<h2>
+								Vercel
+								<IconComponent>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+									/>
+								</IconComponent>
+							</h2>
+							<p>
+								A free and open-source front-end JavaScript library for building
+								user interfaces based on components.
+							</p>
+						</Link>
+
+						<Link
+							href="https://www.framer.com/"
+							className={styles.stack}
+							target={'_blank'}
+						>
+							<Image
+								src="/icons/stack/framer.svg"
+								width={50}
+								height={50}
+								alt="Framer"
+							/>
+							<h2>
+								Framer
+								<IconComponent>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+									/>
+								</IconComponent>
+							</h2>
+							<p>
+								A free and open-source front-end JavaScript library for building
+								user interfaces based on components.
+							</p>
+						</Link>
+
+						<Link
+							href="https://www.typescriptlang.org/"
+							className={styles.stack}
+							target={'_blank'}
+						>
+							<Image
+								src="/icons/stack/type_script.svg"
+								width={50}
+								height={50}
+								alt="TypeScript"
+							/>
+							<h2>
+								TypeScript
+								<IconComponent>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+									/>
+								</IconComponent>
+							</h2>
+							<p>
+								A free and open-source front-end JavaScript library for building
+								user interfaces based on components.
+							</p>
+						</Link>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
