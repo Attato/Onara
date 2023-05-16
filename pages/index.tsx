@@ -4,7 +4,11 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { motion } from 'framer-motion';
+
 import IconComponent from '@/components/IconComponent';
+
+import { stacks } from './stack';
 
 import styles from './index.module.scss';
 
@@ -17,8 +21,12 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/icon.svg" />
 			</Head>
 
-			<main className="main">
-				<div className={styles.masthead}>
+			<motion.main className="main">
+				<motion.div
+					className={styles.masthead}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+				>
 					<h1>Onara - is the perfect way to administer your repositories.</h1>
 
 					<div className={styles.masthed_buttons}>
@@ -43,7 +51,7 @@ const Home: NextPage = () => {
 							</IconComponent>
 						</Link>
 					</div>
-				</div>
+				</motion.div>
 				<div className={styles.footer}>
 					<Image
 						src="/illustrations/homePage.png"
@@ -52,150 +60,46 @@ const Home: NextPage = () => {
 						alt="rabbit asrtonaut"
 					></Image>
 				</div>
-			</main>
+			</motion.main>
 
-			<div className={styles.homepage}>
-				<div className={styles.content}>
+			<motion.div className={styles.homepage}>
+				<motion.div
+					className={styles.content}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+				>
 					<h1>Built on a foundation of fast, production-grade tooling</h1>
 
-					<div className={styles.foundation}>
-						<Link
-							href="https://react.dev/"
-							className={styles.stack}
-							target={'_blank'}
-						>
-							<Image
-								src="/icons/stack/react.svg"
-								width={50}
-								height={50}
-								alt="React"
-							/>
-							<h2>
-								React
-								<IconComponent>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-									/>
-								</IconComponent>
-							</h2>
-							<p>
-								A free and open-source front-end JavaScript library for building
-								user interfaces based on components.
-							</p>
-						</Link>
-						<Link
-							href="https://nextjs.org/"
-							className={styles.stack}
-							target={'_blank'}
-						>
-							<Image
-								src="/icons/stack/next-js.svg"
-								width={90}
-								height={50}
-								alt="Next.js"
-							/>
-
-							<h2>
-								Next js
-								<IconComponent>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-									/>
-								</IconComponent>
-							</h2>
-							<p>
-								A free and open-source front-end JavaScript library for building
-								user interfaces based on components.
-							</p>
-						</Link>
-
-						<Link
-							href="https://vercel.com/"
-							className={styles.stack}
-							target={'_blank'}
-						>
-							<Image
-								src="/icons/stack/vercel.svg"
-								width={90}
-								height={50}
-								alt="Vercel"
-							/>
-							<h2>
-								Vercel
-								<IconComponent>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-									/>
-								</IconComponent>
-							</h2>
-							<p>
-								A free and open-source front-end JavaScript library for building
-								user interfaces based on components.
-							</p>
-						</Link>
-
-						<Link
-							href="https://www.framer.com/"
-							className={styles.stack}
-							target={'_blank'}
-						>
-							<Image
-								src="/icons/stack/framer.svg"
-								width={50}
-								height={50}
-								alt="Framer"
-							/>
-							<h2>
-								Framer
-								<IconComponent>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-									/>
-								</IconComponent>
-							</h2>
-							<p>
-								A free and open-source front-end JavaScript library for building
-								user interfaces based on components.
-							</p>
-						</Link>
-
-						<Link
-							href="https://www.typescriptlang.org/"
-							className={styles.stack}
-							target={'_blank'}
-						>
-							<Image
-								src="/icons/stack/type_script.svg"
-								width={50}
-								height={50}
-								alt="TypeScript"
-							/>
-							<h2>
-								TypeScript
-								<IconComponent>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-									/>
-								</IconComponent>
-							</h2>
-							<p>
-								A free and open-source front-end JavaScript library for building
-								user interfaces based on components.
-							</p>
-						</Link>
-					</div>
-				</div>
-			</div>
+					<motion.div className={styles.foundation}>
+						{stacks.map((stack) => (
+							<Link
+								href={stack.href}
+								className={styles.stack}
+								target="_blank"
+								key={stack.title}
+							>
+								<Image
+									src={stack.imageSrc}
+									width={50}
+									height={50}
+									alt={stack.title}
+								/>
+								<h2>
+									{stack.title}
+									<IconComponent>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+										/>
+									</IconComponent>
+								</h2>
+								<p>{stack.description}</p>
+							</Link>
+						))}
+					</motion.div>
+				</motion.div>
+			</motion.div>
 		</>
 	);
 };
