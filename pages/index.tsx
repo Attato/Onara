@@ -80,8 +80,8 @@ const Home: NextPage = () => {
 							>
 								<Image
 									src={stack.imageSrc}
-									width={50}
-									height={50}
+									width={stack.imageWidth}
+									height={stack.imageHeight}
 									alt={stack.title}
 								/>
 								<h2>
