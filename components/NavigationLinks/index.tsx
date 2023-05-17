@@ -5,6 +5,8 @@ import Link from 'next/dist/client/link';
 
 import { usePathname } from 'next/navigation';
 
+import IconComponent from '@/components/IconComponent';
+
 import styles from './index.module.scss';
 
 const Links = ({ posts }: any) => {
@@ -30,12 +32,13 @@ const Links = ({ posts }: any) => {
 									href={posts[item.frontMatter.id - 1].slug}
 									className={styles.left}
 								>
-									<Image
-										src="/icons/arrow_left.svg"
-										width={24}
-										height={24}
-										alt="arrow_left"
-									></Image>
+									<IconComponent>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
+										/>
+									</IconComponent>
 									{posts[item.frontMatter.id - 1].frontMatter.title}
 								</Link>
 							) : null}
@@ -45,12 +48,14 @@ const Links = ({ posts }: any) => {
 									className={styles.right}
 								>
 									{posts[item.frontMatter.id + 1].frontMatter.title}
-									<Image
-										src="/icons/arrow_right.svg"
-										width={24}
-										height={24}
-										alt="arrow_right"
-									></Image>
+
+									<IconComponent>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+										/>
+									</IconComponent>
 								</Link>
 							) : null}
 						</div>
