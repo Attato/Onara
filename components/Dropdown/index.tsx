@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, ReactNode } from 'react';
 
-import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
+
+import IconComponent from '@/components/IconComponent';
 
 import styles from './index.module.scss';
 
@@ -43,25 +45,30 @@ const Dropdown: React.FC<DropdownProps> = ({ children, label }) => {
 				aria-expanded="true"
 			>
 				{label}
-				<Image
-					src="/icons/arrow_down.svg"
-					width={12}
-					height={8}
-					alt="arrow down"
-					className={isOpen ? styles.arrow_open : styles.arrow}
-				/>
+				<IconComponent width={14} height={14}>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+					/>
+				</IconComponent>
 			</button>
 
-			{isOpen && (
-				<div
-					className={styles.dropdown_open}
-					role="menu"
-					aria-orientation="vertical"
-					aria-labelledby="options-menu"
-				>
-					{children}
-				</div>
-			)}
+			<AnimatePresence>
+				{isOpen && (
+					<motion.div
+						className={styles.dropdown_open}
+						role="menu"
+						aria-orientation="vertical"
+						aria-labelledby="options-menu"
+						initial={{ opacity: 0, y: -20 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -20 }}
+					>
+						{children}
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</div>
 	);
 };
