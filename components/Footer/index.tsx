@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 import useScrollToTop from '@/hooks/useScrollToTop';
 
-import { footerLinks } from './links';
+import { footerLinks } from '@/data/components/footer/links';
 
 import styles from './index.module.scss';
 

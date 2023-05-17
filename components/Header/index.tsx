@@ -12,8 +12,8 @@ import Popup from '@/components/Popup';
 
 import useScrollToTop from '@/hooks/useScrollToTop';
 
-import { links } from './links';
-import { options } from './options';
+import { links } from '@/data/components/header/links';
+import { options } from '@/data/components/header/options';
 
 import styles from './index.module.scss';
 
