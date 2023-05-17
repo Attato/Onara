@@ -31,8 +31,7 @@
 	position: absolute;
 	margin-top: 11px;
 	right: 0;
-	background-color: rgba(6, 6, 6, 0.5);
-	backdrop-filter: blur(20px);
+	background-color: var(--background-secondary);
 	border: 1px solid var(--border-color);
 	border-radius: 10px;
 	width: 250px;
