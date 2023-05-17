@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 
 import IconComponent from '@/components/IconComponent';
 
-import { stacks } from './stack';
+import { stacks } from '@/data/pages/home/stack';
 
 import styles from './index.module.scss';
 
