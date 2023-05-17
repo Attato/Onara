@@ -7,44 +7,11 @@ import Image from 'next/image';
 
 import useScrollToTop from '@/hooks/useScrollToTop';
 
+import { footerLinks } from './links';
+
 import styles from './index.module.scss';
 
 const Footer: FC = () => {
-	const productLinks = [
-		{ href: '/docs/release-notes', label: 'Release Notes' },
-		{ href: '/docs/security', label: 'Security' },
-		{ href: '/', label: 'Sitemap' },
-		{ href: '/', label: 'What is Onara?' },
-	];
-
-	const resourcesLinks = [
-		{ href: '/docs/introduction', label: 'Documentation' },
-		{ href: '/docs/user-guide', label: 'User Guide' },
-		{ href: '/help', label: 'Help' },
-		{ href: '/', label: 'Open Source Software' },
-	];
-
-	const companyLinks = [
-		{ href: '/', label: 'Home' },
-		{ href: '/about', label: 'About' },
-		{ href: '/feedback', label: 'Feedback' },
-		{ href: '/', label: 'Contact Us' },
-	];
-
-	const policyLinks = [
-		{ href: '/', label: 'Privacy Policy' },
-		{ href: '/', label: 'Terms of Service' },
-		{ href: '/', label: 'Cookie Preferences' },
-		{ href: '/docs/legal-licensing', label: 'License' },
-	];
-
-	const footerLinks = [
-		{ title: 'Product', links: productLinks },
-		{ title: 'Resources', links: resourcesLinks },
-		{ title: 'Company', links: companyLinks },
-		{ title: 'Policies', links: policyLinks },
-	];
-
 	return (
 		<footer className={styles.footer}>
 			<nav>
@@ -81,7 +48,7 @@ const Footer: FC = () => {
 				<div className={styles.social}>
 					<Link href="https://github.com/Attato/Onara">
 						<Image
-							src="/icons/github.svg"
+							src="/icons/services/github.svg"
 							width={19}
 							height={19}
 							alt="github"
@@ -90,10 +57,10 @@ const Footer: FC = () => {
 					<hr />
 					<Link href="https://t.me/qwaqwakwa">
 						<Image
-							src="/icons/telegram.svg"
+							src="/icons/services/telegram.svg"
 							width={19}
 							height={19}
-							alt="github"
+							alt="telegram"
 						/>
 					</Link>
 				</div>
