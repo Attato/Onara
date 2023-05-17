@@ -1,0 +1,28 @@
+#info_message {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 12px 16px;
+	border-radius: 10px;
+	color: var(--color-primary);
+
+	p {
+		text-align: left;
+		margin-bottom: 0;
+	}
+}
+
+.warning {
+	background-color: var(--warning-background);
+	border: 1px solid var(--warning-border);
+}
+
+.attention {
+	background-color: var(--attention-background);
+	border: 1px solid var(--attention-border);
+}
+
+.success {
+	background-color: var(--success-background);
+	border: 1px solid var(--success-border);
+}
