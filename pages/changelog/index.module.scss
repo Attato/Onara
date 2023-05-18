@@ -27,20 +27,23 @@
 				-webkit-text-fill-color: transparent;
 			}
 
-			.content {
+			.subtitle {
 				display: flex;
 				flex-direction: column;
 				gap: 10px;
 				margin-left: 2px;
 				color: var(--color-secondary);
 
-				div {
+				.links {
 					display: flex;
 					flex-direction: row;
 					gap: 10px;
 
 					a {
-						color: var(--primary-link);
+						display: flex;
+						align-items: flex-start;
+						gap: 4px;
+						color: var(--accent);
 					}
 				}
 			}

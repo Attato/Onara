@@ -1,13 +1,21 @@
+import { GetStaticProps } from 'next';
+
 import type { NextPage } from 'next';
+
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+
 import fs from 'fs/promises';
 import path from 'path';
+
 import matter from 'gray-matter';
-import { GetStaticProps } from 'next';
+
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+
+import IconComponent from '@/components/IconComponent';
+
 import styles from './index.module.scss';
 
 const components = {
@@ -41,11 +49,32 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 					<div className={styles.masthead}>
 						<div className={styles.masthead_content}>
 							<h1 className={styles.title}>Changelog</h1>
-							<div className={styles.content}>
+							<div className={styles.subtitle}>
 								New updates and improvements to Onara.
-								<div>
-									<Link href="/">Subscribe to updates</Link>
-									<Link href="/">Follow us on Telegram</Link>
+								<div className={styles.links}>
+									<Link
+										href=""
+										onClick={() => alert('This button is not working yet')}
+									>
+										Subscribe to updates
+										<IconComponent width={14} height={14}>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+											/>
+										</IconComponent>
+									</Link>
+									<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
+										Follow us on Telegram
+										<IconComponent width={14} height={14}>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+											/>
+										</IconComponent>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -105,7 +134,7 @@ const getFormattedDate = (fileName: string) => {
 
 	const diffTime = Math.abs(today.getTime() - date.getTime());
 	let diffDays = Math.ceil(
-		(diffTime - today.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24)
+		(diffTime - today.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24),
 	);
 
 	if (diffDays > 0) {
@@ -149,7 +178,7 @@ const getPosts = async (): Promise<Post[]> => {
 					diffDays,
 				},
 			};
-		})
+		}),
 	);
 
 	const sortedPosts = posts.sort((a, b) => {
