@@ -1,14 +1,17 @@
 import IconComponent from '../IconComponent';
 import styles from './index.module.scss';
 
-type InfoMessageType = 'warning' | 'attention' | 'success' | null;
+export type AlertType = 'warning' | 'attention' | 'success' | null;
 
-type InfoMessageProps = {
-	type: InfoMessageType;
-	text: string;
+type AlertProps = {
+	type?: AlertType;
+	text?: string;
 };
 
-const InfoMessage = ({ type, text }: InfoMessageProps) => {
+const Alert = ({
+	type = 'attention',
+	text = 'Alert without text',
+}: AlertProps) => {
 	const getIcon = () => {
 		switch (type) {
 			case 'warning':
@@ -59,7 +62,7 @@ const InfoMessage = ({ type, text }: InfoMessageProps) => {
 					? styles.success
 					: ''
 			}
-			id={styles.info_message}
+			id={styles.alert}
 		>
 			{getIcon()}
 			<p>{text}</p>
@@ -67,4 +70,4 @@ const InfoMessage = ({ type, text }: InfoMessageProps) => {
 	);
 };
 
-export default InfoMessage;
+export default Alert;
