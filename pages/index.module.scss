@@ -15,24 +15,29 @@
 		display: flex;
 		gap: 12px;
 
-		button {
+		#language_btn,
+		#get_started_btn {
 			display: flex;
 			align-items: center;
 			gap: 4px;
 			padding: 0px 16px;
 			border-radius: 12px;
+			color: var(--color-primary);
 		}
 
 		#language_btn {
 			background-color: transparent;
+
+			svg {
+				color: var(--accent);
+			}
 		}
 
 		#get_started_btn {
 			background: linear-gradient(
 				to right,
-				rgb(69, 94, 181) 9.16%,
-				rgb(86, 67, 204) 43.89%,
-				rgb(103, 63, 215) 64.72%
+				rgb(69, 94, 181),
+				rgb(103, 63, 215)
 			);
 		}
 	}
@@ -88,7 +93,7 @@
 					font-size: 20px;
 					font-weight: 500;
 					display: flex;
-					align-items: center;
+					align-items: flex-start;
 					gap: 4px;
 					color: var(--color-primary);
 					margin-top: 24px;

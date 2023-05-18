@@ -22,10 +22,10 @@
 		}
 
 		a {
-			color: var(--primary-link);
+			color: var(--accent);
 
 			&:focus-visible {
-				outline: 2px solid var(--primary-link);
+				outline: 2px solid var(--accent);
 			}
 		}
 
