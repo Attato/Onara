@@ -15,21 +15,25 @@
 		display: flex;
 		gap: 12px;
 
-		a {
+		button {
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			padding: 12px 16px;
+			padding: 0px 16px;
 			border-radius: 12px;
+		}
 
-			&:last-child {
-				background: linear-gradient(
-					to right,
-					rgb(69, 94, 181) 9.16%,
-					rgb(86, 67, 204) 43.89%,
-					rgb(103, 63, 215) 64.72%
-				);
-			}
+		#language_btn {
+			background-color: transparent;
+		}
+
+		#get_started_btn {
+			background: linear-gradient(
+				to right,
+				rgb(69, 94, 181) 9.16%,
+				rgb(86, 67, 204) 43.89%,
+				rgb(103, 63, 215) 64.72%
+			);
 		}
 	}
 }
@@ -37,6 +41,12 @@
 .footer {
 	display: flex;
 	justify-content: center;
+
+	img {
+		max-width: 512px;
+		width: -webkit-fill-available;
+		height: max-content;
+	}
 }
 
 .homepage {
@@ -103,6 +113,14 @@
 			font-size: 36px;
 			text-align: left;
 			margin-bottom: 24px;
+		}
+	}
+
+	.homepage {
+		.content {
+			h1 {
+				font-size: 32px;
+			}
 		}
 	}
 }
