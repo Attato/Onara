@@ -9,7 +9,7 @@
 	box-shadow: none;
 	transition: box-shadow 0.2s ease 0s, background-color 0.2s ease 0s;
 	user-select: none;
-	z-index: 100;
+	z-index: 9;
 
 	.header {
 		display: flex;
@@ -38,7 +38,7 @@
 				padding: 8px 12px;
 				transition: all 0.2s ease;
 				display: flex;
-				align-items: center;
+				align-items: flex-start;
 				gap: 4px;
 
 				&:hover {
@@ -48,8 +48,7 @@
 		}
 
 		.header_nav_third {
-			.signin,
-			.signup {
+			.signin {
 				color: var(--color-primary);
 				font-size: 14px;
 				padding: 8px 12px;

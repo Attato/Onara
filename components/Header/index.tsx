@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 import BurgerMenu from '@/components/BurgerMenu';
 import Dropdown from '@/components/Dropdown';
 import IconComponent from '@/components/IconComponent';
-import Popup from '@/components/Popup';
+
+import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
 import useScrollToTop from '@/hooks/useScrollToTop';
 
@@ -148,29 +149,11 @@ const Header: React.FC = () => {
 							</IconComponent>
 						</button>
 
-						<Popup isOpen={isPopupOpen} onClose={closePopup}>
-							<h1>Continue your acquaintance</h1>
-							<div>
-								<button onClick={() => signIn('github')}>
-									Continue with GitHub
-									<Image
-										src="/icons/services/github.svg"
-										width={18}
-										height={18}
-										alt="github"
-									/>
-								</button>
-								<button onClick={() => signIn('gitlab')}>
-									Continue with GitLab
-									<Image
-										src="/icons/services/gitlab.svg"
-										width={18}
-										height={18}
-										alt="gitlab"
-									/>
-								</button>
-							</div>
-						</Popup>
+						<AuthorizationPopup
+							isPopupOpen={isPopupOpen}
+							popupOnClose={closePopup}
+							title="Log in"
+						/>
 
 						<BurgerMenu menuItems={links} />
 					</div>
