@@ -28,10 +28,7 @@ const Links = ({ posts }: any) => {
 							key={id}
 						>
 							{item.frontMatter.id > 0 ? (
-								<Link
-									href={posts[item.frontMatter.id - 1].slug}
-									className={styles.left}
-								>
+								<Link href={posts[item.frontMatter.id - 1].slug}>
 									<IconComponent>
 										<path
 											strokeLinecap="round"
@@ -43,10 +40,7 @@ const Links = ({ posts }: any) => {
 								</Link>
 							) : null}
 							{item.frontMatter.id < posts.length - 1 ? (
-								<Link
-									href={posts[item.frontMatter.id + 1].slug}
-									className={styles.right}
-								>
+								<Link href={posts[item.frontMatter.id + 1].slug}>
 									{posts[item.frontMatter.id + 1].frontMatter.title}
 
 									<IconComponent>
