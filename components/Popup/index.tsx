@@ -9,9 +9,15 @@ type PopupProps = {
 	isOpen: boolean;
 	onClose: () => void;
 	children: React.ReactNode;
+	title?: string;
 };
 
-const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
+const Popup: React.FC<PopupProps> = ({
+	isOpen,
+	onClose,
+	children,
+	title = 'Untitled',
+}) => {
 	const overlayVariants = {
 		hidden: { opacity: 0 },
 		visible: { opacity: 1 },
@@ -45,15 +51,18 @@ const Popup: React.FC<PopupProps> = ({ isOpen, onClose, children }) => {
 						variants={popupVariants}
 						onClick={handleOverlayClick}
 					>
-						<button className={styles.close} onClick={onClose}>
-							<IconComponent width={24} height={24}>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M6 18L18 6M6 6l12 12"
-								/>
-							</IconComponent>
-						</button>
+						<div className={styles.title}>
+							<h2>{title}</h2>
+							<button className={styles.close} onClick={onClose}>
+								<IconComponent width={20} height={20}>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M6 18L18 6M6 6l12 12"
+									/>
+								</IconComponent>
+							</button>
+						</div>
 						<div className={styles.content}>{children}</div>
 					</motion.div>
 				</motion.div>
