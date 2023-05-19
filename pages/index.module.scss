@@ -9,22 +9,11 @@
 	h1 {
 		font-size: 56px;
 		text-align: center;
-
-		span {
-			background: linear-gradient(to right, #ff5f6d, #ffc371);
-			-webkit-text-fill-color: transparent;
-			color: unset;
-			background-clip: text;
-			transition: all 0.3s ease;
-
-			&:hover {
-				transform: rotate(90deg);
-			}
-		}
 	}
 
 	.masthed_buttons {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 12px;
 
 		#language_btn,
@@ -71,7 +60,7 @@
 	.content {
 		display: flex;
 		flex-direction: column;
-		gap: 24px;
+		gap: 72px;
 		padding: 72px 24px;
 		max-width: var(--page-width);
 		margin: auto;
@@ -92,11 +81,14 @@
 				max-width: 475px;
 				padding: 20px;
 				border-radius: 12px;
-				background: linear-gradient(
-					to right,
-					var(--background-secondary),
-					var(--background-primary)
-				);
+
+				background-color: var(--background-secondary);
+				border: 1px solid var(--border-color);
+				transition: all 0.3s;
+
+				&:hover {
+					background-color: var(--background-secondary-hover);
+				}
 
 				img {
 					user-select: none;
@@ -122,9 +114,7 @@
 }
 
 .support {
-	padding: 72px 24px;
-	max-width: var(--page-width);
-	margin: auto;
+	border-bottom: 1px solid var(--border-color);
 
 	.content {
 		display: flex;
@@ -132,12 +122,16 @@
 		justify-content: center;
 		align-items: center;
 		gap: 20px;
+		max-width: var(--page-width);
+		margin: auto;
+		padding: 72px 24px;
 
 		h1 {
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			gap: 4px;
+			flex-direction: column;
+			gap: 20px;
 			font-size: 56px;
 			color: var(--color-primary);
 			text-align: center;
@@ -171,6 +165,9 @@
 		}
 
 		button {
+			display: flex;
+			align-items: center;
+			gap: 4px;
 			background-color: var(--warning);
 			border-radius: 20px;
 			padding: 0 16px;
@@ -179,14 +176,22 @@
 }
 
 .community {
-	padding: 72px 24px;
-	max-width: var(--page-width);
-	margin: auto;
+	background-image: linear-gradient(
+			to right,
+			var(--border-color) 1px,
+			transparent 1px
+		),
+		linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
+	background-size: 40px 40px;
+	background-position: center center;
 
 	.content {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		padding: 72px 24px;
+		max-width: var(--page-width);
+		margin: auto;
 
 		h1 {
 			font-size: 56px;
@@ -216,8 +221,14 @@
 				border-radius: 10px;
 				color: var(--color-primary);
 				backdrop-filter: saturate(180%) blur(14px);
-				background: rgba(255, 255, 255, 0.05);
+				background: var(--background-secondary);
+				border: 1px solid var(--border-color);
 				min-height: 140px;
+				transition: all 0.3s ease;
+
+				&:hover {
+					background-color: var(--background-secondary-hover);
+				}
 
 				.label {
 					display: flex;
@@ -247,7 +258,7 @@
 		margin: 0;
 
 		h1 {
-			font-size: 36px;
+			font-size: 32px;
 			text-align: left;
 			margin-bottom: 24px;
 		}
@@ -257,6 +268,36 @@
 		.content {
 			h1 {
 				font-size: 32px;
+			}
+		}
+	}
+
+	.support {
+		.content {
+			align-items: flex-start;
+			h1 {
+				align-items: flex-start;
+				font-size: 32px;
+				text-align: left;
+			}
+
+			p {
+				font-size: 16px;
+				text-align: left;
+			}
+		}
+	}
+
+	.community {
+		.content {
+			h1 {
+				font-size: 32px;
+				text-align: left;
+			}
+
+			p {
+				font-size: 16px;
+				text-align: left;
 			}
 		}
 	}

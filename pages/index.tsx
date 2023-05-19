@@ -39,10 +39,7 @@ const Home: NextPage = () => {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 				>
-					<h1>
-						Onara - is the <span>perfect</span> way to administer your
-						repositories.
-					</h1>
+					<h1>Onara - is the perfect way to administer your repositories.</h1>
 
 					<div className={styles.masthed_buttons}>
 						<button
@@ -127,21 +124,27 @@ const Home: NextPage = () => {
 			<div className={styles.support}>
 				<div className={styles.content}>
 					<h1>
-						Support ONARA
 						<IconComponent width={56} height={56} fill="var(--warning)">
 							<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
 						</IconComponent>
+						Support ONARA
 					</h1>
 
 					<p>
 						If you run a business that intends to use Onara in a
-						revenue-generating product, or if you're a freelancer and Onara
-						saves you time in your work, or you're just using it in a fun
-						project, your contributions will help to make Onara better.
+						revenue-generating product, or if you are a casual developer who
+						enjoys using our product, your input will help make Onara better.
 					</p>
 
 					<button onClick={() => alert('This button is not working yet')}>
-						Sponsor the creator, Attato
+						Sponsor the creator
+						<IconComponent width={14} height={14} fill="var(--warning)">
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"
+							/>
+						</IconComponent>
 					</button>
 				</div>
 			</div>
@@ -151,12 +154,12 @@ const Home: NextPage = () => {
 					<h1>Community</h1>
 					<p>Get involved in our community. Everyone is welcome!</p>
 					<div className={styles.links}>
-						<Link href="/">
+						<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
 							<div className={styles.label}>
 								<IconComponent
 									width={30}
 									height={30}
-									fill="#1b92d1"
+									fill="#11aae1"
 									strokeWidth={0}
 								>
 									<path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z" />
@@ -165,7 +168,7 @@ const Home: NextPage = () => {
 							</div>
 							<p>For announcements, tips and general information.</p>
 						</Link>
-						<Link href="/">
+						<Link href="https://discord.gg/h272qD6kBR" target="_blank">
 							<div className={styles.label}>
 								<IconComponent
 									width={30}
@@ -181,7 +184,7 @@ const Home: NextPage = () => {
 								To get involved in the community, ask questions and share tips.
 							</p>
 						</Link>
-						<Link href="/">
+						<Link href="https://github.com/Attato/Onara" target="_blank">
 							<div className={styles.label}>
 								<IconComponent
 									width={30}
