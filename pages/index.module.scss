@@ -302,3 +302,15 @@
 		}
 	}
 }
+
+@media screen and (max-width: 425px) {
+	.community {
+		.content {
+			.links {
+				a {
+					flex: auto;
+				}
+			}
+		}
+	}
+}
