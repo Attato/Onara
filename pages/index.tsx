@@ -196,7 +196,7 @@ const Home: NextPage = () => {
 								</IconComponent>
 								<h5>GitHub</h5>
 							</div>
-							<p>For issues, feature requests and contribute.</p>
+							<p>Ask questions, suggest new features and contribute.</p>
 						</Link>
 					</div>
 				</div>

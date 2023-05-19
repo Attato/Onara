@@ -15,7 +15,7 @@ export const stacks: Stack[] = [
 		imageHeight: 50,
 		title: 'React',
 		description:
-			'A free and open-source front-end JavaScript library for building user interfaces based on components.',
+			'A free and open-source front-end JavaScript library for building user interfaces based on components. ',
 	},
 	{
 		href: 'https://nextjs.org/',
@@ -24,7 +24,7 @@ export const stacks: Stack[] = [
 		imageHeight: 50,
 		title: 'Next.js',
 		description:
-			'A free and open-source front-end JavaScript library for building user interfaces based on components.',
+			'Next.js is an open-source web development framework providing React-based web applications with server-side rendering and static website generation.',
 	},
 	{
 		href: 'https://vercel.com/',
@@ -33,7 +33,7 @@ export const stacks: Stack[] = [
 		imageHeight: 50,
 		title: 'Vercel',
 		description:
-			'A free and open-source front-end JavaScript library for building user interfaces based on components.',
+			'Vercel is an American cloud platform as a service company. The company maintains the Next.js web development environment. Vercel is deployed through Git repositories.',
 	},
 	{
 		href: 'https://www.framer.com/',
@@ -42,7 +42,7 @@ export const stacks: Stack[] = [
 		imageHeight: 50,
 		title: 'Framer',
 		description:
-			'A free and open-source front-end JavaScript library for building user interfaces based on components.',
+			'Framer Motion is a simple yet powerful motion library for React. It powers the amazing animations and interactions in Framer, the web builder for creative pros. Zero code, maximum speed.',
 	},
 	{
 		href: 'https://www.typescriptlang.org/',
@@ -51,6 +51,6 @@ export const stacks: Stack[] = [
 		imageHeight: 50,
 		title: 'TypeScript',
 		description:
-			'A free and open-source front-end JavaScript library for building user interfaces based on components.',
+			'TypeScript is a free and open-source high-level programming language developed by Microsoft that adds static typing with optional type annotations to JavaScript.',
 	},
 ];
