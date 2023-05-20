@@ -66,25 +66,6 @@
 			color: var(--color-secondary);
 			user-select: text;
 		}
-
-		.social {
-			display: flex;
-			height: 19px;
-			gap: 10px;
-
-			img {
-				opacity: 0.4;
-				transition: opacity 0.2s ease;
-
-				&:hover {
-					opacity: 0.9;
-				}
-			}
-
-			hr {
-				border-color: var(--border-color);
-			}
-		}
 	}
 }
 

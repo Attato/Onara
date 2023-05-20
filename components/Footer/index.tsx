@@ -44,26 +44,6 @@ const Footer: FC = () => {
 				<span>
 					Copyright © {new Date().getFullYear()} ONARA Inc. All rights reserved.
 				</span>
-
-				<div className={styles.social}>
-					<Link href="https://github.com/Attato/Onara">
-						<Image
-							src="/icons/services/github.svg"
-							width={19}
-							height={19}
-							alt="github"
-						/>
-					</Link>
-					<hr />
-					<Link href="https://t.me/qwaqwakwa">
-						<Image
-							src="/icons/services/telegram.svg"
-							width={19}
-							height={19}
-							alt="telegram"
-						/>
-					</Link>
-				</div>
 			</div>
 		</footer>
 	);
