@@ -9,7 +9,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXProvider } from '@mdx-js/react';
 
 import SideBar from '@/components/Sidebar';
-import Links from '@/components/NavigationLinks';
+import NavLinks from '@/components/NavLinks';
 
 // Для использования в mdx файлах
 import CodeBlock from '@/components/CodeBlock';
@@ -20,7 +20,7 @@ interface PostData {
 	[key: string]: any;
 }
 
-interface Post {
+export interface Post {
 	slug: string;
 	frontMatter: PostData;
 }
@@ -79,20 +79,22 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 				<link rel="icon" href="/icon.svg" />
 			</Head>
 
-			<div className="main">
-				<div className={styles.slug}>
-					<SideBar posts={allPosts} />
-					<div className={styles.page_content}>
-						<div className={styles.time_info}>
-							<span>{formattedDate}</span>
-							<span> 1 min read</span>
+			<div className={styles.docs}>
+				<div className="main">
+					<div className={styles.slug}>
+						<SideBar posts={allPosts} />
+						<div className={styles.page_content}>
+							<div className={styles.time_info}>
+								<span>{formattedDate}</span>
+								<span> 1 min read</span>
+							</div>
+
+							<MDXProvider components={components}>
+								<MDXRemote {...mdxSource} />
+							</MDXProvider>
+
+							<NavLinks posts={allPosts} />
 						</div>
-
-						<MDXProvider components={components}>
-							<MDXRemote {...mdxSource} />
-						</MDXProvider>
-
-						<Links posts={allPosts} />
 					</div>
 				</div>
 			</div>
