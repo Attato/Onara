@@ -272,6 +272,13 @@
 			h1 {
 				font-size: 32px;
 			}
+
+			.foundation {
+				.stack {
+					max-width: none;
+					width: 100%;
+				}
+			}
 		}
 	}
 
