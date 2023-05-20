@@ -1,27 +1,22 @@
 .sidebar {
-	position: sticky;
-	top: var(--header-height);
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
-	width: 300px;
+	width: 100%;
+	max-width: 256px;
+	max-height: calc(100vh - var(--header-height));
 	padding: 20px;
-	height: calc(100vh - var(--header-height));
 	overflow-y: auto;
-	background-color: var(--background-secondary);
-	border-radius: 10px 0 0 0;
-	border-right: 1px solid var(--border-color);
 	user-select: none;
 
 	&::-webkit-scrollbar {
-		width: 16px;
+		width: 6px;
 		height: 4px;
+		background-color: var(--background-secondary);
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: var(--border-color);
-		border: 4px solid var(--background-secondary);
-		border-radius: 16px;
+		background: var(--border-color-hover);
+		border-radius: 4px;
 
 		&:hover {
 			background: var(--border-color-hover);
@@ -32,34 +27,62 @@
 		}
 	}
 
-	.activeLink {
-		color: var(--color-primary);
-
-		&::before {
-			background-color: var(--accent);
+	.category {
+		&:first-child {
+			h4 {
+				margin-top: 0;
+			}
 		}
-	}
+		h4 {
+			padding: 8px 0 8px 16px;
+			margin: 10px 0;
+			font-size: 14px;
+		}
 
-	a {
-		display: flex;
-		align-items: center;
-		font-size: 14px;
-		color: var(--color-secondary);
-		font-weight: 500;
-		transition: color 0.2s ease;
-
-		&:hover {
+		.activeLink {
 			color: var(--color-primary);
+			background-color: var(--background-secondary);
+			border: 1px solid var(--border-color);
+
+			&::before {
+				color: var(--color-primary);
+			}
 		}
 
-		&::before {
-			content: '';
-			display: block;
-			min-width: 4px;
-			height: 1px;
-			border-radius: 50%;
-			background: var(--color-secondary);
-			margin-right: 16px;
+		a {
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+			color: var(--color-secondary);
+			font-weight: 500;
+			padding: 8px 0 8px 16px;
+			border: 1px solid transparent;
+			border-radius: 6px;
+			transition: color 0.2s ease;
+
+			&:hover,
+			&:focus-visible {
+				color: var(--color-primary);
+				background: var(--background-secondary);
+
+				&::before {
+					color: var(--color-primary);
+				}
+			}
+
+			&::before {
+				content: 'icon';
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 11px;
+				max-width: 24px;
+				width: 100%;
+				height: 24px;
+				color: var(--color-secondary);
+				margin-right: 16px;
+				transition: color 0.2s ease;
+			}
 		}
 	}
 }
