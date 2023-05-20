@@ -7,7 +7,7 @@ import { useSession, signOut } from 'next-auth/react';
 
 import BurgerMenu from '@/components/BurgerMenu';
 import Dropdown from '@/components/Dropdown';
-import IconComponent from '@/components/IconComponent';
+import IconWrapper from '@/components/IconWrapper';
 
 import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
@@ -75,13 +75,13 @@ const Header: React.FC = () => {
 								>
 									{link.label}
 									{link.label === 'Feedback' && (
-										<IconComponent width={14} height={14}>
+										<IconWrapper width={14} height={14}>
 											<path
 												strokeLinecap="round"
 												strokeLinejoin="round"
 												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
 											/>
-										</IconComponent>
+										</IconWrapper>
 									)}
 								</Link>
 							);
@@ -122,13 +122,13 @@ const Header: React.FC = () => {
 
 							<button onClick={() => signOut()} className={styles.btn}>
 								Sign out
-								<IconComponent>
+								<IconWrapper>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
 									/>
-								</IconComponent>
+								</IconWrapper>
 							</button>
 						</Dropdown>
 
@@ -140,13 +140,13 @@ const Header: React.FC = () => {
 					<div className={styles.header_nav_third}>
 						<button onClick={openPopup} className={styles.signin}>
 							Sign in
-							<IconComponent width={14} height={14}>
+							<IconWrapper width={14} height={14}>
 								<path
 									strokeLinecap="round"
 									strokeLinejoin="round"
 									d="M19.5 8.25l-7.5 7.5-7.5-7.5"
 								/>
-							</IconComponent>
+							</IconWrapper>
 						</button>
 
 						<AuthorizationPopup

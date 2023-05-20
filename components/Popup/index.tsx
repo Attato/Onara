@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import IconComponent from '@/components/IconComponent';
+import IconWrapper from '@/components/IconWrapper';
 
 import styles from './index.module.scss';
 
@@ -54,13 +54,13 @@ const Popup: React.FC<PopupProps> = ({
 						<div className={styles.title}>
 							<h2>{title}</h2>
 							<button className={styles.close} onClick={onClose}>
-								<IconComponent width={20} height={20}>
+								<IconWrapper width={20} height={20}>
 									<path
 										strokeLinecap="round"
 										strokeLinejoin="round"
 										d="M6 18L18 6M6 6l12 12"
 									/>
-								</IconComponent>
+								</IconWrapper>
 							</button>
 						</div>
 						<div className={styles.content}>{children}</div>

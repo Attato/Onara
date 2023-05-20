@@ -1,4 +1,4 @@
-import IconComponent from '@/components/IconComponent';
+import IconComponent from '@/components/IconWrapper';
 
 export const options = [
 	{

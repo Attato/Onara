@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { useSession } from 'next-auth/react';
 
-import IconComponent from '@/components/IconComponent';
+import IconWrapper from '@/components/IconWrapper';
 
 import useDisableScroll from '@/hooks/useDisableScroll';
 
@@ -38,21 +38,21 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 		<>
 			<button className={styles.burger_menu__button} onClick={handleClick}>
 				{open ? (
-					<IconComponent width={24} height={24} strokeWidth={1.5}>
+					<IconWrapper width={24} height={24} strokeWidth={1.5}>
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
 						/>
-					</IconComponent>
+					</IconWrapper>
 				) : (
-					<IconComponent width={24} height={24} strokeWidth={1.5}>
+					<IconWrapper width={24} height={24} strokeWidth={1.5}>
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
 						/>
-					</IconComponent>
+					</IconWrapper>
 				)}
 			</button>
 
@@ -81,16 +81,6 @@ const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
 						{menuItem.label}
 					</Link>
 				))}
-
-				{status !== 'authenticated' && (
-					<Link
-						href="/auth/signin"
-						className={styles.signin}
-						onClick={handleClick}
-					>
-						Sign In
-					</Link>
-				)}
 			</div>
 		</>
 	);

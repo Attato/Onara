@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, ReactNode } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-import IconComponent from '@/components/IconComponent';
+import IconWrapper from '@/components/IconWrapper';
 
 import styles from './index.module.scss';
 
@@ -45,13 +45,13 @@ const Dropdown: React.FC<DropdownProps> = ({ children, label }) => {
 				aria-expanded="true"
 			>
 				{label}
-				<IconComponent width={14} height={14}>
+				<IconWrapper width={14} height={14}>
 					<path
 						strokeLinecap="round"
 						strokeLinejoin="round"
 						d="M19.5 8.25l-7.5 7.5-7.5-7.5"
 					/>
-				</IconComponent>
+				</IconWrapper>
 			</button>
 
 			<AnimatePresence>
