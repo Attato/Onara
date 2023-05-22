@@ -1,8 +1,13 @@
+import React, { useState } from 'react';
+
 import fs from 'fs/promises';
 import path from 'path';
 import matter from 'gray-matter';
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
@@ -10,11 +15,14 @@ import { MDXProvider } from '@mdx-js/react';
 
 import SideBar from '@/components/Sidebar';
 import NavLinks from '@/components/NavLinks';
+import BurgerMenu from '@/components/BurgerMenu';
+import IconWrapper from '@/components/IconWrapper';
 
 // Для использования в mdx файлах
 import CodeBlock from '@/components/CodeBlock';
 
 import styles from './index.module.scss';
+import { NextPage } from 'next/types';
 
 interface PostData {
 	[key: string]: any;
@@ -62,7 +70,19 @@ const components = {
 	CodeBlock,
 };
 
-const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
+const SlugPage: NextPage<SlugPageProps> = ({
+	mdxSource,
+	frontMatter,
+	allPosts,
+}) => {
+	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
+
+	const closeBurgerMenu = () => {
+		setTimeout(() => {
+			setIsBurgerMenuOpen(!isBurgerMenuOpen);
+		}, 100);
+	};
+
 	const formattedDate = new Date(frontMatter.lastUpdated).toLocaleDateString(
 		'en-US',
 		{
@@ -71,6 +91,32 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 			day: 'numeric',
 		}
 	);
+
+	const pathname = usePathname();
+
+	// Sidebar logic
+	const sortedPosts = [...allPosts].sort(
+		(a, b) => a.frontMatter.id - b.frontMatter.id
+	);
+
+	const categories = sortedPosts.reduce((categories, post) => {
+		const category = post.frontMatter.category;
+		const isActive = pathname === `/docs/${post.slug}`;
+
+		categories[category] = categories[category] || [];
+		categories[category].push(
+			<Link
+				key={post.slug}
+				href={`/docs/${post.slug}`}
+				className={isActive ? styles.activeLink : ''}
+			>
+				{post.frontMatter.title}
+			</Link>
+		);
+
+		return categories;
+	}, {} as { [category: string]: JSX.Element[] });
+
 	return (
 		<>
 			<Head>
@@ -83,6 +129,42 @@ const SlugPage = ({ mdxSource, frontMatter, allPosts }: SlugPageProps) => {
 				<div className="main">
 					<div className={styles.slug}>
 						<SideBar posts={allPosts} />
+						<BurgerMenu
+							isBurgerMenuOpen={isBurgerMenuOpen}
+							closeBurgerMenu={closeBurgerMenu}
+							title={
+								<React.Fragment>
+									{allPosts
+										.filter((post) => `/docs/${post.slug}` === pathname)
+										.map((post) => {
+											return (
+												<div key={post.slug} className={styles.breadcrumb}>
+													{post.frontMatter.category}{' '}
+													<IconWrapper width={14} height={14}>
+														<path
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															d="M8.25 4.5l7.5 7.5-7.5 7.5"
+														/>
+													</IconWrapper>
+													<span>{post.frontMatter.title}</span>
+												</div>
+											);
+										})}
+								</React.Fragment>
+							}
+						>
+							{Object.entries(categories).map(([category, links]) => (
+								<div key={category} className={styles.burgerMenu_category}>
+									<h4 className={styles.burgerMenu_category_title}>
+										{category}
+									</h4>
+
+									<div className={styles.burgerMenu_links}>{links}</div>
+								</div>
+							))}
+						</BurgerMenu>
+
 						<div className={styles.page_content}>
 							<div className={styles.time_info}>
 								<span>{formattedDate}</span>

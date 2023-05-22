@@ -5,6 +5,76 @@
 	.slug {
 		display: flex;
 
+		// burgerMenu
+		.breadcrumb {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			padding: 16px 0;
+			width: 100%;
+			text-align: left;
+			border-bottom: 1px solid var(--border-color);
+			font-size: 14px;
+			color: var(--accent);
+		}
+
+		.burgerMenu_category {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 30px;
+
+			.burgerMenu_category_title {
+				padding: 8px 0 8px 16px;
+				margin-bottom: 10px;
+				font-size: 14px;
+			}
+
+			.burgerMenu_links {
+				display: flex;
+				flex-direction: column;
+
+				a {
+					display: flex;
+					align-items: center;
+					font-size: 14px;
+					color: var(--color-secondary);
+					font-weight: 500;
+					padding: 8px 0 8px 16px;
+					border: 1px solid transparent;
+					border-radius: 6px;
+					transition: color 0.2s ease;
+
+					&::before {
+						content: 'icon';
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						font-size: 11px;
+						max-width: 24px;
+						width: 100%;
+						height: 24px;
+						color: var(--color-secondary);
+						margin-right: 16px;
+						transition: color 0.2s ease;
+					}
+
+					&:hover {
+						color: var(--color-primary);
+
+						&::before {
+							color: var(--color-primary);
+						}
+					}
+				}
+
+				.select {
+					color: var(--color-primary);
+					background-color: var(--background-secondary);
+					border: 1px solid var(--border-color);
+				}
+			}
+		}
+
 		.page_content {
 			max-width: 840px;
 			width: 100%;
@@ -59,8 +129,13 @@
 }
 
 @media screen and (max-width: 768px) {
-	.page_content {
-		padding: 24px;
-		border-radius: 10px 10px 0 0;
+	.docs {
+		.slug {
+			flex-direction: column;
+			.page_content {
+				padding: 24px 0;
+				border-radius: 10px 10px 0 0;
+			}
+		}
 	}
 }
