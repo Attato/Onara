@@ -39,6 +39,7 @@ const Header: React.FC = () => {
 	}, []);
 
 	const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
 
 	const openPopup = () => {
 		setIsPopupOpen(!isPopupOpen);
@@ -46,6 +47,12 @@ const Header: React.FC = () => {
 
 	const closePopup = () => {
 		setIsPopupOpen(false);
+	};
+
+	const closeBurgerMenu = () => {
+		setTimeout(() => {
+			setIsBurgerMenuOpen(!isBurgerMenuOpen);
+		}, 100);
 	};
 
 	const { data, status } = useSession();
@@ -132,7 +139,73 @@ const Header: React.FC = () => {
 							</button>
 						</Dropdown>
 
-						<BurgerMenu menuItems={links} />
+						<BurgerMenu
+							isBurgerMenuOpen={isBurgerMenuOpen}
+							closeBurgerMenu={closeBurgerMenu}
+						>
+							<div className={styles.burgerMenu_user_wrap}>
+								<Link
+									href="/"
+									onClick={closeBurgerMenu}
+									className={styles.burgerMenu_user}
+								>
+									<p>Signed in as {data.user?.name}</p>
+									<Image
+										src={`${data.user?.image}`}
+										width={32}
+										height={32}
+										alt={data.user?.name + ' logo'}
+									/>
+								</Link>
+
+								{options.map((option) => (
+									<Link
+										href={option.href}
+										role="menuitem"
+										className={styles.burgerMenu_option}
+										key={option.label}
+									>
+										<span>{option.label}</span>
+										{option.image}
+									</Link>
+								))}
+							</div>
+
+							<button
+								onClick={() => signOut()}
+								className={styles.burgerMenu_exit_btn}
+							>
+								Sign out
+								<IconWrapper>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+									/>
+								</IconWrapper>
+							</button>
+
+							<h4 className={styles.burgerMenu_link_title}>Pages</h4>
+							{links.map((menuItem) => (
+								<Link
+									href={menuItem.href}
+									key={menuItem.label}
+									className={styles.burgerMenu_link}
+									target={menuItem.label === 'Feedback' ? `_blank` : ''}
+								>
+									{menuItem.label}
+									{menuItem.label === 'Feedback' && (
+										<IconWrapper>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+											/>
+										</IconWrapper>
+									)}
+								</Link>
+							))}
+						</BurgerMenu>
 					</div>
 				)}
 
@@ -155,7 +228,30 @@ const Header: React.FC = () => {
 							title="Log in"
 						/>
 
-						<BurgerMenu menuItems={links} />
+						<BurgerMenu
+							isBurgerMenuOpen={isBurgerMenuOpen}
+							closeBurgerMenu={closeBurgerMenu}
+						>
+							{links.map((links) => (
+								<Link
+									href={links.href}
+									key={links.label}
+									className={styles.burgerMenu_link}
+									target={links.label === 'Feedback' ? `_blank` : ''}
+								>
+									{links.label}
+									{links.label === 'Feedback' && (
+										<IconWrapper>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+											/>
+										</IconWrapper>
+									)}
+								</Link>
+							))}
+						</BurgerMenu>
 					</div>
 				)}
 			</div>
