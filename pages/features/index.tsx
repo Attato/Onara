@@ -34,36 +34,41 @@ const Features: NextPage = () => {
 							better.
 						</p>
 					</div>
-					<hr />
-					<div className={styles.feature}>
-						<h1 className={styles.first}>Repository Management</h1>
-						<p>
-							Onara allows users to create, edit and delete repositories. We
-							also provide you with the ability to customize access to
-							repositories according to different levels of access rights.
-						</p>
-					</div>
-					<hr />
-					<div className={styles.feature}>
-						<h1 className={styles.second}>Teamwork</h1>
-						<p>
-							Onara has functionality for collaborating on repositories. Onara
-							also allows users to create teams, manage team memberships, and
-							assign different levels of access to team members.
-						</p>
-					</div>
-					<hr />
-					<div className={styles.feature}>
-						<h1 className={styles.third}>Voting</h1>
-						<p>
-							Onara has the functionality to vote for pull requests. Users can
-							upvote or downvote the pull request, and the application can use
-							this information to determine whether to commit changes to the
-							repository.
-						</p>
-					</div>
 				</div>
 			</main>
+			<div className={styles.feature}>
+				<div className={styles.feature_content}>
+					<h1 className={styles.first}>Repository Management</h1>
+					<p>
+						Onara allows users to create, edit and delete repositories. We also
+						provide you with the ability to customize access to repositories
+						according to different levels of access rights.
+					</p>
+				</div>
+			</div>
+
+			<div className={styles.feature}>
+				<div className={styles.feature_content}>
+					<h1 className={styles.second}>Teamwork</h1>
+					<p>
+						Onara has functionality for collaborating on repositories. Onara
+						also allows users to create teams, manage team memberships, and
+						assign different levels of access to team members.
+					</p>
+				</div>
+			</div>
+
+			<div className={styles.feature}>
+				<div className={styles.feature_content}>
+					<h1 className={styles.third}>Voting</h1>
+					<p>
+						Onara has the functionality to vote for pull requests. Users can
+						upvote or downvote the pull request, and the application can use
+						this information to determine whether to commit changes to the
+						repository.
+					</p>
+				</div>
+			</div>
 		</>
 	);
 };

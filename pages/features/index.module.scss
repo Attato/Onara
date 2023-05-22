@@ -1,5 +1,5 @@
 .page_content {
-	min-height: calc(100vh - var(--header-height));
+	margin-bottom: 120px;
 
 	.masthead {
 		display: flex;
@@ -46,23 +46,20 @@
 		p {
 			font-size: 18px;
 			line-height: 1.6;
-			color: #d0d6e0;
+			color: var(--color-primary);
 		}
 	}
+}
 
-	hr {
-		border: 1px solid var(--border-color);
-		border-bottom: 0;
-		margin: 120px 0;
-	}
+.feature {
+	border-top: 1px solid var(--border-color);
+	border-bottom: 0;
+	background-color: var(--background-primary);
+	padding: 120px 0;
 
-	.feature {
+	.feature_content {
 		max-width: 690px;
 		margin: auto;
-
-		&:last-child {
-			margin-bottom: 120px;
-		}
 
 		h1 {
 			font-weight: 600;
@@ -88,10 +85,8 @@
 
 		p {
 			font-size: 18px;
-			letter-spacing: -0.014px;
-			line-height: 30px;
+			line-height: 1.6;
 			margin: 22px 0px 0px;
-			color: rgb(208, 214, 224);
 		}
 	}
 }
