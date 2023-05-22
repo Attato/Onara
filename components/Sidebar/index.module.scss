@@ -28,6 +28,8 @@
 	}
 
 	.category {
+		margin-bottom: 32px;
+
 		&:first-child {
 			h4 {
 				margin-top: 0;
@@ -35,7 +37,7 @@
 		}
 		h4 {
 			padding: 8px 0 8px 16px;
-			margin: 10px 0;
+			margin-bottom: 10px;
 			font-size: 14px;
 		}
 

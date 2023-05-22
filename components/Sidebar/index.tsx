@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './index.module.scss';
+
 import { Post } from '@/pages/docs/[slug]';
+
+import styles from './index.module.scss';
 
 interface SidebarProps {
 	posts: Post[];
