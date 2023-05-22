@@ -33,17 +33,24 @@
 				gap: 10px;
 				margin-left: 2px;
 				color: var(--color-secondary);
+				font-size: 18px;
 
 				.links {
 					display: flex;
 					flex-direction: row;
 					gap: 10px;
+					width: 100%;
+					flex-wrap: wrap;
+					font-size: 16px;
 
 					a {
 						display: flex;
 						align-items: flex-start;
 						gap: 4px;
+						background-color: var(--accent-background);
 						color: var(--accent);
+						padding: 6px 8px;
+						border-radius: 6px;
 					}
 				}
 			}
@@ -117,6 +124,16 @@
 			margin-left: 0;
 			align-items: center;
 			text-align: center;
+
+			.masthead_content {
+				.title {
+					font-size: 32px;
+				}
+
+				.subtitle {
+					font-size: 16px;
+				}
+			}
 		}
 
 		.changelog {
