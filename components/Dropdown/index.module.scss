@@ -3,6 +3,10 @@
 	z-index: 199;
 	color: var(--color-primary);
 
+	&:focus-visible {
+		outline: none;
+	}
+
 	.dropdown_btn {
 		display: flex;
 		gap: 4px;
@@ -27,11 +31,10 @@
 	position: absolute;
 	margin-top: 11px;
 	right: 0;
-	background-color: var(--background-secondary);
+	background-color: var(--background-primary);
 	border: 1px solid var(--border-color);
 	border-radius: 10px;
 	width: 250px;
-	box-shadow: 0 20px 40px 0 rgba(6, 6, 6, 0.3);
 	font-size: 14px;
 }
 
