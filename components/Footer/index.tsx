@@ -1,9 +1,9 @@
-'use client';
-
-import type { FC } from 'react';
+import React, { FC, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import Link from 'next/link';
-import Image from 'next/image';
+
+import IconWrapper from '@/components/IconWrapper';
 
 import useScrollToTop from '@/hooks/useScrollToTop';
 
@@ -12,38 +12,74 @@ import { footerLinks } from '@/data/components/footer/links';
 import styles from './index.module.scss';
 
 const Footer: FC = () => {
+	const [openSections, setOpenSections] = useState<number[]>([]);
+
+	const toggleSection = (index: number) => {
+		if (openSections.includes(index)) {
+			setOpenSections(
+				openSections.filter((sectionIndex) => sectionIndex !== index)
+			);
+		} else {
+			setOpenSections([...openSections, index]);
+		}
+	};
+
 	return (
 		<footer className={styles.footer}>
 			<nav>
-				<div className={styles.footer_group}>
-					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
-						ONARA
-					</Link>
-				</div>
-
-				{footerLinks.map((group) => (
+				{footerLinks.map((group, index) => (
 					<div className={styles.footer_group} key={group.title}>
-						<h2>{group.title}</h2>
-						<div className={styles.footer_list}>
-							{group.links.map(({ href, label }) => (
-								<Link href={href} key={label}>
-									{label}
-								</Link>
-							))}
-						</div>
+						<motion.h2 onClick={() => toggleSection(index)}>
+							{group.title}
+							<IconWrapper>
+								{/* Apply the rotation animation to the path */}
+								<motion.path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+									animate={{
+										rotate: openSections.includes(index) ? 180 : 0,
+									}}
+									transition={{ duration: 0.3 }}
+								/>
+							</IconWrapper>
+						</motion.h2>
+
+						<AnimatePresence>
+							{openSections.includes(index) && (
+								<motion.div
+									initial={{ opacity: 0, height: 0 }}
+									animate={{ opacity: 1, height: 'auto' }}
+									exit={{ opacity: 0, height: 0 }}
+									transition={{ duration: 0.3 }}
+									className={styles.footer_list}
+									style={{ overflow: 'hidden' }}
+								>
+									{group.links.map(({ href, label }) => (
+										<Link href={href} key={label}>
+											{label}
+										</Link>
+									))}
+								</motion.div>
+							)}
+						</AnimatePresence>
 					</div>
 				))}
 			</nav>
 			<div className={styles.footer_wrapper}>
-				<div id={styles.mobile_logo}>
+				<div className={styles.logo}>
 					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
 						ONARA
 					</Link>
 				</div>
 
-				<span>
-					Copyright © {new Date().getFullYear()} ONARA Inc. All rights reserved.
-				</span>
+				<motion.span
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ duration: 0.3 }}
+				>
+					&copy; {new Date().getFullYear()} ONARA Inc. All rights reserved.
+				</motion.span>
 			</div>
 		</footer>
 	);
