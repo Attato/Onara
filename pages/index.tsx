@@ -44,7 +44,7 @@ const Home: NextPage = () => {
 				>
 					<h1>Onara - is the perfect way to administer your repositories.</h1>
 
-					<div className={styles.masthed_buttons}>
+					<div className={styles.masthead_buttons}>
 						<button
 							id={styles.language_btn}
 							onClick={() => alert('This button is not working yet')}

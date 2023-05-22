@@ -11,9 +11,8 @@
 		text-align: center;
 	}
 
-	.masthed_buttons {
+	.masthead_buttons {
 		display: flex;
-		flex-wrap: wrap;
 		gap: 12px;
 
 		#language_btn,
@@ -22,13 +21,16 @@
 			align-items: center;
 			gap: 4px;
 			padding: 0px 16px;
-			border-radius: 12px;
+			border-radius: 6px;
 			color: var(--color-primary);
 			user-select: none;
+			width: 100%;
 		}
 
 		#language_btn {
 			background-color: transparent;
+			border: 1px solid var(--border-color);
+			width: auto;
 
 			svg {
 				color: var(--accent);
@@ -257,7 +259,6 @@
 @media screen and (max-width: 768px) {
 	.masthead {
 		align-items: flex-start;
-		padding: 120px 0;
 		margin: 0;
 
 		h1 {
@@ -314,6 +315,18 @@
 }
 
 @media screen and (max-width: 425px) {
+	.masthead {
+		.masthead_buttons {
+			width: 100%;
+			flex-direction: column;
+
+			#language_btn,
+			#get_started_btn {
+				justify-content: space-between;
+			}
+		}
+	}
+
 	.community {
 		.content {
 			.links {
