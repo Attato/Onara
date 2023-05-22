@@ -29,7 +29,7 @@ const Footer: FC = () => {
 			<nav>
 				{footerLinks.map((group, index) => (
 					<div className={styles.footer_group} key={group.title}>
-						<motion.h2 onClick={() => toggleSection(index)}>
+						<motion.button onClick={() => toggleSection(index)}>
 							{group.title}
 							<IconWrapper>
 								{/* Apply the rotation animation to the path */}
@@ -43,7 +43,7 @@ const Footer: FC = () => {
 									transition={{ duration: 0.3 }}
 								/>
 							</IconWrapper>
-						</motion.h2>
+						</motion.button>
 
 						<AnimatePresence>
 							{openSections.includes(index) && (

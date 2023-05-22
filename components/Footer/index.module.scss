@@ -21,7 +21,7 @@
 				color: var(--color-primary);
 			}
 
-			h2 {
+			button {
 				font-size: 16px;
 				font-weight: 400;
 				color: var(--color-primary);
@@ -34,6 +34,10 @@
 				border-radius: 6px;
 				margin: 6px 0;
 				cursor: pointer;
+
+				&:focus-visible {
+					outline: 2px solid var(--background-secondary);
+				}
 			}
 
 			.footer_list {
