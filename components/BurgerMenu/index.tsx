@@ -1,10 +1,6 @@
-import { useState } from 'react';
-import type { FC } from 'react';
+import React from 'react';
 
-import Image from 'next/image';
-import Link from 'next/link';
-
-import { useSession } from 'next-auth/react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import IconWrapper from '@/components/IconWrapper';
 
@@ -12,77 +8,83 @@ import useDisableScroll from '@/hooks/useDisableScroll';
 
 import styles from './index.module.scss';
 
-interface MenuItem {
-	href: string;
-	label: string;
-}
-
 interface BurgerMenuProps {
-	menuItems: MenuItem[];
+	children: React.ReactNode;
+	isBurgerMenuOpen: boolean;
+	closeBurgerMenu: () => void;
+	title?: React.ReactNode;
 }
 
-const BurgerMenu: FC<BurgerMenuProps> = ({ menuItems }) => {
-	const [open, setOpen] = useState(false);
-
-	useDisableScroll(open);
-
-	const handleClick = () => {
-		setTimeout(() => {
-			setOpen(!open);
-		}, 100);
-	};
-
-	const { data, status } = useSession();
-
-	return (
-		<>
-			<button className={styles.burger_menu__button} onClick={handleClick}>
-				{open ? (
-					<IconWrapper width={24} height={24} strokeWidth={1.5}>
-						<path
+const BurgerMenu: React.FC<BurgerMenuProps> = ({
+	children,
+	isBurgerMenuOpen,
+	closeBurgerMenu,
+	title = (
+		<motion.div
+			initial={false}
+			animate={isBurgerMenuOpen ? 'open' : 'closed'}
+			transition={{
+				duration: 0.2, // Adjust the duration as desired
+				ease: 'easeIn', // Adjust the easing function as desired
+			}}
+			className={styles.burger_menu_icon}
+		>
+			<IconWrapper width={24} height={24} strokeWidth={1.5}>
+				<AnimatePresence>
+					{isBurgerMenuOpen ? (
+						<motion.path
+							key="open"
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
 						/>
-					</IconWrapper>
-				) : (
-					<IconWrapper width={24} height={24} strokeWidth={1.5}>
-						<path
+					) : (
+						<motion.path
+							key="closed"
 							strokeLinecap="round"
 							strokeLinejoin="round"
 							d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
 						/>
-					</IconWrapper>
-				)}
+					)}
+				</AnimatePresence>
+			</IconWrapper>
+		</motion.div>
+	),
+}) => {
+	useDisableScroll(isBurgerMenuOpen);
+
+	const variants = {
+		open: { opacity: 1, y: 0 },
+		closed: { opacity: 0, y: -20 },
+	};
+
+	return (
+		<React.Fragment>
+			<button className={styles.burger_menu__button} onClick={closeBurgerMenu}>
+				{title}
 			</button>
 
-			<div className={open ? styles.content : styles.close_content}>
-				{status === 'authenticated' && (
-					<>
-						<Link href="/" className={styles.user} onClick={handleClick}>
-							<Image
-								src={`${data.user?.image}`}
-								width={32}
-								height={32}
-								alt={data.user?.name + ' logo'}
-							/>
-							<p>{data.user?.name}</p>
-						</Link>
-					</>
-				)}
-
-				{menuItems.map((menuItem) => (
-					<Link
-						href={menuItem.href}
-						key={menuItem.label}
-						className={styles.burger_link}
-						onClick={handleClick}
+			<AnimatePresence>
+				{isBurgerMenuOpen && (
+					<motion.div
+						className={styles.content}
+						initial="closed"
+						animate="open"
+						exit="closed"
+						variants={variants}
+						onClick={closeBurgerMenu}
 					>
-						{menuItem.label}
-					</Link>
-				))}
-			</div>
-		</>
+						{children}
+					</motion.div>
+				)}
+			</AnimatePresence>
+		</React.Fragment>
 	);
 };
 
