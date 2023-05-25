@@ -35,13 +35,12 @@ const NavLinks = ({ posts }: any) => {
 										/>
 									</IconWrapper>
 									{posts[item.frontMatter.id - 1].frontMatter.title}
-									{/* Use <a> instead of {posts[item.frontMatter.id - 1].frontMatter.title} */}
 								</Link>
 							)}
 							{item.frontMatter.id < posts.length - 1 && (
 								<Link href={posts[item.frontMatter.id + 1].slug}>
 									{posts[item.frontMatter.id + 1].frontMatter.title}
-									{/* Use <a> instead of {posts[item.frontMatter.id + 1].frontMatter.title} */}
+
 									<IconWrapper>
 										<path
 											strokeLinecap="round"
