@@ -7,18 +7,16 @@ import Popup from '@/components/Popup';
 import styles from './index.module.scss';
 
 interface AuthorizationPopupProps {
-	isPopupOpen: boolean;
-	popupOnClose: () => void;
+	buttonContent?: React.ReactNode;
 	title?: string;
 }
 
 const AuthorizationPopup: React.FC<AuthorizationPopupProps> = ({
-	isPopupOpen,
-	popupOnClose,
 	title,
+	buttonContent,
 }) => {
 	return (
-		<Popup isOpen={isPopupOpen} onClose={popupOnClose} title={title}>
+		<Popup title={title} buttonContent={buttonContent}>
 			<div className={styles.buttons}>
 				<button onClick={() => signIn('github')} id={styles.github}>
 					Continue with GitHub

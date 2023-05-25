@@ -4,22 +4,20 @@ import Popup from '@/components/Popup';
 import type { AlertType } from '@/components/Alert';
 
 interface AlertPopupProps {
-	isPopupOpen: boolean;
-	popupOnClose: () => void;
+	buttonContent?: React.ReactNode;
 	title?: string;
 	alertType?: AlertType;
 	alertText?: string;
 }
 
 const AlertPopup: React.FC<AlertPopupProps> = ({
-	isPopupOpen,
-	popupOnClose,
+	buttonContent,
+	title,
 	alertType,
 	alertText,
-	title,
 }) => {
 	return (
-		<Popup isOpen={isPopupOpen} onClose={popupOnClose} title={title}>
+		<Popup title={title} buttonContent={buttonContent}>
 			<Alert type={alertType} text={alertText} />
 		</Popup>
 	);
