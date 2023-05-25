@@ -3,10 +3,16 @@
 	align-items: center;
 	background-color: transparent;
 	border: none;
+	border-radius: 0;
 	margin: 0;
 	cursor: pointer;
 	display: none;
 	height: auto;
+	width: inherit;
+
+	&:focus-visible {
+		outline: 1px solid var(--border-color);
+	}
 
 	.burger_menu_icon {
 		max-height: 24px;
@@ -17,7 +23,7 @@
 	display: none;
 	flex-direction: column;
 	position: absolute;
-	top: var(--header-height);
+	top: calc(50px - 1px); //fix border 2px
 	left: 0;
 	height: calc(100vh - var(--header-height));
 	width: 100vw;

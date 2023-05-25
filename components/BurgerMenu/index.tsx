@@ -24,8 +24,8 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 			initial={false}
 			animate={isBurgerMenuOpen ? 'open' : 'closed'}
 			transition={{
-				duration: 0.2, // Adjust the duration as desired
-				ease: 'easeIn', // Adjust the easing function as desired
+				duration: 0.2,
+				ease: 'easeIn',
 			}}
 			className={styles.burger_menu_icon}
 		>
