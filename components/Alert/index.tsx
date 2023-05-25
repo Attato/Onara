@@ -8,10 +8,10 @@ type AlertProps = {
 	text?: string;
 };
 
-const Alert = ({
+const Alert: React.FC<AlertProps> = ({
 	type = 'attention',
 	text = 'Alert without text',
-}: AlertProps) => {
+}) => {
 	const getIcon = () => {
 		switch (type) {
 			case 'warning':
