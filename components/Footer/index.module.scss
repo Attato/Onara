@@ -15,12 +15,6 @@
 			flex-direction: column;
 			width: 100%;
 
-			.logo {
-				font-size: 24px;
-				font-weight: 600;
-				color: var(--color-primary);
-			}
-
 			button {
 				font-size: 16px;
 				font-weight: 400;
@@ -44,8 +38,7 @@
 				display: flex;
 				flex-direction: column;
 				background-color: var(--background-secondary);
-				border: 1px solid var(--border-color);
-				border-radius: 6px;
+
 				margin-top: 0;
 
 				a {
