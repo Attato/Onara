@@ -37,6 +37,8 @@
 .dropdown_open {
 	display: flex;
 	flex-direction: column;
+	position: absolute;
+	width: 250px;
 	margin-top: 6px;
 	right: 0;
 	background-color: var(--background-secondary);

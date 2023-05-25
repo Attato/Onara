@@ -125,6 +125,7 @@ const Header: React.FC = () => {
 						<BurgerMenu
 							isBurgerMenuOpen={isBurgerMenuOpen}
 							closeBurgerMenu={closeBurgerMenu}
+							top="52px"
 						>
 							<div className={styles.burgerMenu_user_wrap}>
 								{options.map(

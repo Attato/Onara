@@ -13,6 +13,7 @@ interface BurgerMenuProps {
 	isBurgerMenuOpen: boolean;
 	closeBurgerMenu: () => void;
 	title?: React.ReactNode;
+	top?: string;
 }
 
 const BurgerMenu: React.FC<BurgerMenuProps> = ({
@@ -56,6 +57,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 			</IconWrapper>
 		</motion.div>
 	),
+	top = '49px',
 }) => {
 	useDisableScroll(isBurgerMenuOpen);
 
@@ -79,6 +81,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 						exit="closed"
 						variants={variants}
 						onClick={closeBurgerMenu}
+						style={{ top: `${top}` }}
 					>
 						{children}
 					</motion.div>
