@@ -29,7 +29,7 @@
 		}
 
 		#language_btn {
-			background-color: transparent;
+			background-color: var(--background-primary);
 			border: 1px solid var(--border-color);
 			width: auto;
 
@@ -169,13 +169,13 @@
 			line-height: 1.6;
 		}
 
-		button {
+		a {
 			display: flex;
 			align-items: center;
 			gap: 4px;
 			background-color: var(--warning);
 			border-radius: 20px;
-			padding: 0 16px;
+			padding: 12px 16px;
 		}
 	}
 }
