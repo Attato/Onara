@@ -38,16 +38,7 @@ const Header: React.FC = () => {
 		};
 	}, []);
 
-	const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
 	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
-
-	const openPopup = () => {
-		setIsPopupOpen(!isPopupOpen);
-	};
-
-	const closePopup = () => {
-		setIsPopupOpen(false);
-	};
 
 	const closeBurgerMenu = () => {
 		setTimeout(() => {
@@ -99,44 +90,32 @@ const Header: React.FC = () => {
 				{status === 'authenticated' && (
 					<div className={styles.header_nav_third}>
 						<Dropdown
-							label={
-								<Image
-									src={`${data.user?.image}`}
-									width={32}
-									height={32}
-									alt={data.user?.name + ' logo'}
-								/>
+							buttonContent={
+								<React.Fragment>
+									<Image
+										src={`${data.user?.image}`}
+										width={32}
+										height={32}
+										alt={data.user?.name + ' logo'}
+									/>
+								</React.Fragment>
 							}
+							positionAbsolute={true}
 						>
-							<Link href="/" className={styles.user}>
-								<p>
-									Signed in as <span>{data.user?.name}</span>
-								</p>
-								<p className={styles.user_email}>{data.user?.email}</p>
-							</Link>
-
 							{options.map((option) => (
 								<Link
 									href={option.href}
 									role="menuitem"
-									className={styles.option}
+									className={
+										option.label === 'Sign out' ? styles.signout : styles.option
+									}
 									key={option.label}
+									onClick={() => option.label === 'Sign out' && signOut()}
 								>
 									<span>{option.label}</span>
 									{option.image}
 								</Link>
 							))}
-
-							<button onClick={() => signOut()} className={styles.btn}>
-								Sign out
-								<IconWrapper>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-									/>
-								</IconWrapper>
-							</button>
 						</Dropdown>
 
 						<BurgerMenu
@@ -144,31 +123,20 @@ const Header: React.FC = () => {
 							closeBurgerMenu={closeBurgerMenu}
 						>
 							<div className={styles.burgerMenu_user_wrap}>
-								<Link
-									href="/"
-									onClick={closeBurgerMenu}
-									className={styles.burgerMenu_user}
-								>
-									<p>Signed in as {data.user?.name}</p>
-									<Image
-										src={`${data.user?.image}`}
-										width={32}
-										height={32}
-										alt={data.user?.name + ' logo'}
-									/>
-								</Link>
-
-								{options.map((option) => (
-									<Link
-										href={option.href}
-										role="menuitem"
-										className={styles.burgerMenu_option}
-										key={option.label}
-									>
-										<span>{option.label}</span>
-										{option.image}
-									</Link>
-								))}
+								{options.map(
+									(option) =>
+										option.label !== 'Sign out' && (
+											<Link
+												href={option.href}
+												role="menuitem"
+												className={styles.burgerMenu_option}
+												key={option.label}
+											>
+												<span>{option.label}</span>
+												{option.image}
+											</Link>
+										)
+								)}
 							</div>
 
 							<button
@@ -211,21 +179,20 @@ const Header: React.FC = () => {
 
 				{status === 'unauthenticated' && (
 					<div className={styles.header_nav_third}>
-						<button onClick={openPopup} className={styles.signin}>
-							Sign in
-							<IconWrapper width={14} height={14}>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-								/>
-							</IconWrapper>
-						</button>
-
 						<AuthorizationPopup
-							isPopupOpen={isPopupOpen}
-							popupOnClose={closePopup}
 							title="Log in"
+							buttonContent={
+								<button className={styles.signin}>
+									Sign in
+									<IconWrapper width={14} height={14}>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+										/>
+									</IconWrapper>
+								</button>
+							}
 						/>
 
 						<BurgerMenu
