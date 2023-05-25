@@ -1,14 +1,87 @@
 ---
 id: 3
 title: Alert
+lastUpdated: 23-05-2023
 readingTime: 1 min
 category: Components
 ---
 
 # Alert
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+The Alert component is a React functional component that displays an alert message with an optional icon. It supports different types of alerts such as warning, attention, and success. The component uses CSS modules for styling.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, you're always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+## Usage
 
-Happy exploring and using Onara!
+Import the Alert component and use it in your React application as follows:
+
+{' '}
+
+<CodeBlock language="tsx" code={`import Alert from '@/components/Alert';
+
+const MyComponent = () => {
+	return(
+		<div>
+			<Alert type="warning" text="This is a warning alert" />
+			<Alert type="attention" text="This is an attention alert" />
+			<Alert type="success" text="This is a success alert" />
+			<Alert text="This is a default alert" />
+		</div>
+	); 
+};
+
+export default MyComponent;`} />
+
+## Props
+The Alert component accepts the following props:
+
+
+<CodeBlock language="tsx" code={`export type AlertType = 'warning' | 'attention' | 'success' | null;
+
+type AlertProps = {
+	type?: AlertType;
+	text?: string;
+};`} />
+
+<CodeBlock language="tsx" code={`| Prop 	| Type           	| Default Value      	| Description               	|
+|------	|----------------	|--------------------	|---------------------------	|
+| type 	| string \| null 	| attention          	| The type of the alert.    	|
+| text 	| string         	| Alert without text 	| The content of the alert. 	|;`} />
+
+## Examples
+
+Example 1: Displaying a Warning Alert.
+
+<CodeBlock language="tsx" code={`<Alert type="warning" text="This is a warning alert" />`} />
+
+This example renders a warning alert with the text "This is a warning alert".
+
+<Alert type="warning" text="This is a warning alert" />
+
+Example 2: Displaying an Attention Alert
+
+<CodeBlock language="tsx" code={`<Alert type="attention" text="This is an attention alert" />`} />
+
+This example renders an attention alert with the text "This is an attention alert".
+
+<Alert type="attention" text="This is an attention alert" />
+
+Example 3: Displaying a Success Alert
+
+<CodeBlock language="tsx" code={`<Alert type="success" text="This is a success alert" />`} />
+
+This example renders a success alert with the text "This is a success alert".
+
+<Alert type="success" text="This is a success alert" />
+
+Example 4: Displaying a Default Alert
+
+<CodeBlock language="tsx" code={`<Alert />`} />
+
+This example displays a default warning (type null) with the default text "Alert without text".
+
+<Alert />
+
+## Note
+If you are wondering how we use svg images inside an alert, then this is the IconWrapper component, you can find it in the following sections of the documentation.
+
+That's it! You can now use the Alert component to display different types of alerts with custom text in your React application.
