@@ -1,14 +1,87 @@
 ---
-id: 9
+id: 8
 title: Popup
+lastUpdated: 25-05-2023
 readingTime: 1 min
 category: Components
 ---
 
 # Popup
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+The Popup component is a reusable React component that provides a popup overlay with a title, content, and close button. It uses the framer-motion library for animations.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, youre always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+## Usage
+To use the Popup component, follow these steps:
 
-Happy exploring and using Onara!
+Import the necessary dependencies:
+
+<CodeBlock language="tsx" code={`import Popup from '@/components/Popup';`} />
+
+Place the component in your JSX code:
+
+<CodeBlock language="tsx" code={`<Popup />`} />
+<br />
+
+<Popup />
+
+## Props
+
+The Loading component accepts the following props:
+<CodeBlock language="md" code={`| Prop          	| Type      	| Default Value                     	| Description              	|
+|---------------	|-----------	|-----------------------------------	|--------------------------	|
+| buttonContent 	| ReactNode 	| <button>Blank popup</button>      	| The button of the popup. 	|
+| title         	| string    	| Untitled                          	| The title of the popup.  	|
+| children      	| ReactNode 	| <p>The legend states that ...</p> 	| The content of the popup 	|`} />
+
+## Example
+
+Here's an example of using the Popup component with custom props:
+
+<CodeBlock language="tsx" code={`<Popup
+    title="Example popup"
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+            padding: "12px 16px",
+            display: "flex",
+           alignItems: "center",
+           gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+>   
+        <CodeBlock language="javascript" code={'console.log("Hello world!")'} />
+</Popup>`} />
+
+Result: 
+
+<Popup
+    title="Example popup"
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+            padding: "12px 16px",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+>   
+        <CodeBlock language="javascript" code={'console.log("Hello world!")'} />
+</Popup>
+
+## Conclusion
+The Popup component provides a flexible and reusable way to create popup windows in React applications. It allows you to easily control the popup's visibility and customize its content and appearance.
