@@ -1,14 +1,87 @@
 ---
-id: 10
+id: 9
 title: Alert Popup
+lastUpdated: 25-05-2023
 readingTime: 1 min
 category: Templates
 ---
 
 # Alert Popup
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+The AlertPopup template is a React functional component that displays an alert inside a popup. It is composed of the Alert and Popup components.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, youre always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+## Usage
 
-Happy exploring and using Onara!
+To use the AlertPopup template, follow these steps:
+
+Import the necessary dependencies:
+
+<CodeBlock language="tsx" code={`import AlertPopup from '@/components/_Templates/AlertPopup';`} />
+
+Place the component in your JSX code:
+
+<CodeBlock language="tsx" code={`<AlertPopup />`} />
+
+Result:
+
+<AlertPopup />
+
+## Props:
+
+<CodeBlock language="md" code={`| Prop          	| Type      	| Default Value      	| Description                           	|
+|---------------	|-----------	|--------------------	|---------------------------------------	|
+| buttonContent 	| ReactNode 	| Blank popup        	| The button content of the alert popup 	|
+| title         	| string    	| Untitled           	| The title of the alert popup.         	|
+| alertType     	| string    	| attention          	| The type of the alert popup.          	|
+| alertText     	| string    	| Alert without text 	| The content of the alert popup        	|`} />
+
+## Example
+Here's an example usage of the AlertPopup component:
+
+<CodeBlock language="tsx" code={`<AlertPopup
+    title="My Alert"
+    alertType="success"
+    alertText="This is a success message."
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+           padding: "12px 16px",
+           display: "flex",
+           alignItems: "center",
+           gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+/>`} />
+
+Result:
+
+<AlertPopup
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+            padding: "12px 16px",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+    title="My Alert"
+    alertType="success"
+    alertText="This is a success message."
+/>
+
+In this example, a popup with the title "My Alert" is displayed, containing a success alert with the message "This is a success message."
