@@ -2,20 +2,27 @@
 	background-color: var(--background-primary);
 	border-top: 1px solid var(--border-color);
 
-	.slug {
+	// burgerMenu
+	.breadcrumb {
 		display: flex;
+		align-items: center;
+		background-color: var(--background-primary);
+		border-bottom: 1px solid var(--border-color);
+		position: sticky;
+		top: var(--header-height);
+		width: 100%;
+		box-shadow: 1px 1px 12px var(--background-primary);
 
-		// burgerMenu
-		.breadcrumb {
+		.breadcrumb_content {
 			display: flex;
 			align-items: center;
 			gap: 10px;
-			padding: 16px 0;
-			width: 100%;
 			text-align: left;
-			border-bottom: 1px solid var(--border-color);
+			padding: 16px 24px;
 			font-size: 14px;
 			color: var(--accent);
+			outline: none;
+			width: 100%;
 		}
 
 		.burgerMenu_category {
@@ -58,12 +65,17 @@
 						transition: color 0.2s ease;
 					}
 
-					&:hover {
+					&:hover,
+					&:focus-visible {
 						color: var(--color-primary);
 
 						&::before {
 							color: var(--color-primary);
 						}
+					}
+
+					&:focus-visible {
+						outline: 1px solid var(--border-color);
 					}
 				}
 
@@ -74,23 +86,31 @@
 				}
 			}
 		}
+	}
+
+	.slug {
+		display: flex;
 
 		.page_content {
 			max-width: 840px;
 			width: 100%;
 			padding: 32px 40px;
 			background-color: var(--background-primary);
+			color: var(--color-primary);
 
 			h1 {
 				font-size: 40px;
 				margin: 32px 0;
-				color: var(--color-primary);
+			}
+
+			h2 {
+				margin: 42px 0 10px;
 			}
 
 			p {
 				line-height: 1.6;
 				margin: 16px 0;
-				color: var(--color-primary);
+				color: inherit;
 			}
 
 			a {
@@ -102,13 +122,42 @@
 				}
 			}
 
+			li {
+				list-style: auto;
+			}
+
 			pre {
-				background-color: #1e1e1e;
+				background-color: var(--background-secondary) !important;
+				border: 1px solid var(--border-color) !important;
 				padding: 20px;
 				margin-bottom: 16px;
 				border-radius: 6px;
 				white-space: pre;
 				overflow: auto;
+				max-width: 640px;
+				overflow: auto;
+
+				&::-webkit-scrollbar {
+					height: 6px;
+					background-color: var(--background-secondary);
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background: var(--border-color-hover);
+					border-radius: 4px;
+
+					&:hover {
+						background: var(--border-color-hover);
+					}
+
+					&:active {
+						background: var(--border-color-active);
+					}
+				}
+
+				code {
+					background-color: transparent !important;
+				}
 
 				span {
 					font-size: 16px;
