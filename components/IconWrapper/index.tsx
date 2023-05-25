@@ -1,23 +1,21 @@
 //
 // I created this component because currentСolor doesn't work with next/image.
 
-import { ReactNode } from 'react';
-
 type IconWrapperProps = {
 	width?: number;
 	height?: number;
 	strokeWidth?: number;
 	fill?: string;
-	children: ReactNode;
+	children: React.ReactNode;
 };
 
-const IconWrapper = ({
+const IconWrapper: React.FC<IconWrapperProps> = ({
 	width = 16,
 	height = 16,
 	strokeWidth = 2,
 	fill = 'none',
 	children,
-}: IconWrapperProps) => {
+}) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
