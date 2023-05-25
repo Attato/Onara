@@ -1,14 +1,75 @@
 ---
-id: 11
+id: 10
 title: Authorization Popup
+lastUpdated: 25-05-2023
 readingTime: 1 min
 category: Templates
 ---
 
 # Authorization Popup
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+The Authorization Popup template is a reusable component used for displaying a popup window with options for user authorization using different services. It is implemented using Next.js and NextAuth.js.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, youre always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+<CodeBlock language="tsx" code={`<AuthorizationPopup />`}/>
 
-Happy exploring and using Onara!
+<AuthorizationPopup />
+
+
+## Props 
+
+<CodeBlock language="md" code={`| Prop          	| Type      	| Default Value                	| Description                                   	|
+|---------------	|-----------	|------------------------------	|-----------------------------------------------	|
+| buttonContent 	| ReactNode 	| <button>Blank popup</button> 	| The button content of the authorization popup 	|
+| title         	| string    	| Untitled                     	| The content of the authorization popup        	|`} />
+
+
+## Example
+Here's an example usage of the Authorization Popup component:
+
+<CodeBlock language="tsx" code={`<AuthorizationPopup
+    title="Sign In to Continue"
+    buttonContent="Sign In"
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+            padding: "12px 16px",
+           display: "flex",
+           alignItems: "center",
+           gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+/>`} />
+
+Result:
+
+<AuthorizationPopup
+    title="Sign In to Continue"
+    buttonContent="Sign In"
+    buttonContent={
+        <button style={{
+            backgroundColor: "#0f0f0f",
+            border: "1px solid #232323",
+            borderRadius: "6px",
+            padding: "12px 16px",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px"
+        }}>
+            Example
+            <IconWrapper>      
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+            </IconWrapper>
+        </button>
+    }
+/>
+
+In the above example, when the user clicks on the "Sign In" button, the popup window will be displayed with options to sign in using GitHub or GitLab.
+
+That's it! You can now use the Authorization Popup component in ONARA application to provide a convenient way for users to sign in using different services.
