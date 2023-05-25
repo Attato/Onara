@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
 import fs from 'fs/promises';
 import path from 'path';
@@ -14,12 +14,20 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXProvider } from '@mdx-js/react';
 
 import SideBar from '@/components/Sidebar';
-import NavLinks from '@/components/NavLinks';
 import BurgerMenu from '@/components/BurgerMenu';
-import IconWrapper from '@/components/IconWrapper';
+import NavLinks from '@/components/NavLinks';
 
-// Для использования в mdx файлах
+// Компоненты для использования в mdx файлах
+import Alert from '@/components/Alert';
 import CodeBlock from '@/components/CodeBlock';
+import Dropdown from '@/components/Dropdown';
+import IconWrapper from '@/components/IconWrapper';
+import Loading from '@/components/Loading';
+import Popup from '@/components/Popup';
+
+// Шаблоны для использования в mdx файлах
+import AlertPopup from '@/components/_Templates/AlertPopup';
+import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
 import styles from './index.module.scss';
 import { NextPage } from 'next/types';
@@ -60,14 +68,19 @@ const getMdxFileContent = async (slug: string) => {
 	const fileContents = await fs.readFile(mdxFilePath, 'utf-8');
 	const { content, data } = matter(fileContents);
 
-	const fileStats = await fs.stat(mdxFilePath);
-	const lastUpdated = new Date(fileStats.mtime).toLocaleDateString();
-
-	return { content, data: { ...data, lastUpdated } };
+	return { content, data: { ...data } };
 };
 
+// Благодаря этому компоненты работают в mdx файлах
 const components = {
+	Alert,
 	CodeBlock,
+	Dropdown,
+	IconWrapper,
+	Loading,
+	Popup,
+	AlertPopup,
+	AuthorizationPopup,
 };
 
 const SlugPage: NextPage<SlugPageProps> = ({
@@ -77,45 +90,65 @@ const SlugPage: NextPage<SlugPageProps> = ({
 }) => {
 	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
 
-	const closeBurgerMenu = () => {
+	const closeBurgerMenu = useCallback(() => {
 		setTimeout(() => {
-			setIsBurgerMenuOpen(!isBurgerMenuOpen);
+			setIsBurgerMenuOpen((prevState) => !prevState);
 		}, 100);
-	};
+	}, []);
 
-	const formattedDate = new Date(frontMatter.lastUpdated).toLocaleDateString(
-		'en-US',
-		{
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		}
+	const [day, month, year] = useMemo(() => {
+		return frontMatter.lastUpdated !== undefined
+			? frontMatter.lastUpdated.split('-')
+			: [];
+	}, [frontMatter.lastUpdated]);
+
+	const date = useMemo(
+		() => new Date(`${month}-${day}-${year}`),
+		[day, month, year]
 	);
+	console.log('date', date);
+
+	const options = useMemo(
+		() => ({
+			day: 'numeric' as const,
+			month: 'long' as const,
+			year: 'numeric' as const,
+		}),
+		[]
+	);
+
+	const formattedDate = useMemo(
+		() => date.toLocaleDateString('en-US', options),
+		[date, options]
+	);
+	console.log('formattedDate', formattedDate);
 
 	const pathname = usePathname();
 
 	// Sidebar logic
-	const sortedPosts = [...allPosts].sort(
-		(a, b) => a.frontMatter.id - b.frontMatter.id
-	);
+	const sortedPosts = useMemo(() => {
+		return [...allPosts].sort((a, b) => a.frontMatter.id - b.frontMatter.id);
+	}, [allPosts]);
 
-	const categories = sortedPosts.reduce((categories, post) => {
-		const category = post.frontMatter.category;
-		const isActive = pathname === `/docs/${post.slug}`;
+	const categories = useMemo(() => {
+		return sortedPosts.reduce((categories, post) => {
+			const category = post.frontMatter.category;
+			const isActive = pathname === `/docs/${post.slug}`;
 
-		categories[category] = categories[category] || [];
-		categories[category].push(
-			<Link
-				key={post.slug}
-				href={`/docs/${post.slug}`}
-				className={isActive ? styles.activeLink : ''}
-			>
-				{post.frontMatter.title}
-			</Link>
-		);
+			categories[category] = categories[category] || [];
+			categories[category].push(
+				<Link
+					key={post.slug}
+					href={`/docs/${post.slug}`}
+					className={isActive ? styles.activeLink : ''}
+				>
+					{post.frontMatter.title}
+				</Link>
+			);
 
-		return categories;
-	}, {} as { [category: string]: JSX.Element[] });
+			return categories;
+		}, {} as { [category: string]: JSX.Element[] });
+	}, [pathname, sortedPosts]);
 
 	return (
 		<>
@@ -126,44 +159,47 @@ const SlugPage: NextPage<SlugPageProps> = ({
 			</Head>
 
 			<div className={styles.docs}>
+				<div className={styles.breadcrumb}>
+					<BurgerMenu
+						isBurgerMenuOpen={isBurgerMenuOpen}
+						closeBurgerMenu={closeBurgerMenu}
+						title={
+							<React.Fragment>
+								{allPosts
+									.filter((post) => `/docs/${post.slug}` === pathname)
+									.map((post) => {
+										return (
+											<div
+												key={post.slug}
+												className={styles.breadcrumb_content}
+											>
+												{post.frontMatter.category}{' '}
+												<IconWrapper width={14} height={14}>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														d="M8.25 4.5l7.5 7.5-7.5 7.5"
+													/>
+												</IconWrapper>
+												<span>{post.frontMatter.title}</span>
+											</div>
+										);
+									})}
+							</React.Fragment>
+						}
+					>
+						{Object.entries(categories).map(([category, links]) => (
+							<div key={category} className={styles.burgerMenu_category}>
+								<h4 className={styles.burgerMenu_category_title}>{category}</h4>
+
+								<div className={styles.burgerMenu_links}>{links}</div>
+							</div>
+						))}
+					</BurgerMenu>
+				</div>
 				<div className="main">
 					<div className={styles.slug}>
 						<SideBar posts={allPosts} />
-						<BurgerMenu
-							isBurgerMenuOpen={isBurgerMenuOpen}
-							closeBurgerMenu={closeBurgerMenu}
-							title={
-								<React.Fragment>
-									{allPosts
-										.filter((post) => `/docs/${post.slug}` === pathname)
-										.map((post) => {
-											return (
-												<div key={post.slug} className={styles.breadcrumb}>
-													{post.frontMatter.category}{' '}
-													<IconWrapper width={14} height={14}>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															d="M8.25 4.5l7.5 7.5-7.5 7.5"
-														/>
-													</IconWrapper>
-													<span>{post.frontMatter.title}</span>
-												</div>
-											);
-										})}
-								</React.Fragment>
-							}
-						>
-							{Object.entries(categories).map(([category, links]) => (
-								<div key={category} className={styles.burgerMenu_category}>
-									<h4 className={styles.burgerMenu_category_title}>
-										{category}
-									</h4>
-
-									<div className={styles.burgerMenu_links}>{links}</div>
-								</div>
-							))}
-						</BurgerMenu>
 
 						<div className={styles.page_content}>
 							<div className={styles.time_info}>
