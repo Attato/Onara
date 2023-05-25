@@ -89,34 +89,38 @@ const Header: React.FC = () => {
 
 				{status === 'authenticated' && (
 					<div className={styles.header_nav_third}>
-						<Dropdown
-							buttonContent={
-								<React.Fragment>
-									<Image
-										src={`${data.user?.image}`}
-										width={32}
-										height={32}
-										alt={data.user?.name + ' logo'}
-									/>
-								</React.Fragment>
-							}
-							positionAbsolute={true}
-						>
-							{options.map((option) => (
-								<Link
-									href={option.href}
-									role="menuitem"
-									className={
-										option.label === 'Sign out' ? styles.signout : styles.option
-									}
-									key={option.label}
-									onClick={() => option.label === 'Sign out' && signOut()}
-								>
-									<span>{option.label}</span>
-									{option.image}
-								</Link>
-							))}
-						</Dropdown>
+						<div className={styles.dropdown}>
+							<Dropdown
+								buttonContent={
+									<React.Fragment>
+										<Image
+											src={`${data.user?.image}`}
+											width={32}
+											height={32}
+											alt={data.user?.name + ' logo'}
+										/>
+									</React.Fragment>
+								}
+								positionAbsolute={true}
+							>
+								{options.map((option) => (
+									<Link
+										href={option.href}
+										role="menuitem"
+										className={
+											option.label === 'Sign out'
+												? styles.signout
+												: styles.option
+										}
+										key={option.label}
+										onClick={() => option.label === 'Sign out' && signOut()}
+									>
+										<span>{option.label}</span>
+										{option.image}
+									</Link>
+								))}
+							</Dropdown>
+						</div>
 
 						<BurgerMenu
 							isBurgerMenuOpen={isBurgerMenuOpen}

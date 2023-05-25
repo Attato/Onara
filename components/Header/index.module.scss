@@ -94,6 +94,10 @@
 
 			// dropdown
 
+			.dropdown {
+				position: relative;
+			}
+
 			.option,
 			.signout {
 				display: flex;
@@ -197,6 +201,10 @@
 
 			.header_nav_third {
 				.signin {
+					display: none;
+				}
+
+				.dropdown {
 					display: none;
 				}
 			}
