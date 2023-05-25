@@ -1,14 +1,57 @@
 ---
-id: 5
+id: 4
 title: Code Block
+lastUpdated: 24-05-2023
 readingTime: 1 min
 category: Components
 ---
 
 # Code Block
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+The CodeBlock component is a reusable React component that displays syntax-highlighted code and provides a copy-to-clipboard functionality. It utilizes the Prism component from the react-syntax-highlighter library to render the code with a specified language and style.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, youre always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+## Usage
 
-Happy exploring and using Onara!
+Import the CodeBlock component and use it in your React application as follows:
+
+{' '}
+
+<CodeBlock language="tsx" code={`import CodeBlock from '@/components/CodeBlock';
+
+const MyComponent = () => {
+	return(
+		<div>
+			<CodeBlock language="javascript" code={'console.log("Hello world!")'} />
+		</div>
+	); 
+};
+
+export default MyComponent;`} />
+
+What you see above is the CodeBlock component. Here is the result you will get if you follow the example:
+
+<CodeBlock language="javascript" code={'console.log("Hello world!")'} />
+
+## Props
+The CodeBlock component accepts the following props:
+
+<CodeBlock language="md" code={
+`| Prop     	| Type   	| Default Value                   	| Description                    	|
+|----------	|--------	|---------------------------------	|--------------------------------	|
+| language 	| string 	| md                              	| The language of the codeblock. 	|
+| code     	| string 	| The majestic empty block of ... 	| The content of the codeblock.  	|`} />
+     
+If you do not pass any values to the component and use it, as in this example:
+
+<CodeBlock language="tsx" code={`<CodeBlock />`} />
+
+You will get this result:
+
+<CodeBlock />
+
+## Support languages
+
+You can view all supported languages of the CodeBlock component at this link
+<a href="https://github.com/react-syntax-highlighter/react-syntax-highlighter/blob/master/AVAILABLE_LANGUAGES_HLJS.MD" target="_blank">click.</a>
+
+
