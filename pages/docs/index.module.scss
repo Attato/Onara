@@ -4,15 +4,17 @@
 	min-height: calc(100vh - var(--header-height));
 
 	// burgerMenu
+
 	.breadcrumb {
 		display: none;
 		align-items: center;
 		background-color: var(--background-primary);
+		width: 100%;
+		box-shadow: 1px 1px 12px var(--background-primary);
 		border-bottom: 1px solid var(--border-color);
 		position: sticky;
 		top: var(--header-height);
-		width: 100%;
-		box-shadow: 1px 1px 12px var(--background-primary);
+		height: 64px;
 
 		.breadcrumb_content {
 			display: flex;
