@@ -13,6 +13,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXProvider } from '@mdx-js/react';
 
+import { ChevronRightIcon } from '@heroicons/react/24/solid';
 import SideBar from '@/components/Sidebar';
 import BurgerMenu from '@/components/BurgerMenu';
 import NavLinks from '@/components/NavLinks';
@@ -21,9 +22,11 @@ import NavLinks from '@/components/NavLinks';
 import Alert from '@/components/Alert';
 import CodeBlock from '@/components/CodeBlock';
 import Dropdown from '@/components/Dropdown';
-import IconWrapper from '@/components/IconWrapper';
+
 import Loading from '@/components/Loading';
 import Popup from '@/components/Popup';
+
+import { GiftIcon } from '@heroicons/react/24/outline';
 
 // Шаблоны для использования в mdx файлах
 import AlertPopup from '@/components/_Templates/AlertPopup';
@@ -76,11 +79,12 @@ const components = {
 	Alert,
 	CodeBlock,
 	Dropdown,
-	IconWrapper,
 	Loading,
 	Popup,
 	AlertPopup,
 	AuthorizationPopup,
+	// иконки
+	GiftIcon,
 };
 
 const SlugPage: NextPage<SlugPageProps> = ({
@@ -173,14 +177,8 @@ const SlugPage: NextPage<SlugPageProps> = ({
 												key={post.slug}
 												className={styles.breadcrumb_content}
 											>
-												{post.frontMatter.category}{' '}
-												<IconWrapper width={14} height={14}>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														d="M8.25 4.5l7.5 7.5-7.5 7.5"
-													/>
-												</IconWrapper>
+												{post.frontMatter.category}
+												<ChevronRightIcon width={14} height={14} />
 												<span>{post.frontMatter.title}</span>
 											</div>
 										);

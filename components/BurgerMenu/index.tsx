@@ -2,8 +2,7 @@ import React from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-import IconWrapper from '@/components/IconWrapper';
-
+import { BarsArrowDownIcon, BarsArrowUpIcon } from '@heroicons/react/24/solid';
 import useDisableScroll from '@/hooks/useDisableScroll';
 
 import styles from './index.module.scss';
@@ -29,31 +28,13 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 			}}
 			className={styles.burger_menu_icon}
 		>
-			<IconWrapper width={24} height={24} strokeWidth={1.5}>
-				<AnimatePresence>
-					{isBurgerMenuOpen ? (
-						<motion.path
-							key="open"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M3 4.5h14.25M3 9h9.75M3 13.5h5.25m5.25-.75L17.25 9m0 0L21 12.75M17.25 9v12"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-						/>
-					) : (
-						<motion.path
-							key="closed"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-							d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-						/>
-					)}
-				</AnimatePresence>
-			</IconWrapper>
+			<AnimatePresence>
+				{isBurgerMenuOpen ? (
+					<BarsArrowDownIcon width={24} height={24} />
+				) : (
+					<BarsArrowUpIcon width={24} height={24} />
+				)}
+			</AnimatePresence>
 		</motion.div>
 	),
 }) => {

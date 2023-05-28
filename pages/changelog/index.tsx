@@ -14,7 +14,7 @@ import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 
-import IconWrapper from '@/components/IconWrapper';
+import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
 
 import styles from './index.module.scss';
 
@@ -57,23 +57,11 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 										onClick={() => alert('This button is not working yet')}
 									>
 										Subscribe to updates
-										<IconWrapper width={14} height={14}>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-											/>
-										</IconWrapper>
+										<ArrowTopRightOnSquareIcon width={14} height={14} />
 									</Link>
 									<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
 										Follow us on Telegram
-										<IconWrapper width={14} height={14}>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
-											/>
-										</IconWrapper>
+										<ArrowTopRightOnSquareIcon width={14} height={14} />
 									</Link>
 								</div>
 							</div>

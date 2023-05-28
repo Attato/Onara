@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import IconWrapper from '@/components/IconWrapper';
-
+import { ArrowRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 import styles from './index.module.scss';
 
 const NavLinks = ({ posts }: any) => {
@@ -27,27 +26,14 @@ const NavLinks = ({ posts }: any) => {
 						>
 							{item.frontMatter.id > 0 && (
 								<Link href={posts[item.frontMatter.id - 1].slug}>
-									<IconWrapper>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M19.5 12h-15m0 0l6.75 6.75M4.5 12l6.75-6.75"
-										/>
-									</IconWrapper>
+									<ArrowLeftIcon width={16} height={16} />
 									{posts[item.frontMatter.id - 1].frontMatter.title}
 								</Link>
 							)}
 							{item.frontMatter.id < posts.length - 1 && (
 								<Link href={posts[item.frontMatter.id + 1].slug}>
 									{posts[item.frontMatter.id + 1].frontMatter.title}
-
-									<IconWrapper>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-										/>
-									</IconWrapper>
+									<ArrowRightIcon width={16} height={16} />
 								</Link>
 							)}
 						</div>
