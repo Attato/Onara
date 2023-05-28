@@ -1,11 +1,6 @@
-import React, { useState } from 'react';
-
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-import Link from 'next/link';
-
-import IconWrapper from '@/components/IconWrapper';
-
+import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import styles from './index.module.scss';
 
 type DropdownProps = {
@@ -19,27 +14,33 @@ const Dropdown: React.FC<DropdownProps> = ({
 	children,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
 
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);
 	};
 
+	const handleOutsideClick = (event: MouseEvent) => {
+		if (
+			dropdownRef.current &&
+			!dropdownRef.current.contains(event.target as Node)
+		) {
+			setIsOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleOutsideClick);
+		return () => {
+			document.removeEventListener('click', handleOutsideClick);
+		};
+	}, []);
+
 	return (
-		<div className={styles.dropdown}>
+		<div ref={dropdownRef} className={styles.dropdown}>
 			<motion.button onClick={toggleDropdown} className={styles.dropdown_btn}>
 				{buttonContent}
-
-				<IconWrapper>
-					<motion.path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-						animate={{
-							rotate: isOpen ? 180 : 0,
-						}}
-						transition={{ duration: 0.3 }}
-					/>
-				</IconWrapper>
+				<ChevronDownIcon width={16} height={16} strokeWidth={1.5} />
 			</motion.button>
 
 			<AnimatePresence>
