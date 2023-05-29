@@ -1,119 +1,122 @@
 .masthead {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 40px;
-	padding: 128px 0 0;
-	color: var(--color-primary);
+	background: linear-gradient(
+		45deg,
+		var(--background-primary),
+		var(--background-secondary-hover)
+	);
+	position: relative;
+	z-index: 1;
 
-	h1 {
-		font-size: 56px;
-		text-align: center;
-	}
-
-	.masthead_buttons {
-		display: flex;
-		gap: 12px;
-
-		#language_btn,
-		#get_started_btn {
-			display: flex;
-			align-items: center;
-			gap: 4px;
-			padding: 0px 16px;
-			border-radius: 10px;
-			height: 44px;
-			color: var(--color-primary);
-			user-select: none;
-			width: 100%;
-		}
-
-		#language_btn {
-			background-color: var(--background-primary);
-			border: 1px solid var(--border-color);
-			width: auto;
-
-			svg {
-				color: var(--accent);
-			}
-		}
-
-		#get_started_btn {
-			background: linear-gradient(to right, #455eb5, #673fd7);
-		}
-	}
-}
-
-.footer {
-	display: flex;
-	justify-content: center;
-
-	img {
-		max-width: 512px;
-		width: -webkit-fill-available;
-		height: max-content;
-	}
-}
-
-.homepage {
-	background-color: var(--background-primary);
-	border-top: 1px solid var(--border-color);
-	border-bottom: 1px solid var(--border-color);
-
-	.content {
+	.masthead_content {
 		display: flex;
 		flex-direction: column;
-		gap: 72px;
-		padding: 72px 24px;
-		max-width: var(--page-width);
+		align-items: center;
+		gap: 24px;
+		padding: 128px 24px;
+		color: var(--color-primary);
+		text-align: center;
+		max-width: 800px;
 		margin: auto;
 
 		h1 {
-			font-size: 56px;
-			color: var(--color-primary);
+			font-size: 52px;
+			text-align: center;
 		}
 
-		.foundation {
+		p {
+			font-size: 20px;
+			max-width: 725px;
+			line-height: 1.6;
+		}
+
+		.masthead_buttons {
 			display: flex;
-			flex-wrap: wrap;
 			gap: 24px;
 
-			.stack {
+			#language_btn,
+			#get_started_btn {
 				display: flex;
-				flex-direction: column;
-				max-width: 475px;
-				padding: 20px;
-				border-radius: 12px;
+				align-items: center;
+				gap: 8px;
+				padding: 0px 16px;
+				border-radius: 20px;
+				height: 44px;
+				color: var(--color-primary);
+				user-select: none;
+				width: 100%;
+			}
 
-				background-color: var(--background-secondary);
+			#language_btn {
+				background-color: var(--background-primary);
 				border: 1px solid var(--border-color);
-				transition: all 0.3s;
+				width: auto;
+				transition: all 0.3s ease;
+
+				svg {
+					color: var(--accent);
+				}
 
 				&:hover {
-					background-color: var(--background-secondary-hover);
-				}
-
-				img {
-					user-select: none;
-				}
-
-				h2 {
-					font-size: 20px;
-					font-weight: 500;
-					display: flex;
-					align-items: flex-start;
-					gap: 4px;
-					color: var(--color-primary);
-					margin-top: 24px;
-				}
-
-				p {
-					font-size: 14px;
-					margin-top: 8px;
-					line-height: 1.6;
+					background-color: var(--background-secondary);
+					border-color: var(--border-color-hover);
 				}
 			}
+
+			#get_started_btn {
+				background: linear-gradient(to right, #455eb5, #673fd7);
+				transition: all 0.3s ease;
+			}
 		}
+
+		.background_image {
+			position: absolute;
+			width: 100%;
+			z-index: -1;
+			bottom: 0;
+			height: auto;
+		}
+	}
+}
+
+.container_primary,
+.container_secondary {
+	padding: 120px 24px;
+
+	.content {
+		display: flex;
+		align-items: center;
+		max-width: var(--page-width);
+		margin: auto;
+		min-height: 440px;
+
+		.description {
+			max-width: 420px;
+			h2 {
+				font-size: 48px;
+			}
+
+			p {
+				font-size: 20px;
+				margin-top: 24px;
+				line-height: 1.6;
+			}
+		}
+	}
+}
+
+.container_primary {
+	background-color: var(--background-primary);
+	border-bottom: 1px solid var(--border-color);
+	border-top: 1px solid var(--border-color);
+	.content {
+		justify-content: flex-end;
+	}
+}
+
+.container_secondary {
+	background-color: var(--background-secondary);
+
+	.content {
 	}
 }
 
@@ -181,14 +184,11 @@
 }
 
 .community {
-	background-image: linear-gradient(
-			to right,
-			var(--border-color) 1px,
-			transparent 1px
-		),
-		linear-gradient(to bottom, var(--border-color) 1px, transparent 1px);
-	background-size: 42px 42px;
-	background-position: center center;
+	background: linear-gradient(
+		45deg,
+		var(--background-primary),
+		var(--background-secondary-hover)
+	);
 
 	.content {
 		display: flex;

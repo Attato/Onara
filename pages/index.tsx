@@ -38,13 +38,19 @@ const Home: NextPage = () => {
 					/>
 					<link rel="icon" href="/icon.svg" />
 				</Head>
-				<motion.main className="main">
+
+				<motion.main className={styles.masthead}>
 					<motion.div
-						className={styles.masthead}
+						className={styles.masthead_content}
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 					>
-						<h1>Onara - is the perfect way to administer your repositories.</h1>
+						<h1>Imagine perfect way to administer your repositories.</h1>
+
+						<p>
+							Extend the capabilities of your Github and Gitlab accounts by
+							adding ONARA features to them.
+						</p>
 
 						<div className={styles.masthead_buttons}>
 							<button
@@ -65,49 +71,55 @@ const Home: NextPage = () => {
 								}
 							/>
 						</div>
-					</motion.div>
-					<div className={styles.footer}>
+
 						<Image
-							src="/illustrations/homePage.png"
-							width={512}
-							height={512}
-							alt="Onara - Rabbit Astronaut"
-							priority={true}
-						></Image>
-					</div>
+							src="/illustrations/background_image.svg"
+							width={600}
+							height={300}
+							className={styles.background_image}
+							alt="background"
+						/>
+					</motion.div>
 				</motion.main>
 
-				<motion.div className={styles.homepage}>
-					<motion.div
-						className={styles.content}
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-					>
-						<h1>Built on a foundation of fast, production-grade tooling</h1>
-
-						<motion.div className={styles.foundation}>
-							{stacks.map((stack) => (
-								<Link
-									href={stack.href}
-									className={styles.stack}
-									target="_blank"
-									key={stack.title}
-								>
-									<Image
-										src={stack.imageSrc}
-										width={stack.imageWidth}
-										height={stack.imageHeight}
-										alt={stack.title}
-									/>
-									<h2>
-										{stack.title}
-										<ArrowTopRightOnSquareIcon width={16} height={16} />
-									</h2>
-									<p>{stack.description}</p>
-								</Link>
-							))}
-						</motion.div>
-					</motion.div>
+				<motion.div className={styles.container_primary}>
+					<div className={styles.content}>
+						<div className={styles.description}>
+							<h2>Invite your friends</h2>
+							<p>
+								Invite your friends to the Onara app or easily import them from
+								your GitHub or Gitlab repositories.
+							</p>
+						</div>
+					</div>
+				</motion.div>
+				<motion.div className={styles.container_secondary}>
+					<div className={styles.content}>
+						<div className={styles.description}>
+							<h2>Team up</h2>
+							<p>
+								Create groups and assign roles to members, providing a good
+								collaborative development experience.
+							</p>
+						</div>
+					</div>
+				</motion.div>
+				<motion.div className={styles.container_primary}>
+					<div className={styles.content}>
+						<Image
+							src="/illustrations/security.svg"
+							width={675}
+							height={440}
+							alt="container image"
+						/>
+						<div className={styles.description}>
+							<h2>Teamwork</h2>
+							<p>
+								Form groups and allocate specific roles to each member,
+								fostering seamless collaboration.
+							</p>
+						</div>
+					</div>
 				</motion.div>
 				<div className={styles.support}>
 					<div className={styles.content}>
