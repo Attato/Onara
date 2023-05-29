@@ -9,6 +9,7 @@
 	box-shadow: none;
 	transition: all 0.3s ease;
 	user-select: none;
+	background-color: var(--background-primary);
 	border-bottom: 1px solid var(--border-color-lighter);
 	z-index: 9;
 
@@ -188,7 +189,6 @@
 
 .scrolled {
 	border-bottom: 1px solid var(--border-color);
-	background-color: var(--background-primary);
 }
 
 @media screen and (max-width: 768px) {
