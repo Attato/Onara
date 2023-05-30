@@ -45,33 +45,38 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 			</Head>
 
 			<div className={styles.page_content}>
-				<main className="main">
-					<div className={styles.masthead}>
-						<div className={styles.masthead_content}>
-							<h1 className={styles.title}>Changelog</h1>
-							<div className={styles.subtitle}>
-								New updates and improvements to Onara.
-								<div className={styles.links}>
-									<Link
-										href=""
-										onClick={() => alert('This button is not working yet')}
-									>
-										Subscribe to updates
-										<ArrowTopRightOnSquareIcon width={14} height={14} />
-									</Link>
-									<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
-										Follow us on Telegram
-										<ArrowTopRightOnSquareIcon width={14} height={14} />
-									</Link>
-								</div>
+				<div className={styles.masthead}>
+					<Image
+						src="/illustrations/background_image_2.svg"
+						width={1920}
+						height={400}
+						alt="background"
+						priority={true}
+					/>
+					<div className={styles.masthead_content}>
+						<h1 className={styles.title}>Changelog</h1>
+						<div className={styles.subtitle}>
+							Check out our Changelog to keep up to date with all the new
+							features and improvements we&apos;re bringing to you. Stay up to
+							date and follow the development of our product.
+							<div className={styles.links}>
+								<Link
+									href=""
+									onClick={() => alert('This button is not working yet')}
+								>
+									Subscribe to updates
+									<ArrowTopRightOnSquareIcon width={14} height={14} />
+								</Link>
+								<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
+									Follow us on Telegram
+									<ArrowTopRightOnSquareIcon width={14} height={14} />
+								</Link>
 							</div>
 						</div>
 					</div>
-				</main>
+				</div>
 
 				{posts.map((post) => {
-					console.log(post);
-
 					return (
 						<div key={post.slug} className={styles.changelog}>
 							<div className={styles.changelog_content}>
@@ -108,7 +113,6 @@ const getFormattedDate = (fileName: string) => {
 
 	// Create a Date object from the extracted parts
 	const date = new Date(`${month}-${day}-${year}`);
-	console.log('date', date);
 
 	const options: Intl.DateTimeFormatOptions = {
 		day: 'numeric',
