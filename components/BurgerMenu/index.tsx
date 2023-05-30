@@ -30,9 +30,9 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 		>
 			<AnimatePresence>
 				{isBurgerMenuOpen ? (
-					<BarsArrowDownIcon width={24} height={24} />
-				) : (
 					<BarsArrowUpIcon width={24} height={24} />
+				) : (
+					<BarsArrowDownIcon width={24} height={24} />
 				)}
 			</AnimatePresence>
 		</motion.div>
