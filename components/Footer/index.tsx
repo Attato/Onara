@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 
 import Link from 'next/link';
 
-import useScrollToTop from '@/hooks/useScrollToTop';
-
 import styles from './index.module.scss';
 
 const Footer: FC = () => {
@@ -12,7 +10,7 @@ const Footer: FC = () => {
 		<footer className={styles.footer}>
 			<div className={styles.footer_wrapper}>
 				<div className={styles.logo}>
-					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
+					<Link href="/" className={styles.logo}>
 						ONARA
 					</Link>
 				</div>

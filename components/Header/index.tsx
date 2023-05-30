@@ -13,12 +13,10 @@ import {
 	ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/solid';
 
-import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
-
-import useScrollToTop from '@/hooks/useScrollToTop';
-
 import { links } from '@/data/components/header/links';
 import { options } from '@/data/components/header/options';
+
+import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
 import styles from './index.module.scss';
 
@@ -56,7 +54,7 @@ const Header: React.FC = () => {
 		<header className={styles.header_wrapper}>
 			<div className={styles.header}>
 				<div className={styles.header_nav_first}>
-					<Link href="/" onClick={useScrollToTop()} className={styles.logo}>
+					<Link href="/" className={styles.logo}>
 						<Image
 							src="/icon.svg"
 							width={40}
@@ -70,13 +68,9 @@ const Header: React.FC = () => {
 					<div className={styles.navigation_menu}>
 						{links.map((link) => {
 							return (
-								<Link
-									href={link.href}
-									key={link.href}
-									target={link.label === 'Feedback' ? `_blank` : ''}
-								>
+								<Link href={link.href} key={link.href} target={link.target}>
 									{link.label}
-									{link.label === 'Feedback' && (
+									{link.target === '_blank' && (
 										<ArrowTopRightOnSquareIcon width={14} height={14} />
 									)}
 								</Link>
@@ -154,10 +148,10 @@ const Header: React.FC = () => {
 									href={menuItem.href}
 									key={menuItem.label}
 									className={styles.burgerMenu_link}
-									target={menuItem.label === 'Feedback' ? `_blank` : ''}
+									target={menuItem.target}
 								>
 									{menuItem.label}
-									{menuItem.label === 'Feedback' && (
+									{menuItem.target === '_blank' && (
 										<ArrowTopRightOnSquareIcon width={14} height={14} />
 									)}
 								</Link>
@@ -182,15 +176,15 @@ const Header: React.FC = () => {
 							isBurgerMenuOpen={isBurgerMenuOpen}
 							closeBurgerMenu={closeBurgerMenu}
 						>
-							{links.map((links) => (
+							{links.map((link) => (
 								<Link
-									href={links.href}
-									key={links.label}
+									href={link.href}
+									key={link.label}
 									className={styles.burgerMenu_link}
-									target={links.label === 'Feedback' ? `_blank` : ''}
+									target={link.target}
 								>
-									{links.label}
-									{links.label === 'Feedback' && (
+									{link.label}
+									{link.target === '_blank' && (
 										<ArrowTopRightOnSquareIcon width={14} height={14} />
 									)}
 								</Link>
