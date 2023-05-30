@@ -110,7 +110,6 @@ const SlugPage: NextPage<SlugPageProps> = ({
 		() => new Date(`${month}-${day}-${year}`),
 		[day, month, year]
 	);
-	console.log('date', date);
 
 	const options = useMemo(
 		() => ({
@@ -125,7 +124,6 @@ const SlugPage: NextPage<SlugPageProps> = ({
 		() => date.toLocaleDateString('en-US', options),
 		[date, options]
 	);
-	console.log('formattedDate', formattedDate);
 
 	const pathname = usePathname();
 
