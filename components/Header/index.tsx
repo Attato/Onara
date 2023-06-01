@@ -93,7 +93,6 @@ const Header: React.FC = () => {
 										/>
 									</React.Fragment>
 								}
-								positionAbsolute={true}
 							>
 								{options.map((option) => (
 									<Link
