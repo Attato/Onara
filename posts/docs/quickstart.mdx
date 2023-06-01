@@ -1,15 +1,85 @@
 ---
 id: 1
 title: Quickstart
-lastUpdated: 25-05-2023
+lastUpdated: 30-05-2023
 readingTime: 1 min
 category: Overview
 ---
 
 # Quickstart
 
-Welcome to the documentation for Onara! This documentation serves as a comprehensive guide to help you understand and effectively use our project.
+This section details how to get started in onara.
 
-We hope that this documentation will serve as a valuable resource for you as you explore and utilize our project. If you have questions about anything related to Onara, youre always welcome to ask our community on [GitHub Discussions](https://github.com/Attato/Onara/discussions).
+## Installation
 
-Happy exploring and using Onara!
+Clone Onara app from our official repository <a href="https://github.com/Attato/Onara" target="_blank">here.</a>
+
+Or use the command:
+
+<CodeBlock language="bash" code={`git clone https://github.com/Attato/Onara.git`} showLineNumbers={false}/>
+
+Then type this code into the console to install all Onara dependencies:
+
+<CodeBlock language="shell" code={`npm install`} showLineNumbers={false}/>
+
+
+You can learn more about project dependencies in the Contributing section.
+
+## Launching
+
+<CodeBlock language="shell" code={`npm run dev`} showLineNumbers={false}/>
+
+Type this code in the console to launch the Onara application locally.
+
+## File structure
+
+<CodeBlock language="file structure" code={
+`├── components -> react components
+│   ├── _Templates -> reused templates of react components
+│   ├── Alert
+│   ├── BurgerMenu
+│   ├── ...
+│   
+├── data -> small data for pages and components
+│   ├── components
+|   |   ├── ...
+│   ├── pages
+|       ├── ...
+|       
+├── hooks -> react hooks
+│   ├── useDisableScroll -> disables scrolling on the page, used in the BurgerMenu
+│   ├── useScroll -> scrolls the page up and indicates the current scroll position in pixels
+│   
+├── pages
+│   ├── [username] -> user profile and related pages
+│   |   ├── ...
+│   ├── 404
+│   ├── api
+│   ├── changelog
+|   ├── docs
+│   ├── _app.tsx -> page initialization component
+|   ├── index.tsx -> homepage of an unauthorized user
+|
+├── posts -> mdx files
+│   ├── changelog
+│   ├── docs
+|
+├── public -> pictures, videos, illustrations
+│   ├── icons
+│   ├── illustrations
+│   ├── icon.svg
+│   ├── manifest.json
+|
+├── .env -> your credentials and IDs
+├── .eslintrc.json
+├── .gitignore
+├── .prettierignore -> used in mdx files
+├── LICENSE -> MIT
+├── next.config.js -> configuration file for projects Next.js
+├── package.json
+├── README.md
+└── tsconfig.json -> configuration file for projects Typescript
+`
+} 
+showLineNumbers={false}
+/>
