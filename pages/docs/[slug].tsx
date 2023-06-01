@@ -14,7 +14,7 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXProvider } from '@mdx-js/react';
 
 import { ChevronRightIcon } from '@heroicons/react/24/solid';
-import SideBar from '@/components/Sidebar';
+import MdxSidebar from '@/components/MdxSidebar';
 import BurgerMenu from '@/components/BurgerMenu';
 import NavLinks from '@/components/NavLinks';
 
@@ -195,7 +195,7 @@ const SlugPage: NextPage<SlugPageProps> = ({
 				</div>
 				<div className="main">
 					<div className={styles.slug}>
-						<SideBar posts={allPosts} />
+						<MdxSidebar posts={allPosts} />
 
 						<div className={styles.page_content}>
 							<div className={styles.time_info}>
