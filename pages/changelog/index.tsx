@@ -125,15 +125,12 @@ const getFormattedDate = (fileName: string) => {
 	const isToday = today.toLocaleDateString('en-US', options) === formattedDate;
 
 	const diffTime = Math.abs(today.getTime() - date.getTime());
-	let diffDays = Math.ceil(
-		(diffTime - today.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24)
-	);
+	const diffDays =
+		Math.ceil(
+			(diffTime - today.getTimezoneOffset() * 60 * 1000) / (1000 * 60 * 60 * 24)
+		) - 1;
 
-	if (diffDays > 0) {
-		diffDays -= today.getDate() > date.getDate() ? 1 : 0;
-	}
-
-	if (diffDays < 1) {
+	if (diffDays === 0) {
 		if (isToday) {
 			return { formattedDate, isToday: true, diffDays };
 		}

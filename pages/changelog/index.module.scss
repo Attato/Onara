@@ -86,8 +86,7 @@
 			.date {
 				position: sticky;
 				top: 90px;
-				width: 100%;
-				max-width: 232px;
+				min-width: 232px;
 				height: fit-content;
 				display: flex;
 				flex-direction: column;
@@ -106,17 +105,25 @@
 			.details {
 				img {
 					width: 100%;
-					height: auto;
+					height: fit-content;
 					max-height: 376px;
 					border-radius: 10px;
 					user-select: none;
 				}
 
+				h1 {
+					margin-top: 48px;
+				}
+
 				h2 {
 					font-size: 24px;
 					font-weight: 600;
-					margin-top: 48px;
+					margin-top: 32px;
 					color: var(--color-primary);
+				}
+
+				h3 {
+					margin-top: 24px;
 				}
 
 				p {
