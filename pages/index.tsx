@@ -25,6 +25,17 @@ const Home: NextPage = () => {
 	const { status } = useSession();
 	const { scrollToTop } = useScroll();
 
+	const textAnimation = {
+		hidden: {
+			y: 100,
+			opacity: 0,
+		},
+		visible: {
+			y: 0,
+			opacity: 1,
+		},
+	};
+
 	return (
 		<>
 			<Head>
@@ -38,13 +49,9 @@ const Home: NextPage = () => {
 
 			{status === 'unauthenticated' && (
 				<React.Fragment>
-					<motion.main className={styles.masthead}>
-						<motion.div
-							className={styles.masthead_content}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-						>
-							<h1>Imagine perfect way to administer your repositories.</h1>
+					<main className={styles.masthead}>
+						<div className={styles.masthead_content}>
+							<h1>Imagine the perfect way to administer your repositories.</h1>
 
 							<p>
 								Extend the capabilities of your Github and Gitlab accounts by
@@ -78,11 +85,21 @@ const Home: NextPage = () => {
 								className={styles.background_image}
 								alt="background"
 							/>
-						</motion.div>
-					</motion.main>
+						</div>
+					</main>
 
-					<motion.div className={styles.container_primary}>
-						<div className={styles.content}>
+					<motion.div
+						className={styles.container_primary}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.4 }}
+					>
+						<motion.div
+							className={styles.content}
+							variants={textAnimation}
+							animate={{ y: 100 }}
+							transition={{ ease: 'easeInOut', duration: 0.5 }}
+						>
 							<Image
 								src="/illustrations/section_1.svg"
 								width={560}
@@ -98,10 +115,20 @@ const Home: NextPage = () => {
 									from your GitHub or Gitlab repositories.
 								</p>
 							</div>
-						</div>
+						</motion.div>
 					</motion.div>
-					<motion.div className={styles.container_secondary}>
-						<div className={styles.content}>
+					<motion.div
+						className={styles.container_secondary}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.4 }}
+					>
+						<motion.div
+							className={styles.content}
+							variants={textAnimation}
+							animate={{ y: 100 }}
+							transition={{ ease: 'easeInOut', duration: 0.5 }}
+						>
 							<div className={styles.description}>
 								<h2>Team up</h2>
 								<p>
@@ -117,10 +144,20 @@ const Home: NextPage = () => {
 								className={styles.illustration}
 								alt="container image"
 							></Image>
-						</div>
+						</motion.div>
 					</motion.div>
-					<motion.div className={styles.container_primary}>
-						<div className={styles.content}>
+					<motion.div
+						className={styles.container_primary}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.4 }}
+					>
+						<motion.div
+							className={styles.content}
+							variants={textAnimation}
+							animate={{ y: 100 }}
+							transition={{ ease: 'easeInOut', duration: 0.5 }}
+						>
 							<Image
 								src="/illustrations/section_3.svg"
 								width={560}
@@ -135,10 +172,20 @@ const Home: NextPage = () => {
 									fostering seamless collaboration.
 								</p>
 							</div>
-						</div>
+						</motion.div>
 					</motion.div>
-					<motion.div className={styles.pre_footer}>
-						<div className={styles.content}>
+					<motion.div
+						className={styles.pre_footer}
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.4 }}
+					>
+						<motion.div
+							className={styles.content}
+							variants={textAnimation}
+							animate={{ y: 100 }}
+							transition={{ ease: 'easeInOut', duration: 0.5 }}
+						>
 							<div className={styles.description}>
 								<h2>Reliable platform for collective decision</h2>
 								<p>
@@ -172,7 +219,7 @@ const Home: NextPage = () => {
 									}
 								/>
 							</div>
-						</div>
+						</motion.div>
 					</motion.div>
 				</React.Fragment>
 			)}
