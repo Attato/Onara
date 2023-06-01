@@ -69,10 +69,11 @@
 
 		.background_image {
 			position: absolute;
-			width: 100%;
+			max-width: 100%;
+			width: auto;
+			height: auto;
 			z-index: -1;
 			bottom: 0;
-			height: auto;
 		}
 	}
 }

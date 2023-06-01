@@ -83,6 +83,7 @@ const Home: NextPage = () => {
 								width={600}
 								height={300}
 								className={styles.background_image}
+								priority={true}
 								alt="background"
 							/>
 						</div>
