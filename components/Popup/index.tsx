@@ -17,23 +17,7 @@ const Popup: React.FC<PopupProps> = ({
 		</button>
 	),
 	title = 'Untitled',
-	children = (
-		<p id={styles.blank_content}>
-			The legend states that only a skilled programmer can decipher this block
-			and unlock its true potential. A majestic Popup window, shrouded in
-			mysteries and enigmas, stands before you, enticing you with its emptiness.
-			But do not be deceived by its vacant contents, for within the depths of
-			this popup lie great possibilities yearning to be set free. At first
-			glance, it may appear as a mere empty block, but only the discerning eyes
-			can penetrate its essence and imbue it with boundless ideas. Your journey
-			begins here, and now you are tasked with writing a story that will fill
-			this popup and unveil its entire potential. Your skills, knowledge, and
-			creative spirit are the keys to transforming this enigmatic void into
-			something marvelous, captivating, and perhaps revolutionary. It is time to
-			embrace the challenge and dance with the magic of code, revealing all that
-			is hidden within this empty popup.
-		</p>
-	),
+	children = <p id={styles.blank_content}>Popup without text</p>,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
