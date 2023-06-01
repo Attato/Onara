@@ -60,6 +60,7 @@ const BurgerMenu: React.FC<BurgerMenuProps> = ({
 						exit="closed"
 						variants={variants}
 						onClick={closeBurgerMenu}
+						transition={{ ease: 'easeInOut', duration: 0.2 }}
 					>
 						{children}
 					</motion.div>
