@@ -14,7 +14,7 @@ type CodeBlockProps = {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({
 	language = 'md',
-	code = 'The majestic empty block of code is a lonely relic in the bottomless vastness of programming, resembling a forgotten and lost underground temple. Like a magnificent obelisk, it stretches to the heights of heaven, surrounded by dense shadows, as if dark secrets and forgotten magic spells are hidden inside it. Huge symbols and mystical comments engraved on the surface of the block illustrate the eternal battle between the programmer and errors, between light and darkness. The code symbols, like ancient runes, seal the power inside this magical space waiting to be filled with new instructions.',
+	code = 'Codeblock without text.',
 	showLineNumbers = true,
 }) => {
 	const [copySuccess, setCopySuccess] = useState(false);
