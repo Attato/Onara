@@ -14,9 +14,8 @@ The Alert component is a React functional component that displays an alert messa
 
 Import the Alert component and use it in your React application as follows:
 
-{' '}
-
-<CodeBlock language="tsx" code={`import Alert from '@/components/Alert';
+<CodeBlock language="tsx" code={
+`import Alert from '@/components/Alert';
 
 const MyComponent = () => {
 	return(
@@ -29,23 +28,28 @@ const MyComponent = () => {
 	); 
 };
 
-export default MyComponent;`} />
+export default MyComponent;`
+} />
 
 ## Props
 The Alert component accepts the following props:
 
 
-<CodeBlock language="tsx" code={`export type AlertType = 'warning' | 'attention' | 'success' | null;
+<CodeBlock language="tsx" code={
+`export type AlertType = 'warning' | 'attention' | 'success' | null;
 
 type AlertProps = {
 	type?: AlertType;
 	text?: string;
-};`} />
+};`
+} />
 
-<CodeBlock language="tsx" code={`| Prop 	| Type           	| Default Value      	| Description               	|
+<CodeBlock language="md" code={
+`| Prop 	| Type           	| Default Value      	| Description               	|
 |------	|----------------	|--------------------	|---------------------------	|
 | type 	| string \| null 	| attention          	| The type of the alert.    	|
-| text 	| string         	| Alert without text 	| The content of the alert. 	|;`} />
+| text 	| string         	| Alert without text 	| The content of the alert. 	|`
+} />
 
 ## Examples
 

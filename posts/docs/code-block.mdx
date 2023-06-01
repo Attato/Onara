@@ -14,9 +14,8 @@ The CodeBlock component is a reusable React component that displays syntax-highl
 
 Import the CodeBlock component and use it in your React application as follows:
 
-{' '}
-
-<CodeBlock language="tsx" code={`import CodeBlock from '@/components/CodeBlock';
+<CodeBlock language="tsx" code={
+`import CodeBlock from '@/components/CodeBlock';
 
 const MyComponent = () => {
 	return(
@@ -36,10 +35,11 @@ What you see above is the CodeBlock component. Here is the result you will get i
 The CodeBlock component accepts the following props:
 
 <CodeBlock language="md" code={
-`| Prop     	| Type   	| Default Value                   	| Description                    	|
-|----------	|--------	|---------------------------------	|--------------------------------	|
-| language 	| string 	| md                              	| The language of the codeblock. 	|
-| code     	| string 	| The majestic empty block of ... 	| The content of the codeblock.  	|`} />
+`| Prop            	| Type    	| Default Value             	| Description                                                     	|
+|-----------------	|---------	|---------------------------	|-----------------------------------------------------------------	|
+| language        	| string  	| 'md'                      	| The language of the codeblock.                                  	|
+| code            	| string  	| 'Codeblock without text.' 	| The content of the codeblock.                                   	|
+| showLineNumbers 	| boolean 	| true                      	| Condition that determines whether to show line numbering or not 	|`} />
      
 If you do not pass any values to the component and use it, as in this example:
 
