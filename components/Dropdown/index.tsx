@@ -1,17 +1,25 @@
 import React, { useState, useRef, useEffect } from 'react';
+
 import { motion, AnimatePresence } from 'framer-motion';
+
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
+
 import styles from './index.module.scss';
 
 type DropdownProps = {
 	buttonContent: React.ReactNode;
 	children: React.ReactNode;
-	positionAbsolute?: boolean;
 };
 
 const Dropdown: React.FC<DropdownProps> = ({
-	buttonContent = 'Empty',
-	children,
+	buttonContent = 'Dropdown',
+	children = (
+		<div className={styles.links}>
+			<div>One</div>
+			<div>Two</div>
+			<div>Three</div>
+		</div>
+	),
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
