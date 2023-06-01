@@ -25,7 +25,9 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 					content="Onara is the perfect way to administer your repositories. Administer your application easily and efficiently."
 				/>
 				<link rel="icon" href="/icon.svg" />
+				<link rel="manifest" href="/manifest.json" />
 			</Head>
+
 			<div className={styles.repositories}>
 				<div className={styles.repositories_content}>
 					<Sidebar username={profile?.name} />
