@@ -68,6 +68,7 @@ const Popup: React.FC<PopupProps> = ({
 							exit="hidden"
 							variants={popupVariants}
 							onClick={handleOverlayClick}
+							transition={{ ease: 'easeInOut', duration: 0.3 }}
 						>
 							<div className={styles.title}>
 								<h2>{title}</h2>
