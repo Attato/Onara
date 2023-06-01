@@ -2,7 +2,7 @@ import {
 	ExclamationCircleIcon,
 	ExclamationTriangleIcon,
 	CheckCircleIcon,
-} from '@heroicons/react/24/solid';
+} from '@heroicons/react/24/outline';
 
 import styles from './index.module.scss';
 
