@@ -1,0 +1,13 @@
+.friends {
+	background-color: var(--background-primary);
+
+	.friends_content {
+		display: flex;
+		gap: 24px;
+		max-width: (var(--page-width));
+		min-height: calc(100vh - var(--header-height));
+		margin: auto;
+		padding: 20px;
+		color: var(--color-primary);
+	}
+}
