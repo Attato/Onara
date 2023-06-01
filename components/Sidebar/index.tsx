@@ -1,47 +1,68 @@
 import Link from 'next/link';
+
 import { usePathname } from 'next/navigation';
 
-import { Post } from '@/pages/docs/[slug]';
+import {
+	UsersIcon,
+	UserCircleIcon,
+	UserGroupIcon,
+	CloudIcon,
+} from '@heroicons/react/24/outline';
 
 import styles from './index.module.scss';
 
-interface SidebarProps {
-	posts: Post[];
+interface LinkItem {
+	image: React.ReactNode;
+	label: string;
+	href: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ posts }) => {
+interface SidebarProps {
+	username: LinkItem[];
+}
+
+const Sidebar = ({ username }: SidebarProps) => {
 	const pathname = usePathname();
 
-	const sortedPosts = [...posts].sort(
-		(a, b) => a.frontMatter.id - b.frontMatter.id
-	);
-
-	const categories = sortedPosts.reduce((categories, post) => {
-		const category = post.frontMatter.category;
-		const isActive = pathname === `/docs/${post.slug}`;
-
-		categories[category] = categories[category] || [];
-		categories[category].push(
-			<Link
-				key={post.slug}
-				href={`/docs/${post.slug}`}
-				className={isActive ? styles.activeLink : ''}
-			>
-				{post.frontMatter.title}
-			</Link>
-		);
-
-		return categories;
-	}, {} as { [category: string]: JSX.Element[] });
+	const links = [
+		{
+			image: <UserCircleIcon width={16} height={16} />,
+			label: 'Profile',
+			href: '/',
+		},
+		{
+			image: <CloudIcon width={16} height={16} />,
+			label: 'Repositories',
+			href: `/${username}/repositories`,
+		},
+		{
+			image: <UsersIcon width={16} height={16} />,
+			label: 'Friends',
+			href: `/${username}/friends`,
+		},
+		{
+			image: <UserGroupIcon width={16} height={16} />,
+			label: 'Groups',
+			href: `/${username}/groups`,
+		},
+	];
 
 	return (
 		<div className={styles.sidebar}>
-			{Object.entries(categories).map(([category, links]) => (
-				<div key={category} className={styles.category}>
-					<h4>{category}</h4>
-					{links}
-				</div>
-			))}
+			{links.map((link: LinkItem) => {
+				return (
+					<Link
+						href={link.href}
+						className={
+							pathname === `${link.href}` ? styles.active_link : styles.link
+						}
+						key={link.label}
+					>
+						{link.image}
+						{link.label}
+					</Link>
+				);
+			})}
 		</div>
 	);
 };
