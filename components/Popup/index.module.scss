@@ -1,6 +1,8 @@
 .popup_opener_button {
 	background-color: transparent;
 	height: fit-content;
+	max-width: 220px;
+	width: inherit;
 
 	#blank_button {
 		background-color: var(--background-secondary);
