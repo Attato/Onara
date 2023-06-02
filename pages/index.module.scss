@@ -1,9 +1,5 @@
 .masthead {
-	background: linear-gradient(
-		45deg,
-		var(--background-primary),
-		var(--background-secondary-hover)
-	);
+	background-color: #404eed;
 	position: relative;
 	z-index: 1;
 
@@ -31,39 +27,24 @@
 
 		.masthead_buttons {
 			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
 			gap: 24px;
+			width: 100%;
 
-			#language_btn,
-			#get_started_btn {
+			.button {
 				display: flex;
 				align-items: center;
+				justify-content: center;
 				gap: 8px;
-				padding: 0px 16px;
-				border-radius: 20px;
-				color: var(--color-primary);
-				user-select: none;
-				width: 100%;
-			}
-
-			#language_btn {
 				background-color: var(--background-primary);
 				border: 1px solid var(--border-color);
-				width: auto;
+				width: 100%;
+				max-width: 220px;
+				padding: 8px 16px;
+				border-radius: 20px;
 				transition: all 0.3s ease;
-
-				svg {
-					color: var(--accent);
-				}
-
-				&:hover {
-					background-color: var(--background-secondary);
-					border-color: var(--border-color-hover);
-				}
-			}
-
-			#get_started_btn {
-				background: linear-gradient(to right, #455eb5, #673fd7);
-				transition: all 0.3s ease;
+				user-select: none;
 			}
 		}
 

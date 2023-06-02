@@ -37,7 +37,7 @@ const Home: NextPage = () => {
 	};
 
 	return (
-		<>
+		<React.Fragment>
 			<Head>
 				<title>Onara</title>
 				<meta
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
 
 							<div className={styles.masthead_buttons}>
 								<button
-									id={styles.language_btn}
+									className={styles.button}
 									onClick={() => alert('This button is not working yet')}
 								>
 									Language
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
 								<AuthorizationPopup
 									title="Log in"
 									buttonContent={
-										<button id={styles.get_started_btn}>
+										<button className={styles.button}>
 											Get Started
 											<RocketLaunchIcon width={16} height={16} />
 										</button>
@@ -225,7 +225,7 @@ const Home: NextPage = () => {
 					</motion.div>
 				</React.Fragment>
 			)}
-		</>
+		</React.Fragment>
 	);
 };
 
