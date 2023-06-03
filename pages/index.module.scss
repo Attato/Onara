@@ -46,6 +46,21 @@
 				transition: all 0.3s ease;
 				user-select: none;
 			}
+
+			.option {
+				background-color: transparent;
+				border-radius: 0;
+				transition: all 0.3s ease;
+				border-bottom: 1px solid var(--border-color-lighter);
+
+				&:hover {
+					background-color: var(--background-secondary-hover);
+				}
+
+				&:last-child {
+					border-bottom: 0;
+				}
+			}
 		}
 
 		.background_image {

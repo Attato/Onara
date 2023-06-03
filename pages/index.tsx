@@ -3,7 +3,6 @@ import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Image from 'next/image';
-
 import { motion } from 'framer-motion';
 
 import { useSession, getSession } from 'next-auth/react';
@@ -17,7 +16,12 @@ import {
 
 import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
+import Dropdown from '@/components/Dropdown';
+
 import useScroll from '@/hooks/useScroll';
+
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import styles from './index.module.scss';
 
@@ -36,6 +40,13 @@ const Home: NextPage = () => {
 		},
 	};
 
+	const { t, i18n } = useTranslation();
+
+	const handleChangeLng = (lng: string) => {
+		i18n.changeLanguage(lng);
+		localStorage.setItem('language', lng);
+	};
+
 	return (
 		<React.Fragment>
 			<Head>
@@ -52,27 +63,38 @@ const Home: NextPage = () => {
 				<React.Fragment>
 					<main className={styles.masthead}>
 						<div className={styles.masthead_content}>
-							<h1>Imagine the perfect way to administer your repositories.</h1>
+							<h1>{t('homepage:masthead.title')}</h1>
 
-							<p>
-								Extend the capabilities of your Github and Gitlab accounts by
-								adding ONARA features to them.
-							</p>
+							<p>{t('homepage:masthead.description')}</p>
 
 							<div className={styles.masthead_buttons}>
-								<button
-									className={styles.button}
-									onClick={() => alert('This button is not working yet')}
+								<Dropdown
+									buttonContent={
+										<button className={styles.button}>
+											{t('common:buttons.language')}
+											<LanguageIcon width={16} height={16} />
+										</button>
+									}
 								>
-									Language
-									<LanguageIcon width={16} height={16} />
-								</button>
+									<button
+										onClick={() => handleChangeLng('en')}
+										className={styles.option}
+									>
+										{t('common:languages.english')}
+									</button>
+									<button
+										onClick={() => handleChangeLng('ru')}
+										className={styles.option}
+									>
+										{t('common:languages.russian')}
+									</button>
+								</Dropdown>
 
 								<AuthorizationPopup
 									title="Log in"
 									buttonContent={
 										<button className={styles.button}>
-											Get Started
+											{t('common:buttons.getStarted')}
 											<RocketLaunchIcon width={16} height={16} />
 										</button>
 									}
@@ -111,11 +133,8 @@ const Home: NextPage = () => {
 								priority={true}
 							></Image>
 							<div className={styles.description}>
-								<h2>Invite your friends</h2>
-								<p>
-									Invite your friends to the Onara app or easily import them
-									from your GitHub or Gitlab repositories.
-								</p>
+								<h2>{t('homepage:section1.title')}</h2>
+								<p>{t('homepage:section1.description')}</p>
 							</div>
 						</motion.div>
 					</motion.div>
@@ -132,11 +151,8 @@ const Home: NextPage = () => {
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
 							<div className={styles.description}>
-								<h2>Team up</h2>
-								<p>
-									Create groups and assign roles to members, providing a good
-									collaborative development experience.
-								</p>
+								<h2>{t('homepage:section2.title')}</h2>
+								<p>{t('homepage:section2.description')}</p>
 							</div>
 
 							<Image
@@ -168,11 +184,8 @@ const Home: NextPage = () => {
 								alt="container image"
 							></Image>
 							<div className={styles.description}>
-								<h2>Teamwork</h2>
-								<p>
-									Form groups and allocate specific roles to each member,
-									fostering seamless collaboration.
-								</p>
+								<h2>{t('homepage:section3.title')}</h2>
+								<p>{t('homepage:section3.description')}</p>
 							</div>
 						</motion.div>
 					</motion.div>
@@ -189,13 +202,8 @@ const Home: NextPage = () => {
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
 							<div className={styles.description}>
-								<h2>Reliable platform for collective decision</h2>
-								<p>
-									Our platform provides a reliable and effective solution for
-									collective decision-making. We enable individuals from diverse
-									experiences to connect and contribute their unique
-									perspectives.
-								</p>
+								<h2>{t('homepage:preFooter.title')}</h2>
+								<p>{t('homepage:preFooter.description')}</p>
 							</div>
 
 							<Image
@@ -208,14 +216,14 @@ const Home: NextPage = () => {
 
 							<div className={styles.buttons}>
 								<button id={styles.back_to_top_btn} onClick={scrollToTop}>
-									Back to top
+									{t('common:buttons.backToTop')}
 									<ArrowUpIcon width={16} height={16} strokeWidth={2} />
 								</button>
 								<AuthorizationPopup
 									title="Log in"
 									buttonContent={
 										<button id={styles.get_started_btn}>
-											Get Started
+											{t('common:buttons.getStarted')}
 											<RocketLaunchIcon width={16} height={16} />
 										</button>
 									}
@@ -229,22 +237,29 @@ const Home: NextPage = () => {
 	);
 };
 
-export const getServerSideProps = async (
-	context: GetServerSidePropsContext
-) => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
 	const session = await getSession(context);
 
 	if (session) {
 		return {
 			redirect: {
 				destination: `/${session.user?.name}`,
+				permanent: false,
 			},
 		};
 	}
 
+	const translations = await serverSideTranslations(context.locale!, [
+		'common',
+		'homepage',
+	]);
+
 	return {
-		props: { session },
+		props: {
+			...translations,
+			session,
+		},
 	};
-};
+}
 
 export default Home;
