@@ -1,0 +1,22 @@
+{
+	"masthead": {
+		"title": "Imagine the perfect way to administer your repositories.",
+		"description": "Extend the capabilities of your Github and Gitlab accounts by adding ONARA features to them."
+	},
+	"section1": {
+		"title": "Invite your friends",
+		"description": "Invite your friends to the Onara app or easily import them from your GitHub or Gitlab repositories."
+	},
+	"section2": {
+		"title": "Team up",
+		"description": "Create groups and assign roles to members, providing a good collaborative development experience."
+	},
+	"section3": {
+		"title": "Teamwork",
+		"description": "Assign several reviewers to the pull request, as well as indicate the number of confirmations of consent to accept the request."
+	},
+	"preFooter": {
+		"title": "Reliable platform for collective decision",
+		"description": "Our platform provides a reliable and effective solution for collective decision-making. We enable individuals from diverse experiences to connect and contribute their unique perspectives."
+	}
+}

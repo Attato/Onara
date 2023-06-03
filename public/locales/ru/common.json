@@ -1,0 +1,11 @@
+{
+	"languages": {
+		"english": "Английский",
+		"russian": "Русский"
+	},
+	"buttons": {
+		"language": "Язык",
+		"getStarted": "Начать",
+		"backToTop": "Наверх"
+	}
+}
