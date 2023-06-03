@@ -2,7 +2,10 @@
 	position: relative;
 	z-index: 7;
 	color: var(--color-primary);
-	width: 100%;
+	max-width: 220px;
+	width: inherit;
+	height: fit-content;
+	cursor: pointer;
 
 	&:focus-visible {
 		outline: none;

@@ -46,10 +46,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 
 	return (
 		<div ref={dropdownRef} className={styles.dropdown}>
-			<motion.button onClick={toggleDropdown} className={styles.dropdown_btn}>
+			<div onClick={toggleDropdown} className={styles.dropdown_btn}>
 				{buttonContent}
-				<ChevronDownIcon width={16} height={16} strokeWidth={1.5} />
-			</motion.button>
+			</div>
 
 			<AnimatePresence>
 				{isOpen && (
