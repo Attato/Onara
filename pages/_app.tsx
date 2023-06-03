@@ -1,20 +1,22 @@
 import React from 'react';
 
 import type { AppProps } from 'next/app';
-// import { Analytics } from '@vercel/analytics/react';
+import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
+import { appWithTranslation } from 'next-i18next';
+
 import '@/styles/import.scss';
 
 console.info('Have a great day! 🌳🐇🌻');
 
-export default function MyApp({
+const MyApp: NextPage<AppProps> = ({
 	Component,
 	pageProps: { session, ...pageProps },
-}: AppProps) {
+}) => {
 	return (
 		<div className="page_container" translate="no">
 			<SessionProvider session={session}>
@@ -22,7 +24,8 @@ export default function MyApp({
 				<Component {...pageProps} />
 				<Footer />
 			</SessionProvider>
-			{/* <Analytics /> */}
 		</div>
 	);
-}
+};
+
+export default appWithTranslation(MyApp);
