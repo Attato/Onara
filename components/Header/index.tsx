@@ -5,9 +5,6 @@ import Image from 'next/image';
 
 import { useSession, signOut } from 'next-auth/react';
 
-import BurgerMenu from '@/components/BurgerMenu';
-import Dropdown from '@/components/Dropdown';
-
 import {
 	ArrowTopRightOnSquareIcon,
 	ArrowRightOnRectangleIcon,
@@ -17,6 +14,8 @@ import { links } from '@/data/components/header/links';
 import { options } from '@/data/components/header/options';
 
 import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
+import BurgerMenu from '@/components/BurgerMenu';
+import Dropdown from '@/components/Dropdown';
 
 import styles from './index.module.scss';
 
