@@ -249,7 +249,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 		};
 	}
 
-	const translations = await serverSideTranslations(context.locale!, [
+	const translations = await serverSideTranslations(context.locale || 'en', [
 		'common',
 		'homepage',
 	]);
