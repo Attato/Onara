@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-import { ChevronDownIcon } from '@heroicons/react/24/solid';
-
 import styles from './index.module.scss';
 
 type DropdownProps = {
