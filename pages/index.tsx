@@ -255,8 +255,8 @@ export const getServerSideProps = async (
 		props: {
 			session,
 			...(await serverSideTranslations(context.locale || 'en', [
-				'homepage',
 				'common',
+				'homepage',
 			])),
 		},
 	};
