@@ -237,35 +237,27 @@ const Home: NextPage = () => {
 	);
 };
 
-// export async function getServerSideProps(context: GetServerSidePropsContext) {
-// 	const session = await getSession(context);
+export const getServerSideProps = async (
+	context: GetServerSidePropsContext
+) => {
+	const session = await getSession(context);
 
-// 	if (session) {
-// 		return {
-// 			redirect: {
-// 				destination: `/${session.user?.name}`,
-// 				permanent: false,
-// 			},
-// 		};
-// 	}
+	if (session) {
+		return {
+			redirect: {
+				destination: `/${session.user?.name}`,
+				permanent: false,
+			},
+		};
+	}
 
-// 	const translations = await serverSideTranslations(context.locale || 'en', [
-// 		'common',
-// 		'homepage',
-// 	]);
-
-// 	return {
-// 		props: {
-// 			...translations,
-// 			session,
-// 		},
-// 	};
-// }
-
-export const getStaticProps = async ({ locale }: { locale: string }) => {
 	return {
 		props: {
-			...(await serverSideTranslations(locale, ['common', 'homepage'])),
+			session,
+			...(await serverSideTranslations(context.locale || 'en', [
+				'homepage',
+				'common',
+			])),
 		},
 	};
 };
