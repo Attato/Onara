@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import { useSession, getSession } from 'next-auth/react';
@@ -13,6 +14,8 @@ import {
 	ArrowUpIcon,
 	RocketLaunchIcon,
 } from '@heroicons/react/24/outline';
+
+import { useRouter } from 'next/router';
 
 import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 
@@ -40,11 +43,15 @@ const Home: NextPage = () => {
 		},
 	};
 
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
-	const handleChangeLng = (lng: string) => {
-		i18n.changeLanguage(lng);
-		localStorage.setItem('language', lng);
+	const router = useRouter();
+	const { locales, locale: activeLocale } = router;
+
+	const otherLocales = locales?.filter((locale) => locale !== activeLocale);
+
+	const changeLocale = (locale: string) => {
+		document.cookie = `NEXT_LOCALE=${locale}`;
 	};
 
 	return (
@@ -76,18 +83,22 @@ const Home: NextPage = () => {
 										</button>
 									}
 								>
-									<button
-										onClick={() => handleChangeLng('en')}
-										className={styles.option}
-									>
-										{t('common:languages.english')}
-									</button>
-									<button
-										onClick={() => handleChangeLng('ru')}
-										className={styles.option}
-									>
-										{t('common:languages.russian')}
-									</button>
+									{otherLocales?.map((locale, id) => {
+										const { pathname, query } = router;
+
+										return (
+											<Link
+												href={{ pathname, query }}
+												key={id}
+												locale={locale}
+												onClick={() => changeLocale(locale)}
+												className={styles.option}
+											>
+												{locale === 'en' && 'Английский'}
+												{locale === 'ru' && 'Russian'}
+											</Link>
+										);
+									})}
 								</Dropdown>
 
 								<AuthorizationPopup

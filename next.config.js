@@ -24,6 +24,14 @@ const nextConfig = {
 	},
 
 	i18n,
+	async rewrites() {
+		return [
+			{
+				source: '/:locale(en|ru)/:path*',
+				destination: '/:path*',
+			},
+		];
+	},
 };
 
 module.exports = nextConfig;

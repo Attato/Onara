@@ -48,17 +48,22 @@
 			}
 
 			.option {
-				background-color: transparent;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 8px;
+				width: 100%;
+				max-width: 220px;
+				padding: 8px 16px;
+				transition: all 0.3s ease;
+				user-select: none;
 				border-radius: 0;
 				transition: all 0.3s ease;
 				border-bottom: 1px solid var(--border-color-lighter);
+				font-size: 16px;
 
 				&:hover {
 					background-color: var(--background-secondary-hover);
-				}
-
-				&:last-child {
-					border-bottom: 0;
 				}
 			}
 		}
