@@ -3,7 +3,7 @@
 	flex-direction: column;
 	min-width: 256px;
 	max-width: 256px;
-	max-height: calc(100vh - var(--header-height));
+	height: fit-content;
 	padding: 20px;
 	overflow-y: auto;
 	position: sticky;
