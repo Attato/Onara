@@ -61,10 +61,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 							features and improvements we&apos;re bringing to you. Stay up to
 							date and follow the development of our product.
 							<div className={styles.links}>
-								<Link
-									href=""
-									onClick={() => alert('This button is not working yet')}
-								>
+								<Link href="https://discord.gg/4YV3qRCYqp" target="_blank">
 									Subscribe to updates
 									<ArrowTopRightOnSquareIcon width={14} height={14} />
 								</Link>
