@@ -9,6 +9,7 @@
 	display: none;
 	height: auto;
 	width: inherit;
+	color: var(--color-primary);
 
 	&:focus-visible {
 		outline: 1px solid var(--border-color);
@@ -31,6 +32,7 @@
 	margin: auto;
 	padding: 0 24px 24px;
 	overflow: auto;
+	z-index: 11;
 }
 
 .close_content {

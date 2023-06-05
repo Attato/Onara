@@ -31,7 +31,7 @@
 			flex-wrap: wrap;
 			gap: 24px;
 			width: 100%;
-
+	
 			.button {
 				display: flex;
 				align-items: center;
@@ -45,6 +45,7 @@
 				border-radius: 20px;
 				transition: all 0.3s ease;
 				user-select: none;
+				color: var(--color-primary);
 			}
 
 			.option {
