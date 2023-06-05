@@ -28,7 +28,7 @@ const Sidebar = ({ username }: SidebarProps) => {
 		{
 			image: <UserCircleIcon width={16} height={16} />,
 			label: 'Profile',
-			href: '/',
+			href: `/${username}`,
 		},
 		{
 			image: <CloudIcon width={16} height={16} />,
