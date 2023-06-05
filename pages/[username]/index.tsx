@@ -85,11 +85,8 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 												</div>
 												<div className={styles.row}>
 													<UsersIcon width={16} height={16} />
-													<Link href={profile?.followers_url}>
-														{profile?.followers} followers
-													</Link>
-													<Link href={profile?.following_url}>
-														{profile?.following} following
+													<Link href={`/${profile.name}/friends`}>
+														friends: {profile?.followers + profile?.following}
 													</Link>
 												</div>
 											</div>
