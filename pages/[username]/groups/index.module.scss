@@ -9,5 +9,33 @@
 		margin: auto;
 		padding: 20px;
 		color: var(--color-primary);
+
+		.groups_list {
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+
+			.create {
+				display: flex;
+				gap: 24px;
+				margin-bottom: 24px;
+
+				input {
+					width: 100%;
+				}
+
+				button {
+					width: 100%;
+					max-width: 150px;
+					background-color: var(--background-primary);
+					border: 1px solid var(--border-color);
+					padding: 0 12px;
+				}
+			}
+
+			h3 {
+				margin: 32px 0;
+			}
+		}
 	}
 }
