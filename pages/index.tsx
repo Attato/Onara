@@ -46,9 +46,7 @@ const Home: NextPage = () => {
 	const { t } = useTranslation();
 
 	const router = useRouter();
-	const { locales, locale: activeLocale } = router;
-
-	const otherLocales = locales?.filter((locale) => locale !== activeLocale);
+	const { locales } = router;
 
 	const changeLocale = (locale: string) => {
 		document.cookie = `NEXT_LOCALE=${locale}`;
@@ -83,7 +81,7 @@ const Home: NextPage = () => {
 										</button>
 									}
 								>
-									{otherLocales?.map((locale, id) => {
+									{locales?.map((locale, id) => {
 										const { pathname, query } = router;
 
 										return (
@@ -94,8 +92,12 @@ const Home: NextPage = () => {
 												onClick={() => changeLocale(locale)}
 												className={styles.option}
 											>
-												{locale === 'en' && 'Английский'}
-												{locale === 'ru' && 'Russian'}
+												{locale === 'en' && (
+													<div>{t('common:languages.english')}</div>
+												)}
+												{locale === 'ru' && (
+													<div>{t('common:languages.russian')}</div>
+												)}
 											</Link>
 										);
 									})}
