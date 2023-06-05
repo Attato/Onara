@@ -1,12 +1,13 @@
 .dropdown {
 	position: relative;
-	z-index: 7;
 	color: var(--color-primary);
 	max-width: 220px;
 	width: inherit;
 	height: fit-content;
 	cursor: pointer;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	z-index: -1;
+
 	&:focus-visible {
 		outline: none;
 	}
@@ -50,6 +51,7 @@
 	border-radius: 10px;
 	font-size: 14px;
 	overflow: hidden;
+	z-index: 7;
 
 	.empty {
 		display: flex;
