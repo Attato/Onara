@@ -9,5 +9,51 @@
 		margin: auto;
 		padding: 20px;
 		color: var(--color-primary);
+
+		.repositories_list {
+			width: 100%;
+
+			.search_bar {
+				input {
+					width: 100%;
+				}
+			}
+
+			.repository_not_found,
+			.loading {
+				padding: 24px 0;
+			}
+
+			.repository {
+				padding: 24px 0;
+				display: flex;
+				gap: 20px;
+				border-bottom: 1px solid var(--border-color);
+
+				.title {
+					display: flex;
+					align-items: center;
+					gap: 20px;
+
+					a {
+						color: var(--accent);
+						font-size: 20px;
+						font-weight: 600;
+					}
+
+					span {
+						display: flex;
+						align-items: center;
+						border: 1px solid var(--border-color);
+						padding: 0 8px;
+						height: 20px;
+						border-radius: 10px;
+						text-transform: capitalize;
+						font-size: 12px;
+						color: var(--color-secondary);
+					}
+				}
+			}
+		}
 	}
 }
