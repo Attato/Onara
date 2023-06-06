@@ -96,7 +96,7 @@ const Friends: NextPage<any> = ({ profileData }) => {
 						<div className={styles.friends_find}>
 							<input
 								type="text"
-								placeholder="Search friends"
+								placeholder="Find a friend..."
 								value={searchQuery}
 								onChange={handleSearch}
 							/>
@@ -122,8 +122,8 @@ const Friends: NextPage<any> = ({ profileData }) => {
 										>
 											<Image
 												src={friend.avatar_url}
-												width={64}
-												height={64}
+												width={80}
+												height={80}
 												alt={friend.login}
 											/>
 
