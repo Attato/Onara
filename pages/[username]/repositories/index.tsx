@@ -19,9 +19,15 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [isLoading, setIsLoading] = useState(true);
 
-	useEffect(() => {
-		setProfile(profileData);
-	}, [profileData]);
+	const formatDate = (dateString: string): string => {
+		const date = new Date(dateString);
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			month: 'short',
+			day: 'numeric',
+		};
+		return date.toLocaleDateString('en-US', options);
+	};
 
 	useEffect(() => {
 		const fetchRepositories = async () => {
@@ -70,7 +76,7 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 						<div className={styles.search_bar}>
 							<input
 								type="text"
-								placeholder="Search repositories"
+								placeholder="Find a repository..."
 								value={searchTerm}
 								onChange={handleSearch}
 							/>
@@ -95,6 +101,10 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 												{repo.name}
 											</Link>
 											<span>{repo.visibility}</span>
+										</div>
+										<div className={styles.repo_info}>
+											{repo.language && <span>{repo.language}</span>}
+											<span>Updated on {formatDate(repo.updated_at)}</span>
 										</div>
 									</div>
 								);
