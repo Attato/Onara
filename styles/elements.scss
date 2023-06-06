@@ -1,11 +1,11 @@
 input {
 	border: 1px solid var(--border-color);
 	border-radius: 3px;
-	background: var(--background);
+	background: var(--background--primary);
 	outline: none;
 	height: 40px;
 	padding: 0 12px;
-	font-size: 100%;
+	font-size: 14px;
 	color: var(--color-primary);
 
 	&:focus-visible {
