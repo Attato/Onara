@@ -7,11 +7,7 @@ import Link from 'next/link';
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 
-import {
-	MapPinIcon,
-	ArrowTopRightOnSquareIcon,
-	UsersIcon,
-} from '@heroicons/react/24/outline';
+import { MapPinIcon, StarIcon } from '@heroicons/react/24/outline';
 
 import Alert from '@/components/Alert';
 import Sidebar from '@/components/Sidebar';
@@ -25,11 +21,27 @@ export interface ProfileProps {
 const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 	const { status } = useSession();
 	const [profile, setProfile] = useState<any>(profileData);
+	const [totalStars, setTotalStars] = useState<number>(0);
 
 	console.log(profile);
 
 	useEffect(() => {
-		setProfile(profileData);
+		if (profileData) {
+			const fetchTotalStars = async () => {
+				try {
+					const response = await fetch(
+						profileData.starred_url.replace('{/owner}{/repo}', '') +
+							'?per_page=1'
+					);
+					const data = await response.json();
+					setTotalStars(data.length);
+				} catch (error) {
+					console.error('Error fetching total stars:', error);
+				}
+			};
+
+			fetchTotalStars();
+		}
 	}, [profileData]);
 
 	return (
@@ -76,28 +88,19 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 											priority={true}
 										/>
 										<div className={styles.user_info}>
-											<h1>{profile?.name}</h1>
+											<h1 className={styles.username}>{profile?.name}</h1>
 											<span className={styles.description}>{profile?.bio}</span>
 											<div className={styles.user_info_rows}>
 												<div className={styles.row}>
-													<MapPinIcon width={16} height={16} />
+													<MapPinIcon width={14} height={14} />
 													{profile?.location}
 												</div>
-												<div className={styles.row}>
-													<UsersIcon width={16} height={16} />
-													<Link href={`/${profile.name}/friends`}>
-														friends: {profile?.followers + profile?.following}
-													</Link>
-												</div>
 											</div>
-											<Link
-												className={styles.github_link}
-												href={profile?.html_url}
-												target="_blank"
-											>
-												GitHub
-												<ArrowTopRightOnSquareIcon width={14} height={14} />
-											</Link>
+
+											<div className={styles.total_stars}>
+												<StarIcon width={16} height={16} />
+												{totalStars}
+											</div>
 										</div>
 									</React.Fragment>
 								)}

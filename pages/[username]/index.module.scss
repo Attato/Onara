@@ -47,9 +47,12 @@
 					justify-content: flex-end;
 					height: fit-content;
 					width: 100%;
+					color: var(--color-secondary);
+					position: relative;
 
-					h1 {
+					.username {
 						font-size: 24px;
+						color: var(--color-primary);
 					}
 
 					.description {
@@ -71,14 +74,19 @@
 						.row {
 							display: flex;
 							align-items: center;
-							gap: 8px;
+							gap: 4px;
+							font-size: 14px;
 						}
 					}
 
-					.github_link {
+					.total_stars {
 						display: flex;
-						color: var(--accent);
+						align-items: center;
 						gap: 4px;
+						font-size: 14px;
+						position: absolute;
+						top: 0;
+						right: 0;
 					}
 				}
 			}
