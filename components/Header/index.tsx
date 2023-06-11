@@ -1,44 +1,18 @@
 import React, { useState, useEffect } from 'react';
-
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { useSession, signOut } from 'next-auth/react';
-
+import { useTheme } from 'next-themes';
 import {
 	ArrowTopRightOnSquareIcon,
 	ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/solid';
 
-import { links } from '@/data/components/header/links';
 import { options } from '@/data/components/header/options';
-
-import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
 import BurgerMenu from '@/components/BurgerMenu';
 import Dropdown from '@/components/Dropdown';
 
-import styles from './index.module.scss';
-
 const Header: React.FC = () => {
-	useEffect(() => {
-		const handleScroll = () => {
-			const header = document.querySelector('header');
-
-			if (header) {
-				if (window.pageYOffset > 0) {
-					header.classList.add(styles.scrolled);
-				} else {
-					header.classList.remove(styles.scrolled);
-				}
-			}
-		};
-
-		window.addEventListener('scroll', handleScroll);
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
-
 	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState<boolean>(false);
 
 	const closeBurgerMenu = () => {
@@ -49,25 +23,43 @@ const Header: React.FC = () => {
 
 	const { data, status } = useSession();
 
+	const links = [
+		{ href: '/changelog', label: 'Changelog', target: '_self' },
+		{
+			href: 'https://opencollective.com/onara',
+			label: 'Support',
+			target: '_blank',
+		},
+		{
+			href: 'https://github.com/Attato/Onara/discussions/categories/feedback',
+			label: 'Feedback',
+			target: '_blank',
+		},
+	];
+
 	return (
-		<header className={styles.header_wrapper}>
-			<div className={styles.header}>
-				<div className={styles.header_nav_first}>
-					<Link href="/" className={styles.logo}>
-						<Image
-							src="/icon.svg"
-							width={40}
-							height={40}
-							alt="img"
-							draggable={false}
-						/>
-					</Link>
-				</div>
-				<div className={styles.header_nav_second}>
-					<div className={styles.navigation_menu}>
+		<header className="absolute z-10 w-full min-h-[64px] flex text-slate-100 select-none">
+			<div className="flex max-w-5xl w-full m-auto px-6">
+				<Link href="/" className="flex items-center justify-center">
+					<Image
+						src="/icon.svg"
+						width={40}
+						height={40}
+						alt="img"
+						draggable={false}
+					/>
+				</Link>
+
+				<div className="flex-1 flex justify-center items-center">
+					<div className="flex gap-3">
 						{links.map((link) => {
 							return (
-								<Link href={link.href} key={link.href} target={link.target}>
+								<Link
+									href={link.href}
+									key={link.href}
+									target={link.target}
+									className="flex gap-1 text-sm px-2 mt-3 font-medium max-md:hidden"
+								>
 									{link.label}
 									{link.target === '_blank' && (
 										<ArrowTopRightOnSquareIcon width={14} height={14} />
@@ -79,8 +71,8 @@ const Header: React.FC = () => {
 				</div>
 
 				{status === 'authenticated' && (
-					<div className={styles.header_nav_third}>
-						<div className={styles.dropdown}>
+					<div className="">
+						<div className="">
 							<Dropdown
 								buttonContent={
 									<React.Fragment>
@@ -97,11 +89,11 @@ const Header: React.FC = () => {
 									<Link
 										href={option.href}
 										role="menuitem"
-										className={
-											option.label === 'Sign out'
-												? styles.signout
-												: styles.option
-										}
+										// className="" ={
+										// 	option.label === 'Sign out'
+										// 		? styles.signout
+										// 		: styles.option
+										// }
 										key={option.label}
 										onClick={() => option.label === 'Sign out' && signOut()}
 									>
@@ -116,36 +108,26 @@ const Header: React.FC = () => {
 							isBurgerMenuOpen={isBurgerMenuOpen}
 							closeBurgerMenu={closeBurgerMenu}
 						>
-							<div className={styles.burgerMenu_user_wrap}>
-								{options.map(
-									(option) =>
-										option.label !== 'Sign out' && (
-											<Link
-												href={option.href}
-												role="menuitem"
-												className={styles.burgerMenu_option}
-												key={option.label}
-											>
-												<span>{option.label}</span>
-												{option.image}
-											</Link>
-										)
-								)}
-							</div>
+							{options.map(
+								(option) =>
+									option.label !== 'Sign out' && (
+										<Link href={option.href} role="menuitem" key={option.label}>
+											<span>{option.label}</span>
+											{option.image}
+										</Link>
+									)
+							)}
 
-							<button
-								onClick={() => signOut()}
-								className={styles.burgerMenu_exit_btn}
-							>
+							<button onClick={() => signOut()} className="">
 								Sign out <ArrowRightOnRectangleIcon width={16} height={16} />
 							</button>
 
-							<h4 className={styles.burgerMenu_link_title}>Pages</h4>
+							<h4 className="">Pages</h4>
 							{links.map((menuItem) => (
 								<Link
 									href={menuItem.href}
 									key={menuItem.label}
-									className={styles.burgerMenu_link}
+									className=""
 									target={menuItem.target}
 								>
 									{menuItem.label}
@@ -159,16 +141,14 @@ const Header: React.FC = () => {
 				)}
 
 				{status === 'unauthenticated' && (
-					<div className={styles.header_nav_third}>
-						<AuthorizationPopup
-							title="Log in"
-							buttonContent={
-								<button className={styles.signin}>
-									Sign in
-									<ArrowRightOnRectangleIcon width={16} height={16} />
-								</button>
-							}
-						/>
+					<div className="flex-1 flex justify-end items-center">
+						<Link
+							href="/auth/signin"
+							className="flex items-center gap-1 font-medium text-sm pl-2 mt-3 max-md:hidden"
+						>
+							Sign in
+							<ArrowRightOnRectangleIcon width={16} height={16} />
+						</Link>
 
 						<BurgerMenu
 							isBurgerMenuOpen={isBurgerMenuOpen}
@@ -178,7 +158,7 @@ const Header: React.FC = () => {
 								<Link
 									href={link.href}
 									key={link.label}
-									className={styles.burgerMenu_link}
+									className=""
 									target={link.target}
 								>
 									{link.label}
