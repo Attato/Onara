@@ -1,26 +1,15 @@
 import { GetStaticProps } from 'next';
-
-import type { NextPage } from 'next';
-
+import { NextPage } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
 import Image from 'next/image';
 
 import fs from 'fs/promises';
 import path from 'path';
-
 import matter from 'gray-matter';
-
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
-
 import styles from './index.module.scss';
-
-const components = {
-	Image,
-};
 
 interface PostData {
 	[key: string]: any;
@@ -45,47 +34,40 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className={styles.page_content}>
-				<div className={styles.masthead}>
+			<div className="min-h-screen overflow-x-hidden">
+				<div className="relative flex items-center justify-end gap-8 min-h-[400px] max-w-2xl m-auto ">
 					<Image
 						src="/illustrations/background_image_2.svg"
+						className="w-auto h-auto max-w-none mr-[50%] translate-x-2/4 select-none"
 						width={1920}
 						height={400}
 						alt="background"
 						priority={true}
 					/>
-					<div className={styles.masthead_content}>
-						<h1 className={styles.title}>Changelog</h1>
-						<div className={styles.subtitle}>
+					<div className="flex flex-col items-center justify-center gap-4 w-full h-full text-center absolute text-colorPrimary mx-auto">
+						<h1 className="text-5xl font-black uppercase mt-10">
+							Learn about the changes at Onara
+						</h1>
+
+						<p>
 							Check out our Changelog to keep up to date with all the new
 							features and improvements we&apos;re bringing to you. Stay up to
 							date and follow the development of our product.
-							<div className={styles.links}>
-								<Link href="https://discord.gg/4YV3qRCYqp" target="_blank">
-									Subscribe to updates
-									<ArrowTopRightOnSquareIcon width={14} height={14} />
-								</Link>
-								<Link href="https://t.me/+wK4gxiduYBwxYzFi" target="_blank">
-									Follow us on Telegram
-									<ArrowTopRightOnSquareIcon width={14} height={14} />
-								</Link>
-							</div>
-						</div>
+						</p>
 					</div>
 				</div>
 
 				{posts.map((post) => {
 					return (
-						<div key={post.slug} className={styles.changelog}>
-							<div className={styles.changelog_content}>
-								<div className={styles.date}>
+						<div key={post.slug} className="bg-backgroundPrimary w-auto">
+							<div className="flex gap-4 py-20 px-6 max-w-5xl m-auto">
+								<div className="sticky top-0 min-w-[232px] h-fit flex flex-col gap-1 text-colorSecondary text-sm">
 									<p>{post.frontMatter.releaseDate}</p>
-
 									<p>
 										{post.frontMatter.isToday ? (
 											<span>(Today&apos;s log)</span>
 										) : (
-											<span>{`(${post.frontMatter.diffDays} days ago)`}</span>
+											<span>({post.frontMatter.diffDays} days ago)</span>
 										)}
 									</p>
 								</div>
@@ -93,7 +75,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 								<div className={styles.details}>
 									<MDXRemote
 										{...post.frontMatter.content}
-										components={components}
+										components={{ Image }}
 									/>
 								</div>
 							</div>
@@ -106,10 +88,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 };
 
 const getFormattedDate = (fileName: string) => {
-	// Extract the date parts from the file name
 	const [day, month, year] = fileName.split('.')[0].split('-');
-
-	// Create a Date object from the extracted parts
 	const date = new Date(`${month}-${day}-${year}`);
 
 	const options: Intl.DateTimeFormatOptions = {
@@ -138,7 +117,6 @@ const getFormattedDate = (fileName: string) => {
 };
 
 const getPosts = async (): Promise<Post[]> => {
-	// Get the path to the directory containing the MDX files
 	const mdxFilesDirectory = path.join(process.cwd(), 'posts/changelog');
 	const mdxFiles = await fs.readdir(mdxFilesDirectory);
 
