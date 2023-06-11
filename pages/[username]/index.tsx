@@ -1,53 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 
 import { MapPinIcon, StarIcon } from '@heroicons/react/24/outline';
 
-import Alert from '@/components/Alert';
 import Sidebar from '@/components/Sidebar';
 
 import styles from './index.module.scss';
 
+import prisma from '@/lib/prisma';
+
 export interface ProfileProps {
 	profileData: any;
+	totalStars: number;
 }
 
-const Profile: NextPage<ProfileProps> = ({ profileData }) => {
+const Profile: NextPage<ProfileProps> = ({ profileData, totalStars }) => {
 	const { status } = useSession();
-	const [profile, setProfile] = useState<any>(profileData);
-	const [totalStars, setTotalStars] = useState<number>(0);
 
-	console.log(profile);
+	console.log(profileData);
 
-	useEffect(() => {
-		if (profileData) {
-			const fetchTotalStars = async () => {
-				try {
-					const response = await fetch(
-						profileData.starred_url.replace('{/owner}{/repo}', '') +
-							'?per_page=1'
-					);
-					const data = await response.json();
-					setTotalStars(data.length);
-				} catch (error) {
-					console.error('Error fetching total stars:', error);
-				}
-			};
-
-			fetchTotalStars();
-		}
-	}, [profileData]);
+	console.log(status);
 
 	return (
 		<>
 			<Head>
-				<title>{profile?.name}</title>
+				<title>{profileData?.name}</title>
 				<meta
 					name="description"
 					content="Onara is the perfect way to administer your repositories. Administer your application easily and efficiently."
@@ -59,47 +41,34 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 			{status === 'authenticated' && (
 				<div className={styles.profile}>
 					<div className={styles.profile_content}>
-						<Sidebar username={profile?.name} />
+						<Sidebar username={profileData?.name} />
 
 						<div className={styles.landing}>
 							<div className={styles.user_details}>
-								{!profile && (
-									<Alert text="You have exceeded the traffic limit, you will have to wait an hour." />
-								)}
-
-								{profile.message !== undefined && (
-									<React.Fragment>
-										<div className={styles.api_limit}>
-											<Alert text={`${profile.message}`} />
-											<Link href={profile.documentation_url} target="_blank">
-												GitHub documentation.
-											</Link>
-										</div>
-									</React.Fragment>
-								)}
-
-								{profile && profile.message === undefined && (
+								{profileData && (
 									<React.Fragment>
 										<Image
-											src={`${profile?.avatar_url}`}
+											src={`${profileData?.image}`}
 											width={150}
 											height={150}
 											alt="profile image"
 											priority={true}
 										/>
 										<div className={styles.user_info}>
-											<h1 className={styles.username}>{profile?.name}</h1>
-											<span className={styles.description}>{profile?.bio}</span>
+											<h1 className={styles.username}>{profileData?.name}</h1>
+											<span className={styles.description}>
+												{profileData?.bio}
+											</span>
 											<div className={styles.user_info_rows}>
 												<div className={styles.row}>
 													<MapPinIcon width={14} height={14} />
-													{profile?.location}
+													{profileData?.location}
 												</div>
 											</div>
 
 											<div className={styles.total_stars}>
 												<StarIcon width={16} height={16} />
-												{totalStars}
+												{profileData?.starredRepos}
 											</div>
 										</div>
 									</React.Fragment>
@@ -132,10 +101,49 @@ export const getServerSideProps = async (
 		const response = await fetch(`https://api.github.com/users/${username}`);
 		const profileData = await response.json();
 
+		const fetchTotalStars = async () => {
+			try {
+				const response = await fetch(
+					profileData.starred_url.replace('{/owner}{/repo}', '') + '?per_page=1'
+				);
+				const data = await response.json();
+				return data.length;
+			} catch (error) {
+				console.error('Error fetching total stars:', error);
+				return 0;
+			}
+		};
+
+		const totalStars = await fetchTotalStars();
+
+		// Save additional values to the User table
+		const updatedUser = await prisma.user.upsert({
+			where: { email: session.user?.email || '' },
+			create: {
+				email: session.user?.email || '',
+				name: profileData.name,
+				image: profileData.avatar_url,
+				bio: profileData.bio,
+				location: profileData.location,
+				followers: profileData.followers,
+				following: profileData.following,
+				starredRepos: totalStars,
+			},
+			update: {
+				name: profileData.name,
+				image: profileData.avatar_url,
+				bio: profileData.bio,
+				location: profileData.location,
+				followers: profileData.followers,
+				following: profileData.following,
+				starredRepos: totalStars,
+			},
+		});
+
 		return {
 			props: {
 				session,
-				profileData,
+				profileData: updatedUser,
 			},
 		};
 	} catch (error) {
@@ -144,6 +152,7 @@ export const getServerSideProps = async (
 			props: {
 				session,
 				profileData: null,
+				totalStars: 0,
 			},
 		};
 	}
