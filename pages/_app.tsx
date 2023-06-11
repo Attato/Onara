@@ -1,28 +1,25 @@
 import React from 'react';
-
 import type { AppProps } from 'next/app';
 import { NextPage } from 'next';
 import { SessionProvider } from 'next-auth/react';
-
+import { appWithTranslation } from 'next-i18next';
+import { ThemeProvider } from 'next-themes';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
-import { appWithTranslation } from 'next-i18next';
-
 import '@/styles/import.scss';
-
-console.info('Have a great day! 🌳🐇🌻');
 
 const MyApp: NextPage<AppProps> = ({
 	Component,
 	pageProps: { session, ...pageProps },
 }) => {
 	return (
-		<div className="page_container" translate="no">
+		<div translate="no">
 			<SessionProvider session={session}>
-				<Header />
-				<Component {...pageProps} />
-				<Footer />
+				<ThemeProvider enableSystem={true} attribute="class">
+					<Header />
+					<Component {...pageProps} />
+					<Footer />
+				</ThemeProvider>
 			</SessionProvider>
 		</div>
 	);
