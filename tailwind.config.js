@@ -4,29 +4,13 @@ module.exports = {
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 		'./pages/**/*.{js,ts,jsx,tsx,mdx}',
 		'./components/**/*.{js,ts,jsx,tsx,mdx}',
-
-		// Or if using `src` directory:
-		'./src/**/*.{js,ts,jsx,tsx,mdx}',
 	],
+	darkMode: 'class',
 	theme: {
 		extend: {
 			colors: {
-				colorPrimary: '#fefefe',
-				colorSecondary: '#86868b',
-
-				background: '#060606',
-				backgroundPrimary: '#0a0a0a',
-				backgroundSecondary: '#0f0f0f',
-				backgroundSecondaryHover: '#151515',
-				backgroundDisabled: 'rgba(255, 255, 255, 0.3)',
-
 				indigoPrimary: '#6564ec',
 				indigoSecondary: '#5022f4',
-
-				borderColorLighter: '#121212',
-				borderColor: '#232323',
-				borderColorHover: '#343434',
-				borderColorActive: '#454545',
 
 				accent: '#0082f5',
 				accentDark: '#0072f5',
@@ -46,6 +30,19 @@ module.exports = {
 
 				githubColor: '#24292e',
 				gitlabColor: '#6b4fbb',
+
+				colorPrimary: 'var(--color-primary)',
+				colorPrimaryDark: 'var(--color-primary-dark)',
+				colorSecondary: 'var(--color-secondary)',
+				colorSecondaryDark: 'var(--color-secondary-dark)',
+
+				backgroundPrimary: 'var(--background-primary)',
+				backgroundPrimaryDark: 'var(--background-primary-dark)',
+				backgroundSecondary: 'var(--background-secondary)',
+				backgroundSecondaryDark: 'var(--background-secondary-dark)',
+
+				borderColor: 'var(--border-color)',
+				borderColorDark: 'var(--border-color-dark)',
 			},
 		},
 	},
