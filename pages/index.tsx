@@ -3,34 +3,17 @@ import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 
-import {
-	LanguageIcon,
-	ArrowUpIcon,
-	RocketLaunchIcon,
-} from '@heroicons/react/24/outline';
-
-import { useRouter } from 'next/router';
-
-import AuthorizationPopup from '@/components/_Templates/AuthorizationPopup';
-
-import Dropdown from '@/components/Dropdown';
-
-import useScroll from '@/hooks/useScroll';
-
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import styles from './index.module.scss';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Home: NextPage = () => {
 	const { status } = useSession();
-	const { scrollToTop } = useScroll();
 
 	const textAnimation = {
 		hidden: {
@@ -44,13 +27,6 @@ const Home: NextPage = () => {
 	};
 
 	const { t } = useTranslation();
-
-	const router = useRouter();
-	const { locales } = router;
-
-	const changeLocale = (locale: string) => {
-		document.cookie = `NEXT_LOCALE=${locale}`;
-	};
 
 	return (
 		<React.Fragment>
@@ -66,181 +42,113 @@ const Home: NextPage = () => {
 
 			{status === 'unauthenticated' && (
 				<React.Fragment>
-					<main className={styles.masthead}>
-						<div className={styles.masthead_content}>
-							<h1>{t('homepage:masthead.title')}</h1>
+					<main className="bg-gradient-to-t from-indigoPrimary to-indigoSecondary text-slate-100 relative overflow-x-hidden">
+						<Image
+							src="/illustrations/homepage_background.svg"
+							className="absolute bottom-0 right-[-1px]"
+							width={500}
+							height={440}
+							alt="homepage image"
+							priority={true}
+						/>
+						<div className="flex flex-col gap-6 py-44 px-6 text-slate-100 max-w-5xl max-lg:max-w-2xl m-auto">
+							<h1 className="text-6xl max-lg:text-5xl max-w-2xl text-500 font-black">
+								{t('homepage:masthead.title')}
+							</h1>
 
-							<p>{t('homepage:masthead.description')}</p>
+							<p className="text-xl max-lg:text-base max-w-2xl leading-8">
+								{t('homepage:masthead.description')}
+							</p>
 
-							<div className={styles.masthead_buttons}>
-								<Dropdown
-									buttonContent={
-										<button className={styles.button}>
-											{t('common:buttons.language')}
-											<LanguageIcon width={16} height={16} />
-										</button>
-									}
-								>
-									{locales?.map((locale, id) => {
-										const { pathname, query } = router;
-
-										return (
-											<Link
-												href={{ pathname, query }}
-												key={id}
-												locale={locale}
-												onClick={() => changeLocale(locale)}
-												className={styles.option}
-											>
-												{locale === 'en' && (
-													<div>{t('common:languages.english')}</div>
-												)}
-												{locale === 'ru' && (
-													<div>{t('common:languages.russian')}</div>
-												)}
-											</Link>
-										);
-									})}
-								</Dropdown>
-
-								<AuthorizationPopup
-									title="Log in"
-									buttonContent={
-										<button className={styles.button}>
-											{t('common:buttons.getStarted')}
-											<RocketLaunchIcon width={16} height={16} />
-										</button>
-									}
-								/>
-							</div>
-
-							<Image
-								src="/illustrations/background_image.svg"
-								width={600}
-								height={300}
-								className={styles.background_image}
-								priority={true}
-								alt="background"
-							/>
+							<div className="flex justify-center flex-wrap gap-6 w-full"></div>
 						</div>
 					</main>
 
 					<motion.div
-						className={styles.container_primary}
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
+						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
 					>
 						<motion.div
-							className={styles.content}
+							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-start justify-center"
 							variants={textAnimation}
 							animate={{ y: 100 }}
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
-							<Image
-								src="/illustrations/section_1.svg"
-								width={560}
-								height={440}
-								className={styles.illustration}
-								alt="container image"
-								priority={true}
-							></Image>
-							<div className={styles.description}>
-								<h2>{t('homepage:section1.title')}</h2>
-								<p>{t('homepage:section1.description')}</p>
+							<div className="max-w-md">
+								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold w-full">
+									{t('homepage:section1.title')}
+								</h1>
+								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
+									{t('homepage:section1.description')}
+								</p>
 							</div>
 						</motion.div>
 					</motion.div>
 					<motion.div
-						className={styles.container_secondary}
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
+						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
 					>
 						<motion.div
-							className={styles.content}
+							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-end justify-center"
 							variants={textAnimation}
 							animate={{ y: 100 }}
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
-							<div className={styles.description}>
-								<h2>{t('homepage:section2.title')}</h2>
-								<p>{t('homepage:section2.description')}</p>
-							</div>
-
-							<Image
-								src="/illustrations/section_2.svg"
-								width={560}
-								height={440}
-								className={styles.illustration}
-								alt="container image"
-							></Image>
-						</motion.div>
-					</motion.div>
-					<motion.div
-						className={styles.container_primary}
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true, amount: 0.4 }}
-					>
-						<motion.div
-							className={styles.content}
-							variants={textAnimation}
-							animate={{ y: 100 }}
-							transition={{ ease: 'easeInOut', duration: 0.5 }}
-						>
-							<Image
-								src="/illustrations/section_3.svg"
-								width={560}
-								height={440}
-								className={styles.illustration}
-								alt="container image"
-							></Image>
-							<div className={styles.description}>
-								<h2>{t('homepage:section3.title')}</h2>
-								<p>{t('homepage:section3.description')}</p>
+							<div className="max-w-md">
+								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold">
+									{t('homepage:section2.title')}
+								</h1>
+								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
+									{t('homepage:section2.description')}
+								</p>
 							</div>
 						</motion.div>
 					</motion.div>
 					<motion.div
-						className={styles.pre_footer}
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
+						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
 					>
 						<motion.div
-							className={styles.content}
+							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-start justify-center"
 							variants={textAnimation}
 							animate={{ y: 100 }}
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
-							<div className={styles.description}>
-								<h2>{t('homepage:preFooter.title')}</h2>
-								<p>{t('homepage:preFooter.description')}</p>
+							<div className="max-w-md bg-backgroundSecondary dark:bg-backgroundSecondaryDark px-8 py-6 rounded-xl border border-borderColor dark:border-borderColorDark">
+								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold">
+									{t('homepage:section3.title')}
+								</h1>
+								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
+									{t('homepage:section3.description')}
+								</p>
 							</div>
-
-							<Image
-								src="/illustrations/section_4.svg"
-								width={874}
-								height={530}
-								className={styles.illustration}
-								alt="container image"
-							/>
-
-							<div className={styles.buttons}>
-								<button id={styles.back_to_top_btn} onClick={scrollToTop}>
-									{t('common:buttons.backToTop')}
-									<ArrowUpIcon width={16} height={16} strokeWidth={2} />
-								</button>
-								<AuthorizationPopup
-									title="Log in"
-									buttonContent={
-										<button id={styles.get_started_btn}>
-											{t('common:buttons.getStarted')}
-											<RocketLaunchIcon width={16} height={16} />
-										</button>
-									}
-								/>
+						</motion.div>
+					</motion.div>
+					<motion.div
+						initial="hidden"
+						whileInView="visible"
+						viewport={{ once: true, amount: 0.4 }}
+						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
+					>
+						<motion.div
+							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-center text-center justify-center"
+							variants={textAnimation}
+							animate={{ y: 100 }}
+							transition={{ ease: 'easeInOut', duration: 0.5 }}
+						>
+							<div className="max-w-4xl">
+								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold">
+									{t('homepage:preFooter.title')}
+								</h1>
+								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
+									{t('homepage:preFooter.description')}
+								</p>
 							</div>
 						</motion.div>
 					</motion.div>
