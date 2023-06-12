@@ -1,4 +1,3 @@
-import { GetStaticProps } from 'next';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -8,6 +7,11 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
+
+import { useTranslation } from 'next-i18next';
+
+import { GetServerSidePropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import styles from './index.module.scss';
 
@@ -25,6 +29,8 @@ interface ChangelogPageProps {
 }
 
 const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
+	const { t } = useTranslation();
+
 	return (
 		<>
 			<Head>
@@ -34,7 +40,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className="min-h-screen overflow-x-hidden">
+			<div className="min-h-screen overflow-x-hidden ">
 				<div className="relative flex items-center justify-end gap-8 min-h-[400px] max-w-2xl m-auto ">
 					<Image
 						src="/illustrations/background_image_2.svg"
@@ -44,7 +50,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 						alt="background"
 						priority={true}
 					/>
-					<div className="flex flex-col items-center justify-center gap-4 w-full h-full text-center absolute text-colorPrimary mx-auto">
+					<div className="flex flex-col items-center justify-center gap-4 w-full h-full text-center absolute text-slate-100 mx-auto">
 						<h1 className="text-5xl font-black uppercase mt-10">
 							Learn about the changes at Onara
 						</h1>
@@ -59,9 +65,12 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 
 				{posts.map((post) => {
 					return (
-						<div key={post.slug} className="bg-backgroundPrimary w-auto">
+						<div
+							key={post.slug}
+							className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark w-auto"
+						>
 							<div className="flex gap-4 py-20 px-6 max-w-5xl m-auto">
-								<div className="sticky top-0 min-w-[232px] h-fit flex flex-col gap-1 text-colorSecondary text-sm">
+								<div className="sticky top-0 min-w-[232px] h-fit flex flex-col gap-1 text-colorSecondary dark:text-colorSecondaryDark text-sm">
 									<p>{post.frontMatter.releaseDate}</p>
 									<p>
 										{post.frontMatter.isToday ? (
@@ -72,7 +81,9 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 									</p>
 								</div>
 
-								<div className={styles.details}>
+								<div
+									className={`${styles.details} text-colorPrimary dark:text-colorPrimaryDark`}
+								>
 									<MDXRemote
 										{...post.frontMatter.content}
 										components={{ Image }}
@@ -158,12 +169,18 @@ const getPosts = async (): Promise<Post[]> => {
 	return sortedPosts;
 };
 
-export const getStaticProps: GetStaticProps<ChangelogPageProps> = async () => {
+export const getServerSideProps = async (
+	context: GetServerSidePropsContext
+) => {
 	const posts = await getPosts();
 
 	return {
 		props: {
 			posts,
+			...(await serverSideTranslations(context.locale || 'en', [
+				'common',
+				'homepage',
+			])),
 		},
 	};
 };
