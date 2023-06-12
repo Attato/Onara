@@ -6,17 +6,23 @@ import { appWithTranslation } from 'next-i18next';
 import { ThemeProvider } from 'next-themes';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { usePathname } from 'next/navigation';
+
 import '@/styles/import.scss';
 
 const MyApp: NextPage<AppProps> = ({
 	Component,
 	pageProps: { session, ...pageProps },
 }) => {
+	const currentPath = usePathname();
+
 	return (
 		<div translate="no">
 			<SessionProvider session={session}>
 				<ThemeProvider enableSystem={true} attribute="class">
-					<Header />
+					{currentPath !== '/auth/signin' && currentPath !== '/auth/signup' && (
+						<Header />
+					)}
 					<Component {...pageProps} />
 					<Footer />
 				</ThemeProvider>
