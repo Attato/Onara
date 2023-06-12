@@ -2,24 +2,18 @@ import React, { useState } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
-
 import { MapPinIcon, StarIcon } from '@heroicons/react/24/outline';
-
 import Sidebar from '@/components/Sidebar';
-
 import styles from './index.module.scss';
-
 import prisma from '@/lib/prisma';
 
 export interface ProfileProps {
 	profileData: any;
-	totalStars: number;
 }
 
-const Profile: NextPage<ProfileProps> = ({ profileData, totalStars }) => {
+const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 	const { status } = useSession();
 
 	console.log(profileData);
@@ -39,12 +33,12 @@ const Profile: NextPage<ProfileProps> = ({ profileData, totalStars }) => {
 			</Head>
 
 			{status === 'authenticated' && (
-				<div className={styles.profile}>
-					<div className={styles.profile_content}>
+				<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
+					<div className="flex gap-6 max-w-5xl min-h-screen m-auto px-5 pb-5 py-16 text-colorPrimary dark:text-colorPrimaryDark">
 						<Sidebar username={profileData?.name} />
 
-						<div className={styles.landing}>
-							<div className={styles.user_details}>
+						<div className="flex flex-col gap-6 w-full">
+							<div className="flex items-center gap-6 bg-backgroundPrimary dark:bg-backgroundPrimaryDark px-8 py-10">
 								{profileData && (
 									<React.Fragment>
 										<Image
@@ -53,20 +47,21 @@ const Profile: NextPage<ProfileProps> = ({ profileData, totalStars }) => {
 											height={150}
 											alt="profile image"
 											priority={true}
+											className="rounded-[50%]"
 										/>
-										<div className={styles.user_info}>
-											<h1 className={styles.username}>{profileData?.name}</h1>
-											<span className={styles.description}>
-												{profileData?.bio}
-											</span>
-											<div className={styles.user_info_rows}>
-												<div className={styles.row}>
+										<div className="flex flex-col justify-end h-fit w-full text-colorSecondary dark:text-colorSecondaryDark relative">
+											<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
+												{profileData?.name}
+											</h1>
+											<span className="mt-1 text-sm">{profileData?.bio}</span>
+											<div className="flex items-center gap-2 mx-3">
+												<div className="flex items-center gap-1 text-sm text-colorSecondary dark:text-colorSecondaryDark">
 													<MapPinIcon width={14} height={14} />
 													{profileData?.location}
 												</div>
 											</div>
 
-											<div className={styles.total_stars}>
+											<div className="flex items-center gap-1 text-sm absolute top-0 right-0">
 												<StarIcon width={16} height={16} />
 												{profileData?.starredRepos}
 											</div>
