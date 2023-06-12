@@ -5,11 +5,11 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-import { useSession, getSession } from 'next-auth/react';
-import { GetServerSidePropsContext } from 'next';
+import { useSession } from 'next-auth/react';
 
 import { useTranslation } from 'next-i18next';
 
+import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Home: NextPage = () => {
@@ -47,7 +47,7 @@ const Home: NextPage = () => {
 							src="/illustrations/homepage_background.svg"
 							className="absolute bottom-0 right-[-1px]"
 							width={500}
-							height={440}
+							height={500}
 							alt="homepage image"
 							priority={true}
 						/>
@@ -161,20 +161,8 @@ const Home: NextPage = () => {
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext
 ) => {
-	const session = await getSession(context);
-
-	if (session) {
-		return {
-			redirect: {
-				destination: `/${session.user?.name}`,
-				permanent: false,
-			},
-		};
-	}
-
 	return {
 		props: {
-			session,
 			...(await serverSideTranslations(context.locale || 'en', [
 				'common',
 				'homepage',
