@@ -19,42 +19,42 @@ const Footer: FC = () => {
 		setMounted(true);
 	}, []);
 
+	const themeOptions = [
+		{
+			theme: 'light',
+			icon: <SunIcon className="w-5 h-5 flex-1" />,
+			title: 'Light Theme',
+		},
+		{
+			theme: 'dark',
+			icon: <MoonIcon className="w-5 h-5 flex-1" />,
+			title: 'Dark Theme',
+		},
+		{
+			theme: 'system',
+			icon: <ComputerDesktopIcon className="w-5 h-5 flex-1" />,
+			title: 'System Theme',
+		},
+	];
+
 	const renderThemeChanger = () => {
 		if (!mounted) return null;
 
 		return (
 			<div className="flex-1">
-				<div className="ml-auto flex w-fit space-x-2 border border-borderColor dark:border-borderColorDark p-1 rounded-3xl">
-					<button
-						className={`${
-							theme === 'light' &&
-							'bg-backgroundSecondary dark:bg-backgroundSecondaryDark'
-						} p-1 rounded-[50%]`}
-						onClick={() => setTheme('light')}
-						title="Light Theme"
-					>
-						<SunIcon className="w-5 h-5 flex-1" />
-					</button>
-					<button
-						className={`${
-							theme === 'dark' &&
-							'bg-backgroundSecondary dark:bg-backgroundSecondaryDark'
-						} p-1 rounded-[50%]`}
-						onClick={() => setTheme('dark')}
-						title="Dark Theme"
-					>
-						<MoonIcon className="w-5 h-5 flex-1" />
-					</button>
-					<button
-						className={`${
-							theme === 'system' &&
-							'bg-backgroundSecondary dark:bg-backgroundSecondaryDark'
-						} p-1 rounded-[50%]`}
-						onClick={() => setTheme('system')}
-						title="System Theme"
-					>
-						<ComputerDesktopIcon className="w-5 h-5 flex-1" />
-					</button>
+				<div className="ml-auto flex w-fit space-x-2 border border-borderColor dark:border-borderColorDark bg-backgroundSecondary dark:bg-backgroundSecondaryDark p-1 rounded-3xl">
+					{themeOptions.map((option) => (
+						<button
+							key={option.theme}
+							className={`${
+								theme === option.theme && 'bg-indigo-600 text-colorPrimaryDark'
+							} p-1 rounded-[50%] border-2 border-transparent transition-all hover:border-indigo-600`}
+							onClick={() => setTheme(option.theme)}
+							title={option.title}
+						>
+							{option.icon}
+						</button>
+					))}
 				</div>
 			</div>
 		);
@@ -70,6 +70,17 @@ const Footer: FC = () => {
 
 	const { locales, locale, query, pathname } = router;
 
+	const languageOptions = [
+		{
+			locale: 'en',
+			label: t('common:languages.english'),
+		},
+		{
+			locale: 'ru',
+			label: t('common:languages.russian'),
+		},
+	];
+
 	return (
 		<footer className="p-6 bg-backgroundPrimary dark:bg-backgroundPrimaryDark border-t border-borderColor dark:border-borderColorDark select-none">
 			<div className="flex flex-col gap-4 max-w-5xl m-auto text-colorPrimary dark:text-colorPrimaryDark">
@@ -77,7 +88,11 @@ const Footer: FC = () => {
 					<Listbox value={locales}>
 						{({ open }) => (
 							<div className="relative h-fit w-full max-w-[220px] mr-4">
-								<Listbox.Button className="rounded-[10px] w-full h-10 font-medium flex items-center justify-between border border-borderColor dark:border-borderColorDark px-3">
+								<Listbox.Button
+									className={`${
+										open && 'ring-2 ring-indigo-600 dark:ring-indigo-600'
+									} flex items-center justify-between w-full rounded-md  py-1.5 px-3 bg-backgroundSecondary dark:bg-backgroundSecondaryDark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-1 ring-inset ring-borderColor dark:ring-borderColorDark sm:text-sm sm:leading-6`}
+								>
 									<span className="flex items-center">
 										{locale === 'en' && <>{t('common:languages.english')}</>}
 										{locale === 'ru' && <>{t('common:languages.russian')}</>}
@@ -86,39 +101,27 @@ const Footer: FC = () => {
 								</Listbox.Button>
 
 								{open && (
-									<Listbox.Options className="absolute left-0 rounded-md mt-1 w-full py-1 border bg-backgroundPrimary dark:bg-backgroundPrimaryDark border-borderColor dark:border-borderColorDark">
-										{locales?.map((currentLocale) => {
-											return (
-												<Link
-													key={currentLocale}
-													href={{ pathname, query }}
-													locale={currentLocale}
-													onClick={() => changeLocale(currentLocale)}
+									<Listbox.Options className="absolute left-0 rounded-md mt-1 w-full py-1 border border-borderColor dark:border-borderColorDark bg-backgroundSecondary dark:bg-backgroundSecondaryDark">
+										{languageOptions.map((option) => (
+											<Link
+												key={option.locale}
+												href={{ pathname, query }}
+												locale={option.locale}
+												onClick={() => changeLocale(option.locale)}
+											>
+												<Listbox.Option
+													value={option.locale}
+													className={`${
+														option.locale === locale && 'font-medium'
+													} flex text-sm items-center justify-between px-4 py-2 cursor-pointer hover:bg-indigo-600 hover:text-slate-100 transition-all`}
 												>
-													<Listbox.Option
-														value={currentLocale}
-														className={`${
-															currentLocale === locale && 'font-medium'
-														} flex text-sm items-center justify-between px-4 py-2 cursor-pointer`}
-													>
-														{currentLocale === 'en' && (
-															<>{t('common:languages.english')}</>
-														)}
-														{currentLocale === 'ru' && (
-															<>{t('common:languages.russian')}</>
-														)}
-
-														{currentLocale === locale && (
-															<CheckIcon
-																width={16}
-																height={16}
-																strokeWidth={2}
-															/>
-														)}
-													</Listbox.Option>
-												</Link>
-											);
-										})}
+													{option.label}
+													{option.locale === locale && (
+														<CheckIcon width={16} height={16} strokeWidth={2} />
+													)}
+												</Listbox.Option>
+											</Link>
+										))}
 									</Listbox.Options>
 								)}
 							</div>
@@ -129,19 +132,19 @@ const Footer: FC = () => {
 						<h3 className="font-medium mb-4">Product</h3>
 						<Link
 							href="/"
-							className="mb-2 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
+							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Changelog
 						</Link>
 						<Link
 							href="/"
-							className="mb-2 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
+							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Support
 						</Link>
 						<Link
 							href="/"
-							className="mb-2 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
+							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Feedback
 						</Link>
@@ -151,13 +154,13 @@ const Footer: FC = () => {
 						<h3 className="font-medium mb-4">Company</h3>
 						<Link
 							href="/"
-							className="mb-2 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
+							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Open source
 						</Link>
 						<Link
 							href="/"
-							className="mb-2 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
+							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Privacy Policy
 						</Link>
