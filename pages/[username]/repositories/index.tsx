@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 
 import { ProfileProps } from '..';
 
-import Sidebar from '@/components/Sidebar';
+import Tabs from '@/components/Tabs';
 import Alert from '@/components/Alert';
 import Loading from '@/components/Loading';
 
@@ -70,7 +70,7 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 
 			<div className={styles.repositories}>
 				<div className={styles.repositories_content}>
-					<Sidebar username={profile?.name} />
+					<Tabs username={profile?.name} />
 
 					<div className={styles.repositories_list}>
 						<div className={styles.search_bar}>
@@ -92,8 +92,6 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 							</div>
 						) : (
 							filteredRepositories.map((repo: any) => {
-								console.log(repo);
-
 								return (
 									<div key={repo.id} className={styles.repository}>
 										<div className={styles.title}>

@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 
 import { ProfileProps } from '..';
-import Sidebar from '@/components/Sidebar';
+import Tabs from '@/components/Tabs';
 import Alert from '@/components/Alert';
 
 import styles from './index.module.scss';
@@ -60,7 +60,7 @@ const Groups: NextPage<ProfileProps> = ({ profileData }) => {
 
 			<div className={styles.groups}>
 				<div className={styles.groups_content}>
-					<Sidebar username={profile?.name} />
+					<Tabs username={profile?.name} />
 					<div className={styles.groups_list}>
 						<div className={styles.create}>
 							<input

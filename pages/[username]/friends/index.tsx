@@ -9,7 +9,7 @@ import { getSession } from 'next-auth/react';
 
 import { MapPinIcon } from '@heroicons/react/24/outline';
 
-import Sidebar from '@/components/Sidebar';
+import Tabs from '@/components/Tabs';
 import Alert from '@/components/Alert';
 import Loading from '@/components/Loading';
 
@@ -90,7 +90,7 @@ const Friends: NextPage<any> = ({ profileData }) => {
 
 			<div className={styles.friends}>
 				<div className={styles.friends_content}>
-					<Sidebar username={profile?.name} />
+					<Tabs username={profile?.name} />
 
 					<div className={styles.friends_list}>
 						<div className={styles.friends_find}>
