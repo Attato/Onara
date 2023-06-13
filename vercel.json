@@ -1,13 +1,10 @@
 {
-	"builds": [
-		{
-			"src": "package.json",
-			"use": "@vercel/static-build",
-			"config": {
-				"prisma": {
-					"generate": true
-				}
-			}
+	"build": {
+		"env": {
+			"PRISMA_GENERATE_BEFORE_BUILD": "1"
+		},
+		"commands": {
+			"build": "prisma generate && next build"
 		}
-	]
+	}
 }
