@@ -49,7 +49,7 @@ const SignIn = () => {
 								src="/icons/services/github.svg"
 								width={16}
 								height={16}
-								alt="gitgub"
+								alt="github"
 							/>
 							GitHub
 							<ArrowRightIcon
