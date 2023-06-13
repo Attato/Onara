@@ -40,18 +40,19 @@ model Session {
 }
 
 model User {
-    id           String    @id @default(cuid())
-    name         String?
-    email        String?   @unique
-    avatarUrl    String?
-    htmlUrl      String?   @unique
-    bio          String?
-    location     String?
-    createdAt    String?
-    updatedAt    String?
-    accounts     Account[]
-    sessions     Session[]
-    starredRepos Int       @default(0)
-    followers    Int       @default(0)
-    following    Int       @default(0)
+    id            String    @id @default(cuid())
+    email         String    @unique
+    emailVerified String?
+    name          String?
+    image         String?
+    htmlUrl       String?
+    bio           String?
+    location      String?
+    createdAt     String?
+    updatedAt     String?
+    followers     Int?
+    following     Int?
+    starredRepos  Int?
+    accounts      Account[]
+    sessions      Session[]
 }

@@ -31,24 +31,20 @@ CREATE TABLE "Session" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "emailVerified" TEXT,
     "name" TEXT,
-    "email" TEXT,
-    "emailVerified" TIMESTAMP(3),
-    "avatarUrl" TEXT,
+    "image" TEXT,
+    "htmlUrl" TEXT,
     "bio" TEXT,
     "location" TEXT,
+    "createdAt" TEXT,
+    "updatedAt" TEXT,
+    "followers" INTEGER,
+    "following" INTEGER,
+    "starredRepos" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "VerificationToken" (
-    "id" SERIAL NOT NULL,
-    "identifier" TEXT NOT NULL,
-    "token" TEXT NOT NULL,
-    "expires" TIMESTAMP(3) NOT NULL,
-
-    CONSTRAINT "VerificationToken_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -59,12 +55,6 @@ CREATE UNIQUE INDEX "Session_session_token_key" ON "Session"("session_token");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
-
--- CreateIndex
-CREATE UNIQUE INDEX "VerificationToken_token_key" ON "VerificationToken"("token");
-
--- CreateIndex
-CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationToken"("identifier", "token");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -41,7 +41,7 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 								{profileData && (
 									<React.Fragment>
 										<Image
-											src={`${profileData?.avatarUrl}`}
+											src={`${profileData?.image}`}
 											width={150}
 											height={150}
 											alt="profile image"
@@ -134,9 +134,9 @@ export const getServerSideProps = async (
 		const updatedUser = await prisma.user.upsert({
 			where: { email: session.user?.email || '' },
 			create: {
-				email: session.user?.email,
+				email: session.user?.email || '',
 				name: profileData?.name,
-				avatarUrl: profileData?.avatar_url,
+				image: profileData?.avatar_url,
 				htmlUrl: profileData?.html_url,
 				bio: profileData?.bio,
 				location: profileData?.location,
@@ -148,7 +148,7 @@ export const getServerSideProps = async (
 			},
 			update: {
 				name: profileData?.name,
-				avatarUrl: profileData?.avatar_url,
+				image: profileData?.avatar_url,
 				htmlUrl: profileData?.html_url,
 				bio: profileData?.bio,
 				location: profileData?.location,
