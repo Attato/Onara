@@ -11,8 +11,6 @@ import Tabs from '@/components/Tabs';
 import Alert from '@/components/Alert';
 import Loading from '@/components/Loading';
 
-import styles from './index.module.scss';
-
 const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 	const [profile, setProfile] = useState<any>(profileData);
 	const [repositories, setRepositories] = useState<any>([]);
@@ -68,39 +66,45 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className={styles.repositories}>
-				<div className={styles.repositories_content}>
+			<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
+				<div className="flex flex-col gap-6 min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
 					<Tabs username={profile?.name} />
 
-					<div className={styles.repositories_list}>
-						<div className={styles.search_bar}>
+					<div className="w-full">
+						<div className="py-4">
 							<input
 								type="text"
 								placeholder="Find a repository..."
 								value={searchTerm}
 								onChange={handleSearch}
+								className="flex items-center justify-between w-full rounded-md  py-1.5 px-3 bg-backgroundSecondary dark:bg-backgroundSecondaryDark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-borderColor dark:ring-borderColorDark sm:text-sm sm:leading-6 outline-none focus:ring-2 focus:ring-indigo-600 focus:dark:ring-indigo-600"
 							/>
 						</div>
 
 						{isLoading ? (
-							<div className={styles.loading}>
-								<Loading />
-							</div>
+							<Loading />
 						) : isRepositoriesNotFound ? (
-							<div className={styles.repository_not_found}>
-								<Alert text="Repository Not Found" />
-							</div>
+							<Alert text="Repository Not Found" />
 						) : (
 							filteredRepositories.map((repo: any) => {
 								return (
-									<div key={repo.id} className={styles.repository}>
-										<div className={styles.title}>
-											<Link href={repo.html_url} target="_blank">
+									<div
+										key={repo.id}
+										className="py-6 flex flex-col gap-3 border-t border-t-borderColor dark:border-t-borderColorDark text-xs text-colorSecondary dark:text-colorSecondaryDark last:mb-10"
+									>
+										<div className="flex items-center gap-5">
+											<Link
+												href={repo.html_url}
+												className="text-indigo-600 text-xl font-semibold"
+												target="_blank"
+											>
 												{repo.name}
 											</Link>
-											<span>{repo.visibility}</span>
+											<span className="flex items-center border border-borderColor dark:border-borderColorDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
+												{repo.visibility}
+											</span>
 										</div>
-										<div className={styles.repo_info}>
+										<div className="flex gap-3">
 											{repo.language && <span>{repo.language}</span>}
 											<span>Updated on {formatDate(repo.updated_at)}</span>
 										</div>
