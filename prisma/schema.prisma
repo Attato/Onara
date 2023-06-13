@@ -43,21 +43,15 @@ model User {
     id           String    @id @default(cuid())
     name         String?
     email        String?   @unique
-    image        String?
+    avatarUrl    String?
+    htmlUrl      String?   @unique
     bio          String?
     location     String?
+    createdAt    String?
+    updatedAt    String?
     accounts     Account[]
     sessions     Session[]
     starredRepos Int       @default(0)
     followers    Int       @default(0)
     following    Int       @default(0)
-}
-
-model VerificationToken {
-    id         Int      @id @default(autoincrement())
-    identifier String
-    token      String   @unique
-    expires    DateTime
-
-    @@unique([identifier, token])
 }
