@@ -9,19 +9,17 @@ import {
 	CloudIcon,
 } from '@heroicons/react/24/outline';
 
-import styles from './index.module.scss';
-
 interface LinkItem {
 	image: React.ReactNode;
 	label: string;
 	href: string;
 }
 
-interface SidebarProps {
+interface TabsProps {
 	username: LinkItem[];
 }
 
-const Sidebar = ({ username }: SidebarProps) => {
+const Tabs = ({ username }: TabsProps) => {
 	const pathname = usePathname();
 
 	const links = [
@@ -48,14 +46,15 @@ const Sidebar = ({ username }: SidebarProps) => {
 	];
 
 	return (
-		<div className={styles.sidebar}>
+		<div className="flex gap-1 w-full text-colorSecondary dark:text-colorSecondaryDark select-none mt-12">
 			{links.map((link: LinkItem) => {
 				return (
 					<Link
 						href={link.href}
-						className={
-							pathname === `${link.href}` ? styles.active_link : styles.link
-						}
+						className={`${
+							pathname === link.href &&
+							'text-slate-100 dark:text-slate-100 bg-indigo-600 dark:bg-indigo-600 hover:text-slate-100 hover:bg-indigo-600 hover:dark:bg-indigo-600'
+						} flex items-center gap-3 hover:text-colorPrimary hover:dark:text-colorPrimaryDark hover:bg-backgroundSecondary hover:dark:bg-backgroundSecondaryDark h-fit text-sm font-medium px-3 py-1 rounded-md transition-all`}
 						key={link.label}
 					>
 						{link.image}
@@ -67,4 +66,4 @@ const Sidebar = ({ username }: SidebarProps) => {
 	);
 };
 
-export default Sidebar;
+export default Tabs;
