@@ -3,8 +3,16 @@
 		"env": {
 			"PRISMA_GENERATE_BEFORE_BUILD": "1"
 		},
-		"commands": {
-			"build": "prisma generate && next build"
-		}
+		"use": "@vercel/node",
+		"builds": [
+			{
+				"src": "lib/prisma.ts",
+				"use": "@vercel/node"
+			},
+			{
+				"src": "next.config.js",
+				"use": "@vercel/next"
+			}
+		]
 	}
 }
