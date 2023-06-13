@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-import { useSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 
 import { useTranslation } from 'next-i18next';
 
@@ -161,6 +161,17 @@ const Home: NextPage = () => {
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext
 ) => {
+	const session = await getSession(context);
+
+	if (session) {
+		return {
+			redirect: {
+				destination: `/${session.user?.name}`,
+				permanent: false,
+			},
+		};
+	}
+
 	return {
 		props: {
 			...(await serverSideTranslations(context.locale || 'en', [
