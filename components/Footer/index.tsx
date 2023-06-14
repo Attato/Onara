@@ -42,13 +42,13 @@ const Footer: FC = () => {
 
 		return (
 			<div className="flex-1">
-				<div className="ml-auto flex w-fit space-x-2 border border-borderColor dark:border-borderColorDark bg-backgroundSecondary dark:bg-backgroundSecondaryDark p-1 rounded-3xl">
+				<div className="ml-auto flex w-fit space-x-2 border border-border dark:border-borderDark bg-surface100 dark:bg-surface100Dark p-1 rounded-3xl">
 					{themeOptions.map((option) => (
 						<button
 							key={option.theme}
 							className={`${
-								theme === option.theme && 'bg-indigo-600 text-colorPrimaryDark'
-							} p-1 rounded-[50%] border-2 border-transparent transition-all hover:border-indigo-600`}
+								theme === option.theme && 'bg-accent text-colorPrimaryDark'
+							} p-1 rounded-[50%] border-2 border-transparent transition-all hover:border-accent`}
 							onClick={() => setTheme(option.theme)}
 							title={option.title}
 						>
@@ -82,7 +82,7 @@ const Footer: FC = () => {
 	];
 
 	return (
-		<footer className="p-6 bg-backgroundPrimary dark:bg-backgroundPrimaryDark border-t border-borderColor dark:border-borderColorDark select-none">
+		<footer className="p-6 bg-background dark:bg-backgroundDark border-t border-border dark:border-borderDark select-none">
 			<div className="flex flex-col gap-4 max-w-5xl m-auto text-colorPrimary dark:text-colorPrimaryDark">
 				<div className="flex justify-between">
 					<Listbox value={locales}>
@@ -90,8 +90,8 @@ const Footer: FC = () => {
 							<div className="relative h-fit w-full max-w-[220px] mr-4">
 								<Listbox.Button
 									className={`${
-										open && 'ring-2 ring-indigo-600 dark:ring-indigo-600'
-									} flex items-center justify-between w-full rounded-md  py-1.5 px-3 bg-backgroundSecondary dark:bg-backgroundSecondaryDark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-1 ring-inset ring-borderColor dark:ring-borderColorDark sm:text-sm sm:leading-6`}
+										open && 'ring-2 ring-accent dark:ring-accent'
+									} flex items-center justify-between w-full rounded-md  py-1.5 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-1 ring-inset ring-border dark:ring-borderDark sm:text-sm sm:leading-6`}
 								>
 									<span className="flex items-center">
 										{locale === 'en' && <>{t('common:languages.english')}</>}
@@ -101,7 +101,7 @@ const Footer: FC = () => {
 								</Listbox.Button>
 
 								{open && (
-									<Listbox.Options className="absolute left-0 rounded-md mt-1 w-full py-1 border border-borderColor dark:border-borderColorDark bg-backgroundSecondary dark:bg-backgroundSecondaryDark">
+									<Listbox.Options className="absolute left-0 rounded-md mt-1 w-full py-1 border border-border dark:border-borderDark bg-surface100 dark:bg-surface100Dark">
 										{languageOptions.map((option) => (
 											<Link
 												key={option.locale}
@@ -113,7 +113,7 @@ const Footer: FC = () => {
 													value={option.locale}
 													className={`${
 														option.locale === locale && 'font-medium'
-													} flex text-sm items-center justify-between px-4 py-2 cursor-pointer hover:bg-indigo-600 hover:text-slate-100 transition-all`}
+													} flex text-sm items-center justify-between px-4 py-2 cursor-pointer hover:bg-accent hover:text-slate-100 transition-all`}
 												>
 													{option.label}
 													{option.locale === locale && (
@@ -167,7 +167,7 @@ const Footer: FC = () => {
 					</div>
 				</div>
 
-				<div className="flex items-center border-t border-borderColor dark:border-borderColorDark pt-6 mt-6">
+				<div className="flex items-center border-t border-border dark:border-borderDark pt-6 mt-6">
 					<div className="flex flex-1 w-full h-max">
 						<Link href="/" className="text-3xl font-black">
 							ONARA
