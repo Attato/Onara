@@ -67,7 +67,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 					return (
 						<div
 							key={post.slug}
-							className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark w-auto"
+							className="bg-surface100 dark:bg-surface100Dark w-auto"
 						>
 							<div className="flex gap-4 py-20 px-6 max-w-5xl m-auto">
 								<div className="sticky top-0 min-w-[232px] h-fit flex flex-col gap-1 text-colorSecondary dark:text-colorSecondaryDark text-sm">
@@ -98,7 +98,7 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 	);
 };
 
-const getFormattedDate = (fileName: string) => {
+export const getFormattedDate = (fileName: string) => {
 	const [day, month, year] = fileName.split('.')[0].split('-');
 	const date = new Date(`${month}-${day}-${year}`);
 
