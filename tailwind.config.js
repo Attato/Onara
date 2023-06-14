@@ -12,9 +12,7 @@ module.exports = {
 				indigoPrimary: '#6564ec',
 				indigoSecondary: '#5022f4',
 
-				accent: '#0082f5',
-				accentDark: '#0072f5',
-				accentBackground: 'rgba(0, 114, 245, 0.1)',
+				accent: '#4f46e5',
 
 				warning: '#f85149',
 				warningBackground: 'rgba(248, 81, 73, 0.6)',
@@ -36,13 +34,27 @@ module.exports = {
 				colorSecondary: 'var(--color-secondary)',
 				colorSecondaryDark: 'var(--color-secondary-dark)',
 
+				background: 'var(--background)',
+				backgroundDark: 'var(--background-dark)',
+
+				surface100: 'var(--surface-100)',
+				surface100Dark: 'var(--surface-100-dark)',
+				surface200: 'var(--surface-200)',
+				surface200Dark: 'var(--surface-200-dark)',
+				surface300: 'var(--surface-300)',
+				surface300Dark: 'var(--surface-300-dark)',
+				surface400: 'var(--surface-400)',
+				surface400Dark: 'var(--surface-400-dark)',
+
 				backgroundPrimary: 'var(--background-primary)',
 				backgroundPrimaryDark: 'var(--background-primary-dark)',
 				backgroundSecondary: 'var(--background-secondary)',
 				backgroundSecondaryDark: 'var(--background-secondary-dark)',
+				backgroundTertiary: 'var(--background-tertiary)',
+				backgroundTertiaryDark: 'var(--background-tertiary-dark)',
 
-				borderColor: 'var(--border-color)',
-				borderColorDark: 'var(--border-color-dark)',
+				border: 'var(--border)',
+				borderDark: 'var(--border-dark)',
 			},
 		},
 	},

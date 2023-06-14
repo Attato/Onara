@@ -1,14 +1,21 @@
 :root {
-	--color-primary: #1e293b; // slate-800
-	--color-primary-dark: #f1f5f9; // slate-100
-	--color-secondary: #64748b; // slate-500
-	--color-secondary-dark: #94a3b8; // slate-400
+	--color-primary: #1e293b;
+	--color-primary-dark: #f2f3f5;
+	--color-secondary: #64748b;
+	--color-secondary-dark: #b5bac1;
 
-	--background-primary: #f1f5f9; // slate-100
-	--background-primary-dark: #0f172a; // slate-900
-	--background-secondary: #ffffff; // white
-	--background-secondary-dark: #1e293b; // slate-800
+	--background: #ffffff;
+	--background-dark: #313338;
 
-	--border-color: #e2e8f0; // slate-200
-	--border-color-dark: #334155; // slate-700
+	--surface-100: #f2f3f5;
+	--surface-100-dark: #2b2d31;
+	--surface-200: #ebedef;
+	--surface-200-dark: #232428;
+	--surface-300: #e3e5e8;
+	--surface-300-dark: #1e1f22;
+	--surface-400: #ffffff;
+	--surface-400-dark: #111214;
+
+	--border: #ccced3;
+	--border-dark: #35363c;
 }
