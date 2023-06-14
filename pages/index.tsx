@@ -68,7 +68,7 @@ const Home: NextPage = () => {
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
-						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
+						className="bg-background dark:bg-backgroundDark"
 					>
 						<motion.div
 							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-start justify-center"
@@ -90,7 +90,7 @@ const Home: NextPage = () => {
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
-						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
+						className="bg-background dark:bg-backgroundDark"
 					>
 						<motion.div
 							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-end justify-center"
@@ -112,7 +112,7 @@ const Home: NextPage = () => {
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
-						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
+						className="bg-background dark:bg-backgroundDark"
 					>
 						<motion.div
 							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-start justify-center"
@@ -120,7 +120,7 @@ const Home: NextPage = () => {
 							animate={{ y: 100 }}
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
-							<div className="max-w-md bg-backgroundSecondary dark:bg-backgroundSecondaryDark px-8 py-6 rounded-xl border border-borderColor dark:border-borderColorDark">
+							<div className="max-w-md bg-background dark:bg-backgroundDark px-8 py-6 rounded-xl border border-border dark:border-borderDark">
 								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold">
 									{t('homepage:section3.title')}
 								</h1>
@@ -134,7 +134,7 @@ const Home: NextPage = () => {
 						initial="hidden"
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.4 }}
-						className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark"
+						className="bg-background dark:bg-backgroundDark"
 					>
 						<motion.div
 							className="max-w-5xl m-auto py-16 px-6 min-h-[400px] flex flex-col items-center text-center justify-center"
