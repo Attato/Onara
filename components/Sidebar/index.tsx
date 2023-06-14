@@ -145,7 +145,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 											/>
 
 											{isPanelOpen && (
-												<div className="flex items-start w-[340px] text-left absolute left-[264px] top-[-46px] cursor-default">
+												<div className="flex items-start w-72 text-left absolute left-[264px] top-[-46px] cursor-default">
 													<div className="w-4 h-[112px] flex " />
 													<div className="rounded-md px-3 py-4 bg-surface400 dark:bg-surface400Dark w-full text-sm shadow-md">
 														<div className="border-b border-b-border dark:border-b-borderDark pb-3 mb-3">
