@@ -32,11 +32,11 @@ const SignIn = () => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
-				<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark w-full mx-auto mt-10 rounded-lg max-w-sm">
+			<div className="flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-surface100 dark:bg-surface100Dark">
+				<div className="w-full mx-auto mt-10 rounded-lg max-w-sm">
 					<div className="flex items-center justify-center relative">
-						<div className="border-t border-borderColor dark:border-borderColorDark w-full absolute" />
-						<span className="z-10 w-fit bg-backgroundPrimary dark:bg-backgroundPrimaryDark px-6 ">
+						<div className="border-t border-border dark:border-borderDark w-full absolute" />
+						<span className="z-10 w-fit bg-surface100 dark:bg-surface100Dark px-6 ">
 							Continue with
 						</span>
 					</div>
