@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { MapPinIcon, StarIcon, EyeIcon } from '@heroicons/react/24/outline';
-import Tabs from '@/components/Tabs';
+import { StarIcon, EyeIcon } from '@heroicons/react/24/outline';
 import prisma from '@/lib/prisma';
+
+import Tabs from '@/components/Tabs';
+import Sidebar from '@/components/Sidebar';
 
 export interface ProfileProps {
 	profileData: any;
@@ -30,14 +32,19 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 			</Head>
 
 			{status === 'authenticated' && (
-				<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark min-h-screen">
+				<div className="bg-background dark:bg-backgroundDark min-h-screen">
 					<div className="flex gap-8 h-full">
-						<div className="flex flex-col max-w-[240px] w-full h-screen px-3 pt-3 ">
-							Sidebar
+						<div className="flex">
+							<div className="bg-surface300 dark:bg-surface300Dark min-w-[72px] p-3">
+								<div className="flex items-center justify-center border-2 border-dashed px-1 h-12 py-1 text-[8px] font-medium rounded-xl hover:rounded-[50%] transition-all cursor-pointer border-border dark:border-borderDark">
+									Group
+								</div>
+							</div>
+							<Sidebar profileData={profileData} />
 						</div>
 						<div className="flex flex-col gap-4 w-full">
 							<Tabs username={profileData?.name} />
-							<div className="flex items-center gap-6 bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
+							<div className="flex items-center gap-6">
 								{profileData && (
 									<React.Fragment>
 										<Image
@@ -46,7 +53,7 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 											height={150}
 											alt="profile image"
 											priority={true}
-											className="rounded-[20px] select-none"
+											className="rounded-[20px] hover:rounded-[50%] transition-all select-none shadow-md"
 										/>
 										<div className="flex items-end gap-10 w-full">
 											<div className="flex flex-col gap-1 text-sm text-colorSecondary dark:text-colorSecondaryDark">
@@ -177,7 +184,6 @@ export const getServerSideProps = async (
 			props: {
 				session,
 				profileData: null,
-				totalStars: 0,
 			},
 		};
 	}
