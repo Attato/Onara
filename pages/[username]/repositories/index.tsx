@@ -10,12 +10,16 @@ import { ProfileProps } from '..';
 import Tabs from '@/components/Tabs';
 import Alert from '@/components/Alert';
 import Loading from '@/components/Loading';
+import Sidebar from '@/components/Sidebar';
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
-	const [profile, setProfile] = useState<any>(profileData);
 	const [repositories, setRepositories] = useState<any>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
 	const [isLoading, setIsLoading] = useState(true);
+
+	console.log(profileData);
 
 	const formatDate = (dateString: string): string => {
 		const date = new Date(dateString);
@@ -67,8 +71,9 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 			</Head>
 
 			<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
+				{/* <Sidebar profileData={profileData} /> */}
 				<div className="flex flex-col gap-6 min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
-					<Tabs username={profile?.name} />
+					{/* <Tabs username={profileData?.name} /> */}
 
 					<div className="w-full">
 						<div className="py-4">
@@ -122,34 +127,40 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext
 ) => {
-	const session = await getSession(context);
-
-	if (!session) {
-		return {
-			redirect: {
-				destination: '/',
-			},
-		};
-	}
-
-	const { username } = context.params as { username: string }; // Type assertion
-
 	try {
-		const response = await fetch(`https://api.github.com/users/${username}`);
-		const profileData = await response.json();
+		const session = await getSession(context);
+
+		if (!session) {
+			return {
+				redirect: {
+					destination: '/',
+				},
+			};
+		}
+
+		const { email } = context.query as { email: string };
+
+		const user = await prisma.user.findUnique({
+			where: { email },
+		});
 
 		return {
 			props: {
-				session,
-				profileData,
+				session: session ?? null,
+				userData: user,
+				...(await serverSideTranslations(context.locale || 'en', [
+					'common',
+					'otherPage',
+				])),
 			},
 		};
 	} catch (error) {
-		console.error('Error fetching profile data:', error);
+		console.error('Error fetching user data:', error);
+
 		return {
 			props: {
-				session,
-				profileData: null,
+				session: null,
+				userData: null,
 			},
 		};
 	}
