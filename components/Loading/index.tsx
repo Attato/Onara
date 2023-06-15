@@ -3,22 +3,16 @@ import styles from './index.module.scss';
 type LoadingProps = {
 	width?: number;
 	height?: number;
-	color?: string;
 };
 
-const Loading: React.FC<LoadingProps> = ({
-	width = 24,
-	height = 24,
-	color = '#0082f5',
-}) => {
+const Loading: React.FC<LoadingProps> = ({ width = 24, height = 24 }) => {
 	return (
-		<div className={styles.spinner_container}>
+		<div className="flex justify-center items-center">
 			<div
-				className={styles.spinner}
+				className={`${styles.spinner} border-[4px] border-surface100 dark:border-surface100Dark ronded-[50%] border-t-accent dark:border-t-accent`}
 				style={{
 					width: `${width}px`,
 					height: `${height}px`,
-					borderTopColor: `${color}`,
 				}}
 			></div>
 		</div>
