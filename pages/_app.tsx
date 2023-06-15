@@ -20,7 +20,7 @@ const MyApp: NextPage<AppProps> = ({
 		<div translate="no">
 			<SessionProvider session={session}>
 				<ThemeProvider enableSystem={true} attribute="class">
-					{currentPath !== '/auth/signin' && currentPath !== '/auth/signup' && (
+					{currentPath !== '/' && currentPath !== '/changelog' ? null : (
 						<Header />
 					)}
 					<Component {...pageProps} />
