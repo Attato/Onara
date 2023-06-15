@@ -15,7 +15,6 @@ const Popup: React.FC<PopupProps> = ({
 			Blank popup <WrenchScrewdriverIcon width={16} height={16} />
 		</button>
 	),
-	title = 'Untitled',
 	children = <p>Popup without text</p>,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
