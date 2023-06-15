@@ -14,49 +14,21 @@ import Sidebar from '@/components/Sidebar';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { fetchProfileData } from '@/lib/profile';
+
 const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
-	const [repositories, setRepositories] = useState<any>([]);
 	const [searchTerm, setSearchTerm] = useState<string>('');
-	const [isLoading, setIsLoading] = useState(true);
-
-	console.log(profileData);
-
-	const formatDate = (dateString: string): string => {
-		const date = new Date(dateString);
-		const options: Intl.DateTimeFormatOptions = {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		};
-		return date.toLocaleDateString('en-US', options);
-	};
-
-	useEffect(() => {
-		const fetchRepositories = async () => {
-			try {
-				const response = await fetch(profileData.repos_url);
-				const repositoriesData = await response.json();
-				setRepositories(repositoriesData);
-				setIsLoading(false);
-			} catch (error) {
-				console.error('Error fetching repositories:', error);
-			}
-		};
-
-		if (profileData) {
-			fetchRepositories();
-		}
-	}, [profileData]);
 
 	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);
 	};
 
-	const filteredRepositories = repositories.filter((repo: any) =>
+	const filteredRepositories = profileData.repositories.filter((repo: any) =>
 		repo.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
 	const isRepositoriesNotFound = filteredRepositories.length === 0;
+	console.log(profileData);
 
 	return (
 		<React.Fragment>
@@ -70,48 +42,46 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className="bg-backgroundPrimary dark:bg-backgroundPrimaryDark">
-				{/* <Sidebar profileData={profileData} /> */}
-				<div className="flex flex-col gap-6 min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
-					{/* <Tabs username={profileData?.name} /> */}
+			<div className="flex bg-background dark:bg-backgroundDark">
+				<Sidebar profileData={profileData} />
+				<div className="flex w-full flex-col gap-6 min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
+					<Tabs username={profileData?.name} />
 
 					<div className="w-full">
-						<div className="py-4">
-							<input
-								type="text"
-								placeholder="Find a repository..."
-								value={searchTerm}
-								onChange={handleSearch}
-								className="flex items-center justify-between w-full rounded-md  py-1.5 px-3 bg-backgroundSecondary dark:bg-backgroundSecondaryDark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-borderColor dark:ring-borderColorDark sm:text-sm sm:leading-6 outline-none focus:ring-2 focus:ring-indigo-600 focus:dark:ring-indigo-600"
-							/>
-						</div>
+						<input
+							type="text"
+							placeholder="Find a repository..."
+							value={searchTerm}
+							onChange={handleSearch}
+							className="flex items-center justify-between w-full rounded-md py-1.5 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark sm:text-sm sm:leading-6 outline-none focus:ring-2 focus:ring-indigo-600 focus:dark:ring-indigo-600"
+						/>
+					</div>
 
-						{isLoading ? (
-							<Loading />
-						) : isRepositoriesNotFound ? (
+					<div className="flex flex-col max-h-[78vh] overflow-auto">
+						{isRepositoriesNotFound ? (
 							<Alert text="Repository Not Found" />
 						) : (
 							filteredRepositories.map((repo: any) => {
 								return (
 									<div
 										key={repo.id}
-										className="py-6 flex flex-col gap-3 border-t border-t-borderColor dark:border-t-borderColorDark text-xs text-colorSecondary dark:text-colorSecondaryDark last:mb-10"
+										className="py-6 flex flex-col gap-3 border-t border-t-border dark:border-t-borderDark text-xs text-colorSecondary dark:text-colorSecondaryDark last:mb-10"
 									>
 										<div className="flex items-center gap-5">
 											<Link
-												href={repo.html_url}
+												href={repo.htmlUrl}
 												className="text-indigo-600 text-xl font-semibold"
 												target="_blank"
 											>
 												{repo.name}
 											</Link>
-											<span className="flex items-center border border-borderColor dark:border-borderColorDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
+											<span className="flex items-center border border-border dark:border-borderDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
 												{repo.visibility}
 											</span>
 										</div>
 										<div className="flex gap-3">
 											{repo.language && <span>{repo.language}</span>}
-											<span>Updated on {formatDate(repo.updated_at)}</span>
+											{/* <span>Updated on {useFormatDate(repo.updated_at)}</span> */}
 										</div>
 									</div>
 								);
@@ -127,40 +97,36 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 export const getServerSideProps = async (
 	context: GetServerSidePropsContext
 ) => {
+	const session = await getSession(context);
+
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/',
+			},
+		};
+	}
+
 	try {
-		const session = await getSession(context);
-
-		if (!session) {
-			return {
-				redirect: {
-					destination: '/',
-				},
-			};
-		}
-
-		const { email } = context.query as { email: string };
-
-		const user = await prisma.user.findUnique({
-			where: { email },
-		});
+		const profileData = await fetchProfileData(session);
 
 		return {
 			props: {
-				session: session ?? null,
-				userData: user,
+				session,
+				profileData,
 				...(await serverSideTranslations(context.locale || 'en', [
 					'common',
-					'otherPage',
+					'homepage',
 				])),
 			},
 		};
 	} catch (error) {
-		console.error('Error fetching user data:', error);
+		console.error('Error fetching profile data:', error);
 
 		return {
 			props: {
-				session: null,
-				userData: null,
+				session,
+				profileData: null,
 			},
 		};
 	}
