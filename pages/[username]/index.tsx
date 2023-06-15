@@ -7,7 +7,7 @@ import { useSession, getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { StarIcon, EyeIcon } from '@heroicons/react/24/outline';
-import prisma from '@/lib/prisma';
+import { fetchProfileData } from '@/lib/profile';
 
 import Tabs from '@/components/Tabs';
 import Sidebar from '@/components/Sidebar';
@@ -18,6 +18,8 @@ export interface ProfileProps {
 
 const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 	const { status } = useSession();
+
+	console.log(profileData);
 
 	return (
 		<>
@@ -34,14 +36,8 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 			{status === 'authenticated' && (
 				<div className="bg-background dark:bg-backgroundDark min-h-screen">
 					<div className="flex gap-8 h-full">
-						<div className="flex">
-							<div className="bg-surface300 dark:bg-surface300Dark min-w-[72px] p-3">
-								<div className="flex items-center justify-center border-2 border-dashed px-1 h-12 py-1 text-[8px] font-medium rounded-xl hover:rounded-[50%] transition-all cursor-pointer border-border dark:border-borderDark">
-									Group
-								</div>
-							</div>
-							<Sidebar profileData={profileData} />
-						</div>
+						<Sidebar profileData={profileData} />
+
 						<div className="flex flex-col gap-4 w-full">
 							<Tabs username={profileData?.name} />
 							<div className="flex items-center gap-6">
@@ -116,61 +112,14 @@ export const getServerSideProps = async (
 		};
 	}
 
-	const { username } = context.params as { username: string }; // Type assertion
-
 	try {
-		const response = await fetch(`https://api.github.com/users/${username}`);
-		const profileData = await response.json();
-
-		const fetchTotalStars = async () => {
-			try {
-				const response = await fetch(
-					profileData.starred_url.replace('{/owner}{/repo}', '') + '?per_page=1'
-				);
-				const data = await response.json();
-				return data.length;
-			} catch (error) {
-				console.error('Error fetching total stars:', error);
-				return 0;
-			}
-		};
-
-		const totalStars = await fetchTotalStars();
-
-		// Save additional values to the User table
-		const updatedUser = await prisma.user.upsert({
-			where: { email: session.user?.email || '' },
-			create: {
-				email: session.user?.email || '',
-				name: profileData?.name,
-				image: profileData?.avatar_url,
-				htmlUrl: profileData?.html_url,
-				bio: profileData?.bio,
-				location: profileData?.location,
-				followers: profileData?.followers,
-				following: profileData?.following,
-				starredRepos: totalStars,
-				createdAt: profileData?.created_at,
-				updatedAt: profileData?.updated_at,
-			},
-			update: {
-				name: profileData?.name,
-				image: profileData?.avatar_url,
-				htmlUrl: profileData?.html_url,
-				bio: profileData?.bio,
-				location: profileData?.location,
-				followers: profileData?.followers,
-				following: profileData?.following,
-				starredRepos: totalStars,
-				createdAt: profileData?.created_at,
-				updatedAt: profileData?.updated_at,
-			},
-		});
+		// https://api.github.com/users/${username}
+		const profileData = await fetchProfileData(session);
 
 		return {
 			props: {
 				session,
-				profileData: updatedUser,
+				profileData,
 				...(await serverSideTranslations(context.locale || 'en', [
 					'common',
 					'homepage',
