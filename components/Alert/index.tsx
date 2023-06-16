@@ -33,16 +33,18 @@ const Alert: React.FC<AlertProps> = ({
 
 	return (
 		<div
-			className={
-				type === 'warning'
-					? styles.warning
-					: type === 'attention'
-					? styles.attention
-					: type === 'success'
-					? styles.success
-					: ''
-			}
-			id={styles.alert}
+			className={`
+				${
+					type === 'warning'
+						? 'text-warning bg-warningBackground border border-warningBorder'
+						: type === 'attention'
+						? 'text-attention bg-attentionBackground border border-attentionBorder'
+						: type === 'success'
+						? 'text-success bg-successBackground border border-successBorder'
+						: ''
+				}
+				flex items-center gap-2 px-4 py-3 rounded-lg text-background
+			`}
 		>
 			{getIcon()}
 			<p>{text}</p>
