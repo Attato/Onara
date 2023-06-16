@@ -37,6 +37,19 @@ export async function fetchProfileData(session: any) {
 			};
 		});
 
+		const { data: followers } = await axios.get(
+			`https://api.github.com/users/${profileData.name}/followers`
+		);
+
+		profileData.followers = followers.map((follower: any) => {
+			return {
+				id: follower.id.toString(),
+				login: follower.login,
+				image: follower.avatar_url,
+				htmlUrl: follower.html_url,
+			};
+		});
+
 		const { data: user } = await axios.get(
 			`https://api.github.com/users/${profileData.name}`
 		);
@@ -49,8 +62,6 @@ export async function fetchProfileData(session: any) {
 		profileData.location = user.location;
 		profileData.createdAt = user.created_at;
 		profileData.updatedAt = user.updated_at;
-		profileData.followers = user.followers;
-		profileData.following = user.following;
 
 		return profileData;
 	} catch (error) {
