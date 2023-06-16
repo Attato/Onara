@@ -15,7 +15,7 @@ import { Popover, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { ProfileProps } from '@/pages/[username]';
 import { useFormatDate } from '@/hooks/useFormatDate';
-
+import ModalPage from '@/components/ModalPage';
 const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 	const [isOnline, setIsOnline] = useState(false);
 
@@ -120,7 +120,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 											</span>
 										</div>
 										<div className="flex flex-col gap-1 border-b border-border dark:border-borderDark pb-3 mb-3">
-											<button
+											<div
 												onMouseEnter={() => setIsPanelOpen(true)}
 												onMouseLeave={() => setIsPanelOpen(false)}
 												className={`${
@@ -175,7 +175,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 														</div>
 													</div>
 												)}
-											</button>
+											</div>
 										</div>
 										<button
 											className="flex items-center justify-between text-warning w-full text-left px-2 pr-4 py-2 h-9 hover:bg-surface200 hover:dark:bg-surface200Dark rounded-md transition-all uppercase text-xs font-semibold"
@@ -194,12 +194,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 						</Transition>
 					</Popover>
 
-					<Link
-						href="#"
-						className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface100 hover:dark:bg-surface100Dark rounded-md transition-all"
-					>
-						<Cog6ToothIcon width={20} height={20} />
-					</Link>
+					<ModalPage />
 				</div>
 			</div>
 		</div>
