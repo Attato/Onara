@@ -40,23 +40,20 @@ model Session {
 }
 
 model User {
-    id                   String       @id @default(cuid())
-    email                String       @unique
-    emailVerified        String?      @map("email_verified")
-    name                 String?
-    image                String?
-    htmlUrl              String?      @map("html_url")
-    bio                  String?
-    location             String?
-    createdAt            String?      @map("created_at")
-    updatedAt            String?      @map("updated_at")
-    followers            Int?
-    following            Int?
-    totalStargazersCount Int          @map("total_stargazers_count")
-    totalWatchersCount   Int          @map("total_watchers_count")
-    accounts             Account[]
-    sessions             Session[]
-    repositories         Repository[]
+    id           String       @id @default(cuid())
+    email        String       @unique
+    name         String?
+    image        String?
+    htmlUrl      String?      @map("html_url")
+    bio          String?
+    location     String?
+    createdAt    String?      @map("created_at")
+    updatedAt    String?      @map("updated_at")
+    accounts     Account[]
+    sessions     Session[]
+    repositories Repository[]
+    followers    Follower[]
+    following    Following[]
 }
 
 model Repository {
@@ -74,9 +71,30 @@ model Repository {
     stargazersCount Int     @map("stargazers_count")
     watchersCount   Int     @map("watchers_count")
     language        String?
+    visibility      String
 
     userId String @map("user_id")
     user   User   @relation(fields: [userId], references: [id])
 
     @@unique([name, userId])
+}
+
+model Follower {
+    id      String @id @default(cuid())
+    login   String
+    image   String
+    htmlUrl String @map("html_url")
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @map("user_id")
+}
+
+model Following {
+    id      String @id @default(cuid())
+    login   String
+    image   String
+    htmlUrl String @map("html_url")
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String @map("user_id")
 }
