@@ -12,7 +12,7 @@ module.exports = {
 				indigoPrimary: '#6564ec',
 				indigoSecondary: '#5022f4',
 
-				accent: '#4f46e5',
+				accent: 'var(--accent)',
 
 				warning: '#f85149',
 				warningBackground: 'rgba(248, 81, 73, 0.6)',
@@ -45,13 +45,6 @@ module.exports = {
 				surface300Dark: 'var(--surface-300-dark)',
 				surface400: 'var(--surface-400)',
 				surface400Dark: 'var(--surface-400-dark)',
-
-				backgroundPrimary: 'var(--background-primary)',
-				backgroundPrimaryDark: 'var(--background-primary-dark)',
-				backgroundSecondary: 'var(--background-secondary)',
-				backgroundSecondaryDark: 'var(--background-secondary-dark)',
-				backgroundTertiary: 'var(--background-tertiary)',
-				backgroundTertiaryDark: 'var(--background-tertiary-dark)',
 
 				border: 'var(--border)',
 				borderDark: 'var(--border-dark)',
