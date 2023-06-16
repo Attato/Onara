@@ -1,34 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NextPage, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-
+import Image from 'next/image';
 import { getSession } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 
 import { ProfileProps } from '..';
-
 import Tabs from '@/components/Tabs';
-import Alert from '@/components/Alert';
-import Loading from '@/components/Loading';
 import Sidebar from '@/components/Sidebar';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { fetchProfileData } from '@/lib/profile';
 
+import styles from './index.module.scss';
+
 const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
+	const { theme } = useTheme();
+
 	const [searchTerm, setSearchTerm] = useState<string>('');
 
 	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchTerm(event.target.value);
 	};
 
-	const filteredRepositories = profileData.repositories.filter((repo: any) =>
+	const filteredRepositories = profileData?.repositories.filter((repo: any) =>
 		repo.name.toLowerCase().includes(searchTerm.toLowerCase())
 	);
 
-	const isRepositoriesNotFound = filteredRepositories.length === 0;
-	console.log(profileData);
+	const isRepositoriesNotFound = filteredRepositories?.length === 0;
 
 	return (
 		<React.Fragment>
@@ -53,15 +53,49 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 							placeholder="Find a repository..."
 							value={searchTerm}
 							onChange={handleSearch}
-							className="flex items-center justify-between w-full rounded-md py-1.5 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark sm:text-sm sm:leading-6 outline-none focus:ring-2 focus:ring-indigo-600 focus:dark:ring-indigo-600"
+							className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm"
 						/>
 					</div>
 
-					<div className="flex flex-col max-h-[78vh] overflow-auto">
-						{isRepositoriesNotFound ? (
-							<Alert text="Repository Not Found" />
+					<div
+						className={`${theme === 'light' ? styles.light : styles.dark} ${
+							styles.scroll
+						} flex flex-col max-h-[78vh] h-full overflow-auto`}
+					>
+						{profileData?.repositories.length === 0 ? (
+							<div className="flex flex-col h-full items-center justify-center">
+								<Image
+									src={
+										theme === 'light'
+											? '/illustrations/not-found-light.svg'
+											: '/illustrations/not-found-dark.svg'
+									}
+									width={421}
+									height={218}
+									alt="not found"
+								/>
+								<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
+									We could not find your repositories.
+								</p>
+							</div>
+						) : isRepositoriesNotFound ? (
+							<div className="flex flex-col h-full items-center justify-center">
+								<Image
+									src={
+										theme === 'light'
+											? '/illustrations/not-found-light.svg'
+											: '/illustrations/not-found-dark.svg'
+									}
+									width={421}
+									height={218}
+									alt="not found"
+								/>
+								<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
+									We could not find a repository with that name.
+								</p>
+							</div>
 						) : (
-							filteredRepositories.map((repo: any) => {
+							filteredRepositories?.map((repo: any) => {
 								return (
 									<div
 										key={repo.id}
@@ -70,12 +104,12 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 										<div className="flex items-center gap-5">
 											<Link
 												href={repo.htmlUrl}
-												className="text-indigo-600 text-xl font-semibold"
+												className="text-colorPrimary dark:text-colorPrimaryDark text-xl font-semibold"
 												target="_blank"
 											>
 												{repo.name}
 											</Link>
-											<span className="flex items-center border border-border dark:border-borderDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
+											<span className="flex items-center bg-surface100 dark:bg-surface100Dark border border-border dark:border-borderDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
 												{repo.visibility}
 											</span>
 										</div>
