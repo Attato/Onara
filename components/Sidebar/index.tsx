@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-
 import {
 	ChevronRightIcon,
 	ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
-import {
-	Cog6ToothIcon,
-	MoonIcon,
-	MinusCircleIcon,
-} from '@heroicons/react/24/solid';
+import { MoonIcon, MinusCircleIcon } from '@heroicons/react/24/solid';
 import { Popover, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { ProfileProps } from '@/pages/[username]';
 import { useFormatDate } from '@/hooks/useFormatDate';
 import ModalPage from '@/components/ModalPage';
+
 const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 	const [isOnline, setIsOnline] = useState(false);
 
@@ -110,6 +105,10 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 											<h2 className="text-xl font-semibold">
 												{profileData?.name}
 											</h2>
+
+											<p className="text-sm text-colorSecondary dark:text-colorSecondaryDark overflow-hidden max-h-5 line-clamp-1">
+												{profileData?.bio}
+											</p>
 										</div>
 										<div className="flex flex-col gap-1 border-b border-border dark:border-borderDark pb-3 mb-3">
 											<h3 className="font-semibold uppercase text-xs">
@@ -147,12 +146,12 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 														<div className="w-4 h-[112px] flex " />
 														<div className="rounded-md px-3 py-4 bg-surface400 dark:bg-surface400Dark w-full text-sm shadow-md">
 															<div className="border-b border-b-border dark:border-b-borderDark pb-3 mb-3">
-																<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all rounded-md group">
+																<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark transition-all rounded-md group">
 																	<div className="w-3 h-3 rounded-[50%] bg-accent group-hover:bg-colorPrimaryDark" />
 																	Online
 																</button>
 															</div>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all rounded-md group">
+															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
 																<MoonIcon
 																	width={14}
 																	height={14}
@@ -160,7 +159,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 																/>
 																Idle
 															</button>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all rounded-md group">
+															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
 																<MinusCircleIcon
 																	width={14}
 																	height={14}
@@ -168,7 +167,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 																/>
 																Do Not Disturb
 															</button>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all rounded-md group">
+															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
 																<div className="w-3 h-3  rounded-[50%] border-[3px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
 																Invisible
 															</button>
