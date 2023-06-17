@@ -42,9 +42,9 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className="flex bg-background dark:bg-backgroundDark">
+			<div className="flex gap-8 bg-background dark:bg-backgroundDark">
 				<Sidebar profileData={profileData} />
-				<div className="flex w-full flex-col gap-6 min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
+				<div className="flex w-full h-screen flex-col gap-6 min-h-screen text-colorPrimary dark:text-colorPrimaryDark pr-8 overflow-hidden">
 					<Tabs username={profileData?.name} />
 
 					<div className="w-full">
@@ -60,7 +60,7 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 					<div
 						className={`${theme === 'light' ? styles.light : styles.dark} ${
 							styles.scroll
-						} flex flex-col max-h-[78vh] h-full overflow-auto`}
+						} flex flex-col h-full overflow-auto`}
 					>
 						{profileData?.repositories.length === 0 ? (
 							<div className="flex flex-col h-full items-center justify-center">
@@ -99,7 +99,7 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 								return (
 									<div
 										key={repo.id}
-										className="py-6 flex flex-col gap-3 border-t border-t-border dark:border-t-borderDark text-xs text-colorSecondary dark:text-colorSecondaryDark last:mb-10"
+										className="py-6 flex flex-col gap-3 border-t border-t-border dark:border-t-borderDark text-xs text-colorSecondary dark:text-colorSecondaryDark"
 									>
 										<div className="flex items-center gap-5">
 											<Link
