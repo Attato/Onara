@@ -193,7 +193,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 						</Transition>
 					</Popover>
 
-					<ModalPage />
+					<ModalPage profileData={profileData} />
 				</div>
 			</div>
 		</div>
