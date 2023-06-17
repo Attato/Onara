@@ -32,6 +32,7 @@ CREATE TABLE "Session" (
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "email_verified" TEXT,
     "name" TEXT,
     "image" TEXT,
     "html_url" TEXT,

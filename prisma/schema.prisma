@@ -40,20 +40,21 @@ model Session {
 }
 
 model User {
-    id           String       @id @default(cuid())
-    email        String       @unique
-    name         String?
-    image        String?
-    htmlUrl      String?      @map("html_url")
-    bio          String?
-    location     String?
-    createdAt    String?      @map("created_at")
-    updatedAt    String?      @map("updated_at")
-    accounts     Account[]
-    sessions     Session[]
-    repositories Repository[]
-    followers    Follower[]
-    following    Following[]
+    id            String       @id @default(cuid())
+    email         String       @unique
+    emailVerified String?      @map("email_verified")
+    name          String?
+    image         String?
+    htmlUrl       String?      @map("html_url")
+    bio           String?
+    location      String?
+    createdAt     String?      @map("created_at")
+    updatedAt     String?      @map("updated_at")
+    accounts      Account[]
+    sessions      Session[]
+    repositories  Repository[]
+    followers     Follower[]
+    following     Following[]
 }
 
 model Repository {
