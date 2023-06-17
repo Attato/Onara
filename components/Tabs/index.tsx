@@ -46,7 +46,7 @@ const Tabs = ({ username }: TabsProps) => {
 	];
 
 	return (
-		<div className="flex gap-1 w-full text-colorSecondary dark:text-colorSecondaryDark select-none mt-12">
+		<div className="flex gap-1 w-full text-colorSecondary dark:text-colorSecondaryDark select-none border-b border-b-border dark:border-b-borderDark py-4">
 			{links.map((link: LinkItem) => {
 				return (
 					<Link
