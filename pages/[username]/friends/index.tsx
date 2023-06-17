@@ -138,22 +138,20 @@ const Friends: NextPage<any> = ({ profileData }) => {
 					</div>
 
 					{isUserNotFound ? (
-						<div className="py-6">
-							<div className="flex flex-col h-full items-center justify-center">
-								<Image
-									src={
-										theme === 'light'
-											? '/illustrations/not-found-light.svg'
-											: '/illustrations/not-found-dark.svg'
-									}
-									width={421}
-									height={218}
-									alt="not found"
-								/>
-								<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
-									We could not find anyone by that name.
-								</p>
-							</div>
+						<div className="flex flex-col h-full items-center justify-center">
+							<Image
+								src={
+									theme === 'light'
+										? '/illustrations/not-found-light.svg'
+										: '/illustrations/not-found-dark.svg'
+								}
+								width={421}
+								height={218}
+								alt="not found"
+							/>
+							<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
+								We could not find anyone by that name.
+							</p>
 						</div>
 					) : (
 						<React.Fragment>
