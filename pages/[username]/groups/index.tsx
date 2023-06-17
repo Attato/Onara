@@ -1,55 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NextPage, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-
+import Link from 'next/link';
+import Image from 'next/image';
 import { getSession } from 'next-auth/react';
+import { useTheme } from 'next-themes';
 
 import { ProfileProps } from '..';
 import Tabs from '@/components/Tabs';
-import Alert from '@/components/Alert';
+import Sidebar from '@/components/Sidebar';
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { fetchProfileData } from '@/lib/profile';
 
 import styles from './index.module.scss';
 
-const Groups: NextPage<ProfileProps> = ({ profileData }) => {
-	const [profile, setProfile] = useState<any>(profileData);
-	const [groupName, setGroupName] = useState('');
-	const [friends, setFriends] = useState<string[]>([]);
-	const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
-	const [groups, setGroups] = useState<any[]>([]);
+const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
+	const { theme } = useTheme();
 
-	useEffect(() => {
-		setProfile(profileData);
-	}, [profileData]);
+	const groups = [{}];
+	const [searchTerm, setSearchTerm] = useState<string>('');
 
-	const handleGroupNameChange = (
-		event: React.ChangeEvent<HTMLInputElement>
-	) => {
-		setGroupName(event.target.value);
+	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchTerm(event.target.value);
 	};
 
-	const handleFriendSelection = (friend: string) => {
-		setSelectedFriends((prevSelectedFriends) =>
-			prevSelectedFriends.includes(friend)
-				? prevSelectedFriends.filter((f) => f !== friend)
-				: [...prevSelectedFriends, friend]
-		);
-	};
+	// const filteredGrops = groups.filter((group: any) =>
+	// 	group.name.includes(searchTerm.toLowerCase())
+	// );
 
-	const handleCreateGroup = () => {
-		const newGroup = {
-			name: groupName,
-			friends: selectedFriends,
-		};
-
-		setGroups((prevGroups) => [...prevGroups, newGroup]);
-		setGroupName('');
-		setSelectedFriends([]);
-	};
+	const isRepositoriesNotFound = groups?.length === 0;
 
 	return (
 		<React.Fragment>
 			<Head>
-				<title>Your groups</title>
+				<title>Your repositories</title>
 				<meta
 					name="description"
 					content="Onara is the perfect way to administer your repositories. Administer your application easily and efficiently."
@@ -58,45 +43,85 @@ const Groups: NextPage<ProfileProps> = ({ profileData }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className={styles.groups}>
-				<div className={styles.groups_content}>
-					<Tabs username={profile?.name} />
-					<div className={styles.groups_list}>
-						<div className={styles.create}>
-							<input
-								type="text"
-								placeholder="Group Name"
-								value={groupName}
-								onChange={handleGroupNameChange}
-							/>
-							<button onClick={handleCreateGroup}>Create Group</button>
-						</div>
-						{/* <h3>Select Friends:</h3>
-						{friends.map((friend) => (
-							<div key={friend}>
-								<label>
-									<input
-										type="checkbox"
-										checked={selectedFriends.includes(friend)}
-										onChange={() => handleFriendSelection(friend)}
-									/>
-									{friend}
-								</label>
-							</div>
-						))}
-						<h2>Your Groups</h2>
-						{groups.map((group) => (
-							<div key={group.name}>
-								<h3>{group.name}</h3>
-								<ul>
-									{group.friends.map((friend: string) => (
-										<li key={friend}>{friend}</li>
-									))}
-								</ul>
-							</div>
-						))} */}
+			<div className="flex gap-8 bg-background dark:bg-backgroundDark">
+				<Sidebar profileData={profileData} />
+				<div className="flex w-full flex-col gap-6 min-h-screen text-colorPrimary dark:text-colorPrimaryDark">
+					<Tabs username={profileData?.name} />
 
-						<Alert text="Under construction..." />
+					<div className="w-full">
+						<input
+							type="text"
+							placeholder="Find a group..."
+							value={searchTerm}
+							onChange={handleSearch}
+							className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm"
+						/>
+					</div>
+
+					<div
+						className={`${theme === 'light' ? styles.light : styles.dark} ${
+							styles.scroll
+						} flex flex-col h-full overflow-auto`}
+					>
+						{profileData?.repositories.length === 0 ? (
+							<div className="flex flex-col h-full items-center justify-center">
+								<Image
+									src={
+										theme === 'light'
+											? '/illustrations/not-found-light.svg'
+											: '/illustrations/not-found-dark.svg'
+									}
+									width={421}
+									height={218}
+									alt="not found"
+								/>
+								<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
+									We could not find your repositories.
+								</p>
+							</div>
+						) : isRepositoriesNotFound ? (
+							<div className="flex flex-col h-full items-center justify-center">
+								<Image
+									src={
+										theme === 'light'
+											? '/illustrations/not-found-light.svg'
+											: '/illustrations/not-found-dark.svg'
+									}
+									width={421}
+									height={218}
+									alt="not found"
+								/>
+								<p className="mt-10 text-colorSecondary dark:text-colorSecondaryDark">
+									We could not find a repository with that name.
+								</p>
+							</div>
+						) : (
+							groups?.map((group: any) => {
+								return (
+									<div
+										key={group.id}
+										className="py-6 flex flex-col gap-3 border-t border-t-border dark:border-t-borderDark text-xs text-colorSecondary dark:text-colorSecondaryDark last:mb-10"
+									>
+										{/* <div className="flex items-center gap-5">
+											<Link
+												href={group.htmlUrl}
+												className="text-colorPrimary dark:text-colorPrimaryDark text-xl font-semibold"
+												target="_blank"
+											>
+												{group.name}
+											</Link>
+											<span className="flex items-center bg-surface100 dark:bg-surface100Dark border border-border dark:border-borderDark capitalize text-xs text-colorSecondary dark:text-colorSecondaryDark rounded-md px-1 py-[2px]">
+												{group.visibility}
+											</span>
+										</div>
+										<div className="flex gap-3">
+											{group.language && <span>{group.language}</span>}
+										</div> */}
+										Under contruction...
+									</div>
+								);
+							})
+						)}
 					</div>
 				</div>
 			</div>
@@ -117,32 +142,29 @@ export const getServerSideProps = async (
 		};
 	}
 
-	const { username } = context.params as { username: string }; // Type assertion
-
 	try {
-		const response = await fetch(`https://api.github.com/users/${username}`);
-		const profileData = await response.json();
-
-		// Fetch friends data from an API or other source
-		const friendsData = ['Friend 1', 'Friend 2', 'Friend 3'];
+		const profileData = await fetchProfileData(session);
 
 		return {
 			props: {
 				session,
 				profileData,
-				friendsData,
+				...(await serverSideTranslations(context.locale || 'en', [
+					'common',
+					'homepage',
+				])),
 			},
 		};
 	} catch (error) {
 		console.error('Error fetching profile data:', error);
+
 		return {
 			props: {
 				session,
 				profileData: null,
-				friendsData: [],
 			},
 		};
 	}
 };
 
-export default Groups;
+export default Repositories;
