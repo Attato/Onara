@@ -42,16 +42,16 @@ const Home: NextPage = () => {
 
 			{status === 'unauthenticated' && (
 				<React.Fragment>
-					<main className="bg-gradient-to-t from-indigoPrimary to-indigoSecondary text-slate-100 relative overflow-x-hidden">
+					<main className="bg-gradient-to-t from-indigoPrimary to-indigoSecondary text-colorPrimaryDark relative overflow-x-hidden">
 						<Image
 							src="/illustrations/homepage_background.svg"
 							className="absolute bottom-0 right-[-1px]"
 							width={500}
 							height={500}
-							alt="homepage image"
+							alt="homepage background illustration"
 							priority={true}
 						/>
-						<div className="flex flex-col gap-6 py-44 px-6 text-slate-100 max-w-5xl max-lg:max-w-2xl m-auto">
+						<div className="flex flex-col gap-6 py-44 px-6 text-colorPrimaryDark max-w-5xl max-lg:max-w-2xl m-auto">
 							<h1 className="text-6xl max-lg:text-5xl max-w-2xl text-500 font-black">
 								{t('homepage:masthead.title')}
 							</h1>
