@@ -32,7 +32,6 @@ CREATE TABLE "Session" (
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "email_verified" TEXT,
     "name" TEXT,
     "image" TEXT,
     "html_url" TEXT,
@@ -40,9 +39,6 @@ CREATE TABLE "User" (
     "location" TEXT,
     "created_at" TEXT,
     "updated_at" TEXT,
-    "followers" INTEGER,
-    "following" INTEGER,
-    "starred_repos" INTEGER,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -63,9 +59,32 @@ CREATE TABLE "Repository" (
     "stargazers_count" INTEGER NOT NULL,
     "watchers_count" INTEGER NOT NULL,
     "language" TEXT,
+    "visibility" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
 
     CONSTRAINT "Repository_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Follower" (
+    "id" TEXT NOT NULL,
+    "login" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "html_url" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+
+    CONSTRAINT "Follower_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Following" (
+    "id" TEXT NOT NULL,
+    "login" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "html_url" TEXT NOT NULL,
+    "user_id" TEXT NOT NULL,
+
+    CONSTRAINT "Following_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -88,3 +107,9 @@ ALTER TABLE "Session" ADD CONSTRAINT "Session_user_id_fkey" FOREIGN KEY ("user_i
 
 -- AddForeignKey
 ALTER TABLE "Repository" ADD CONSTRAINT "Repository_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Follower" ADD CONSTRAINT "Follower_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Following" ADD CONSTRAINT "Following_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
