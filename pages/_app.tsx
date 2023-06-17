@@ -24,7 +24,9 @@ const MyApp: NextPage<AppProps> = ({
 						<Header />
 					)}
 					<Component {...pageProps} />
-					<Footer />
+					{currentPath !== '/' && currentPath !== '/changelog' ? null : (
+						<Footer />
+					)}
 				</ThemeProvider>
 			</SessionProvider>
 		</div>
