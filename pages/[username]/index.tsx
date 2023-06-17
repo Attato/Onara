@@ -80,11 +80,13 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 											<div className="flex flex-col gap-1 justify-between text-colorSecondary dark:text-colorSecondaryDark select-none">
 												<div className="flex items-center gap-1 text-sm">
 													<StarIcon width={16} height={16} />
-													{profileData?.starredRepos} starred
+													16 starred
+													{/* {profileData?.starredRepos} */}
 												</div>
 												<div className="flex items-center gap-1 text-sm">
 													<EyeIcon width={16} height={16} />
-													{profileData?.starredRepos} watching
+													42 watching
+													{profileData?.watchingRepos}
 												</div>
 											</div>
 										</div>
