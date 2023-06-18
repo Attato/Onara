@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { PrismaClient } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
@@ -13,8 +14,15 @@ export async function fetchProfileData(session: any) {
 			throw new Error('User not found');
 		}
 
+		const config = {
+			headers: {
+				Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+			},
+		};
+
 		const { data: repositories } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/repos`
+			`https://api.github.com/users/${profileData.name}/repos`,
+			config
 		);
 
 		profileData.repositories = repositories.map((repo: any) => {
@@ -33,12 +41,14 @@ export async function fetchProfileData(session: any) {
 				stargazersCount: repo.stargazers_count,
 				watchersCount: repo.watchers_count,
 				language: repo.language,
+				visibility: repo.visibility,
 				userId: profileData.id,
 			};
 		});
 
 		const { data: followers } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/followers`
+			`https://api.github.com/users/${profileData.name}/followers`,
+			config
 		);
 
 		profileData.followers = followers.map((follower: any) => {
@@ -50,8 +60,37 @@ export async function fetchProfileData(session: any) {
 			};
 		});
 
+		const { data: following } = await axios.get(
+			`https://api.github.com/users/${profileData.name}/following`,
+			config
+		);
+
+		profileData.following = following.map((following: any) => {
+			return {
+				id: following.id.toString(),
+				login: following.login,
+				image: following.avatar_url,
+				htmlUrl: following.html_url,
+			};
+		});
+
+		const { data: friends } = await axios.get(
+			`https://api.github.com/users/${profileData.name}/friends`,
+			config
+		);
+
+		profileData.friends = friends.map((friend: any) => {
+			return {
+				id: friend.id.toString(),
+				login: friend.login,
+				image: friend.avatar_url,
+				htmlUrl: friend.html_url,
+			};
+		});
+
 		const { data: user } = await axios.get(
-			`https://api.github.com/users/${profileData.name}`
+			`https://api.github.com/users/${profileData.name}`,
+			config
 		);
 
 		profileData.email = user.email;
