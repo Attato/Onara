@@ -55,6 +55,7 @@ model User {
     repositories  Repository[]
     followers     Follower[]
     following     Following[]
+    friends       Friend[]
 }
 
 model Repository {
@@ -81,21 +82,29 @@ model Repository {
 }
 
 model Follower {
-    id      String @id @default(cuid())
-    login   String
+    id      String  @id @default(cuid())
+    name    String?
     image   String
-    htmlUrl String @map("html_url")
+    htmlUrl String  @map("html_url")
+    user    User    @relation(fields: [userId], references: [id])
+    userId  String  @map("user_id")
+}
+
+model Following {
+    id      String  @id @default(cuid())
+    name    String?
+    image   String
+    htmlUrl String  @map("html_url")
 
     user   User   @relation(fields: [userId], references: [id])
     userId String @map("user_id")
 }
 
-model Following {
-    id      String @id @default(cuid())
-    login   String
+model Friend {
+    id      String  @id @default(cuid())
+    name    String?
     image   String
-    htmlUrl String @map("html_url")
-
-    user   User   @relation(fields: [userId], references: [id])
-    userId String @map("user_id")
+    htmlUrl String  @map("html_url")
+    user    User    @relation(fields: [userId], references: [id])
+    userId  String  @map("user_id")
 }
