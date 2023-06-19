@@ -13,19 +13,21 @@ const Footer = () => {
 					<div className="max-w-[220px] w-full flex flex-col mx-4">
 						<h3 className="font-medium mb-4">Product</h3>
 						<Link
-							href="/"
+							href="/changelog"
 							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Changelog
 						</Link>
 						<Link
-							href="/"
+							href="https://opencollective.com/onara"
+							target="_blank"
 							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Support
 						</Link>
 						<Link
-							href="/"
+							href="https://github.com/Attato/Onara/discussions/categories/feedback"
+							target="_blank"
 							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Feedback
@@ -35,7 +37,8 @@ const Footer = () => {
 					<div className="max-w-[220px] w-full flex flex-col mx-4">
 						<h3 className="font-medium mb-4">Company</h3>
 						<Link
-							href="/"
+							href="https://github.com/Attato/Onara"
+							target="_blank"
 							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
 						>
 							Open source
