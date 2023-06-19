@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { PrismaClient } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
 
 const prisma = new PrismaClient();
 
@@ -74,23 +73,8 @@ export async function fetchProfileData(session: any) {
 			};
 		});
 
-		const { data: friends } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/friends`,
-			config
-		);
-
-		profileData.friends = friends.map((friend: any) => {
-			return {
-				id: friend.id.toString(),
-				login: friend.login,
-				image: friend.avatar_url,
-				htmlUrl: friend.html_url,
-			};
-		});
-
 		const { data: user } = await axios.get(
-			`https://api.github.com/users/${profileData.name}`,
-			config
+			`https://api.github.com/users/${profileData.name}`
 		);
 
 		profileData.email = user.email;
