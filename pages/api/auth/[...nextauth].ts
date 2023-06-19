@@ -9,8 +9,14 @@ const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 const options = {
 	providers: [
 		GitHubProvider({
-			clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID!,
-			clientSecret: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET!,
+			clientId:
+				process.env.NODE_ENV === 'production'
+					? process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID_PROD!
+					: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID_DEV!,
+			clientSecret:
+				process.env.NODE_ENV === 'production'
+					? process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET_PROD!
+					: process.env.NEXT_PUBLIC_GITHUB_CLIENT_SECRET_DEV!,
 		}),
 	],
 	adapter: PrismaAdapter(prisma),
