@@ -1,0 +1,6 @@
+.input:checked + div {
+	@apply bg-indigo-500;
+}
+.input:checked + div svg {
+	@apply flex;
+}
