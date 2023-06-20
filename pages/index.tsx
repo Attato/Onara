@@ -119,7 +119,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={true} />
+													<CheckBox checked={true} readOnly />
 												</div>
 											</div>
 											{/* Second */}
@@ -137,7 +137,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={false} />
+													<CheckBox checked={false} readOnly />
 												</div>
 											</div>
 											{/* Third */}
@@ -155,7 +155,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={true} />
+													<CheckBox checked={true} readOnly />
 												</div>
 											</div>
 										</div>
@@ -176,7 +176,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={false} />
+													<CheckBox checked={false} readOnly />
 												</div>
 											</div>
 
@@ -194,7 +194,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={false} />
+													<CheckBox checked={false} readOnly />
 												</div>
 											</div>
 
@@ -212,7 +212,7 @@ const Home: NextPage = () => {
 														</span>
 													</div>
 
-													<CheckBox checked={true} />
+													<CheckBox checked={true} readOnly />
 												</div>
 											</div>
 										</div>
