@@ -53,7 +53,33 @@ const Friends: NextPage<any> = ({ profileData }) => {
 		});
 	};
 
-	console.log(selectedFriends);
+	const submitData = async () => {
+		try {
+			const dataToSend = {
+				selectedFriends: selectedFriends.map((friend) => ({
+					id: friend.id,
+					login: friend.login,
+					image: friend.image,
+					htmlUrl: friend.htmlUrl,
+				})),
+				userId: profileData.id,
+			};
+
+			const response = await fetch('/api/addFriends', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(dataToSend),
+			});
+
+			if (response.ok) {
+				console.log('Friends added successfully!');
+			} else {
+				console.log('Error adding friends:', response.statusText);
+			}
+		} catch (error) {
+			console.log('Error adding friends:', error);
+		}
+	};
 
 	return (
 		<React.Fragment>
@@ -67,9 +93,9 @@ const Friends: NextPage<any> = ({ profileData }) => {
 				<link rel="manifest" href="/manifest.json" />
 			</Head>
 
-			<div className="flex bg-background dark:bg-backgroundDark">
+			<div className="flex bg-background dark:bg-backgroundDark gap-8">
 				<Sidebar profileData={profileData} />
-				<div className="flex flex-col gap-6 w-full min-h-screen p-5 text-colorPrimary dark:text-colorPrimaryDark">
+				<div className="flex flex-col gap-6 w-full pr-8 min-h-screen text-colorPrimary dark:text-colorPrimaryDark">
 					<Tabs username={profileData?.name} />
 
 					<div className="w-full flex flex-col">
@@ -126,8 +152,10 @@ const Friends: NextPage<any> = ({ profileData }) => {
 															<h3>Following</h3>
 															<div className="flex flex-col gap-2 border-l border-l-border dark:border-l-borderDark">
 																{profileData?.following.map((follow: any) => {
-																	const isFriendSelected =
-																		selectedFriends.includes(follow.id);
+																	const isFriendSelected = selectedFriends.some(
+																		(selectedFriend) =>
+																			selectedFriend.id === follow.id
+																	);
 
 																	return (
 																		<div
@@ -142,13 +170,13 @@ const Friends: NextPage<any> = ({ profileData }) => {
 																				htmlFor={`friend-${follow.id}`}
 																				className="flex w-full gap-3 items-center px-3 py-2 cursor-pointer"
 																			>
-																				{/* <Image
+																				<Image
 																					src={follow.image}
 																					width={32}
 																					height={32}
 																					alt={`${follow.login} avatar`}
 																					className="rounded-[50%] h-fit"
-																				/> */}
+																				/>
 
 																				<div className="flex flex-col w-full">
 																					<h3 className="text-colorPrimary dark:text-colorPrimaryDark text-base font-medium">
@@ -177,8 +205,10 @@ const Friends: NextPage<any> = ({ profileData }) => {
 															<h3>Followers</h3>
 															<div className="flex flex-col gap-2 border-l border-l-border dark:border-l-borderDark">
 																{profileData?.followers.map((follower: any) => {
-																	const isFriendSelected =
-																		selectedFriends.includes(follower.id);
+																	const isFriendSelected = selectedFriends.some(
+																		(selectedFriend) =>
+																			selectedFriend.id === follower.id
+																	);
 
 																	return (
 																		<div
@@ -193,13 +223,13 @@ const Friends: NextPage<any> = ({ profileData }) => {
 																				htmlFor={`friend-${follower.id}`}
 																				className="flex w-full gap-3 items-center px-3 py-2 cursor-pointer"
 																			>
-																				{/* <Image
+																				<Image
 																					src={follower.image}
 																					width={32}
 																					height={32}
 																					alt={`${follower.login} avatar`}
 																					className="rounded-[50%] h-fit"
-																				/> */}
+																				/>
 
 																				<div className="flex flex-col w-full">
 																					<h3 className="text-colorPrimary dark:text-colorPrimaryDark text-base font-medium">
@@ -228,7 +258,7 @@ const Friends: NextPage<any> = ({ profileData }) => {
 														<div className="flex items-center justify-between w-full font-medium text-sm">
 															<span>Selected: {selectedFriends.length}</span>
 															<button
-																// onClick={handleAddFriends}
+																onClick={submitData}
 																className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark px-3 w-full max-w-[160px] px py-2 rounded-md"
 															>
 																Add +
