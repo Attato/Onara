@@ -5,9 +5,9 @@ generator client {
 
 datasource db {
     provider          = "postgresql"
-    url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-    shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+    url               = env("POSTGRES_PRISMA_URL") // использует пул подключений
+    directUrl         = env("POSTGRES_URL_NON_POOLING") // использует прямое подключение
+    shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // используется для миграций
 }
 
 model Account {
@@ -55,7 +55,7 @@ model User {
     repositories  Repository[]
     followers     Follower[]
     following     Following[]
-    friends       Friend[]
+    friends       Friend?
 }
 
 model Repository {
@@ -86,8 +86,10 @@ model Follower {
     name    String?
     image   String
     htmlUrl String  @map("html_url")
-    user    User    @relation(fields: [userId], references: [id])
     userId  String  @map("user_id")
+    user    User    @relation(fields: [userId], references: [id])
+
+    @@unique([userId, id])
 }
 
 model Following {
@@ -95,16 +97,20 @@ model Following {
     name    String?
     image   String
     htmlUrl String  @map("html_url")
+    userId  String  @map("user_id")
+    user    User    @relation(fields: [userId], references: [id])
 
-    user   User   @relation(fields: [userId], references: [id])
-    userId String @map("user_id")
+    @@unique([userId, id])
 }
 
 model Friend {
     id      String  @id @default(cuid())
     name    String?
-    image   String
-    htmlUrl String  @map("html_url")
-    user    User    @relation(fields: [userId], references: [id])
-    userId  String  @map("user_id")
+    image   String?
+    htmlUrl String?
+
+    userId String? @unique @map("user_id")
+    user   User?   @relation(fields: [userId], references: [id])
+
+    @@unique([userId, id])
 }

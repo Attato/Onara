@@ -69,7 +69,7 @@ CREATE TABLE "Repository" (
 -- CreateTable
 CREATE TABLE "Follower" (
     "id" TEXT NOT NULL,
-    "login" TEXT NOT NULL,
+    "name" TEXT,
     "image" TEXT NOT NULL,
     "html_url" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
@@ -80,12 +80,23 @@ CREATE TABLE "Follower" (
 -- CreateTable
 CREATE TABLE "Following" (
     "id" TEXT NOT NULL,
-    "login" TEXT NOT NULL,
+    "name" TEXT,
     "image" TEXT NOT NULL,
     "html_url" TEXT NOT NULL,
     "user_id" TEXT NOT NULL,
 
     CONSTRAINT "Following_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Friend" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+    "image" TEXT,
+    "htmlUrl" TEXT,
+    "user_id" TEXT,
+
+    CONSTRAINT "Friend_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -99,6 +110,18 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Repository_name_user_id_key" ON "Repository"("name", "user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Follower_user_id_id_key" ON "Follower"("user_id", "id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Following_user_id_id_key" ON "Following"("user_id", "id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Friend_user_id_key" ON "Friend"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Friend_user_id_id_key" ON "Friend"("user_id", "id");
 
 -- AddForeignKey
 ALTER TABLE "Account" ADD CONSTRAINT "Account_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -114,3 +137,6 @@ ALTER TABLE "Follower" ADD CONSTRAINT "Follower_user_id_fkey" FOREIGN KEY ("user
 
 -- AddForeignKey
 ALTER TABLE "Following" ADD CONSTRAINT "Following_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Friend" ADD CONSTRAINT "Friend_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
