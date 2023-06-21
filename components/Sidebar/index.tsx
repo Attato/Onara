@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
 	ChevronRightIcon,
 	ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
-import { MoonIcon, MinusCircleIcon } from '@heroicons/react/24/solid';
+import { MoonIcon, MinusCircleIcon, PlusIcon } from '@heroicons/react/24/solid';
 import { Popover, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { ProfileProps } from '@/pages/[username]';
@@ -37,24 +38,72 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 
 	return (
 		<div className="flex">
-			<div className="bg-surface300 dark:bg-surface300Dark min-w-[72px] p-3">
-				<div className="flex items-center justify-center border-2 border-dashed px-1 h-12 py-1 text-[8px] font-medium rounded-xl hover:rounded-[50%] transition-all cursor-pointer border-border dark:border-borderDark">
-					Group
-				</div>
+			<div className="flex flex-col items-center gap-2 bg-surface300 dark:bg-surface300Dark min-w-[72px] p-3">
+				<Link
+					href="/"
+					className="w-12 h-12 bg-black rounded-2xl hover:rounded-[50%] transition-all flex items-center justify-center"
+				>
+					<Image
+						src="/icons/icon-512_transparent.png"
+						width={42}
+						height={42}
+						alt="logo"
+					/>
+				</Link>
+
+				<hr className="border-b-2 border-[#ccced3] border-t-0 w-8 dark:border-surface75Dark" />
+
+				<Link
+					href={`/${profileData.name}/groups`}
+					className="w-12 h-12 bg-background dark:bg-backgroundDark rounded-[50%] hover:rounded-2xl transition-all flex items-center justify-center text-accent"
+				>
+					<PlusIcon width={24} height={24} />
+				</Link>
 			</div>
 			<div className="flex flex-col min-w-[240px] w-full h-screen pt-3 bg-surface100 dark:bg-surface100Dark">
-				<div className="flex flex-col gap-3 h-full px-3">
-					<div className="border-dashed border-2 px-3 py-2 text-sm font-medium rounded-md border-border dark:border-borderDark cursor-pointer">
-						Friend
+				<div className="flex flex-col  px-3 h-[calc(100vh-52px)] overflow-auto">
+					<div className="flex items-center justify-between">
+						<h2 className="px-3 text-xs font-semibold text-colorSecondary dark:text-colorSecondaryDark uppercase py-2">
+							Friends:
+						</h2>
+						<Link
+							href={`${profileData.name}/friends`}
+							className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
+						>
+							<PlusIcon width={16} height={16} />
+						</Link>
 					</div>
-					<div className="border-dashed border-2 px-3 py-2 text-sm font-medium rounded-md border-border dark:border-borderDark cursor-pointer">
-						Friend
-					</div>
-					<div className="border-dashed border-2 px-3 py-2 text-sm font-medium rounded-md border-border dark:border-borderDark cursor-pointer">
-						Friend
-					</div>
+					{profileData.friends.map((friend: any) => {
+						return (
+							<Link
+								href={`/${profileData.name}/messages/${friend.id}`}
+								key={friend.id}
+								className="flex items-center gap-3 hover:bg-surface300 hover:dark:bg-surface300Dark text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark rounded-md px-3 py-2 transition-all"
+							>
+								<div className="relative">
+									<Image
+										src={friend.image}
+										width={32}
+										height={32}
+										alt={friend.name + 'avatar'}
+										className="rounded-[50%]"
+									/>
+									<div className="bg-surface100 dark:bg-surface100Dark w-[14px] h-[14px] absolute right-[-2px] bottom-[-2px] rounded-[50%] flex items-center justify-center">
+										<div className="w-[10px] h-[10px] rounded-[50%] border-[2px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
+									</div>
+								</div>
+
+								<div className="flex flex-col items-start">
+									<h3 className="text-sm text-colorPrimary dark:text-colorPrimaryDark font-medium">
+										{friend.name}
+									</h3>
+									<span className="text-xs font-medium">@{friend.id}</span>
+								</div>
+							</Link>
+						);
+					})}
 				</div>
-				<div className="flex items-center justify-between h-14 bg-surface200 dark:bg-surface200Dark px-3">
+				<div className="flex items-center justify-between h-[52px] bg-surface200 dark:bg-surface200Dark px-3">
 					<Popover className="relative">
 						<Popover.Button className="flex items-center hover:bg-surface100 hover:dark:bg-surface100Dark transition-all pl-2 pr-4 py-1 rounded-md outline-none">
 							<div className="relative flex">
@@ -87,7 +136,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 						>
 							<Popover.Panel className="absolute z-10 bottom-16 bg-surface200 dark:bg-surface200Dark rounded-lg w-80 text-sm font-medium shadow-md">
 								<div className="absolute bg-accent w-full h-[60px] rounded-t-md"></div>
-								<div className="m-4">
+								<div className="m-4 mb-0">
 									<div className="relative w-fit">
 										<Image
 											src={`${profileData?.image}`}
@@ -99,7 +148,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 										/>
 									</div>
 								</div>
-								<div className="mx-4 mb-4 mt-7 bg-surface400 dark:bg-surface400Dark rounded-md">
+								<div className="m-4 bg-surface400 dark:bg-surface400Dark rounded-md">
 									<div className="py-4 px-3">
 										<div className="border-b border-border dark:border-borderDark pb-3 mb-3">
 											<h2 className="text-xl font-semibold">
@@ -168,7 +217,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 																Do Not Disturb
 															</button>
 															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
-																<div className="w-3 h-3  rounded-[50%] border-[3px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
+																<div className="w-3 h-3 rounded-[50%] border-[3px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
 																Invisible
 															</button>
 														</div>
