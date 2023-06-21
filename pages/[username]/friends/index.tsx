@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NextPage, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-
+import Link from 'next/link';
 import { getSession } from 'next-auth/react';
 
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -14,14 +14,23 @@ import { Dialog, Transition } from '@headlessui/react';
 import Sidebar from '@/components/Sidebar';
 import Tabs from '@/components/Tabs';
 
+import {
+	ChatBubbleBottomCenterTextIcon,
+	EllipsisVerticalIcon,
+} from '@heroicons/react/24/solid';
+
+import { useTheme } from 'next-themes';
+
 const Friends: NextPage<any> = ({ profileData }) => {
+	const { theme } = useTheme();
+
 	const [searchQuery, setSearchQuery] = useState('');
 
-	// const filteredFollowers = profileData?.followers.filter((friend: any) =>
-	// 	friend.login.toLowerCase().includes(searchQuery.toLowerCase())
-	// );
+	const filteredFriends = profileData?.friends.filter((friend: any) =>
+		friend.name.toLowerCase().includes(searchQuery.toLowerCase())
+	);
 
-	// const isUserNotFound = filteredFollowers.length === 0;
+	const isUserNotFound = filteredFriends.length === 0;
 
 	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setSearchQuery(event.target.value);
@@ -274,7 +283,10 @@ const Friends: NextPage<any> = ({ profileData }) => {
 						</div>
 					</div>
 
-					{/* {isUserNotFound ? (
+					<h2 className="text-xs uppercase font-semibold text-colorSecondary dark:text-colorSecondaryDark">
+						Online — 0
+					</h2>
+					{isUserNotFound ? (
 						<div className="flex flex-col h-full items-center justify-center">
 							<Image
 								src={
@@ -291,50 +303,63 @@ const Friends: NextPage<any> = ({ profileData }) => {
 							</p>
 						</div>
 					) : (
-						<React.Fragment>
-							{filteredFollowers.map((friend: any) => {
+						<div className="flex flex-col">
+							{filteredFriends.map((friend: any) => {
 								console.log(friend);
 
 								return (
 									<div
 										key={friend.id}
-										className="flex py-6 border-t border-border dark:border-borderDark"
+										className="flex py-2 border-t border-border dark:border-borderDark hover:bg-surface100 hover:dark:bg-surface100Dark transition px-3"
 									>
 										<Link
 											href={friend.htmlUrl}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="w-full flex items-center gap-6"
+											className="w-full flex items-center justify-between"
 										>
-											<Image
-												src={friend.image}
-												width={80}
-												height={80}
-												alt={friend.login}
-												className="rounded-[50%]"
-											/>
+											<div className="flex items-center gap-3">
+												<Image
+													src={friend.image}
+													width={40}
+													height={40}
+													alt={friend.name}
+													className="rounded-[50%]"
+												/>
 
-											<div className="flex flex-col gap-3 text-colorSecondary dark:text-colorSecondaryDark text-sm">
-												<h3 className="text-colorPrimary dark:text-colorPrimaryDark text-base font-medium">
-													{friend.login}
-												</h3>
-												{friend.bio && <span>{friend.bio}</span>}
+												<div className="flex flex-col gap-1 text-colorSecondary dark:text-colorSecondaryDark text-sm">
+													<h3 className="text-colorPrimary dark:text-colorPrimaryDark text-base font-medium">
+														{friend.name}
+													</h3>
 
-												<span className="flex items-center gap-2">
-													{friend.location && (
-														<>
-															<MapPinIcon width={16} height={16} />
-															<span>{friend.location}</span>
-														</>
-													)}
-												</span>
+													<span className="flex items-center gap-2">
+														@{friend.id}
+													</span>
+												</div>
+											</div>
+											<div className="flex items-center gap-3">
+												<Link
+													href={`/${profileData.name}/messages/${friend.id}`}
+													className="hover:bg-surface300 hover:dark:bg-surface300Dark p-1 rounded-md transition-all"
+												>
+													<ChatBubbleBottomCenterTextIcon
+														width={20}
+														height={20}
+													/>
+												</Link>
+												<Link
+													href="/"
+													className="hover:bg-surface300 hover:dark:bg-surface300Dark p-1 rounded-md transition-all"
+												>
+													<EllipsisVerticalIcon width={20} height={20} />
+												</Link>
 											</div>
 										</Link>
 									</div>
 								);
 							})}
-						</React.Fragment>
-					)} */}
+						</div>
+					)}
 				</div>
 			</div>
 		</React.Fragment>
