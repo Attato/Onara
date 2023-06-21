@@ -18,7 +18,7 @@ const MyApp: NextPage<AppProps> = ({
 
 	return (
 		<div translate="no">
-			<SessionProvider session={session}>
+			<SessionProvider session={pageProps.session}>
 				<ThemeProvider enableSystem={true} attribute="class">
 					{currentPath !== '/' && currentPath !== '/changelog' ? null : (
 						<Header />
