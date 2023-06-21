@@ -115,7 +115,6 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 										</div>
 										<div className="flex gap-3">
 											{repo.language && <span>{repo.language}</span>}
-											{/* <span>Updated on {useFormatDate(repo.updated_at)}</span> */}
 										</div>
 									</div>
 								);
