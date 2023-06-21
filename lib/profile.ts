@@ -73,6 +73,27 @@ export async function fetchProfileData(session: any) {
 			};
 		});
 
+		const friends = await prisma.friend.findMany();
+
+		profileData.friends = friends.map((friend) => {
+			return {
+				id: friend.id.toString(),
+				name: friend.name,
+				image: friend.image,
+				htmlUrl: friend.htmlUrl,
+			};
+		});
+
+		const posts = await prisma.post.findMany();
+
+		profileData.posts = posts.map((post) => {
+			return {
+				id: post.id.toString(),
+				title: post.title,
+				content: post.content,
+			};
+		});
+
 		const { data: user } = await axios.get(
 			`https://api.github.com/users/${profileData.name}`
 		);
