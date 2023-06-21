@@ -56,6 +56,7 @@ model User {
     followers     Follower[]
     following     Following[]
     friends       Friend?
+    posts         Post[]
 }
 
 model Repository {
@@ -113,4 +114,13 @@ model Friend {
     user   User?   @relation(fields: [userId], references: [id])
 
     @@unique([userId, id])
+}
+
+model Post {
+    id        String  @id @default(cuid())
+    title     String
+    content   String?
+    published Boolean @default(false)
+    author    User?   @relation(fields: [authorId], references: [id])
+    authorId  String?
 }
