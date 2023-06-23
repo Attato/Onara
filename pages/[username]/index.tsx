@@ -137,7 +137,11 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 						<div className="flex flex-col gap-4 w-full">
 							<Tabs username={profileData?.name} />
 
-							<div className="max-h-[calc(100vh-16px-61px)] h-full overflow-auto max-w-[calc(100%-380px)] pr-8">
+							<div
+								className={`${
+									theme === 'light' ? 'light' : 'dark'
+								} ${'scroll'} max-h-[calc(100vh-16px-61px)] h-full overflow-auto max-w-[calc(100%-380px)] pr-4`}
+							>
 								<div className="flex items-center gap-6 max-w-5xl">
 									<React.Fragment>
 										{profileData ? (
