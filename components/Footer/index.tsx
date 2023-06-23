@@ -43,12 +43,6 @@ const Footer = () => {
 						>
 							Open source
 						</Link>
-						<Link
-							href="/"
-							className="mb-3 last:mb-0 text-sm text-colorSecondary hover:opacity-90 dark:text-colorSecondaryDark font-medium w-fit"
-						>
-							Privacy Policy
-						</Link>
 					</div>
 				</div>
 
