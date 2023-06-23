@@ -21,7 +21,6 @@ export default async function addPosts(
 			},
 		});
 
-		// Assuming you have the userId available
 		const userId = 'user_id_here';
 
 		await prisma.user.update({
