@@ -60,33 +60,6 @@ const ModalPage: FC<ProfileProps> = ({ profileData }) => {
 								<Dialog.Panel className="flex w-full h-screen bg-background dark:bg-backgroundDark">
 									<div className="min-w-[440px] bg-surface100 dark:bg-surface100Dark">
 										<div className="flex flex-col items-start py-16 px-3 max-w-[218px] ml-auto text-colorSecondary dark:text-colorSecondaryDark text-sm font-medium text-left">
-											<h3 className="uppercase text-xs font-bold px-3 pb-[6px]">
-												# User settings
-											</h3>
-											<div className="flex flex-col w-full">
-												<button
-													className={`${
-														activeTab === 'my-account'
-															? 'bg-surface50 dark:bg-surface50Dark hover:bg-surface-75 hover:dark:bg-surface75Dark text-colorPrimary dark:text-colorPrimaryDark'
-															: 'hover:bg-surface75 hover:dark:bg-surface75Dark'
-													} w-full text-left mb-[2px] outline-none focus-visible:ring-1 ring-border dark:ring-borderDark rounded-md px-3 py-2 hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all`}
-													onClick={() => setActiveTab('my-account')}
-												>
-													My Account
-												</button>
-												<button
-													className={`${
-														activeTab === 'profiles'
-															? 'bg-surface50 dark:bg-surface50Dark hover:bg-surface-75 hover:dark:bg-surface75Dark text-colorPrimary dark:text-colorPrimaryDark'
-															: 'hover:bg-surface75 hover:dark:bg-surface75Dark'
-													} w-full text-left mb-[2px] outline-none focus-visible:ring-1 ring-border dark:ring-borderDark rounded-md px-3 py-2 hover:text-colorPrimary hover:dark:text-colorPrimaryDark transition-all`}
-													onClick={() => setActiveTab('profiles')}
-												>
-													Profiles
-												</button>
-
-												<hr className="mb-3 pb-3 mx-3 max-w-[170px] border-t-0 border-b border-b-border dark:border-b-borderDark" />
-											</div>
 											<h3 className="uppercase text-xs font-bold px-3 py-[6px]">
 												# App settings
 											</h3>
@@ -209,8 +182,6 @@ const ModalPage: FC<ProfileProps> = ({ profileData }) => {
 													<div className="flex justify-center w-fit my-4">
 														<ThemeChanger />
 													</div>
-													<h3>Dark sidebar?</h3>
-													<h3 className="mt-4">Chat Font Scaling</h3>
 												</div>
 											</React.Fragment>
 										)}
