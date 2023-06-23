@@ -138,7 +138,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 							Friends:
 						</h2>
 						<Link
-							href={`${profileData?.name}/friends`}
+							href={`${profileData?.name}` + '/friends'}
 							className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
 						>
 							<PlusIcon width={16} height={16} />
