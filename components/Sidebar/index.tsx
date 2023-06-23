@@ -132,48 +132,50 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 				</Link>
 			</div>
 			<div className="flex flex-col min-w-[240px] w-full h-screen pt-3 bg-surface100 dark:bg-surface100Dark">
-				<div className="flex flex-col  px-3 h-[calc(100vh-52px)] overflow-auto">
-					<div className="flex items-center justify-between">
-						<h2 className="px-3 text-xs font-semibold text-colorSecondary dark:text-colorSecondaryDark uppercase py-2">
-							Friends:
-						</h2>
-						<Link
-							href={profileData?.name ? `${profileData.name}/friends` : '#'}
-							className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
-						>
-							<PlusIcon width={16} height={16} />
-						</Link>
-					</div>
-					{profileData.friends.map((friend: any) => {
-						return (
+				{profileData && (
+					<div className="flex flex-col  px-3 h-[calc(100vh-52px)] overflow-auto">
+						<div className="flex items-center justify-between">
+							<h2 className="px-3 text-xs font-semibold text-colorSecondary dark:text-colorSecondaryDark uppercase py-2">
+								Friends:
+							</h2>
 							<Link
-								href={`/${profileData?.name}/messages/${friend.id}`}
-								key={friend.id}
-								className="flex items-center gap-3 hover:bg-surface300 hover:dark:bg-surface300Dark text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark rounded-md px-3 py-2 transition-all"
+								href={profileData?.name}
+								className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
 							>
-								<div className="relative">
-									<Image
-										src={friend.image}
-										width={32}
-										height={32}
-										alt={friend.name + 'avatar'}
-										className="rounded-[50%]"
-									/>
-									<div className="bg-surface100 dark:bg-surface100Dark w-[14px] h-[14px] absolute right-[-2px] bottom-[-2px] rounded-[50%] flex items-center justify-center">
-										<div className="w-[10px] h-[10px] rounded-[50%] border-[2px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
-									</div>
-								</div>
-
-								<div className="flex flex-col items-start">
-									<h3 className="text-sm text-colorPrimary dark:text-colorPrimaryDark font-medium">
-										{friend.name}
-									</h3>
-									<span className="text-xs font-medium">@{friend.id}</span>
-								</div>
+								<PlusIcon width={16} height={16} />
 							</Link>
-						);
-					})}
-				</div>
+						</div>
+						{profileData.friends.map((friend: any) => {
+							return (
+								<Link
+									href={`/${profileData?.name}/messages/${friend.id}`}
+									key={friend.id}
+									className="flex items-center gap-3 hover:bg-surface300 hover:dark:bg-surface300Dark text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark rounded-md px-3 py-2 transition-all"
+								>
+									<div className="relative">
+										<Image
+											src={friend.image}
+											width={32}
+											height={32}
+											alt={friend.name + 'avatar'}
+											className="rounded-[50%]"
+										/>
+										<div className="bg-surface100 dark:bg-surface100Dark w-[14px] h-[14px] absolute right-[-2px] bottom-[-2px] rounded-[50%] flex items-center justify-center">
+											<div className="w-[10px] h-[10px] rounded-[50%] border-[2px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
+										</div>
+									</div>
+
+									<div className="flex flex-col items-start">
+										<h3 className="text-sm text-colorPrimary dark:text-colorPrimaryDark font-medium">
+											{friend.name}
+										</h3>
+										<span className="text-xs font-medium">@{friend.id}</span>
+									</div>
+								</Link>
+							);
+						})}
+					</div>
+				)}
 				<div className="flex items-center justify-between h-[52px] bg-surface200 dark:bg-surface200Dark px-3">
 					<Popover className="relative">
 						<Popover.Button className="flex items-center hover:bg-surface100 hover:dark:bg-surface100Dark transition-all pl-2 pr-4 py-1 rounded-md outline-none">
