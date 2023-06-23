@@ -111,7 +111,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 							return (
 								<React.Fragment key={group.id}>
 									<Link
-										href={`/${profileData.name}/groups/${group.id}`}
+										href={`/${profileData?.name}/groups/${group.id}`}
 										className="w-12 h-12 bg-accent rounded-[50%] hover:rounded-2xl transition-all flex items-center justify-center text-accent"
 									>
 										<UserGroupIcon
@@ -125,7 +125,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 						})}
 
 				<Link
-					href={`/${profileData.name}/groups`}
+					href={`/${profileData?.name}/groups`}
 					className="w-12 h-12 bg-background dark:bg-backgroundDark rounded-[50%] hover:rounded-2xl transition-all flex items-center justify-center text-accent"
 				>
 					<PlusIcon width={24} height={24} />
@@ -138,7 +138,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 							Friends:
 						</h2>
 						<Link
-							href={`${profileData.name}/friends`}
+							href={`${profileData?.name}/friends`}
 							className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
 						>
 							<PlusIcon width={16} height={16} />
@@ -147,7 +147,7 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 					{profileData.friends.map((friend: any) => {
 						return (
 							<Link
-								href={`/${profileData.name}/messages/${friend.id}`}
+								href={`/${profileData?.name}/messages/${friend.id}`}
 								key={friend.id}
 								className="flex items-center gap-3 hover:bg-surface300 hover:dark:bg-surface300Dark text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark rounded-md px-3 py-2 transition-all"
 							>
