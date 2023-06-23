@@ -1,11 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
 	ChevronRightIcon,
 	ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
-import { MoonIcon, MinusCircleIcon, PlusIcon } from '@heroicons/react/24/solid';
+import {
+	MoonIcon,
+	MinusCircleIcon,
+	PlusIcon,
+	UserGroupIcon,
+} from '@heroicons/react/24/solid';
 import { Popover, Transition } from '@headlessui/react';
 import { signOut } from 'next-auth/react';
 import { ProfileProps } from '@/pages/[username]';
@@ -13,28 +18,73 @@ import { useFormatDate } from '@/hooks/useFormatDate';
 import ModalPage from '@/components/ModalPage';
 
 const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
-	const [isOnline, setIsOnline] = useState(false);
+	const [selectedStatus, setSelectedStatus] = useState('Online');
 
-	useEffect(() => {
-		const handleStatusChange = () => {
-			setIsOnline(navigator.onLine);
-		};
+	let statusIcon;
 
-		if (typeof window !== 'undefined') {
-			setIsOnline(navigator.onLine);
-			window.addEventListener('online', handleStatusChange);
-			window.addEventListener('offline', handleStatusChange);
-		}
+	if (selectedStatus === 'Online') {
+		statusIcon = (
+			<div className="w-3 h-3 rounded-[50%] bg-accent group-hover:bg-colorPrimaryDark" />
+		);
+	} else if (selectedStatus === 'Idle') {
+		statusIcon = (
+			<MoonIcon
+				width={14}
+				height={14}
+				className="text-attention group-hover:text-colorPrimaryDark"
+			/>
+		);
+	} else if (selectedStatus === 'Do Not Disturb') {
+		statusIcon = (
+			<MinusCircleIcon
+				width={14}
+				height={14}
+				className="text-warning group-hover:text-colorPrimaryDark"
+			/>
+		);
+	} else if (selectedStatus === 'Invisible') {
+		statusIcon = (
+			<div className="w-3 h-3 rounded-[50%] border-[3px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
+		);
+	}
 
-		return () => {
-			if (typeof window !== 'undefined') {
-				window.removeEventListener('online', handleStatusChange);
-				window.removeEventListener('offline', handleStatusChange);
-			}
-		};
-	}, []);
+	let statusIconSmall;
+
+	if (selectedStatus === 'Online') {
+		statusIconSmall = (
+			<div className="w-2 h-2 rounded-[50%] bg-accent group-hover:bg-colorPrimaryDark" />
+		);
+	} else if (selectedStatus === 'Idle') {
+		statusIconSmall = (
+			<MoonIcon
+				width={8}
+				height={8}
+				className="text-attention group-hover:text-colorPrimaryDark"
+			/>
+		);
+	} else if (selectedStatus === 'Do Not Disturb') {
+		statusIconSmall = (
+			<MinusCircleIcon
+				width={8}
+				height={8}
+				className="text-warning group-hover:text-colorPrimaryDark"
+			/>
+		);
+	} else if (selectedStatus === 'Invisible') {
+		statusIconSmall = (
+			<div className="w-2 h-2 rounded-[50%]  bg-colorSecondary dark:bg-colorSecondaryDark group-hover:bg-colorPrimaryDark" />
+		);
+	}
 
 	const [isPanelOpen, setIsPanelOpen] = useState(false);
+	const [groups, setGroups] = useState([]);
+
+	useEffect(() => {
+		const storedGroups = localStorage.getItem('groups');
+		if (storedGroups) {
+			setGroups(JSON.parse(storedGroups));
+		}
+	}, []);
 
 	return (
 		<div className="flex">
@@ -52,6 +102,27 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 				</Link>
 
 				<hr className="border-b-2 border-[#ccced3] border-t-0 w-8 dark:border-surface75Dark" />
+
+				{groups.length !== 0 &&
+					groups
+						?.slice()
+						.reverse()
+						.map((group: any) => {
+							return (
+								<React.Fragment key={group.id}>
+									<Link
+										href={`/${profileData.name}/groups/${group.id}`}
+										className="w-12 h-12 bg-accent rounded-[50%] hover:rounded-2xl transition-all flex items-center justify-center text-accent"
+									>
+										<UserGroupIcon
+											width={40}
+											height={40}
+											className="bg-accent p-2 rounded-full text-colorPrimaryDark"
+										/>
+									</Link>
+								</React.Fragment>
+							);
+						})}
 
 				<Link
 					href={`/${profileData.name}/groups`}
@@ -115,13 +186,15 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 									priority={true}
 									className="rounded-[20px] select-none h-fit"
 								/>
-								<div className="w-3 h-3 rounded-[50%] border-2 border-surface200 dark:border-surface200Dark absolute bottom-0 right-0 bg-accent" />
+								<div className="absolute bottom-0 right-0">
+									{statusIconSmall}
+								</div>
 							</div>
 
 							<div className="flex flex-col font-medium ml-2 text-left">
 								<h6 className="text-sm">{profileData?.name}</h6>
 								<span className="text-xs text-colorSecondary dark:text-colorSecondaryDark ">
-									{isOnline ? 'Online' : 'Offline'}
+									{selectedStatus}
 								</span>
 							</div>
 						</Popover.Button>
@@ -168,6 +241,9 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 											</span>
 										</div>
 										<div className="flex flex-col gap-1 border-b border-border dark:border-borderDark pb-3 mb-3">
+											<h3 className="font-semibold uppercase text-xs">
+												Status
+											</h3>
 											<div
 												onMouseEnter={() => setIsPanelOpen(true)}
 												onMouseLeave={() => setIsPanelOpen(false)}
@@ -178,10 +254,8 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 												} flex items-center justify-between w-full text-left px-2 pr-4 py-2 hover:text-colorPrimary hover:dark:text-colorPrimaryDark hover:bg-surface200 hover:dark:bg-surface200Dark rounded-md transition-all relative`}
 											>
 												<div className="flex items-center gap-2">
-													<div className="w-3 h-3 rounded-[50%] bg-accent" />
-													<span className="text-sm ">
-														{isOnline ? 'Online' : 'Offline'}
-													</span>
+													{statusIcon}
+													<span className="text-sm ">{selectedStatus}</span>
 												</div>
 
 												<ChevronRightIcon
@@ -195,12 +269,18 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 														<div className="w-4 h-[112px] flex " />
 														<div className="rounded-md px-3 py-4 bg-surface400 dark:bg-surface400Dark w-full text-sm shadow-md">
 															<div className="border-b border-b-border dark:border-b-borderDark pb-3 mb-3">
-																<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark transition-all rounded-md group">
+																<button
+																	onClick={() => setSelectedStatus('Online')}
+																	className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark hover:dark:text-colorPrimaryDark  transition-all rounded-md group"
+																>
 																	<div className="w-3 h-3 rounded-[50%] bg-accent group-hover:bg-colorPrimaryDark" />
 																	Online
 																</button>
 															</div>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
+															<button
+																onClick={() => setSelectedStatus('Idle')}
+																className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark hover:dark:text-colorPrimaryDark  transition-all rounded-md group"
+															>
 																<MoonIcon
 																	width={14}
 																	height={14}
@@ -208,7 +288,12 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 																/>
 																Idle
 															</button>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
+															<button
+																onClick={() =>
+																	setSelectedStatus('Do Not Disturb')
+																}
+																className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark hover:dark:text-colorPrimaryDark  transition-all rounded-md group"
+															>
 																<MinusCircleIcon
 																	width={14}
 																	height={14}
@@ -216,7 +301,10 @@ const Sidebar: React.FC<ProfileProps> = ({ profileData }) => {
 																/>
 																Do Not Disturb
 															</button>
-															<button className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark  transition-all rounded-md group">
+															<button
+																onClick={() => setSelectedStatus('Invisible')}
+																className="flex items-center gap-2 p-2 w-full text-left hover:bg-accent text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimaryDark hover:dark:text-colorPrimaryDark transition-all rounded-md group"
+															>
 																<div className="w-3 h-3 rounded-[50%] border-[3px] border-colorSecondary dark:border-colorSecondaryDark group-hover:border-colorPrimaryDark" />
 																Invisible
 															</button>
