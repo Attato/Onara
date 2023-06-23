@@ -1,40 +1,50 @@
 import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react';
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
 import Image from 'next/dist/client/image';
 import Sidebar from '@/components/Sidebar';
-
 import { getSession } from 'next-auth/react';
 import { GetServerSidePropsContext } from 'next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { fetchProfileData } from '@/lib/profile';
-
 import { ProfileProps } from '../..';
 import { NextPage } from 'next/types';
-
 import { PaperAirplaneIcon, CheckIcon } from '@heroicons/react/24/solid';
+import { useTheme } from 'next-themes';
 
 interface Message {
 	id: number;
 	message: string;
 }
 
+interface MessagesState {
+	[friendId: string]: Message[];
+}
+
 const Messages: NextPage<ProfileProps> = ({ profileData }) => {
-	const pathname = usePathname();
+	const router = useRouter();
+
+	const { theme } = useTheme();
 
 	const [message, setMessage] = useState<string>('');
-	const [messages, setMessages] = useState<Message[]>([]);
+	const [messages, setMessages] = useState<MessagesState>({});
 
 	console.log(messages);
 
 	useEffect(() => {
-		const savedPosts = localStorage.getItem('messages');
-		if (savedPosts) {
-			setMessages(JSON.parse(savedPosts));
+		const friendId = String(router.query.id);
+		const savedMessages = localStorage.getItem(`messages_${friendId}`);
+		if (savedMessages) {
+			setMessages((prevMessages) => ({
+				...prevMessages,
+				[friendId]: JSON.parse(savedMessages),
+			}));
 		} else {
-			setMessages([]);
+			setMessages((prevMessages) => ({
+				...prevMessages,
+				[friendId]: [],
+			}));
 		}
-	}, []);
+	}, [router.query.id]);
 
 	const handleMessageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setMessage(e.target.value);
@@ -42,16 +52,26 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const friendId = String(router.query.id);
 		const newPost: Message = {
 			id: Date.now(),
 			message,
 		};
-		setMessages([...messages, newPost]);
+		const updatedMessages = [...(messages[friendId] || []), newPost];
+		setMessages((prevMessages) => ({
+			...prevMessages,
+			[friendId]: updatedMessages,
+		}));
 
 		setMessage('');
 
-		localStorage.setItem('messages', JSON.stringify([...messages, newPost]));
+		localStorage.setItem(
+			`messages_${friendId}`,
+			JSON.stringify(updatedMessages)
+		);
 	};
+
+	const friendId = String(router.query.id);
 
 	return (
 		<>
@@ -59,12 +79,9 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 				<div className="flex gap-8 h-full">
 					<Sidebar profileData={profileData} />
 
-					<div className="flex flex-col gap-4 w-full">
+					<div className="flex flex-col gap-4 w-full max-w-3xl">
 						{profileData.friends
-							.filter(
-								(friend: any) =>
-									`/${profileData.name}/messages/${friend.id}` === pathname
-							)
+							.filter((friend: any) => friend.id === router.query.id)
 							.map((friend: any) => {
 								return (
 									<div
@@ -94,9 +111,13 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 								);
 							})}
 
-						<div className="max-h-[calc(100vh-16px-61px)] h-full overflow-auto max-w-[calc(100%-380px)] pr-8">
-							<div className="flex flex-col items-end justify-end gap-2 max-w-5xl h-[calc(100%-52px)] overflow-auto ml-auto">
-								{messages.map((message: any) => {
+						<div
+							className={`${
+								theme === 'light' ? 'light' : 'dark'
+							} ${'scroll'} flex flex-col items-end justify-end gap-2 max-w-5xl h-[calc(100vh-36px-12px-32px-53px-16px)] pr-2 overflow-auto ml-auto`}
+						>
+							<div className="h-full flex flex-col gap-2">
+								{messages[friendId]?.map((message: any) => {
 									const date = new Date(message.id);
 
 									const formattedDate = date.toLocaleDateString('en-US', {
@@ -134,24 +155,26 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 									);
 								})}
 							</div>
-							<form className="mt-3 flex gap-3" onSubmit={handleSubmit}>
-								<input
-									type="text"
-									placeholder="Send a message"
-									value={message}
-									onChange={handleMessageChange}
-									className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm text-"
-								/>
-
-								<button
-									type="submit"
-									className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark rounded-[50%] max-w-[36px] w-full flex items-center justify-center text-sm disabled:bg-slate-400"
-									disabled={message.length === 0}
-								>
-									<PaperAirplaneIcon width={16} height={16} />
-								</button>
-							</form>
 						</div>
+						<form className="mt-3 flex gap-3" onSubmit={handleSubmit}>
+							<input
+								type="text"
+								placeholder="Send a message"
+								value={message}
+								onChange={handleMessageChange}
+								className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm text-"
+							/>
+
+							<button
+								type="submit"
+								className={`${
+									message.length === 0 && 'cursor-not-allowed'
+								} bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark rounded-[50%] max-w-[36px] w-full flex items-center justify-center text-sm disabled:bg-slate-400`}
+								disabled={message.length === 0}
+							>
+								<PaperAirplaneIcon width={16} height={16} />
+							</button>
+						</form>
 					</div>
 				</div>
 			</div>
