@@ -163,7 +163,7 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 												{profileData ? (
 													<React.Fragment>
 														<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
-															{profileData.name}
+															{profileData?.name}
 														</h1>
 														<span>{profileData?.bio}</span>
 														<div className="flex items-center gap-2 text-colorSecondary dark:text-colorSecondaryDark hover:text-indigo-400 dark:hover:text-indigo-400 transition-all">
@@ -319,7 +319,7 @@ const Profile: NextPage<ProfileProps> = ({ profileData }) => {
 
 																	<div className="flex flex-col">
 																		<h3 className="font-semibold">
-																			{profileData.name}
+																			{profileData?.name}
 																		</h3>
 
 																		<span className="text-sm text-colorSecondary dark:text-colorSecondaryDark">
