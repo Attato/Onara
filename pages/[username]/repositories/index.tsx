@@ -13,8 +13,6 @@ import Sidebar from '@/components/Sidebar';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { fetchProfileData } from '@/lib/profile';
 
-import styles from './index.module.scss';
-
 const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 	const { theme } = useTheme();
 
@@ -58,9 +56,9 @@ const Repositories: NextPage<ProfileProps> = ({ profileData }) => {
 					</div>
 
 					<div
-						className={`${theme === 'light' ? styles.light : styles.dark} ${
-							styles.scroll
-						} flex flex-col h-full overflow-auto`}
+						className={`${
+							theme === 'light' ? 'light' : 'dark'
+						} ${'scroll'} flex flex-col h-full overflow-auto`}
 					>
 						{profileData?.repositories.length === 0 ? (
 							<div className="flex flex-col h-full items-center justify-center">
