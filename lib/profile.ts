@@ -13,15 +13,8 @@ export async function fetchProfileData(session: any) {
 			throw new Error('User not found');
 		}
 
-		const config = {
-			headers: {
-				Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
-			},
-		};
-
 		const { data: repositories } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/repos`,
-			config
+			`https://api.github.com/users/${profileData.name}/repos`
 		);
 
 		profileData.repositories = repositories.map((repo: any) => {
@@ -46,8 +39,7 @@ export async function fetchProfileData(session: any) {
 		});
 
 		const { data: followers } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/followers`,
-			config
+			`https://api.github.com/users/${profileData.name}/followers`
 		);
 
 		profileData.followers = followers.map((follower: any) => {
@@ -60,8 +52,7 @@ export async function fetchProfileData(session: any) {
 		});
 
 		const { data: following } = await axios.get(
-			`https://api.github.com/users/${profileData.name}/following`,
-			config
+			`https://api.github.com/users/${profileData.name}/following`
 		);
 
 		profileData.following = following.map((following: any) => {

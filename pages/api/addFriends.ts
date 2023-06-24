@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/lib/prisma';
 
-// Функция для добавления друга в базу данных
 export default async function addFriend(
 	req: NextApiRequest,
 	res: NextApiResponse
