@@ -247,7 +247,7 @@ const Home: NextPage = () => {
 								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold mt-2">
 									{t('homepage:section2.title')}
 								</h1>
-								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
+								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3 max-w-md m-auto">
 									{t('homepage:section2.description')}
 								</p>
 

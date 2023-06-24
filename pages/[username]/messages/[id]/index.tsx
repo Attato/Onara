@@ -79,7 +79,7 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 				<div className="flex gap-8 h-full">
 					<Sidebar profileData={profileData} />
 
-					<div className="flex flex-col gap-4 w-full mr-8">
+					<div className="flex flex-col gap-4 max-w-6xl w-full mr-8">
 						{profileData.friends
 							.filter((friend: any) => friend.id === router.query.id)
 							.map((friend: any) => {
@@ -114,7 +114,7 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 						<div
 							className={`${
 								theme === 'light' ? 'light' : 'dark'
-							} ${'scroll'} flex flex-col items-end justify-end gap-2 max-w-5xl h-[calc(100vh-36px-12px-32px-53px-16px)] pr-2 overflow-auto ml-auto`}
+							} ${'scroll'} max-w-5xl flex flex-col items-end justify-end gap-2  h-[calc(100vh-36px-12px-32px-53px-16px)] pr-2 overflow-auto ml-auto`}
 						>
 							<div className="h-full flex flex-col gap-2">
 								{messages[friendId]?.map((message: any) => {
