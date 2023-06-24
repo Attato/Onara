@@ -11,7 +11,7 @@ import { ProfileProps } from '@/pages/[username]';
 
 const ModalPage: FC<ProfileProps> = ({ profileData }) => {
 	let [isModalOpen, setIsModalOpen] = useState(false);
-	let [activeTab, setActiveTab] = useState('my-account');
+	let [activeTab, setActiveTab] = useState('appearance');
 
 	function closeModal() {
 		setIsModalOpen(false);
@@ -108,72 +108,6 @@ const ModalPage: FC<ProfileProps> = ({ profileData }) => {
 										</div>
 									</div>
 									<div className="w-full max-w-3xl relative px-10 pb-20 pt-16 text-left">
-										{activeTab === 'my-account' && (
-											<React.Fragment>
-												<div className="flex flex-col justify-start uppercase text-colorSecondary dark:text-colorSecondaryDark font-semibold text-xs">
-													<h2 className="mb-4 text-xl font-medium">
-														My Account
-													</h2>
-													<h3>Edit profile</h3>
-													<div className="bg-surface200 dark:bg-surface200Dark rounded-lg w-80 text-sm font-medium shadow-md">
-														<div className="bg-accent w-full h-[60px] rounded-t-md"></div>
-														<div className="m-4">
-															<div className="relative w-fit">
-																<Image
-																	src={`${profileData?.image}`}
-																	width={96}
-																	height={96}
-																	alt="profile image"
-																	priority={true}
-																	className="rounded-[50%] select-none h-fit border-4 border-surface200 dark:border-surface200Dark"
-																/>
-															</div>
-														</div>
-														<div className="mx-4 mb-4 mt-7 bg-surface400 dark:bg-surface400Dark rounded-md">
-															<div className="py-4 px-3">
-																<div className="border-b border-border dark:border-borderDark pb-3 mb-3">
-																	<h2 className="text-xl font-semibold">
-																		{profileData?.name}
-																	</h2>
-
-																	<p className="text-sm text-colorSecondary dark:text-colorSecondaryDark overflow-hidden max-h-5 line-clamp-1">
-																		{profileData?.bio}
-																	</p>
-																</div>
-																<div className="flex flex-col gap-1 border-b border-border dark:border-borderDark pb-3 mb-3">
-																	<h3 className="font-semibold uppercase text-xs">
-																		GitHub member since
-																	</h3>
-																</div>
-															</div>
-														</div>
-													</div>
-
-													<h3>edit username</h3>
-													<h3>edit email</h3>
-													<h3>edit password</h3>
-													<h3>edit phone number</h3>
-													<br />
-													<h3>delete account?</h3>
-												</div>
-											</React.Fragment>
-										)}
-
-										{activeTab === 'profiles' && (
-											<React.Fragment>
-												<h2 className="mb-4 text-xl font-medium">Profiles</h2>
-												<div className="flex flex-col justify-start uppercase text-colorSecondary dark:text-colorSecondaryDark font-semibold text-xs">
-													<h3>change avatar</h3>
-													<h3>remove avatar</h3>
-													<br />
-													<h3>change banner</h3>
-													<h3>remove banner</h3>
-													<br />
-													<h3>change accent color</h3>
-												</div>
-											</React.Fragment>
-										)}
-
 										{activeTab === 'appearance' && (
 											<React.Fragment>
 												<h2 className="mb-4 text-xl font-medium">Appearance</h2>
