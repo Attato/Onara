@@ -13,7 +13,7 @@ import {
 	UserPlusIcon,
 	UserIcon,
 	UserGroupIcon,
-	CommandLineIcon,
+	CheckIcon,
 } from '@heroicons/react/24/solid';
 
 import { GetServerSidePropsContext } from 'next';
@@ -239,7 +239,7 @@ const Home: NextPage = () => {
 							animate={{ y: 100 }}
 							transition={{ ease: 'easeInOut', duration: 0.5 }}
 						>
-							<div className="max-w-md">
+							<div className="max-w-3xl w-full">
 								<span className="text-accent dark:text-indigo-400 font-semibold flex items-center justify-center gap-2">
 									<UserGroupIcon width={20} height={20} />
 									Teamship
@@ -250,6 +250,56 @@ const Home: NextPage = () => {
 								<p className="text-colorSecondary dark:text-colorSecondaryDark text-lg mt-3">
 									{t('homepage:section2.description')}
 								</p>
+
+								<div className="w-full m-auto max-w-2xl transform rounded-lg bg-background dark:bg-surface50Dark p-6 mt-3 text-left align-middle shadow-xl transition-all">
+									<div className="flex items-end justify-end w-fit rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm last:mb-8 text-sm">
+										<div className="flex items-end gap-3">
+											<div className="flex flex-col">
+												<div className="flex items-baseline gap-2">
+													<h2 className="text-sm text-accent font-medium">
+														James
+													</h2>
+													<span className="text-xs font-medium text-colorSecondary dark:text-colorSecondaryDark">
+														6/24/2023, 7:16 AM
+													</span>
+												</div>
+												<span className="text-md text-colorPrimary dark:text-colorPrimaryDark font-medium">
+													Hello!
+												</span>
+											</div>
+
+											<div className="flex h-fit items-center gap-2">
+												<span>
+													<CheckIcon width={16} height={16} />{' '}
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div className="flex items-end ml-auto mt-5 justify-end w-fit rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm last:mb-8 text-sm">
+										<div className="flex items-end gap-3">
+											<div className="flex flex-col">
+												<div className="flex items-baseline gap-2">
+													<h2 className="text-sm text-accent font-medium">
+														Anna
+													</h2>
+													<span className="text-xs font-medium text-colorSecondary dark:text-colorSecondaryDark">
+														6/24/2023, 7:17 AM
+													</span>
+												</div>
+												<span className="text-md text-colorPrimary dark:text-colorPrimaryDark font-medium">
+													Hi!
+												</span>
+											</div>
+
+											<div className="flex h-fit items-center gap-2">
+												<span>
+													<CheckIcon width={16} height={16} />{' '}
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</motion.div>
 					</motion.div>
@@ -268,7 +318,7 @@ const Home: NextPage = () => {
 							<div className="max-w-md">
 								<span className="text-accent dark:text-indigo-400 font-semibold flex items-center justify-center gap-2">
 									<UserGroupIcon width={20} height={20} />
-									Teamwork
+									PWA
 								</span>
 								<h1 className="text-colorPrimary dark:text-colorPrimaryDark text-4xl font-semibold mt-2">
 									{t('homepage:section3.title')}
