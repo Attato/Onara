@@ -132,7 +132,7 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 											<UserGroupIcon
 												width={150}
 												height={150}
-												className="rounded-[20px] hover:rounded-[50%] transition-all select-none shadow-md bg-accent max-w-[150px] w-full p-6"
+												className="rounded-[20px] hover:rounded-[50%] transition-all select-none shadow-md bg-accent max-w-[150px] w-full p-6 text-colorPrimaryDark"
 											/>
 										) : (
 											<div className="min-w-[150px] h-[150px] rounded-[50%] bg-surface75 dark:bg-surface75Dark flex items-center justify-center">
