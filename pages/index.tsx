@@ -78,7 +78,7 @@ const Home: NextPage = () => {
 					<motion.div
 						initial="hidden"
 						whileInView="visible"
-						viewport={{ once: true, amount: 0.4 }}
+						viewport={{ once: true, amount: 0.3 }}
 						className="bg-background dark:bg-backgroundDark"
 					>
 						<motion.div

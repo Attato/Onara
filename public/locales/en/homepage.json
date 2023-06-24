@@ -8,12 +8,12 @@
 		"description": "Invite your friends to the Onara app or easily import them from your GitHub or Gitlab repositories."
 	},
 	"section2": {
-		"title": "Team up",
-		"description": "Create groups and assign roles to members, providing a good collaborative development experience."
+		"title": "Сommunicate",
+		"description": "Import friends from GitHub and chat with them in real time."
 	},
 	"section3": {
-		"title": "Teamwork",
-		"description": "Assign several reviewers to the pull request, as well as indicate the number of confirmations of consent to accept the request."
+		"title": "PWA",
+		"description": "You have the opportunity to download the application to your phone and be online in any place convenient for you."
 	},
 	"preFooter": {
 		"title": "Reliable platform for collective decision",
