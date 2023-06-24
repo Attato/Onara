@@ -17,7 +17,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, Transition } from '@headlessui/react';
 
 import { ProfileProps } from '../..';
-import Groups from '..';
 
 interface Post {
 	id: number;
@@ -63,7 +62,7 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 	const router = useRouter();
 
 	const [voteCount, setVoteCount] = useState<number>(0);
-
+	const [needVoteCount, setNeedVoteCount] = useState<number>(0);
 	const handleVoteCountChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const count = parseInt(e.target.value);
 		setVoteCount(count);
@@ -377,13 +376,13 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 
 												<div className="flex w-full items-center">
 													<p className="text-colorSecondary dark:text-colorSecondaryDark text-sm leading-6 pl-10">
-														Vote count: {voteCount}
+														Vote count: {needVoteCount}
 													</p>
 
 													<button
 														onClick={() => {
-															if (voteCount < 1) {
-																setVoteCount(voteCount + 1);
+															if (needVoteCount < 1) {
+																setNeedVoteCount(needVoteCount + 1);
 															}
 														}}
 														className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark  w-full max-w-[100px] ml-10 py-1 rounded-md"
