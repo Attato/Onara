@@ -52,14 +52,10 @@ const Changelog: NextPage<ChangelogPageProps> = ({ posts }) => {
 					/>
 					<div className="flex flex-col items-center justify-center gap-4 w-full h-full text-center absolute text-slate-100 mx-auto">
 						<h1 className="text-5xl font-black uppercase mt-10">
-							Learn about the changes at Onara
+							{t('changelog:masthead.title')}
 						</h1>
 
-						<p>
-							Check out our Changelog to keep up to date with all the new
-							features and improvements we&apos;re bringing to you. Stay up to
-							date and follow the development of our product.
-						</p>
+						<p>{t('changelog:masthead.description')}</p>
 					</div>
 				</div>
 
@@ -179,7 +175,7 @@ export const getServerSideProps = async (
 			posts,
 			...(await serverSideTranslations(context.locale || 'en', [
 				'common',
-				'homepage',
+				'changelog',
 			])),
 		},
 	};
