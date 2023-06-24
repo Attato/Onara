@@ -12,14 +12,15 @@ import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
 import Tabs from '@/components/Tabs';
 import Sidebar from '@/components/Sidebar';
-
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, Transition } from '@headlessui/react';
 
 import { ProfileProps } from '../..';
+import Groups from '..';
 
 interface Post {
-	userId: number;
+	id: number;
 	title: string;
 	content: string;
 	voteCount: number;
@@ -32,16 +33,6 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
-	const [posts, setPosts] = useState<Post[]>([]);
-
-	useEffect(() => {
-		const savedPosts = localStorage.getItem('posts');
-		if (savedPosts) {
-			setPosts(JSON.parse(savedPosts));
-		} else {
-			setPosts([]);
-		}
-	}, []);
 
 	const handleTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setTitle(e.target.value);
@@ -53,10 +44,19 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 
 	const [groups, setGroups] = useState<Post[]>([]);
 
+	const [gr, setGr] = useState([]);
+
 	useEffect(() => {
 		const storedGroups = localStorage.getItem('votes');
 		if (storedGroups) {
 			setGroups(JSON.parse(storedGroups));
+		}
+	}, [groups]);
+
+	useEffect(() => {
+		const grp = localStorage.getItem('groups');
+		if (grp) {
+			setGr(JSON.parse(grp));
 		}
 	}, []);
 
@@ -72,7 +72,7 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const newPost: Post = {
-			userId: Date.now(),
+			id: Date.now(),
 			title,
 			content,
 			voteCount,
@@ -94,6 +94,12 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 	function openModal() {
 		setIsModalOpen(true);
 	}
+
+	const handleDelete = (postId: number) => {
+		const updatedPosts = groups.filter((group) => group.id !== postId);
+		setGroups(updatedPosts);
+		localStorage.setItem('votes', JSON.stringify(updatedPosts));
+	};
 
 	return (
 		<>
@@ -118,7 +124,7 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 							<div
 								className={`${
 									theme === 'light' ? 'light' : 'dark'
-								} ${'scroll'} max-h-[calc(100vh-16px-61px)] h-full overflow-auto max-w-[calc(100%-380px)] pr-4`}
+								} ${'scroll'} h-fit overflow-auto max-w-[calc(100%-380px)] pr-4`}
 							>
 								<div className="flex items-center gap-6 max-w-5xl">
 									<React.Fragment>
@@ -135,64 +141,63 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 										)}
 										<div className="flex flex-col gap-4 w-full">
 											<div className="flex flex-col gap-1 text-sm text-colorSecondary dark:text-colorSecondaryDark">
-												{profileData ? (
-													groups
-														.filter((group: any) => group.id == router.query.id)
-														.map((group: any) => {
-															console.log(group);
+												{gr
 
-															return (
-																<React.Fragment key={group.id}>
-																	<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
-																		{group.title}
-																	</h1>
+													.filter((group: any) => group.id == router.query.id)
+													.map((group: any) => {
+														return (
+															<React.Fragment key={group.id}>
+																<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
+																	{group.title}
+																</h1>
 
-																	<span>{group.content}</span>
-																	<span className="flex items-center gap-1">
-																		Creator:
-																		<Image
-																			src={profileData.image}
-																			width={32}
-																			height={32}
-																			alt={profileData.name + 'avatar'}
-																			className="rounded-[50%] ml-1"
-																		/>
-																		<span className="font-semibold">
-																			{profileData.name}
-																		</span>
+																<span>{group.content}</span>
+																<span className="flex items-center gap-1">
+																	Creator:
+																	<Image
+																		src={profileData.image}
+																		width={32}
+																		height={32}
+																		alt={profileData.name + 'avatar'}
+																		className="rounded-[50%] ml-1"
+																	/>
+																	<span className="font-semibold">
+																		{profileData.name}
 																	</span>
-																</React.Fragment>
-															);
-														})
-												) : (
-													<React.Fragment>
-														<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
-															Username
-														</h1>
-														<span>Hello, i am null!</span>
-														<div className="flex items-center gap-2 text-colorSecondary dark:text-colorSecondaryDark hover:text-indigo-400 dark:hover:text-indigo-400 transition-all">
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																aria-label="github"
-																height="16"
-																viewBox="0 0 14 14"
-																width="16"
-															>
-																<path
-																	fill="currentColor"
-																	fillRule="nonzero"
-																	d="M7 .175c-3.872 0-7 3.128-7 7 0 3.084 2.013 5.71 4.79 6.65.35.066.482-.153.482-.328v-1.181c-1.947.415-2.363-.941-2.363-.941-.328-.81-.787-1.028-.787-1.028-.634-.438.044-.416.044-.416.7.044 1.071.722 1.071.722.635 1.072 1.641.766 2.035.59.066-.459.24-.765.437-.94-1.553-.175-3.193-.787-3.193-3.456 0-.766.262-1.378.721-1.881-.065-.175-.306-.897.066-1.86 0 0 .59-.197 1.925.722a6.754 6.754 0 0 1 1.75-.24c.59 0 1.203.087 1.75.24 1.335-.897 1.925-.722 1.925-.722.372.963.131 1.685.066 1.86.46.48.722 1.115.722 1.88 0 2.691-1.641 3.282-3.194 3.457.24.219.481.634.481 1.29v1.926c0 .197.131.415.481.328C11.988 12.884 14 10.259 14 7.175c0-3.872-3.128-7-7-7z"
-																></path>
-															</svg>
-															<Link href="/" target="_blank">
-																http://localhost:3000/undefined
-															</Link>
-														</div>
-													</React.Fragment>
-												)}
+																</span>
+															</React.Fragment>
+														);
+													})}
 											</div>
 
 											<div>
+												{groups
+													.filter((group: any) => group.id == router.query.id)
+													.map((group: any) => {
+														return (
+															<React.Fragment key={group.id}>
+																<h1 className="text-2xl font-semibold text-colorPrimary dark:text-colorPrimaryDark">
+																	{group.title}
+																</h1>
+
+																<span>{group.content}</span>
+																<span className="flex items-center gap-1">
+																	Creator:
+																	<Image
+																		src={profileData.image}
+																		width={32}
+																		height={32}
+																		alt={profileData.name + 'avatar'}
+																		className="rounded-[50%] ml-1"
+																	/>
+																	<span className="font-semibold">
+																		{profileData.name}
+																	</span>
+																</span>
+															</React.Fragment>
+														);
+													})}
+
 												<button
 													type="button"
 													onClick={openModal}
@@ -274,11 +279,24 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 																						placeholder="What's new with you?"
 																						className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm resize-none"
 																					></textarea>
+
+																					<h2 className="text-xs font-semibold text-colorSecondary dark:text-colorSecondaryDark uppercase">
+																						Votes
+																					</h2>
+
+																					<input
+																						type="number"
+																						placeholder="Number of confirmations"
+																						value={voteCount}
+																						onChange={handleVoteCountChange}
+																						min={0}
+																						className="flex items-center justify-between w-full rounded-md py-2 px-3 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark outline-none focus:ring-2 focus:ring-accent focus:dark:ring-accent text-sm"
+																					/>
 																					<button
 																						type="submit"
 																						onClick={closeModal}
 																						disabled={title.length === 0}
-																						className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark px-3 w-full max-w-[160px] px py-2 rounded-md text-sm disabled:bg-slate-400"
+																						className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark px-3 w-full max-w-[160px] px py-2 mt-2 rounded-md text-sm disabled:bg-slate-400"
 																					>
 																						Publish
 																					</button>
@@ -296,11 +314,87 @@ const Group: NextPage<ProfileProps> = ({ profileData }) => {
 									</React.Fragment>
 								</div>
 							</div>
-							<div>
-								{groups.map((vote) => {
-									return <div key={vote.userId}>{vote.title}</div>;
-								})}
-							</div>
+							<AnimatePresence>
+								{groups
+									.slice()
+									.reverse()
+									.map((group) => {
+										const date = new Date(group.id);
+
+										const formattedDate = date.toLocaleDateString('en-US', {
+											day: 'numeric',
+											month: 'short',
+											year: 'numeric',
+										});
+
+										return (
+											<motion.div
+												initial={{ opacity: 0, y: -20 }}
+												animate={{ opacity: 1, y: 0 }}
+												exit={{ opacity: 0, y: -20 }}
+												key={group.id}
+												className="flex flex-col max-w-5xl items-start w-full rounded-md py-2 px-3 mb-4 bg-surface100 dark:bg-surface100Dark text-colorPrimary dark:text-colorPrimaryDark shadow-sm ring-inset ring-1 ring-border dark:ring-borderDark"
+											>
+												<div className="flex items-center justify-between w-full">
+													<div className="flex items-center gap-2">
+														<Image
+															src={`${profileData?.image}`}
+															width={32}
+															height={32}
+															alt="profile image"
+															priority={true}
+															className="rounded-[20px] hover:rounded-[50%] transition-all select-none shadow-md max-h-8"
+														/>
+
+														<div className="flex flex-col">
+															<h3 className="font-semibold">
+																{profileData?.name}
+															</h3>
+
+															<span className="text-sm text-colorSecondary dark:text-colorSecondaryDark">
+																{formattedDate}
+															</span>
+														</div>
+													</div>
+
+													<button
+														onClick={() => handleDelete(group.id)}
+														className="text-colorSecondary dark:text-colorSecondaryDark hover:text-colorPrimary hover:dark:text-colorPrimaryDark p-1 hover:bg-surface300 hover:dark:bg-surface300Dark rounded-md transition-all"
+													>
+														<XMarkIcon width={16} height={16} strokeWidth={2} />
+													</button>
+												</div>
+												<div className="text-base font-semibold mb-2 mt-3 flex items-baseline gap-3 pl-10">
+													<h2>{group.title}</h2>
+												</div>
+												<p className="text-colorSecondary dark:text-colorSecondaryDark text-sm leading-6 pl-10">
+													{group.content}
+												</p>
+
+												<p className="text-colorSecondary dark:text-colorSecondaryDark text-sm leading-6 pl-10">
+													Need vote: {group.voteCount}
+												</p>
+
+												<div className="flex w-full items-center">
+													<p className="text-colorSecondary dark:text-colorSecondaryDark text-sm leading-6 pl-10">
+														Vote count: {voteCount}
+													</p>
+
+													<button
+														onClick={() => {
+															if (voteCount < 1) {
+																setVoteCount(voteCount + 1);
+															}
+														}}
+														className="bg-accent hover:bg-indigo-500 transition-all text-colorPrimaryDark  w-full max-w-[100px] ml-10 py-1 rounded-md"
+													>
+														Vote
+													</button>
+												</div>
+											</motion.div>
+										);
+									})}
+							</AnimatePresence>
 						</div>
 					</div>
 				</div>

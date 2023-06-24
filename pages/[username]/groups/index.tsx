@@ -20,7 +20,7 @@ import { useTheme } from 'next-themes';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Post {
+export interface Groups {
 	id: number;
 	title: string;
 	content: string;
@@ -47,7 +47,7 @@ const Groups: NextPage<any> = ({ profileData }) => {
 
 	const [title, setTitle] = useState<string>('');
 	const [content, setContent] = useState<string>('');
-	const [groups, setGroups] = useState<Post[]>([]);
+	const [groups, setGroups] = useState<Groups[]>([]);
 
 	useEffect(() => {
 		const savedPosts = localStorage.getItem('groups');
@@ -62,7 +62,7 @@ const Groups: NextPage<any> = ({ profileData }) => {
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const newPost: Post = {
+		const newPost: Groups = {
 			id: Date.now(),
 			title,
 			content,

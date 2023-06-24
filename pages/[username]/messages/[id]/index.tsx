@@ -79,7 +79,7 @@ const Messages: NextPage<ProfileProps> = ({ profileData }) => {
 				<div className="flex gap-8 h-full">
 					<Sidebar profileData={profileData} />
 
-					<div className="flex flex-col gap-4 w-full max-w-3xl">
+					<div className="flex flex-col gap-4 w-full mr-8">
 						{profileData.friends
 							.filter((friend: any) => friend.id === router.query.id)
 							.map((friend: any) => {
