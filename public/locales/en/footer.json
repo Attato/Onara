@@ -1,0 +1,11 @@
+{
+	"footer": {
+		"titles": { "product": "Product", "company": "Company" },
+
+		"links": {
+			"changelog": "Changelog",
+			"support": "Support",
+			"feedback": "Feedback"
+		}
+	}
+}

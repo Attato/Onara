@@ -2,8 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import ThemeChanger from '@/components/_ThemeChanger';
 import LanguageChanger from '@/components/_LanguageChanger';
+import { useTranslation } from 'next-i18next';
 
 const Footer = () => {
+	const { t } = useTranslation();
 	return (
 		<footer className="p-6 bg-background dark:bg-backgroundDark border-t border-border dark:border-borderDark select-none">
 			<div className="flex flex-col gap-4 max-w-5xl m-auto text-colorPrimary dark:text-colorPrimaryDark">
